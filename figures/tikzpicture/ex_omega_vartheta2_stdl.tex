@@ -1,0 +1,49 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    thick,
+    every node/.style={font=\LARGE},
+  ]
+  \node [anchor=east]         (mpi) at (-4, 0) {$\shortminus\pi$};
+  \node [anchor=west]         (ppi) at (+4, 0) {$\pi\phantom{\shortminus}$};
+  \node [label = {above:$0$}] (z)   at ( 0, 0) {};
+
+  % \node[label = {above:\textcolor{DarkOrchid}{$\shortminus\frac{\pi}{2}\phantom{\shortminus}$}}] (mpo2) at (-2, 0) {};
+  % \node[label = {above:\textcolor{DarkOrchid}{$\frac{\pi}{2}$}}]  (ppo2) at (+2, 0) {};
+
+  \node[label = {above:\textcolor{NavyBlue}{$\shortminus\frac{3\pi}{4}\phantom{\shortminus}$}}] (m3po4) at (-3, 0) {};
+  \node[label = {above:\textcolor{NavyBlue}{$\shortminus\frac{ \pi}{4}\phantom{\shortminus}$}}]  (m1po4) at (-1, 0) {};
+  \node[label = {above:\textcolor{NavyBlue}{$\frac{\pi}{4}$}}]   (p1po4) at (+1, 0) {};
+  \node[label = {above:\textcolor{NavyBlue}{$\frac{3\pi}{4}$}}]  (p3po4) at (+3, 0) {};
+
+  \draw [-] (mpi.east) -- (ppi.west);
+  \draw [-, thick] (z.south) -- (z.north);
+
+  % \draw [-, thick, DarkOrchid] (mpo2.south) -- (mpo2.north);
+  % \draw [-, thick, DarkOrchid] (ppo2.south) -- (ppo2.north);
+
+  \draw [-, thick, NavyBlue] (m3po4.south) -- (m3po4.north);
+  \draw [-, thick, NavyBlue] (m1po4.south) -- (m1po4.north);
+  \draw [-, thick, NavyBlue] (p1po4.south) -- (p1po4.north);
+  \draw [-, thick, NavyBlue] (p3po4.south) -- (p3po4.north);
+
+  % \draw[DarkOrchid, thick] (4, 0) arc[start angle=65, end angle=115, radius=1cm];
+
+  \foreach \i in {-4, -2, 0, 2} {
+    \draw[draw=none,  thick] (\i, -.15)+(.15, 0) arc[start angle=-110, end angle=-70, radius=2.45cm]
+    node [midway, below, font=\normalsize] {\phantom{$\pi/2$}};
+  }
+  \foreach \i in {-4, -3, -2, -1, 0, 1, 2, 3} {
+      \draw[NavyBlue, thick] (\i, -.15)+(.15, 0) arc[start angle=-110, end angle=-70, radius=1.cm]
+      node [midway, below, font=\normalsize] {$\pi/4$};
+    }
+
+\end{tikzpicture}
+
+\end{document}

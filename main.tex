@@ -1,0 +1,221 @@
+\documentclass[hidelinks, french, xcolor={table, rgb, dvipsnames, x11names}, aspectratio=169, professionalfonts]{beamer}
+
+\RequirePackage{luatex85}
+
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{amsfonts,amssymb,amsmath}
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+
+% \usepackage{lmodern}
+\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx, dblfloatfix}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage[toc, acronyms]{glossaries}
+\usepackage{csquotes}
+\usepackage{booktabs}
+\usepackage{stmaryrd}
+\usepackage{bm}
+\usepackage{multicol}
+
+
+\usepackage[style=ieee, sorting=none, minnames=1, maxnames=1]{biblatex} %Imports biblatex package
+\addbibresource{biblio/thesis.bib} %Import the bibliography file
+
+\usepackage{pifont}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+
+\usepackage[font={it, small}, tablename=, figurename=]{caption}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,
+  shapes.misc,
+  shapes.geometric,
+  arrows.meta,
+  positioning,
+  overlay-beamer-styles,
+  patterns,
+  patterns.meta,
+  matrix, 
+  chains, 
+  scopes, 
+  fit}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+
+\usetheme[hideothersubsections]{Marburg}
+\usecolortheme[named=RoyalBlue3]{structure}
+
+\makeatletter
+\setbeamertemplate{sidebar canvas \beamer@sidebarside}[vertical shading][top=black,bottom=RoyalBlue]
+\makeatother
+\setbeamercolor{titlelike}{use=structure,fg=RoyalBlue4}
+
+\addtobeamertemplate{frametitle}{}{}
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
+
+\newcommand*{\Xb}{\textcolor{blue}{\symbol{"25A0}}}
+\newcommand*{\Ob}{\textcolor{red}{\symbol{"25A0}}}
+
+\title[\textsc{Implémentations temps réel d'un récepteur QCSP}]{\textsc{Implémentations temps réel d'un récepteur \acrfull{qcsp}}\vspace*{-.6 cm}}
+% \subtitle{Performances, complexity and chip rates}
+
+\author[C. MONIÈRE]{Camille MONIÈRE}
+\institute[UBS Lab-STICC, UB IMS]{Lab-STICC, CNRS UMR 6285, Université de Bretagne Sud, 56100 Lorient, France, Email : camille.moniere@univ-ubs.fr \and
+IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : camille.moniere@ims-bordeaux.fr}
+
+\date{04/01/2023}
+
+\addtobeamertemplate{navigation symbols}{}{%
+\usebeamerfont{footline}%
+\usebeamercolor[fg]{footline}%
+\hspace{1em}%
+\insertframenumber
+}
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+\AtBeginSection[]{
+  \begin{frame}[noframenumbering]{Sommaire}
+    \begin{columns}
+        \begin{column}{.15\linewidth}
+            \hfill
+        \end{column}
+        \begin{column}{.85\linewidth}
+            \tableofcontents[hideothersubsections, sectionstyle=show/hide, ]
+        \end{column}
+    \end{columns}
+  \end{frame}
+}
+
+\newenvironment{variableblock}[3]{%
+  \setbeamercolor{block body}{#2}
+  \setbeamercolor{block title}{#3}
+  \begin{block}{#1}}{\end{block}}
+
+\graphicspath{{figures/}{figures/logos-thesis/}}
+
+\input{acronyms.tex}
+\input{commands.tex}
+
+\usepackage{standalone}
+\usepackage{import}
+\usepackage{subfiles}
+
+\begin{document}
+
+\section*{}
+
+\begin{frame}
+    \vspace*{-.8 cm}
+    \titlepage
+
+    \vspace{-.4 cm}
+    \begin{columns}
+        \begin{column}{.11\textwidth}
+            \hfill
+        \end{column}
+        \begin{column}{.13\textwidth} \centering
+            \includegraphics[width=.7\textwidth]{CNRS.svg.png}
+        \end{column}
+        \begin{column}{.13\textwidth} \centering
+            \includegraphics[width=\textwidth]{labsticc.png}
+        \end{column}
+        \begin{column}{.13\textwidth} \centering
+            \includegraphics[width=\textwidth]{logoimsjoom.png}
+        \end{column}
+
+        \begin{column}{.13\textwidth} \centering
+            \includegraphics[width=\textwidth]{anr-logo-2021.png}
+        \end{column}
+        \begin{column}{.13\textwidth} \centering
+            \includegraphics[width=\textwidth]{QCSP_Logo.pdf}
+        \end{column}
+        \begin{column}{.11\textwidth}
+            \hfill
+        \end{column}\subsecname
+    \end{columns}
+    \begin{columns}
+        \begin{column}{.22\textwidth}
+            \hfill
+        \end{column}
+        \begin{column}{.16\textwidth} \centering
+            \includegraphics[width=\textwidth]{universite-bordeaux.eps.pdf}
+        \end{column}
+        \begin{column}{.15\textwidth}\centering
+            \includegraphics[width=\textwidth]{universite-bretagne-sud.eps.pdf}
+            \hfill
+        \end{column}
+        \begin{column}{.22\textwidth}
+            \hfill
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\section*{Avant-propos} % Sommaire
+\begin{frame}{\secname}
+    \begin{center}
+        \begin{columns}
+            \begin{column}{.6\linewidth}
+                Ces travaux de thèse ont été financé par l'Agence Nationale de la Recherche (ANR) française, et s'inscrivent ainsi dans le projet \acrfull{qcsp}, identifiant \texttt{ANR-19-CE25-0013-01}.
+            \end{column}
+            \begin{column}{.2\linewidth}
+                \hfill \includegraphics[width=\linewidth]{anr_approved.jpg}
+            \end{column}
+        \end{columns}
+
+        \vspace{3 em}
+
+        Cette thèse s'est déroulée sous la direction d'Emmanuel BOUTILLON\footnote{\tiny Pr, Lab-STICC, CNRS UMR 6285, Université de Bretagne Sud, 56100 Lorient, France, Email : emmanel.boutillon@univ-ubs.fr}, et l'encadrement de Bertrand LE GAL\footnote{\tiny MCF, IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : bertrand.legal@ims-bordeaux.fr \vspace{1em}}.
+    \end{center}
+\end{frame}
+
+
+\section*{Sommaire} % Sommaire
+\begin{frame}{\secname}
+    \begin{columns}
+        \begin{column}{.2\linewidth}
+            \hfill
+        \end{column}
+        \begin{column}{.7\linewidth}
+            \tableofcontents[hideallsubsections]
+        \end{column}
+        \begin{column}{.1\linewidth}
+            \hfill
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\subfile{sections/introduction}
+
+\subfile{sections/qcsp_summary.tex}
+
+\subfile{sections/algorithm.tex}
+
+\subfile{sections/implementations.tex}
+
+\subfile{sections/experimentations.tex}
+
+\subfile{sections/conclusion.tex}
+
+\section*{Bibliography}
+\begin{frame}[noframenumbering, allowframebreaks]
+    \frametitle{Références}
+    \nocite{*}
+    \renewcommand*{\bibfont}{\tiny}
+    \printbibliography[heading=none]
+\end{frame}
+
+\end{document}

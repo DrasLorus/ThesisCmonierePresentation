@@ -1,0 +1,67 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    thin
+  ]
+  \tiny
+  \begin{axis}
+    [
+      height = 6 cm,
+      width  = 10cm,
+      % scaled y ticks = false,
+      % y tick label style={/pgf/number format/fixed,
+      % 		/pgf/number format/1000 sep = \thinspace},
+      xmin=1, xmax=64,
+      ylabel={\scriptsize Correlation result},
+      xlabel={\scriptsize Chip index},
+      ymin=-25, ymax=70,
+      ymajorgrids=true, xmajorgrids=true,
+      yminorgrids=true, xminorgrids=true,
+    %   legend pos = north east,
+      axis y line=left, axis x line=bottom,
+      legend columns = 1,
+      legend cell align={left},
+      legend style={
+            at={(0.97, 0.8)}, anchor=north east,
+        % the /tikz/ prefix is necessary here...
+        % otherwise, it might end-up with `/pgfplots/column 2`
+        % which is not what we want. compare pgfmanual.pdf
+          /tikz/column 1/.style={
+              column sep=4pt,
+            },
+        %   /tikz/column 4/.style={
+        %       column sep=5pt,
+        %     },
+        },
+        xtick={1, 11, 21, 31, 41, 51, 61},
+        xticklabels={$0$, $10$, $20$, $30$, $40$, $50$, $60$},
+    ]
+
+    \addplot[color=blue, semithick] table[x index=0, y index=1] {\fromRoot{data/corrs_to_draw.dat}};
+    \addplot[color=red, semithick] table[x index=0, y index=2] {\fromRoot{data/corrs_to_draw.dat}};
+    \addplot[color=orange, semithick] table[x index=0, y index=3] {\fromRoot{data/corrs_to_draw.dat}};
+    \addplot[color=green!60!blue, semithick] table[x index=0, y index=4] {\fromRoot{data/corrs_to_draw.dat}};
+    
+    \addplot[color=blue, mark=*, semithick] coordinates {(1, 64)};
+    \addplot[color=red, mark=*, semithick] coordinates {(17, 64)};
+    \addplot[color=orange, mark=*, semithick] coordinates {(40, 64)};
+    \addplot[color=green!60!blue, mark=*, semithick] coordinates {(49, 64)};
+
+    \foreach \x [evaluate={\xm = int(\x - 1)}] in {1, 17, 40, 49} {
+        \edef\temp{\noexpand\node [label={right:($\xm$, $64$)}] at (\x, 64) {};}
+        \temp
+    }
+
+    \legend{
+      {$\vect{P}_{0}$},
+      {$\vect{P}_{16}$},
+      {$\vect{P}_{39}$},
+      {$\vect{P}_{48}$},
+    }
+  \end{axis}
+
+\end{tikzpicture}
+\end{document}

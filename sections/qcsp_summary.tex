@@ -1,0 +1,68 @@
+\documentclass[../main.tex]{subfiles}
+
+\makeatletter
+\@ifundefined{fromRoot}{%
+  \newcommand{\fromRoot}[1]{../#1}
+  
+  \usepackage{xr}
+  \externaldocument{../main}
+}{}
+
+\def\input@path{{\subfix{../}}}
+%or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
+\makeatother
+
+\graphicspath{{\subfix{../}}}
+
+\hypersetup{
+    pdfauthor   = {Camille MONIÈRE},
+    pdftitle    = {Th\`{e}se (Présentation: QCSP, un résumé)},
+    pdfsubject  = {Th\`{e}se (Présentation: QCSP, un résumé)},
+%    pdfkeywords = {mots-cl\'{e}s},
+}
+
+\begin{document}
+
+\section{\acrshort{qcsp}}
+
+\subsection{Principes}
+
+\begin{frame}{\subsecname}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
+
+\subsection{Émission}
+
+\begin{frame}{\subsecname}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
+
+\subsection{Détection}
+
+\begin{frame}{\subsecname}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
+
+\subsection{Synchronisation}
+
+\begin{frame}{\subsecname}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
+
+\subsection{Décodage}
+
+\begin{frame}{\subsecname}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
+
+\end{document}

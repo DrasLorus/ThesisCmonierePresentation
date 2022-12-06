@@ -1,0 +1,41 @@
+\newcommand*{\gf}[1]{\acrshort{gf}($#1$)}%
+\newcommand*{\mpn}[1]{\bm{P}_{#1}}%
+\newcommand*{\pn}[1]{%
+  \ifthenelse{\equal{#1}{}}{$\mpn{0}$}{$\mpn{#1}$}%
+}%
+
+\newcommand*{\pk}[3]{%
+  \ifthenelse{\equal{#1}{#2}}{\textcolor{red}{\phantom{.}$p_0$\phantom{.}}}{\phantom{.}$p_#3$\phantom{.}}%
+}%
+
+
+\newcommand*{\placeholder}{\includegraphics[width=\linewidth, height=.25\textheight, keepaspectratio = true]{figures/certified_xilinx.png}}%
+
+\newcommand*{\snr}{\acrshort{snr}}%
+\newcommand*{\snrs}{\acrshortpl{snr}}%
+
+\newcommand*{\mpd}[0]{p_\Delta}%
+\newcommand*{\mpo}[0]{p_\omega}%
+\newcommand*{\pd}[0]{$\mpd$}%
+\newcommand*{\po}[0]{$\mpo$}%
+\newcommand*{\mpfa}[0]{\mathcal{P}_{fa}}%
+\newcommand*{\mpmd}[0]{\mathcal{P}_{md}}%
+\newcommand*{\pfa}[0]{\acrshort{pfa}}%
+\newcommand*{\pmd}[0]{\acrshort{pmd}}%
+\newcommand*{\mnorm}[1]{\mathcal{L}_{#1}}%
+\newcommand*{\norm}[1]{$\mnorm{#1}$}%
+\newcommand*{\fft}{\acrshort{fft}}%
+\newcommand*{\mfft}[1]{\mathcal{F}(#1)}%
+\newcommand*{\mifft}[1]{\mathcal{F}^{-1}(#1)}%
+\newcommand*{\ts}{\acrshort{ts}}%
+
+\newcommand*{\cpp}[1]{C\textrm{++#1}}%
+\newcommand*{\na}{\textrm{\textcolor{SlateGray4}{N/A}}}%
+
+\newcommand*{\vect}[1]{\bm{#1}}%
+\newcommand*{\mat}[1]{\bm{\mathrm{#1}}}%
+
+\newcommand*{\task}[1]{\mathcal{T}_{#1}}%
+
+\newcommand*{\sdr}{\acrshort{sdr}}%
+\newcommand*{\fpga}{\acrshort{fpga}}%

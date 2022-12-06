@@ -1,0 +1,90 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    thin
+  ]
+  \tiny
+  \begin{axis}
+    [
+      height = 8 cm,
+      width  = 10.5 cm,
+      font = \normalsize,
+      % scaled y ticks = false,
+      % y tick label style={/pgf/number format/fixed,
+      % 		/pgf/number format/1000 sep = \thinspace},
+      xmin=5, xmax=11,
+      ylabel={$\mathrm{MPE}$ (dB)},
+      ylabel style = {font = \Large},
+      xlabel={Quantization $Q$ (bits)},
+      xlabel style = {font = \Large},
+      ymin=-15, ymax=18,
+      ymajorgrids=true, xmajorgrids=true,
+      yminorgrids=true, xminorgrids=true,
+      legend pos = north east,
+      axis y line=left, axis x line=bottom,
+      % xtick={5,6,7,8,9,10},
+      legend columns = 2,
+      legend style={
+          label = {above:{Values of a$(\mpo, \; q)$}},
+          font = \large,
+          % the /tikz/ prefix is necessary here...
+          % otherwise, it might end-up with `/pgfplots/column 2`
+          % which is not what we want. compare pgfmanual.pdf
+          /tikz/column 2/.style={
+              column sep=5pt,
+            },
+          /tikz/column 4/.style={
+              column sep=5pt,
+            },
+          /tikz/column 6/.style={
+              column sep=5pt,
+            },
+          /tikz/column 8/.style={
+              column sep=5pt,
+            },
+        },
+    ]
+
+    % \draw [-latex, thick, red] (5.5, 10) -- (5, 4)
+    % node [pos = 0, above, align=center] {Around $3$ dB\\of error.};
+
+    \addplot[ dashed, color=Orange!60, mark = o, mark options = {solid}, thick,]
+    table [ x=id, x expr = (\thisrow{id} + 1), y=mpe4 ] {\fromRoot{data/qfx_rot_test_q64.dat}};
+
+    \addplot[ dashed, color=RoyalBlue!60, mark = diamond, mark options = {solid}, thick,]
+    table [ x=id, x expr = (\thisrow{id} + 1), y=mpe4 ] {\fromRoot{data/qfx_rot_test_q256.dat}};
+
+    \addplot[ solid, color=Orange, mark = *, mark options = {solid}, thick, ]
+    table [ x=id, x expr = (\thisrow{id} + 1),  y=mpe8 ] {\fromRoot{data/qfx_rot_test_q64.dat}};
+
+    \addplot[ solid, color=RoyalBlue, mark = diamond*, mark options = {solid}, thick, ]
+    table [ x=id, x expr = (\thisrow{id} + 1),  y=mpe8 ] {\fromRoot{data/qfx_rot_test_q256.dat}};
+
+    \legend{
+      {$(4, \; \phantom{2}64)$},
+      {$(4, \; 256)$},
+      {$(8, \; \phantom{2}64)$},
+      {$(8, \; 256)$},
+    }
+  \end{axis}
+
+
+  % \node [anchor = north west] (leg) at (0, -1 cm) {};
+  % \draw [thick, blue,-] ($(leg.east) + (0, 0)$) -- ($(leg.east) + (1, 0)$)
+  % node [pos = 1, right] {$p_\Delta = 8$};
+  % \draw [thick, red,-] ($(leg.east) + (0, -.4)$) -- ($(leg.east) + (1, -.4)$)
+  % node [pos = 1, right] {$p_\Delta = 64$};
+
+  % \node [anchor = center] (leg2) at ($(leg.center) + (2.5, 0)$) {};
+  % \draw [thick, black, dotted,-] ($(leg2.east) + (0, 0)$) -- ($(leg2.east) + (1, 0)$)
+  % node [pos = 1, right] {$p_\omega = 2$};
+  % \draw [thick, black, dashed, -] ($(leg2.east) + (0, -.4)$) -- ($(leg2.east) + (1, -.4)$)
+  % node [pos = 1, right] {$p_\omega = 4$};
+  % \draw [thick, black,-] ($(leg2.east) + (0, -.8)$) -- ($(leg2.east) + (1, -.8)$)
+  % node [pos = 1, right] {$p_\omega = 8$};
+\end{tikzpicture}
+\end{document}

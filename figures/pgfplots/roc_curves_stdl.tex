@@ -1,0 +1,101 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    thin
+  ]
+
+  \begin{loglogaxis}
+    [
+      height = 8 cm,
+      width  = 13cm,
+      font = \normalsize,
+      % scaled y ticks = false,
+      % y tick label style={/pgf/number format/fixed,
+      % 		/pgf/number format/1000 sep = \thinspace},
+      xmin=10^-6, xmax=1 * 10^-2,
+      ylabel={$\mathcal{P}_{md}$},
+      ylabel style = {font = \Large},
+      xlabel={$\mathcal{P}_{fa}$},
+      xlabel style = {font = \Large},
+      ymin=10^-6, ymax=1 *10^-3,
+      ymajorgrids=true, xmajorgrids=true,
+      yminorgrids=true, xminorgrids=true,
+      legend pos = north east,
+      axis y line=left, axis x line=bottom,
+      legend columns = 1,
+      legend style={
+          % the /tikz/ prefix is necessary here...
+          % otherwise, it might end-up with `/pgfplots/column 2`
+          % which is not what we want. compare pgfmanual.pdf
+          /tikz/column 2/.style={
+              column sep=5pt,
+            },
+          /tikz/column 4/.style={
+              column sep=5pt,
+            },
+        },
+      font={\footnotesize},
+    ]
+
+    \addplot[dotted, mark options={solid}, color=Orange, smooth, thick, mark=diamond]
+    table[col sep=comma, x index=0, y index=1] {\fromRoot{data/data_for_fig_sips.dat}};
+
+    \addplot[dashed, mark options={solid}, color=Orange, smooth, thick, mark=diamond]
+    table[col sep=comma, x index=2, y index=3] {\fromRoot{data/data_for_fig_sips.dat}};
+
+    \addplot[color=Orange, smooth, thick, mark=diamond*]
+    table[col sep=comma, x index=4, y index=5] {\fromRoot{data/data_for_fig_sips.dat}};
+
+    \addplot[dotted, mark options={solid}, color=Cerulean!90!black, smooth, thick, mark=square]
+    table[col sep=comma, x index=6, y index=7] {\fromRoot{data/data_for_fig_sips.dat}};
+
+    \addplot[dashed, mark options={solid}, color=Cerulean!90!black, smooth, thick, mark=square]
+    table[col sep=comma, x index=8, y index=9] {\fromRoot{data/data_for_fig_sips.dat}};
+
+    \addplot[color=Cerulean!90!black, smooth, thick, mark=square*]
+    table[col sep=comma, x index=10, y index=11] {\fromRoot{data/data_for_fig_sips.dat}};
+
+    \addplot[dotted, mark options={solid}, color=Blue, smooth, thick, mark=o]
+    table[col sep=comma, x index=12, y index=13] {\fromRoot{data/data_for_fig_sips.dat}};
+
+    \addplot[dashed, mark options={solid}, color=Blue, smooth, thick, mark=o]
+    table[col sep=comma, x index=14, y index=15] {\fromRoot{data/data_for_fig_sips.dat}};
+
+    \addplot[color=Blue, smooth, thick, mark=*]
+    table[col sep=comma, x index=16, y index=17] {\fromRoot{data/data_for_fig_sips.dat}};
+
+    \addplot[ color=red!80, mark = *, thick, mark size = 2pt, forget plot ]
+    coordinates {(1e-6, 1e-4)};
+    \node [fill = white, anchor = north west, inner sep = 0pt, text = red!80, align=left] at (11e-7, 1e-4) {Functioning\\point};
+
+    \legend{
+      {$(\textcolor{OliveGreen}{2}, \; \textcolor{red}{\phantom{6}8})$},
+      {$(\textcolor{OliveGreen}{2}, \; \textcolor{red}{16})$},
+      {$(\textcolor{OliveGreen}{2}, \; \textcolor{red}{64})$},
+      {$(\textcolor{OliveGreen}{4}, \; \textcolor{red}{\phantom{6}8})$},
+      {$(\textcolor{OliveGreen}{4}, \; \textcolor{red}{16})$},
+      {$(\textcolor{OliveGreen}{4}, \; \textcolor{red}{64})$},
+      {$(\textcolor{OliveGreen}{8}, \; \textcolor{red}{\phantom{6}8})$},
+      {$(\textcolor{OliveGreen}{8}, \; \textcolor{red}{16})$},
+      {$(\textcolor{OliveGreen}{8}, \; \textcolor{red}{64})$}
+    }
+  \end{loglogaxis}
+
+  % \node [anchor = north west] (leg) at (0, -1 cm) {};
+  % \draw [thick, blue,-] ($(leg.east) + (0, 0)$) -- ($(leg.east) + (1, 0)$)
+  % node [pos = 1, right] {$p_\Delta = 8$};
+  % \draw [thick, red,-] ($(leg.east) + (0, -.4)$) -- ($(leg.east) + (1, -.4)$)
+  % node [pos = 1, right] {$p_\Delta = 64$};
+
+  % \node [anchor = center] (leg2) at ($(leg.center) + (2.5, 0)$) {};
+  % \draw [thick, black, dotted,-] ($(leg2.east) + (0, 0)$) -- ($(leg2.east) + (1, 0)$)
+  % node [pos = 1, right] {$p_\omega = 2$};
+  % \draw [thick, black, dashed, -] ($(leg2.east) + (0, -.4)$) -- ($(leg2.east) + (1, -.4)$)
+  % node [pos = 1, right] {$p_\omega = 4$};
+  % \draw [thick, black,-] ($(leg2.east) + (0, -.8)$) -- ($(leg2.east) + (1, -.8)$)
+  % node [pos = 1, right] {$p_\omega = 8$};
+\end{tikzpicture}
+\end{document}

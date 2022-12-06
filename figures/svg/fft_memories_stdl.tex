@@ -1,0 +1,67 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\usepackage[]{svg}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture} [->,
+  >={Triangle[width=6pt, length=8pt]},
+  auto,
+  thick,
+  main node/.style={rectangle, fill = white!35, draw,
+      align=center},
+  every node/.style = {font=\huge},
+  ]
+
+  \node [anchor = south west] (picture) at (0, 0) {\includesvg{distr_or_shared.svg}};
+
+
+  \node [anchor = east] at (35 pt, 115 pt) {$y(n)$};
+  \node [anchor = east] at (35 pt, 441 pt) {$y(n)$};
+
+
+  \node [anchor = east] at (50 pt, 396 pt) {$\frac{q}{\mpd{}}$};
+  \node [anchor = east] at (50 pt, 320 pt) {$\frac{q}{\mpd{}}$};
+  \node [anchor = east] at (50 pt, 245 pt) {$\frac{q}{\mpd{}}$};
+
+  \node [anchor = east] at (120 pt, 396 pt) {FIFO};
+  \node [anchor = east] at (120 pt, 320 pt) {FIFO};
+  \node [anchor = east] at (120 pt, 245 pt) {FIFO};
+
+  \node [
+  fill=white,
+  anchor = center,
+  font={\Huge}] (yn) at (395 pt, 215 pt) {$\vect{y}_{n - q + \frac{q}{8}}$};
+
+  \node [
+  fill=white,
+  anchor = center,
+  font={\Huge}] (yn) at (440 pt, 290 pt) {$\vect{y}_{n - q + \frac{q}{4}}$};
+
+  \node [
+  fill=white,
+  anchor = center,
+  font={\Huge}] (yn) at (520 pt, 367 pt) {$\vect{y}_{n - q + \frac{q}{2}}$};
+
+  \node [
+    fill=white,
+    anchor = center,
+    font={\Huge}] (yn) at (684 pt, 443 pt) {$\vect{y}_{n}$};
+
+
+  \node [anchor = center, Red3] (yn) at (395 pt, -8 pt) {$q$ chips};
+
+  \node [anchor = center, Goldenrod3] (yn) at (440 pt, 18 pt) {$q$ chips};
+
+  \node [anchor = center, Chartreuse4] (yn) at (520 pt, 40 pt) {$q$ chips};
+
+  \node [anchor = center, RoyalBlue2] (yn) at (684 pt, 63 pt) {$q$ chips};
+
+
+  \node [anchor = west, align = left, font={\Huge}] (yn) at (900 pt, 80 pt) {\textbf{Shared}\\\textbf{memory}};
+
+  \node [anchor = west, align = left, font={\Huge}] (yn) at (900 pt, 340 pt) {\textbf{Distributed}\\\textbf{memory}};
+
+\end{tikzpicture}
+\end{document}

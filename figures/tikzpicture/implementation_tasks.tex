@@ -1,0 +1,142 @@
+\documentclass[tikz,border=1cm]{standalone}
+
+% More defined colors
+% \usepackage [dvipsnames]{xcolor}
+% \usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault}
+
+\usetikzlibrary{shapes.misc, shapes.geometric, arrows.meta, positioning, matrix, chains, scopes, fit, calc}
+
+
+\def\lenn{5}
+\begin{document}
+\huge
+\pgfdeclarelayer{background}
+\pgfsetlayers{background, main}
+\begin{tikzpicture} [->,
+  >={Triangle[width = 6pt, length = 8pt]},
+  auto,
+  very thick,
+  scale = 4,
+  main node/.style={rectangle, fill = white!35, draw,
+      align=center},
+  txt/.style   = {draw = none, text width = 1.5cm, anchor = center},
+  usrp/.style  = {draw=yellow!75!black, fill =yellow!25,},
+  pc/.style    = {draw=black, fill =gray!35},
+  rfnoc/.style = {draw = green!35!black, text = green!05!black, fill = green!25!white},
+  cpp/.style   = {draw = blue!25!black,  text = blue!05!black,  fill = blue!20!white},
+  mat/.style   = {draw = red!25!black,   text = red!05!black,   fill = red!20!white},
+  every on chain/.style={join},
+  every join/.style=->,]
+
+
+
+  \matrix (m) [matrix of nodes,
+  column sep = 1cm,
+  row sep = 1.5 cm,
+  nodes = {rectangle,
+      anchor = center,
+      text centered,
+      draw,
+      %align = center,
+      fill = white,
+      minimum width=1.5cm,
+      minimum height=1.2cm},
+  txt/.style   = {draw = none, text width = 1.5cm, anchor = center},
+  rfnoc/.style = {draw = green!35!black, text = green!05!black, fill = green!25!white},
+  cpp/.style   = {draw = blue!25!black,  text = blue!05!black,  fill = blue!20!white},
+  mat/.style   = {draw = red!25!black,   text = red!05!black,   fill = red!20!white},
+  ] {
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[cpp]|   {FIR} & |[cpp]|   {Détection} & |[mat]|   {Sync. Temps} & |[mat]|   {Sync. Fréq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur CCE} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[cpp]|   {FIR} & |[cpp]|   {Détection} & |[cpp]|   {Sync. Temps} & |[cpp]|   {Sync. Fréq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur CCE} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[cpp]|   {Détection} & |[cpp]|   {Sync. Temps} & |[cpp]|   {Sync. Fréq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur CCE} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[rfnoc]| {Détection} & |[cpp]|   {Sync. Temps} & |[cpp]|   {Sync. Fréq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur CCE} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[rfnoc]| {Détection} & |[rfnoc]| {Sync. Temps} & |[rfnoc]| {Sync. Fréq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur CCE} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[rfnoc]| {Détection} & |[rfnoc]| {Sync. Temps} & |[rfnoc]| {Sync. Fréq.} & |[cpp]|   {Sync. Phase} & |[cpp]|   {Décodeur CCE} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[rfnoc]| {Détection} & |[rfnoc]| {Sync. Temps} & |[rfnoc]| {Sync. Fréq.} & |[rfnoc]| {Sync. Phase} & |[rfnoc]| {Décodeur CCE} & |[txt]| {}  \\
+  };
+
+  \foreach \n in {1,...,7} {
+      \begin{scope}
+        { [start chain,
+              join]
+          \chainin (m-\n-1);
+          \chainin (m-\n-2);
+          \chainin (m-\n-3);
+          \chainin (m-\n-4);
+          \chainin (m-\n-5);
+          \chainin (m-\n-6);
+          \chainin (m-\n-7);
+          \chainin (m-\n-8);
+          \chainin (m-\n-9); }
+      \end{scope}
+    }
+
+
+  \begin{pgfonlayer}{background}
+
+    \node (usrp_1) [usrp,
+      inner sep = 4 mm,fit= (m-1-2)] {};
+    \node (pc_1) [draw=black,
+      fill =gray!35,
+      inner sep = 4 mm,fit= (m-1-3) (m-1-8)] {};
+
+    \node (usrp_2) [usrp,
+      inner sep = 4 mm,fit= (m-2-2)] {};
+    \node (pc_2) [draw=black,
+      fill =gray!35,
+      inner sep = 4 mm,fit= (m-2-3) (m-2-8)] {};
+
+    \node (usrp_3) [usrp,
+      inner sep = 4 mm,fit= (m-3-2) (m-3-3)] {};
+    \node (pc_3) [draw=black,
+      fill =gray!35,
+      inner sep = 4 mm,fit= (m-3-4) (m-3-8)] {};
+
+    \node (usrp_4) [usrp,
+      inner sep = 4 mm,fit= (m-4-2) (m-4-4)] {};
+    \node (pc_4) [draw=black,
+      fill =gray!35,
+      inner sep = 4 mm,fit= (m-4-5) (m-4-8)] {};
+
+    \node (usrp_5) [usrp,
+      inner sep = 4 mm,fit= (m-5-2) (m-5-6)] {};
+    \node (pc_5) [draw=black,
+      fill =gray!35,
+      inner sep = 4 mm,fit= (m-5-7) (m-5-8)] {};
+
+    \node (usrp_6) [usrp,
+      inner sep = 4 mm,fit= (m-6-2) (m-6-6)] {};
+    \node (pc_6) [draw=black,
+      fill =gray!35,
+      inner sep = 4 mm,fit= (m-6-7) (m-6-8)] {};
+
+    \node (usrp_7) [usrp,
+      inner sep = 4 mm,fit= (m-7-2) (m-7-8)] {};
+    % \node (pc_6) [draw=black,
+    %   fill =gray!50,
+    %   inner sep = 4 mm,fit= (m-6-8) (m-6-8)] {};
+
+  \end{pgfonlayer}
+
+  \foreach \n in {1,...,7} {
+      \node (chain_\n) [draw=none,
+        fill =none,
+        inner sep = 4 mm, fit= (m-\n-1) (m-\n-9)] {};
+      \node [anchor = west] at ($(chain_\n.west) + (-.2, 0)$) {\textbf{Étape \n}};
+    }
+
+  \node [matrix, draw = black, thick,
+    right = 2cm of chain_4] (leg) {
+    \node [rfnoc, align = center, minimum size = 3 cm] (rfnoc_l) {Blocs\\RFNoC};
+    \node [cpp,   align = center, minimum size = 3 cm, right = 2 cm of rfnoc_l] (cpp_l) {Code\\C/C\texttt{++}};
+    \node [mat,   align = center, minimum size = 3 cm, right = 2 cm of cpp_l] {\textsc{Matlab}\\Octave};\\
+    \node [draw = none, minimum size = 1cm] {}; \\
+    \node[usrp, minimum size = 3 cm, anchor = north west] (usrp_l) {Sur l'USRP};
+    \node[pc,   minimum size = 3 cm, right = 2 cm of usrp_l] (pc_l) {Sur l'hôte};\\
+  };
+
+  \node [anchor = south] at (leg.north) {\textsc{\textbf{Légende}}};
+
+\end{tikzpicture}
+\end{document}

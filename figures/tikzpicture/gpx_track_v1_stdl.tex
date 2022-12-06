@@ -1,0 +1,25 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \pgfdeclarelayer{background}
+  \pgfdeclarelayer{foreground}
+  \pgfsetlayers{background,main,foreground}
+  \node[anchor = north west, inner sep = 0pt ] (pict) at (0, 0) {\includegraphics[width =7cm]{\fromRoot{figures/rtexps-pics/gpx_track_v1.png}}};
+
+  \draw [|-|, line width = 1.5 pt] (2.7,-2.5) -- (4.75, -.6)
+  node [midway, above, rotate=45, inner sep = 1mm] {$\simeq$ 1 km};
+
+
+  \begin{pgfonlayer}{foreground}
+    \node [anchor = north west, inner sep = 1mm] (succ) at (.2, -.2){\textcolor{green!75!black}{\textbf{Decoded frames}}};
+    \node [anchor = north west, inner sep = 1mm] (fail) at (succ.south west){\textcolor{blue}{\textbf{Signal lost}}};
+  \end{pgfonlayer}
+  \node [draw=black, thick, fill=white, fit = (succ) (fail) (succ) (fail)] {};
+
+\end{tikzpicture}
+
+\end{document}

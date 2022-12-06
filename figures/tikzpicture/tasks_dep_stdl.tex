@@ -1,0 +1,84 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture} [-latex,
+    >=latex,
+    auto,
+    very thick,
+    every node/.style={font = {\Large}},
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center}
+  ]
+
+  \node [] (yn) at (0, 0) {$y(n)$};
+
+  \node [draw,
+    thick,
+    anchor = west,
+    right = 1 cm of yn,
+    minimum width = 3 cm,
+  ] (score) {$\task{S}$};
+
+  \node [draw,
+    thick,
+    anchor = north west,
+  ] (norm) at ($(score.south west) + (0.01, -1 cm)$) {$\task{\mnorm{}}$};
+
+
+  \node [draw,
+    thick,
+    right = 1cm of score,
+  ] (state)  {$\task{U}$};
+
+  \node [draw,
+    thick,
+    anchor = north east,
+  ] (buff) at ($(state.south east) + (0, -2)$) {$\task{B}$};
+  % \node [draw,
+  %   gray,
+  %   thick,
+  %   anchor = east,
+  %   inner sep = -.2pt,
+  %   fill = gray!30,
+  %   fit = {(norm.west |- buff.south west) (buff.north west)}
+  % ] (bufft) {$\phantom{\task{B}}$};
+
+  \node [right = 1 cm of state] (om) {$\omega$};
+  \node [right = 1 cm of buff]  (fd) {$\vect{F}_D$};
+
+  \draw [Turquoise3] (score) -> (state);
+  \draw [Turquoise3] (norm)  -| (score);
+
+  \draw [blue] (yn) -> (score);
+  \draw [blue] (yn) |- (norm);
+  \draw [blue] (yn) |- (buff);
+
+  \draw [OliveGreen] (state) -> (buff);
+  \draw [OliveGreen] (state) -> (om);
+  \draw [OliveGreen] (buff)  -> (fd);
+
+  \coordinate (top) at ($(score.north west) + (0, .5)$);
+  \coordinate (bottom) at ($(buff.south west) + (0, -.5)$);
+
+  % \draw [dashed, gray, -] (top -| score.west) -- (bottom -| score.west);
+  % \draw [dashed, gray, -] (top -| score.east) -- (bottom -| score.east);
+  % \draw [dashed, gray, -] (top -| state.east) -- (bottom -| state.east);
+
+  % \draw [dotted, gray, -] (top -| norm.east) -- (bottom -| norm.east);
+
+  \node [anchor = north west, black,]      (a) at ($(state -| fd.east) + (0.5, 0.5)$) {\textbf{→} Data path};
+  \node [anchor = north west, black,]      (z) at ($(a.south west) + (0, -.2)$)     {\underline{Path usage}};
+  \node [anchor = north west, blue,]       (b) at ($(z.south west) + (0, 0)$)                    {\textbf{---} Continuous};
+  \node [anchor = north west, Turquoise3,] (c) at ($(z.south west) + (0, -.6)$)                     {\textbf{---} Depends on \pd{}};
+  \node [anchor = north west, OliveGreen,] (d) at ($(z.south west) + (0, -1.2)$)                     {\textbf{---} When a detection occurs};
+
+  \node [draw=gray, label={above:\textsc{Legend}}, fit = {(a) (d)}] () {};
+
+  \node [draw, inner sep = 5pt, label={above:Detector}, dashed, fit  = {(score) (buff)}] {}; 
+
+\end{tikzpicture}
+
+\end{document}

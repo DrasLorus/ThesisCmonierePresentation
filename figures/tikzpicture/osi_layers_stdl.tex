@@ -1,0 +1,69 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background, main}
+\begin{tikzpicture}[
+  every node/.style={font=\huge}
+]
+
+  \node [
+    draw,
+    fill=blue!00,
+    minimum width = 5cm,
+    minimum height = 1cm] (lv1) at (0,0) {Physical};
+  \node [
+    draw,
+    fill=blue!05,
+    minimum width = 5cm,
+    minimum height = 1cm,
+    above = 2mm of lv1
+  ] (lv2) {Data Link};
+  \node [
+    draw,
+    fill=blue!10,
+    minimum width = 5cm,
+    minimum height = 1cm,
+    above = 2mm of lv2
+  ] (lv3) {Network};
+  \node [
+    draw,
+    fill=blue!15,
+    minimum width = 5cm,
+    minimum height = 1cm,
+    above = 2mm of lv3
+  ] (lv4) {Transport};
+  \node [
+    draw,
+    fill=blue!20,
+    minimum width = 5cm,
+    minimum height = 1cm,
+    above = 2mm of lv4
+  ] (lv5) {Session};
+  \node [
+    draw,
+    fill=blue!25,
+    minimum width = 5cm,
+    minimum height = 1cm,
+    above = 2mm of lv5
+  ] (lv6) {Presentation};
+  \node [
+    draw,
+    fill=blue!30,
+    minimum width = 5cm,
+    minimum height = 1cm,
+    above = 2mm of lv6
+  ] (lv7) {Application};
+
+\foreach \i in {1,2,3,4,5,6,7} {
+  \node [right = .1mm of lv\i] (lv\i_lb) {Layer \i}; 
+}
+
+\node [draw=red, ultra thick, inner sep=1mm, fit = (lv1) (lv1_lb) ] {};
+
+\end{tikzpicture}
+\end{document}
+

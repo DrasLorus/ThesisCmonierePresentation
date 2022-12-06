@@ -1,0 +1,109 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture} [->,
+  >={Triangle[width=6pt, length=8pt]},
+  auto,
+  thick,
+  main node/.style={rectangle, fill = white!35, draw,
+      align=center},
+  every node/.style = {font=\Large},
+  ]
+
+  \node [main node,
+    draw = none,
+    % fill = gray!40!white, 
+    % minimum size = 1cm
+  ] (input) at (0, 0) {$y(n)$};
+
+  \node [main node,
+    draw,
+    % fill = gray!40!white, 
+    % minimum size = 1cm
+    right = .8 cm of input
+  ] (pack) {Buffer};
+
+  \node [red,
+    font = {\normalsize},
+    % fill = gray!40!white, 
+    % minimum size = 1cm
+    anchor = south,
+    align = center
+  ] at (pack.north east) {Output $\vect{y}_n$\\every $\frac{q}{p_\Delta}$\\chips};
+
+  \draw (input.east) -> (pack.west);
+  \draw [latex-latex] ($(pack.south west) + (-.05, -.15)$) -> ($(pack.south east) + (.05, -.15)$)
+  node [midway, anchor = north] {size $q$};
+
+  \node [circle,
+    draw,
+    % fill = gray!40!white, 
+    right = 1.2 cm of pack,
+    minimum size = .8 cm
+  ] (multf) {};
+  \node [circle,
+    draw=none,
+    % fill = gray!40!white, 
+    anchor = center,
+    minimum size = .8 cm
+  ] at (multf.center) {$\odot$};
+  % \draw [-] ($(multf.north west) + (.1, -.1) $) -- ($(multf.south east) + (-.1,  .1) $);
+  % \draw [-] ($(multf.south west) + (.1,  .1) $) -- ($(multf.north east) + (-.1, -.1) $);
+
+
+  % \draw [line width=2.6pt] ($(multf.north) + (0, .5)$) -> (multf.north)
+  % node [pos=0, above, align=center] () {$e^{-j\frac{\omega k}{q}}_{(k = 0, 1, \dots, q - 1)}$};
+  \node [anchor = south] (gnw) at ($(multf.north) + (0, .5)$) {$\vect{\Gamma}_n^{\textcolor{blue}{\bm{\omega}}}$};
+
+  \draw [line width = 2.6pt] (gnw.south) -> (multf.north);
+
+  \node [main node,
+    % fill = gray!40!white, 
+    % minimum size = 1.2cm,
+    right = .8 cm of multf
+  ] (fft) {$\mathcal{F}$};
+
+  \draw [line width=2.6pt] (multf.east) -> (fft.west);
+
+  \node [circle,
+    draw,
+    % fill = gray!40!white,
+    right = .8 cm of fft,
+    minimum size = .8 cm
+  ] (mult) {};
+  \node [circle,
+    draw=none,
+    % fill = gray!40!white, 
+    anchor = center,
+    minimum size = .8 cm
+  ] at (mult.center) {$\odot$};
+  % \draw [-] ($(mult.north west) + (.1, -.1) $) -- ($(mult.south east) + (-.1,  .1) $);
+  % \draw [-] ($(mult.south west) + (.1,  .1) $) -- ($(mult.north east) + (-.1, -.1) $);
+
+  % \draw [line width=2.6pt] ($(mult.north) + (0, .5)$) -> (mult.north)
+  % node [pos=0, above, align=center] () {$\mathrm{FFT}(\vect{P}_0)$};
+  \node [anchor = south, align=center] (fpn) at ($(mult.north) + (0, .45)$) {$\mathcal{F}(\mpn{0})^\ast$};
+
+  \draw  [line width=2.6pt] (fpn.south) -> (mult.north);
+  \draw  [line width=2.6pt] (fft.east) -> (mult.west);
+
+  \node [main node,
+    % fill = gray!40!white, 
+    % minimum size = 1.2cm,
+    right = .8 cm of mult
+  ] (ifft) {$\mathcal{F}^{-1}$};
+
+  \draw  [line width=2.6pt] (mult.east) -> (ifft.west);
+
+  % \draw  [line width=2.6pt] ($(multf.west) + (-.8, 0)$) ->  (multf.west)
+  % node [pos=0, left, align=center] () {$\vect{y}_n$\\(q chips)};
+  \draw  [line width=2.6pt] (pack.east) -> (multf.west);
+
+  \draw  [line width=2.6pt] (ifft.east) -> ($(ifft.east) + (.8, 0)$)
+  node [pos=1, right, align=center] () {$\vect{L}_n^\omega$};
+\end{tikzpicture}
+
+\end{document}

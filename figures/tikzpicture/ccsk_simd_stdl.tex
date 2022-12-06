@@ -1,0 +1,80 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture} [-latex,
+    >=latex,
+    auto,
+    very thick,
+    every node/.style={font={\Large}},
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center}
+  ]
+
+  \node [main node,
+    fill = red!40!white,
+    minimum size = 1cm
+  ] (ccsk0) at (0, 0)   {$1$};
+  \node [main node,
+    fill = blue!40!white,
+    minimum size = 1cm
+  ] (ccsk1) at (1cm, 0) {$0$};
+  \node [main node,
+    fill = blue!40!white,
+    minimum size = 1cm
+  ] (ccsk2) at (2cm, 0) {$0$};
+  \node [main node,
+    fill = blue!40!white,
+    minimum size = 1cm
+  ] (ccsk3) at (3cm, 0) {$0$};
+
+
+  \node [main node,
+    draw = none,
+    minimum size = 1cm,
+    anchor=north east,
+    align = center
+  ] (in) at ($(ccsk0.south west) + (-1,-1)$) {Input\\($p$ bits)};
+
+
+  \node [main node,
+    fill = blue!40!white,
+    anchor=north west,
+    minimum size = 1cm
+  ] (symb0) at ($(in.south east)    + (1,-1)$) {$0$};
+  \node [main node,
+    fill = blue!40!white,
+    minimum size = 1cm,
+    anchor=north east,
+  ] (symb1) at ($(symb0.north east) + (1, 0)$) {$0$};
+  \node [main node,
+    fill = red!40!white,
+    minimum size = 1cm,
+    anchor=north east,
+  ] (symb2) at ($(symb1.north east) + (1, 0)$) {$1$};
+  \node [main node,
+    fill = blue!40!white,
+    minimum size = 1cm,
+    anchor=north east,
+  ] (symb3) at ($(symb2.north east) + (1, 0)$) {$0$};
+
+  \draw [blue, -, dashed] (ccsk2.south west) -- (symb0.north west);
+  \draw [blue, -, dashed] (ccsk3.south east) -- (symb1.north east);
+  \draw [blue, -Triangle,line width = 2pt] ($(ccsk2.south east) + (-.15, -.25)$) -- ($(symb0.north east) + (.15, .25)$);
+  \draw [red, -, dashed] (ccsk0.south west) -- (symb2.north west);
+  \draw [red, -, dashed] (ccsk1.south east) -- (symb3.north east);
+  \draw [red, -Triangle,line width = 2pt] ($(ccsk0.south east) + (.15, -.25)$) -- ($(symb2.north east) + (-.15, .25)$);
+
+
+  \node [main node,
+    minimum width = 4cm,
+  ] (map) at (ccsk1.east |- in.west) {Mapper};
+
+  \draw (in.east) -- (map.west);
+
+  \node[anchor = south, align = center] at (ccsk1.north east) {CCSK Sequence\\($q$ chips)};
+  \node[anchor = north, align = center] at (symb1.south east) {CCSK Symbol\\($q$ chips)};
+
+\end{tikzpicture}
+\end{document}

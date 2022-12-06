@@ -1,0 +1,52 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\pgfplotsset{yticklabel style={text width=3em,align=right}}
+
+\begin{tikzpicture}[
+    thin
+  ]
+  \tiny
+  \begin{semilogyaxis}
+    [
+      name = plot1,
+      height = 8 cm,
+      width  = 10cm,
+      % scaled y ticks = false,
+      % y tick label style={/pgf/number format/fixed,
+      % 		/pgf/number format/1000 sep = \thinspace},
+      % xmin=0, xmax=250,
+      ylabel={Normalized counting},
+      xlabel={Score},
+      ymin=10^-6, ymax=1,
+      ymajorgrids=true, xmajorgrids=true,
+      yminorgrids=true, xminorgrids=true,
+      legend pos = north east,
+      axis y line=left, axis x line=bottom,
+      legend columns = 1,
+      legend style={
+          % the /tikz/ prefix is necessary here...
+          % otherwise, it might end-up with `/pgfplots/column 2`
+          % which is not what we want. compare pgfmanual.pdf
+          % /tikz/column 2/.style={
+          %     column sep=5pt,
+          %   },
+          % /tikz/column 4/.style={
+          %     column sep=5pt,
+          %   },
+        },
+    ]
+
+    \addplot[ color=red,   thick ] table [ x=score, y=Nfa, y expr=\thisrow{Nfa}*1e-6 ] {\fromRoot{data/score_famd_raw_m10db_sync.dat}};
+    \addplot[ color=blue,  thick ] table [ x=score, y=Nmd, y expr=\thisrow{Nmd}*1e-6 ] {\fromRoot{data/score_famd_raw_m10db_sync.dat}};
+
+    \legend{
+      {Noise only},
+      {Frame $+$ noise}
+    }
+  \end{semilogyaxis}
+\end{tikzpicture}
+\end{document}

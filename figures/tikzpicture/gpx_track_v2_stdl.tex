@@ -1,0 +1,24 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \pgfdeclarelayer{background}
+  \pgfdeclarelayer{foreground}
+  \pgfsetlayers{background,main,foreground}
+
+  \node[anchor = north west, inner sep = 0pt ] (pict) at (0, 0) {\includegraphics[height =7cm]{\fromRoot{figures/rtexps-pics/MatlabMap.png}}};
+
+  \draw [white, |-|, line width = 1.5 pt] (2.7,-4.5) -- (4.65, -2.6)
+  node [fill = black!10, text=black, midway, above, rotate=45, inner sep = 1 mm] {\large $\mathbf{\simeq}$ \textbf{500 m}};
+
+  \begin{pgfonlayer}{foreground}
+    \node [anchor = north west, inner sep = 1mm] (fail) at (1, -.2){\textcolor{red!60}{\textbf{Frame not detected}}};
+    \node [ anchor = north west, inner sep = 1mm] (succ) at (fail.south west){\textcolor{cyan!50}{\textbf{Frame decoded}}};
+  \end{pgfonlayer}
+  \node [draw=black, thick, fill=white, fit = (succ) (fail) (succ) (fail)] {};
+\end{tikzpicture}
+
+\end{document}

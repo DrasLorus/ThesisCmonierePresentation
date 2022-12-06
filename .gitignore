@@ -315,3 +315,7 @@ TSWLatexianTemp*
 # Built Visual Studio Code Extensions
 *.vsix
 
+# Sections artifact
+sections/*.pdf
+*.ist
+.$*

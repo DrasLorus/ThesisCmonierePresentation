@@ -1,0 +1,107 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    thin
+  ]
+  \tiny
+  \begin{loglogaxis}
+    [
+      height = 8 cm,
+      width  = 10.5 cm,
+      font = \normalsize,
+      % scaled y ticks = false,
+      % y tick label style={/pgf/number format/fixed,
+      % 		/pgf/number format/1000 sep = \thinspace},
+      xmin=10^-6, xmax=1 * 10^-2,
+      ylabel={$\mathcal{P}_{md}$},
+      ylabel style = {font = \Large},
+      xlabel={$\mathcal{P}_{fa}$},
+      xlabel style = {font = \Large},
+      ymin=10^-6, ymax=1 *10^-2,
+      ymajorgrids=true, xmajorgrids=true,
+      yminorgrids=true, xminorgrids=true,
+      legend pos = north east,
+      axis y line=left, axis x line=bottom,
+      legend columns = 1,
+      legend style={
+          font = \large,
+          % the /tikz/ prefix is necessary here...
+          % otherwise, it might end-up with `/pgfplots/column 2`
+          % which is not what we want. compare pgfmanual.pdf
+          /tikz/column 2/.style={
+              column sep=5pt,
+            },
+          /tikz/column 4/.style={
+              column sep=5pt,
+            },
+          /tikz/column 6/.style={
+              column sep=5pt,
+            },
+          /tikz/column 8/.style={
+              column sep=5pt,
+            },
+        },
+    ]
+
+    \addplot[ dashed, color=Orange, mark = o, mark options = {solid}, thick, forget plot ]
+    table [ x=Pfa_LINF, y=Pmd_LINF ] {\fromRoot{data/norms_data_po5_raw_60x64.dat}};
+
+    \addplot[ dashed, color=Aquamarine!80!black, mark = diamond, mark options = {solid},  thick, forget plot ]
+    table [ x=Pfa_L1B, y=Pmd_L1B ] {\fromRoot{data/norms_data_po5_raw_60x64.dat}};
+
+    \addplot[ dashed, color=Chartreuse4, mark = square, mark options = {solid},  thick, forget plot ]
+    table [ x=Pfa_L1, y=Pmd_L1 ] {\fromRoot{data/norms_data_po5_raw_60x64.dat}};
+
+    \addplot[ dashed, color=Blue, mark = triangle, mark options = {solid}, thick, forget plot ]
+    table [ x=Pfa_L2, y=Pmd_L2 ] {\fromRoot{data/norms_data_po5_raw_60x64.dat}};
+
+    \addplot[ color=Orange, mark = o, thick ]
+    table [ x=Pfa_LINF, y=Pmd_LINF ] {\fromRoot{data/norms_data_sync_raw_60x64.dat}};
+
+    \addplot[ color=Aquamarine!80!black, mark = diamond,  thick ]
+    table [ x=Pfa_L1B, y=Pmd_L1B ] {\fromRoot{data/norms_data_sync_raw_60x64.dat}};
+
+    \addplot[ color=Chartreuse4, mark = square,  thick ]
+    table [ x=Pfa_L1, y=Pmd_L1 ] {\fromRoot{data/norms_data_sync_raw_60x64.dat}};
+
+    \addplot[ color=Blue, mark = triangle, thick ]
+    table [ x=Pfa_L2, y=Pmd_L2 ] {\fromRoot{data/norms_data_sync_raw_60x64.dat}};
+
+    \draw [-latex] (1.6e-6, 1.5e-6) -- (11e-7, 11e-7)
+    node [pos = -.75, ] {reference};
+
+    \addplot[ color=red!80, mark = *, thick, mark size = 2pt, forget plot ]
+    coordinates {(1e-6, 1e-4)};
+    \node [anchor = west, red!80, align=left] at (11e-7, 1e-4) {Functioning\\point};
+
+    \addplot[ color=black,  thick, mark = pentagon*, mark options={fill=Goldenrod}]
+    coordinates {(1e-6, 1e-6)};
+
+    \legend{
+      {$\mathcal{L}_\infty$},
+      {$\mathcal{L}_d$},
+      {$\mathcal{L}_1$},
+      {$\mathcal{L}_2$},
+      {ref.},
+    }
+  \end{loglogaxis}
+
+  % \node [anchor = north west] (leg) at (0, -1 cm) {};
+  % \draw [thick, blue,-] ($(leg.east) + (0, 0)$) -- ($(leg.east) + (1, 0)$)
+  % node [pos = 1, right] {$p_\Delta = 8$};
+  % \draw [thick, red,-] ($(leg.east) + (0, -.4)$) -- ($(leg.east) + (1, -.4)$)
+  % node [pos = 1, right] {$p_\Delta = 64$};
+
+  % \node [anchor = center] (leg2) at ($(leg.center) + (2.5, 0)$) {};
+  % \draw [thick, black, dotted,-] ($(leg2.east) + (0, 0)$) -- ($(leg2.east) + (1, 0)$)
+  % node [pos = 1, right] {$p_\omega = 2$};
+  % \draw [thick, black, dashed, -] ($(leg2.east) + (0, -.4)$) -- ($(leg2.east) + (1, -.4)$)
+  % node [pos = 1, right] {$p_\omega = 4$};
+  % \draw [thick, black,-] ($(leg2.east) + (0, -.8)$) -- ($(leg2.east) + (1, -.8)$)
+  % node [pos = 1, right] {$p_\omega = 8$};
+\end{tikzpicture}
+\end{document}

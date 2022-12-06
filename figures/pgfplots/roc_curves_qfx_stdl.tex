@@ -1,0 +1,105 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    thin
+  ]
+  \tiny
+  \begin{loglogaxis}
+    [
+      height = 8 cm,
+      width  = 15.5 cm,
+      font = \normalsize,
+      % scaled y ticks = false,
+      % y tick label style={/pgf/number format/fixed,
+      % 		/pgf/number format/1000 sep = \thinspace},
+      xmin=10^-7, xmax=1 * 10^-3,
+      ylabel={$\mathcal{P}_{md}$},
+      ylabel style = {font = \Large},
+      xlabel={$\mathcal{P}_{fa}$},
+      xlabel style = {font = \Large},
+      ymin=10^-7, ymax=2 *10^-4,
+      ymajorgrids=true, xmajorgrids=true,
+      yminorgrids=true, xminorgrids=true,
+      legend pos = north east,
+      axis y line=left, axis x line=bottom,
+      legend columns = 2,
+      legend style={
+          font = \large,
+          % the /tikz/ prefix is necessary here...
+          % otherwise, it might end-up with `/pgfplots/column 2`
+          % which is not what we want. compare pgfmanual.pdf
+          /tikz/column 2/.style={
+              column sep=20pt,
+            },
+          /tikz/column 4/.style={
+              column sep=5pt,
+            },
+          /tikz/column 6/.style={
+              column sep=5pt,
+            },
+          /tikz/column 8/.style={
+              column sep=5pt,
+            },
+        },
+    ]
+
+    \addplot[ dashed, color=Aquamarine!80!Black, mark = o, mark options = {solid}, thick, forget plot ]
+    table [ x=Pfa_float_q64_pw2, y=Pmd_float_q64_pw2 ] {\fromRoot{data/qfx_data_sync_raw_60x64.dat}};
+
+    \addplot[ color=Aquamarine!80!Black, mark = *, thick ]
+    table [ x=Pfa_int16_q64_pw2, y=Pmd_int16_q64_pw2 ] {\fromRoot{data/qfx_data_sync_raw_60x64.dat}};
+
+    \addplot[solid, color=Black, thick ]
+    coordinates {(10e-8, 10e-8)};
+
+    \addplot[ dashed, color=Chartreuse4, mark = diamond, mark options = {solid}, thick, forget plot ]
+    table [ x=Pfa_float_q64_pw4, y=Pmd_float_q64_pw4 ] {\fromRoot{data/qfx_data_sync_raw_60x64.dat}};
+
+    \addplot[ color=Chartreuse4, mark = diamond*, thick ]
+    table [ x=Pfa_int16_q64_pw4, y=Pmd_int16_q64_pw4 ] {\fromRoot{data/qfx_data_sync_raw_60x64.dat}};
+
+    \addplot[dashed, color=Black, thick ]
+    coordinates {(10e-8, 10e-8)};
+
+    \addplot[ dashed, color=RoyalBlue, mark = square, mark options = {solid}, thick, forget plot ]
+    table [ x=Pfa_float_q64_pw8, y=Pmd_float_q64_pw8 ] {\fromRoot{data/qfx_data_sync_raw_60x64.dat}};
+
+    \addplot[ color=RoyalBlue, mark = square*, thick ]
+    table [ x=Pfa_int16_q64_pw8, y=Pmd_int16_q64_pw8 ] {\fromRoot{data/qfx_data_sync_raw_60x64.dat}};
+
+
+    \addplot[ color=red!90, mark = *, thick, mark size = 2pt, forget plot ]
+    coordinates {(1e-6, 1e-4)};
+    \node [anchor = west, red!90, align=center] at (11e-7, 1e-4) {Functioning\\point};
+
+    % \addplot[ color=black,  thick, mark = pentagon*, mark options={fill=Goldenrod}]
+    % coordinates {(1e-6, 1e-6)};
+
+    \legend{
+      {$\mpd = 2$},
+      Quantized,
+      {$\mpd = 4$},
+      Reference,
+      {$\mpd = 8$}
+    }
+  \end{loglogaxis}
+
+  % \node [anchor = north west] (leg) at (0, -1 cm) {};
+  % \draw [thick, blue,-] ($(leg.east) + (0, 0)$) -- ($(leg.east) + (1, 0)$)
+  % node [pos = 1, right] {$p_\Delta = 8$};
+  % \draw [thick, red,-] ($(leg.east) + (0, -.4)$) -- ($(leg.east) + (1, -.4)$)
+  % node [pos = 1, right] {$p_\Delta = 64$};
+
+  % \node [anchor = center] (leg2) at ($(leg.center) + (2.5, 0)$) {};
+  % \draw [thick, black, dotted,-] ($(leg2.east) + (0, 0)$) -- ($(leg2.east) + (1, 0)$)
+  % node [pos = 1, right] {$p_\omega = 2$};
+  % \draw [thick, black, dashed, -] ($(leg2.east) + (0, -.4)$) -- ($(leg2.east) + (1, -.4)$)
+  % node [pos = 1, right] {$p_\omega = 4$};
+  % \draw [thick, black,-] ($(leg2.east) + (0, -.8)$) -- ($(leg2.east) + (1, -.8)$)
+  % node [pos = 1, right] {$p_\omega = 8$};
+\end{tikzpicture}
+\end{document}

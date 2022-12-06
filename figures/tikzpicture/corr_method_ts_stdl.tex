@@ -1,0 +1,139 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\Large
+
+\newcommand{\multnode}[2]{
+  \node [calc node,
+    #1
+  ] ({#2}) {};
+  \draw [-] ({#2}.north west) -- ({#2}.south east);
+  \draw [-] ({#2}.south west) -- ({#2}.north east);
+}
+
+\newcommand{\addnode}[2]{
+  \node [calc node,
+    #1
+  ] ({#2}) {};
+  \draw [-] ({#2}.west) -- ({#2}.east);
+  \draw [-] ({#2}.south) -- ({#2}.north);
+}
+
+\newcommand{\regnode}[2]{
+  \node [main node,
+    minimum height = 1.8cm,
+    minimum width = .8cm,
+    #2
+  ] ({#1}) {};
+  \node [isosceles triangle,
+    isosceles triangle apex angle=60,
+    draw,
+    anchor=west
+  ] () at ($({#1}.west) + (0, -.5)$) {};
+}
+
+\begin{tikzpicture} [->,
+    >=latex,
+    auto,
+    very thick,
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center},
+    calc node/.style={circle, fill = white!35, draw}
+  ]
+
+  \node [main node,
+    fill = white!35,
+    minimum size = .8cm,
+    minimum width = 1.8cm
+  ] (ff) at (0, 0) {FIFO};
+
+  \multnode{minimum size = .8cm, right = 0.8 of ff}{outf}
+
+  \node [calc node,
+    minimum size = .8cm,
+    right = .8 cm of outf
+  ] (minus) {};
+  \draw [-] (minus.west) -- (minus.east);
+
+  \multnode{minimum size = .8cm, right = .8 of minus}{inf}
+
+  \draw (ff.east) -> (outf.west);
+  \draw (outf.east) -> (minus.west);
+
+  \coordinate (ankh) at ($(ff.west) + (-.4, 0)$) {};
+  \coordinate (ankhup) at ($(minus.north) + (0, .8)$) {};
+  \draw [-] (ankh) |- (ankhup);
+  \draw (ankhup) -> (minus.north)
+  node [pos=.9, right] {$+$};
+
+  \draw (minus.east) -> (inf.west);
+
+  \draw ($(ff.west) + (-.8, 0)$) ->  (ff.west)
+  node [pos=.1, left, align=center] () {{\LARGE $y_n$}\\(1 chip)};
+
+  \draw ($(inf.south) + (0, -0.4)$) ->  (inf.south)
+  node [pos=.1, below, align=center] () {$e^{-j\omega \times \frac{n}{q}}$};
+  \draw ($(outf.south) + (0, -0.4)$) ->  (outf.south)
+  node [pos=.1, below, align=center] () {$e^{j\omega}$};
+
+  \draw [latex-latex] ($(ff.south west) + (0, -.2)$) -- ($(ff.south east) + (0, -.2)$)
+  node [midway, below] () {q};
+
+  \node [
+    below = 1.6 of ff.east
+  ] (ankh2)  {};
+
+  \multnode{minimum size = .8cm, below = .6cm of ankh2}{mult0}
+  \addnode{minimum size = .8cm, below = .6cm of mult0}{add0}
+  \regnode{reg0}{left = .8cm of add0}
+
+  \regnode{reg1}{right = .8cm of add0}
+  \addnode{minimum size = .8cm, right = .8cm of reg1}{add1}
+  \multnode{minimum size = .8cm, above = .6cm of add1}{mult1}
+
+  \regnode{regk}{right = 2.8cm of add1}
+  \addnode{minimum size = .8cm, right = .8cm of regk}{addk}
+  \multnode{minimum size = .8cm, above = .6cm of addk}{multk}
+  \regnode{regkp1}{right = .8cm of addk}
+
+  \regnode{regq-1}{right = 2.8cm of regkp1}
+  \addnode{minimum size = .8cm, right = .8cm of regq-1}{addq-1}
+  \multnode{minimum size = .8cm, above = .6cm of addq-1}{multq-1}
+
+  \foreach \x in {0, 1, k, q-1}{
+      \draw (mult\x.north |- ankh2) -> (mult\x.north);
+      \draw ($(mult\x.west) + (-.5, 0)$) -> (mult\x.west)
+      node [pos=0, left] {\textbf{PN}(\x)};
+      \draw (mult\x.south) ->(add\x.north);
+      \draw (reg\x.east) ->(add\x.west)
+      node [midway] (r\x) {};
+      \draw [-] (r\x) -> ($(r\x) + (0, -2.2)$)
+      node [pos=1, below] {$\vect{L}_n$(\x)};
+    }
+
+  \draw [-] (inf.east) -| (multq-1.north |- ankh2)
+  node [pos=.25] {$(y_{n} - e^{j\omega}\times y_{n - q})\times e^{-j\omega \times \frac{n}{q}}$};
+  \draw [-] (mult0 |- ankh2) -- (multq-1|- ankh2);
+  \draw [line width=.75mm]
+  ($(r0) + (0, -2.2)$) -> ($(rq-1) + (3, -2.2)$)
+  node [pos=1, right, align=center] {$\vect{L}_n$\\(q points)};
+
+  \node () at ($(add1.east) + (1.5, 0)$) {\Huge \textbf{\dots}};
+  \node () at ($(regkp1.east) + (1.5, 0)$) {\Huge \textbf{\dots}};
+
+  \draw (add0.east) -- (reg1.west);
+  \draw (add1.east) -- ($(add1.east) + (.5, 0)$);
+  \draw ($(regk.west) + (-.5, 0)$) -- (regk.west);
+  \draw (addk.east) -- (regkp1.west);
+  \draw (regkp1.east) -- ($(regkp1.east) + (.5, 0)$);
+  \draw ($(regq-1.west) + (-.5, 0)$) -- (regq-1.west);
+
+  \draw [-] (addq-1.east) -| ($(addq-1.east) + (.5, -1.4)$);
+  \draw [-] ($(addq-1.east) + (.5, -1.4)$) -- ($(reg0.west) + (-.5, -1.4)$);
+  \draw ($(reg0.west) + (-.5, -1.4)$) |- (reg0.west) ;
+
+\end{tikzpicture}
+
+\end{document}

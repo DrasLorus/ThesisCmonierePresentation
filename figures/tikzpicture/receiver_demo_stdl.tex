@@ -1,0 +1,113 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture} [-latex,
+    >=latex,
+    auto,
+    very thick,
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center, inner sep = 3 mm},
+    every node/.style={font=\Large}
+  ]
+
+  \node [
+    align=center,
+    minimum height = 1.5cm
+  ] (chan) at (0, 0) {From the\\
+  channel};
+
+  \node [main node,
+  align=center,
+  minimum height = .75cm,
+  minimum width = .5cm,
+  fill = yellow!40,
+  % label = above:{$f_s = 500$ kHz},
+  right = .5cm of chan
+  ] (adc) {ADC $+$ Filter};
+
+  \draw (chan.east) -- (adc.west);
+  \draw [dashed, -] ($(adc.north east) + (.5, 1)$) -- ($(adc.south east) + (.5, -2.5)$);
+  
+  \node [anchor = south east, inner sep = .8cm] at ($(adc.south east) + (.5, -2.5)$) {\itshape On the USRP\phantom{p}};
+  \node [anchor = south west, inner sep = .8cm] at ($(adc.south east) + (.5, -2.5)$) {\itshape On the laptop};
+
+  \node [main node,
+    minimum height = 1.5cm,
+    fill = green!40,
+    %minimum width = 3cm,
+    right = 1 cm of adc
+  ] (ccskd)  {Detection};
+
+
+  \draw (adc.east) -- (ccskd.west);
+
+  \node [main node,
+    fill = red!35,
+    minimum height = 1.5cm,
+    %minimum width = 3cm,
+    right = 1 cm of ccskd
+  ] (ccsks) {Synchronization};
+
+  \draw (ccskd.east) -> (ccsks.west);
+
+  \node [main node,
+    fill = magenta!30,
+    minimum height = 1.5cm,
+    right = 1cm of ccsks
+  ] (nbdec) {NB-LDPC\\Decoder};
+
+  \node [right = 1cm of nbdec, align=center] (Mp) {Received Message\\$\vect{M'}$\\($20 \times 6$ bits)};
+
+
+  \draw (ccsks.east) -> (nbdec.west);
+
+
+  \draw (nbdec.east) -> ($(1, 0) + (nbdec.east)$);
+
+
+  %\draw ($(-1, 0) + (ccskd_z.west)$) -> (ccskd_z.west);
+
+  %\draw (ccsks.east) -> ($(1, 0) + (ccsks.east)$);
+
+  %\draw [dashed, color = red!50!gray, -] (anchor.south west) -- (frame_chosen.north west);
+  %\draw [dashed, color = red!50!gray, -] (anchor.south east) -- (frame_chosen.north east);
+
+  \node [
+    main node,
+    draw,
+    left = 5.5 cm of chan,
+    fill=yellow!40,
+  ] (rcvl) {\phantom{/}VHDL\phantom{/}};
+  \node [
+    main node,
+    draw,
+    right = .5cm of rcvl,
+    fill=green!40,
+  ] (rccc) {C/\cpp{}};
+  \node [
+    main node,
+    draw,
+    below = .5cm of rcvl,
+    fill=red!30,
+  ] (rcm) {\textsc{Matlab}};
+  \node [
+    draw,
+    main node,
+    align = center,
+    right = .5cm of rcm,
+    fill=magenta!30,
+  ] (rcmc) {C/\cpp{} called\\from \textsc{Matlab}};
+
+  \node[
+    draw,
+    inner sep = 2.1 mm,
+    fit = (rcvl) (rcmc),
+    label = {below:\textsc{Legend}}
+  ] (rcfit) {};
+
+\end{tikzpicture}
+
+\end{document}

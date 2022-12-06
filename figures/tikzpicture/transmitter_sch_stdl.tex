@@ -1,0 +1,80 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture}[very thick, inner sep = 1 mm]
+
+  \node [
+    inner sep = 1 mm,
+    anchor = north east
+  ] (bat) at (0,0){\texttt{Battery}};
+  \node [
+    align=center,
+    inner sep = 1 mm,
+    anchor = north
+  ] (pi4) at ($(bat.south) + (0, -1)$) {\texttt{Raspberry}\\\texttt{Pi 4}};
+  \node [
+    align = center,
+    inner sep = 1 mm,
+    anchor = north
+  ] (gps) at ($(pi4.south) + (0, -1)$) {\texttt{GPS Module}};
+  \node [
+    align = center,
+    inner sep = 1 mm,
+    anchor = west
+  ] (usrp) at ($(pi4.east) + (1, 0)$) {\texttt{USRP}\\\texttt{B205 mini-I}};
+
+  \draw [-Triangle] (bat.south) -> (pi4.north)
+  node [midway, left] {\scriptsize \textit{power}};
+  \draw [-Triangle] (gps.north) -> (pi4.south)
+  node [midway, left] (tgps) {\scriptsize \textit{GPS data}};
+  \draw [-Triangle] (pi4.east) -> (usrp.west)
+  node [midway, above] {\scriptsize \textit{frames}};
+
+  \coordinate (ant_usrp) at ($(usrp.east) + (2,0)$);
+  \draw [-Triangle] (usrp.east) -- (ant_usrp);
+  \draw (ant_usrp) -- ($(ant_usrp) + (0, .75)$);
+  \draw ($(ant_usrp) + (0, .75)$) -- ($(ant_usrp) + (+.25, 1)$);
+  \draw ($(ant_usrp) + (0, .75)$) -- ($(ant_usrp) + (   0, 1)$);
+  \draw ($(ant_usrp) + (0, .75)$) -- ($(ant_usrp) + (-.25, 1)$);
+
+  \coordinate (ant_gps) at ($(gps.east -| usrp.east) + (1.25,0)$);
+  \draw [Triangle-] (gps.east) -- (ant_gps);
+  \draw (ant_gps) -- ($(ant_gps) + (0, .45)$);
+  \draw ($(ant_gps) + (0, .45)$) -- ($(ant_gps) + (+.25, .65)$);
+  \draw ($(ant_gps) + (0, .45)$) -- ($(ant_gps) + (   0, .65)$);
+  \draw ($(ant_gps) + (0, .45)$) -- ($(ant_gps) + (-.25, .65)$);
+
+  \node [
+    draw,
+    dashed,
+    inner sep = 2mm,
+    fit = (bat) (gps) (usrp) (tgps)
+  ] (v) {};
+  \node[below = 0 mm of v, inner sep = 2 mm] () {Vehicle};
+
+  \node [
+  ] (ausrp) at (ant_usrp |- bat) {\phantom{\texttt{By}}};
+  \node [
+  ] (agps) at (ant_gps |- gps) {\phantom{\texttt{GPS}}};
+  \node [] (tmpw) at ($(ant_gps) - (.3, 0)$) {};
+  \node [] (tmpe) at ($(ant_gps) + (.8, 0)$) {};
+  \node [
+    draw,
+    dashed,
+    inner sep = 2mm,
+    fit = (ausrp) (agps) (tmpe) (tmpw)
+  ] (vv) {};
+  \node[below = 0 mm of vv, inner sep = 2 mm] () {Vehicle roof};
+
+
+  \node[left = .1cm of v, inner sep = 0pt] {\includegraphics[clip, trim={25cm 8cm 40cm 8cm}, width = 5.5 cm]{\fromRoot{figures/rtexps-pics/IMG_20221027_172657.jpg}}};
+  \node [dashed, RoyalBlue, draw, fit = {(-7.5,-.2) (-6.2,-1.2)}, label={above:\textbf{R. Pi 4 + GNSS}}] {};
+  \node [dashed, Yellow2, draw, fit = {(-7.75,-2.2) (-6.95,-3.58)}, label={right:\textbf{Battery}}] {};
+  \node [dashed, , draw=Red, fit = {(-3.85,-2.2) (-2.95,-3.58)}] {\textbf{USRP}};
+  \node[right = .1 cm of vv, inner sep = 0pt] {\includegraphics[width = 3.5 cm]{\fromRoot{figures/rtexps-pics/trans_antenna.jpg}}};
+
+\end{tikzpicture}
+\end{document}

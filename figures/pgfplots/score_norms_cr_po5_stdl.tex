@@ -1,0 +1,102 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+% \pgfplotsset{yticklabel style={text width=3em,align=right}}
+
+\begin{tikzpicture}[
+    thin
+  ]
+  \tiny
+  \begin{semilogyaxis}
+    [
+      name = plot1,
+      height = 8 cm,
+      width  = 10.5 cm,
+      mark size = 2pt,
+      font = \normalsize,
+      % scaled y ticks = false,
+      % y tick label style={/pgf/number format/fixed,
+      % 		/pgf/number format/1000 sep = \thinspace},
+      % xmin=0, xmax=250,
+      ylabel={Normalized counting},
+      ylabel style = {font = \Large},
+      xlabel={Centered Reduced Score},
+      xlabel style = {font = \Large},
+      ymin=10^-6, ymax=1,
+      ymajorgrids=true, xmajorgrids=true,
+      yminorgrids=true, xminorgrids=true,
+      legend pos = north east,
+      axis y line=left, axis x line=bottom,
+      legend columns = 5,
+      legend style={
+          font = \large,
+          % the /tikz/ prefix is necessary here...
+          % otherwise, it might end-up with `/pgfplots/column 2`
+          % which is not what we want. compare pgfmanual.pdf
+          % /tikz/column 2/.style={
+          %     column sep=5pt,
+          %   },
+          % /tikz/column 4/.style={
+          %     column sep=5pt,
+          %   },
+        },
+    ]
+
+    % \addplot[ dashdotted, color=red!80, thick, forget plot ]
+    % table [
+    %     x=edge, x expr=\thisrow{edge} + .25,
+    %     y=Nfa_NONE, y expr=\thisrow{Nfa_NONE}*1e-7 ] {\fromRoot{data/norms_data_po5_cenred_60x64.dat}};
+    % \addplot[ dashed,  color=red!80, thick, forget plot ]
+    % table [
+    %     x=edge, x expr=\thisrow{edge} + .25,
+    %     y=Nfa_L1, y expr=\thisrow{Nfa_L1}*1e-7 ] {\fromRoot{data/norms_data_po5_cenred_60x64.dat}};
+    \addplot[ solid, color=red!80, thick, forget plot ]
+    table [
+        x=edge, x expr=\thisrow{edge} + .25,
+        y=Nfa_L2, y expr=\thisrow{Nfa_L2}*1e-7 ] {\fromRoot{data/norms_data_po5_cenred_60x64.dat}};
+    % \addplot[ dashed, color=red!80, thick, forget plot ]
+    % table [
+    %     x=edge, x expr=\thisrow{edge} + .25,
+    %     y=Nfa_LINF, y expr=\thisrow{Nfa_LINF}*1e-7 ] {\fromRoot{data/norms_data_po5_cenred_60x64.dat}};
+
+    \addplot[ color=Orange, mark = o, thick ]
+    table [
+        x=edge, x expr=\thisrow{edge} + .25,
+        y=Nmd_LINF, y expr=\thisrow{Nmd_LINF}*1e-7 ] {\fromRoot{data/norms_data_po5_cenred_60x64.dat}};
+
+    \addplot[ color=Aquamarine!80!black, mark = diamond,  thick ]
+    table [
+        x=edge, x expr=\thisrow{edge} + .25,
+        y=Nmd_L1B, y expr=\thisrow{Nmd_L1B}*1e-7 ] {\fromRoot{data/norms_data_po5_cenred_60x64.dat}};
+
+    \addplot[ color=Chartreuse4, mark = square,  thick ]
+    table [
+        x=edge, x expr=\thisrow{edge} + .25,
+        y=Nmd_L1, y expr=\thisrow{Nmd_L1}*1e-7 ] {\fromRoot{data/norms_data_po5_cenred_60x64.dat}};
+
+    \addplot[ color=Blue, mark = triangle, thick ]
+    table [
+        x=edge, x expr=\thisrow{edge} + .25,
+        y=Nmd_L2, y expr=\thisrow{Nmd_L2}*1e-7 ] {\fromRoot{data/norms_data_po5_cenred_60x64.dat}};
+
+    \addplot[ color=black,  thick, mark = x, mark size = 3pt]
+    table [
+        x=edge, x expr=\thisrow{edge} + .25,
+        y=Nmd_NONE, y expr=\thisrow{Nmd_NONE}*1e-7 ] {\fromRoot{data/norms_data_po5_cenred_60x64.dat}};
+
+    \node [red, rotate = 90] at (0, 5e-3) {Noise only};
+
+    \legend{
+      % {Noise only \phantom{X} | \phantom{X}},
+      {$\mathcal{L}_\infty$ \phantom{X}},
+      {$\mathcal{L}_d$ \phantom{X}},
+      {$\mathcal{L}_1$ \phantom{X}},
+      {$\mathcal{L}_2$ \phantom{X}},
+      {ref.}
+    }
+  \end{semilogyaxis}
+\end{tikzpicture}
+\end{document}

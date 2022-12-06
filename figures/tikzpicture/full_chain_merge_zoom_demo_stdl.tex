@@ -1,0 +1,196 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture} [-latex,
+    >=latex,
+    auto,
+    very thick,
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center, inner sep = 3 mm},
+    every node/.style={font=\Large}
+  ]
+
+  \node [main node,
+    fill=cyan!30,
+    align=center,
+    minimum height = 1.5cm
+  ] (nbenc) at (0, 0) {NB-LDPC\\Encoder};
+
+  \draw ($(-1, 0) + (nbenc.west)$) -> (nbenc.west)
+  node [pos=0, align=center, below = 1cm] (M) {Message\\
+      $\vect{M}$\\($20 \times 6$ bits)};
+
+  \node [main node,
+    fill=cyan!30,
+    minimum height = 1.5cm,
+    %minimum width = 3cm,
+    right = 1cm of nbenc
+  ] (ccskm) {CCSK\\Mapping};
+
+  \draw (nbenc.east) -> (ccskm.west)
+  node [midway, align=center, below = 1cm] (cw) {Codeword\\
+      $\vect{C}$\\($60 \times 6$ bits)};
+
+  \node [main node,
+    fill=cyan!30,
+    minimum height = 1.5cm,
+    %minimum width = 3cm,
+    right = 1cm of ccskm
+  ] (bpskm) {BPSK $+$\\Overmodulation};
+
+  \draw (ccskm.east) -> (bpskm.west)
+  node [midway, align=center, below = 1cm] (M) {CCSK Frame\\
+      $\vect{F}_{\mathrm{CCSK}}$\\($60 \times 64$ bits)};
+
+  \node [main node,
+  top color = cyan!30,
+  bottom color = orange!30,
+  align=center,
+  minimum height = .75cm,
+  minimum width = .5cm,
+  label = above:{$f_s = 125$ kHz},
+  right = 1 cm of bpskm
+  ] (dac) {Filter\\$+$\\DAC};
+
+  \node [diamond,
+  fill = white!35,
+  draw,
+  align=center,
+  %minimum height = 1.5cm,
+  %minimum width = 2cm,
+  fill = white,
+  inner sep = 3 mm,
+  label=above:{$f_c = 433.92$ MHz},
+  right = .5 cm of dac
+  ] (chan) {Radio\\Channel};
+
+  \node [main node,
+  align=center,
+  minimum height = .75cm,
+  minimum width = .5cm,
+  fill = yellow!40,
+  label = above:{$f_s = 500$ kHz},
+  right = .5cm of chan
+  ] (adc) {ADC\\$+$\\Filter};
+
+  \draw (bpskm.east) -- (dac.west)
+  node [midway, align=center, below = 1cm] (M) {Frame\\
+  $\vect{F}$\\($60 \times 64$ chips)};
+
+  \draw (dac.east) -- (chan.west);
+  \draw (chan.east) -- (adc.west);
+
+  \node [main node,
+    minimum height = 1.5cm,
+    fill = green!40,
+    %minimum width = 3cm,
+    right = 1 cm of adc
+  ] (ccskd)  {Detection};
+
+
+  \draw (adc.east) -- (ccskd.west)
+  node [midway, align=center, below = 1.2cm] (M) {$4$ parallel\\data streams};
+
+  \node [main node,
+    fill = red!35,
+    minimum height = 1.5cm,
+    %minimum width = 3cm,
+    right = 1 cm of ccskd
+  ] (ccsks) {Synchronization};
+
+  \draw (ccskd.east) -> (ccsks.west)
+  node [midway, align=center, below = 1cm] (M) {Detected Frame\\$\vect{F}_D$\\
+      ($2 \times 60 \times 64$ chips)};
+
+  \node [main node,
+    fill = magenta!30,
+    minimum height = 1.5cm,
+    right = 1cm of ccsks
+  ] (nbdec) {NB-LDPC\\Decoder};
+
+
+
+  \draw (ccsks.east) -> (nbdec.west)
+  node [midway, align=center, below = 1cm] (M) {Synchronized Frame\\$\vect{F}_S$\\
+      ($60 \times 64$ chips)};
+
+
+  \draw (nbdec.east) -> ($(1, 0) + (nbdec.east)$)
+  node [pos=1, align=center, below = 1cm] (M) {Received Message\\
+      $\vect{M'}$\\
+      ($20 \times 6$ bits)};
+
+  \draw [latex-latex] ($(0, .2) + (nbenc.north west)$) -- ($(0, .2) +
+  (ccskm.north east)$)
+  node [midway, align=center, above = .2cm] (Mp) {Effective coding rate:
+      $R_{eff} = \frac{1}{32}$};
+
+
+
+
+  %\draw ($(-1, 0) + (ccskd_z.west)$) -> (ccskd_z.west);
+
+  %\draw (ccsks.east) -> ($(1, 0) + (ccsks.east)$);
+
+  %\draw [dashed, color = red!50!gray, -] (anchor.south west) -- (frame_chosen.north west);
+  %\draw [dashed, color = red!50!gray, -] (anchor.south east) -- (frame_chosen.north east);
+
+  \node [
+    main node,
+    draw,
+    anchor = north east,
+    fill=cyan!30,
+  ] at ($(cw.south) - (0, 1)$) (emcc) {C/\cpp{}};
+  \node [
+    main node,
+    draw,
+    right = .5cm of emcc,
+    fill=orange!30,
+  ] (emvl) {\phantom{/}VHDL\phantom{/}};
+
+  \node[
+    draw,
+    inner sep = 4 mm,
+    fit = (emcc) (emvl)
+  ] (emfit) {};
+  \node [anchor = north, inner sep = 1 mm] at (emfit.south) {Transmitter};
+
+  \node [
+    main node,
+    draw,
+    right = 1.2 cm of emvl,
+    fill=yellow!40,
+  ] (rcvl) {\phantom{/}VHDL\phantom{/}};
+  \node [
+    main node,
+    draw,
+    right = .5cm of rcvl,
+    fill=green!40,
+  ] (rccc) {C/\cpp{}};
+  \node [
+    main node,
+    draw,
+    right = .5cm of rccc,
+    fill=red!30,
+  ] (rcm) {\textsc{Matlab}};
+  \node [
+    draw,
+    main node,
+    align = center,
+    right = .5cm of rcm,
+    fill=magenta!30,
+  ] (rcmc) {C/\cpp{} called\\from \textsc{Matlab}};
+
+  \node[
+    draw,
+    inner sep = 2.1 mm,
+    fit = (rcvl) (rcmc)
+  ] (rcfit) {};
+  \node [anchor = north, inner sep = 1 mm] at (rcfit.south) {Receiver};
+
+\end{tikzpicture}
+
+\end{document}

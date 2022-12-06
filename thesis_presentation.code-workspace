@@ -1,0 +1,69 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"ltex.language": "fr",
+		"latex-workshop.view.pdf.viewer": "external",
+		"latex-workshop.latex.tools": [
+			{
+				"name": "latexmk",
+				"command": "latexmk",
+				"args": [
+					"-synctex=1",
+					"-interaction=nonstopmode",
+					"-file-line-error",
+					"-shell-escape",
+					"-pdf",
+					"-pdflatex=lualatex %O %S",
+					"-outdir=%OUTDIR%",
+					"%DOC%"
+				],
+				"env": {}
+			}
+		],
+		// "latex-workshop.latex.autoBuild.interval": 20000,
+		// "latex-workshop.view.pdf.external.viewer.command": "zathura-tabbed",
+		// "latex-workshop.view.pdf.external.viewer.command": "zathura",
+		// "latex-workshop.view.pdf.external.viewer.args": [
+		// 	"--synctex-editor-command",
+		// 	"code --no-sandbox -r -g \"%{input}:%{line}\"",
+		// 	"%PDF%"
+		// ],
+		// "latex-workshop.view.pdf.external.synctex.command": "zathura",
+		// "latex-workshop.view.pdf.external.synctex.args": [
+		// 	"--synctex-forward=%LINE%:0:%TEX%",
+		// 	"%PDF%"
+		// ],
+		"latex-workshop.view.pdf.external.viewer.command": "okular",
+		"latex-workshop.view.pdf.external.viewer.args": [
+			"--unique",
+			"%PDF%"
+		],
+		"latex-workshop.view.pdf.external.synctex.command": "okular",
+		"latex-workshop.view.pdf.external.synctex.args": [
+			"--unique",
+			"%PDF%#src:%LINE%%TEX%"
+		],
+		// "on-File-Change" or "ne-ver"
+		"latex-workshop.latex.autoBuild.run": "onFileChange",
+		"cSpell.language": "en,fr",
+		"cSpell.words": [
+			"Abelian",
+			"Bogo",
+			"correlator",
+			"correlators",
+			"manycore",
+			"Sigfox",
+			"stdl"
+		],
+		"latex-workshop.message.latexlog.exclude": [
+			"(hyperref)*acr*",
+			"Font shape `U/stmry/b/n' undefined",
+			"Font shape `TU/.*/m/sc' undefined"
+		],
+		"latex-workshop.intellisense.citation.backend": "biblatex"
+	}
+}

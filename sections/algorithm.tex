@@ -1,0 +1,47 @@
+\documentclass[../main.tex]{subfiles}
+
+\makeatletter
+\@ifundefined{fromRoot}{%
+  \newcommand{\fromRoot}[1]{../#1}
+  
+  \usepackage{xr}
+  \externaldocument{../main}
+}{}
+
+\def\input@path{{\subfix{../}}}
+%or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
+\makeatother
+
+\graphicspath{{\subfix{../}}}
+
+\hypersetup{
+    pdfauthor   = {Camille MONIÈRE},
+    pdftitle    = {Th\`{e}se (Présentation: étude algorithmique)},
+    pdfsubject  = {Th\`{e}se (Présentation: étude algorithmique)},
+%    pdfkeywords = {mots-cl\'{e}s},
+}
+
+\begin{document}
+
+\section{Étude algorithmique}
+
+\subsection{Sensibilité à un facteur d'échelle}
+
+
+\begin{frame}{\subsecname}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
+
+
+\subsection{Corrélation glissante dans le temps (\emph{Time sliding})}
+
+\begin{frame}{\subsecname}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
+
+
+\end{document}

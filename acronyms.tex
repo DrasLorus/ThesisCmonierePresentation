@@ -1,0 +1,128 @@
+\makeglossaries
+
+\newglossaryentry{gnssg}{
+    name={Global Navigation Satellite System},
+    description={Regroups all navigation satellite systems. For instance: GPS is the American system, Galileo is the Europen one, GLONASS is Russian and BeiDou is Chinese}
+}
+
+\newglossaryentry{ism}{
+    name={ISM radio band},
+    description={{Portion of the radio spectrum reserved internationally for industrial, scientific and medical (ISM) purposes. [\dots] Despite the intent of the original allocations, in recent years the fastest-growing use of these bands has been for short-range, low power wireless communications systems} \cite{ISMRadioBand2022}}
+}
+
+\newglossaryentry{cw}{
+    name={codeword},
+    description={Output of the channel encoder, that contains the transmitted message and some redundancy.
+    The original message can be retrieved by using the right channel decoder, 
+    which can also correct transmission errors in the process}
+}
+
+\newglossaryentry{qcspg}{
+    name={Quasi-Cyclic Short Packet},
+    description={The aim of the Quasi-Cyclic Short Packet (QCSP) project is to contribute to the evolution of IoT networks by defining, implementing and testing a new coded modulation scheme dedicated to IoT networks. The “big bet” of the project is to work on the emergence of NB codes combined with a Cyclic Code Shift Keying (CCSK) modulation \cite{QuasiCyclicSmall}}
+}
+
+\newglossaryentry{nmea}{
+    name={NMEA 0183},
+    description={{NMEA 0183 is a combined electrical and data specification for communication between marine electronics such as echo sounder, sonars, anemometer, gyrocompass, autopilot, GPS receivers and many other types of instruments. It has been defined and is controlled by the National Marine Electronics Association (NMEA).} \cite{NMEA01832022}}
+}
+
+\newglossaryentry{ookg}{
+    name={on-off keying},
+    description={Modulation scheme, where \textit{"1"}-bits are mapped to a high level (e.g. $+A$) and \textit{"0"}-bits are mapped to the zero level (e.g. $0$)}
+}
+
+\newglossaryentry{omg}{
+    name={Overmodulation},
+    description={Added frame-level information, used in the Quasi-Cyclic Short Packet chain to improve synchronization}
+}
+
+\newglossaryentry{bpskg}{
+    name={Binary Phase Shift Keying},
+    description={Modulation scheme, where \textit{"1"}-bits are mapped to a high level (e.g. $+1$) and \textit{"0"}-bits are mapped to a the opposite level (e.g. $-1$)}
+}
+
+\newglossaryentry{qpskg}{
+    name={Quadrature Phase Shift Keying},
+    description={Modulation scheme, where the number $k$ from $0$ to $3$ (2 bits) is mapped to the complex number $e^{j\frac{(2k + 1)\pi}{4}}$}
+}
+
+\newglossaryentry{cssg}{
+    name={Chirp Spread Spectrum},
+    description={Modulation scheme, where symbols are mapped to a signal with a particular frequency fingerprint, called a chirp. The key feature of the chirp, is that its frequency fingerprint can be circularly shifted. Each possible shift correspond to a specific symbol}
+}
+
+
+
+\setacronymstyle{long-short}
+
+\newacronym[]{css}{CSS}{\Gls{cssg}}
+\newacronym[]{qpsk}{QPSK}{\Gls{qpskg}}
+
+\newacronym[]{qcsp}{QCSP}{\Gls{qcspg}}
+\newacronym[]{pn}{PN}{Pseudo-Noise}
+\newacronym[]{ook}{OOK}{\Gls{ookg}}
+\newacronym[]{ccsk}{CCSK}{Cyclic Code Shift Keying}
+\newacronym[]{bpsk}{BPSK}{\Gls{bpskg}}
+\newacronym[]{om}{OM}{\Gls{omg}}
+\newacronym[]{cawgn}{CAWGN}{Complex Additive White Gaussian Noise}
+\newacronym[]{spu}{SPU}{Score Processing Unit}
+\newacronym[]{urllc}{URLLC}{Ultra-Reliable Low-Latency Communication}
+\newacronym[]{nbiot}{NBIoT}{Narrow-Band Internet of Things}
+\newacronym[]{mmbb}{mMBB}{massive Mobile Broadband}
+\newacronym[]{mmtc}{mMTC}{massive Machine Type Communications}
+\newacronym[]{embb}{eMBB}{Enhanced Mobile Broadband}
+\newacronym[]{lpwan}{LPWAN}{Low Power Wide Area Network}
+\newacronym[]{gf}{GF}{Galois Field}
+\newacronym[]{fecc}{FECC}{Forward Error Correction Codes}
+\newacronym[]{nbecc}{NB-ECC}{Non Binary Error Correction Codes}
+\newacronym[]{ldpc}{LDPC}{Low Density Parity Check}
+\newacronym[]{nbldpc}{NB-LDPC}{Non-Binary Low Density Parity Check}
+\newacronym[]{pcm}{PCM}{Parity Check Matrix}
+\newacronym[]{llr}{LLR}{Log-Likelihood Ratio}
+\newacronym[]{pfa}{$\mathcal{P}_{fa}$}{probability of False Alarm}
+\newacronym[]{pmd}{$\mathcal{P}_{md}$}{probability of Miss Detection}
+\newacronym[]{mc}{MC}{Monte-Carlo}
+\newacronym[]{roc}{ROC}{Receiver Operating Characteristic}
+\newacronym[]{dac}{DAC}{Digital Analog Converter}
+\newacronym[]{adc}{ADC}{Analog Digital Converter}
+\newacronym[]{snr}{SNR}{Signal-to-Noise Ratio}
+\newacronym[]{rf}{RF}{Radio-Frequency}
+\newacronym[]{iot}{IoT}{Internet of Things}
+\newacronym[]{sbc}{SBC}{Single-Board Computer}
+\newacronym[]{soc}{SoC}{System on Chip}
+\newacronym[]{fft}{FFT}{Fast Fourier Transform}
+\newacronym[]{ifft}{IFFT}{Inverse Fast Fourier Transform}
+\newacronym[]{ts}{TS}{Time Sliding}
+\newacronym[]{simd}{SIMD}{Single Instruction Multiple Data}
+\newacronym[]{isa}{ISA}{Instruction Set Architecture}
+\newacronym[]{fpga}{FPGA}{Field-Programmable Gate Array}
+\newacronym[]{asic}{ASIC}{Application-Specific Integrated Circuit}
+\newacronym[]{lut}{LUT}{LookUp Table}
+\newacronym[]{ff}{FF}{Flip-Flop}
+\newacronym[]{dsp}{DSP}{Digital Signal Processor}
+\newacronym[]{bram}{BRAM}{Block RAM}
+\newacronym[]{hls}{HLS}{High-Level Synthesis}
+\newacronym[]{cu}{CU}{Correlation Unit}
+\newacronym[]{tcu}{TCU}{\acrshort{ts} Correlation Unit}
+\newacronym[]{fcu}{FCU}{\acrshort{fft} Correlation Unit}
+\newacronym[]{alu}{ALU}{Arithmetic Logic Unit}
+\newacronym[]{usrp}{USRP}{Universal Software-define Radio Peripheral}
+\newacronym[]{rfnoc}{RFNoC\protect}{\acrshort{rf} Network-on-Chip}
+\newacronym[]{mse}{MSE}{Mean Square Error}
+\newacronym[]{mpe}{MPE}{Mean Percentage Error}
+\newacronym[]{lsb}{LSB}{Least Significant Bit}
+\newacronym[]{msb}{MSB}{Most Significant Bit}
+\newacronym[]{sdr}{SdR}{Software-defined Radio}
+\newacronym[]{cordic}{CORDIC}{COordinate Rotation DIgital Computer}
+\newacronym[]{mt}{MT}{Multithreading}
+\newacronym[]{gnss}{GNSS}{\gls{gnssg}}
+\newacronym[]{uhd}{UHD}{\acrshort{usrp} Hardware Driver}
+\newacronym[]{osi}{OSI}{Open System Interconnection}
+\newacronym[]{wsn}{WSN}{Wireless Sensor Network}
+\newacronym[]{dcs}{DCS}{Digital Communication System}
+
+\newacronym[]{ecc}{ECC}{Error Correction Code}
+\newacronym[]{cpu}{CPU}{Central Processing Unit}
+\newacronym[]{gpu}{GPU}{Graphical Processing Unit}
+\newacronym[]{gpgpu}{GPGPU}{General Purpose Graphical Processing Unit}

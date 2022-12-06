@@ -1,0 +1,106 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\def\mk{7}
+\def\mn{15}
+\def\lenn{14}
+
+\begin{tikzpicture} [->,
+  >={Triangle[width = 6pt, length = 8pt]},
+  auto,
+  thick,
+  main node/.style={rectangle, fill = white!35,  draw,
+      align=center}]
+
+  \def\currcolor{blue!60!green!30}
+
+  \coordinate (ref_fft) at (0, 0);
+
+  \foreach \n in {0,...,\lenn} {
+
+  \foreach \k in {0,...,\mk} {
+
+  \pgfmathparse{Mod(\n, \mk + 1)==0?1:0}
+
+  \ifnum\pgfmathresult>0 {
+    \node [fill= red!70!green!50,
+      draw=black,
+      anchor=south west,
+      minimum size = 1 cm] at ($(ref_fft) + (\n, \k) $) {};
+
+    } \else {
+      \pgfmathparse{int(Mod(\n, (\mk + 1) / 2))==0?1:0}
+
+      \ifnum\pgfmathresult>0
+        { \node [fill= red!60!white!70,
+          draw=black,
+          anchor=south west,
+          minimum size = 1 cm] at ($(ref_fft) + (\n, \k)$) {}; }
+        \else
+        { \node [fill= \currcolor,
+            draw=black,
+            anchor=south west,
+            minimum size = 1 cm] at ($(ref_fft) + (\n, \k)$) {}; }
+      \fi
+    }
+  \fi
+
+  }
+  }
+
+
+  \foreach \k in {0,...,\mk} {
+      \node [fill=none,
+        draw=none,
+        font = {\Huge},
+        anchor=south east,
+        minimum size = 1 cm] at ($(ref_fft) + (0, \k)$) {$\k$};
+    }
+
+  \foreach \n in {0,...,\lenn} {
+
+  \pgfmathparse{int(Mod(\n, (\mn + 1) / 4))== 0?1:0}
+
+  \ifnum\pgfmathresult>0
+    {
+    \pgfmathparse{int(Mod(\n, (\mn + 1) / 4))==3?1:0}
+    \node [fill=none,
+      draw=none,
+      anchor=north,
+      font = {\Huge},
+      minimum size = 1 cm] at ($(ref_fft) + (\n, 0)+ (.5, 0)$) {$\n$};
+
+    }
+    \else
+    {  }
+  \fi
+
+
+  }
+
+  \pgfmathparse{\lenn / 2 + 1}
+  \node [fill=none,
+    draw=none,
+    anchor=north,
+    font = {\Huge},
+    minimum size = 1 cm] at ($(ref_fft) + (\pgfmathresult, -1)$) {$n$};
+
+
+  \pgfmathparse{(\mk) / 2 + 1}
+  \node [fill=none,
+    draw=none,
+    anchor=north,
+    font = {\Huge},
+    minimum size = 1 cm] at ($(ref_fft) + (-1.5, \pgfmathresult)$) {$k$};
+
+  \draw[line width=2.5pt] (ref_fft) -> ($(ref_fft) + (0, \mk) + (0, 1.5)$);
+
+  \draw[line width=2.5pt] ($(ref_fft)  + (-.0438,0)$) -> ($(ref_fft) + (\lenn, 0) + (1.5, 0)$);
+
+
+\end{tikzpicture}
+
+\end{document}

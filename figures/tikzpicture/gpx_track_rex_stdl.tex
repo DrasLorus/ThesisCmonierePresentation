@@ -1,0 +1,16 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture}
+  
+  \node[anchor = north west, inner sep = 0pt ] (pict) at (0, 0) {\includegraphics[width =7cm]{\fromRoot{figures/rtexps-pics/gpx_track.png}}};
+
+  \coordinate (ensibs) at (4.77, -1.9);
+  \node [blue, dashed, very thick, label=below:\textbf{\textcolor{blue}{1000 m}}, draw, circle, minimum size = 4.5cm] (v1) at (ensibs) {};
+  \node [magenta!90!black, dashed, very thick, label=above:\textbf{\textcolor{magenta!90!black}{500 m}}, draw, circle, minimum size = 2.25cm] (v2) at (ensibs) {};
+\end{tikzpicture}
+
+\end{document}

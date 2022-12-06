@@ -1,0 +1,158 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\usepackage[]{luacode}
+
+\newcommand*{\lencoords}[0]{10}%
+
+\newcommand{\coordscaled}[2]{%
+    \directlua {%
+        local array = {0, 32, 64, 68, 74, 80, 81, 88, 104, 119, 120};
+        tex.print(array[#1] * (#2))
+    }
+}%
+
+\begin{luacode*}
+  function printnodename(idx) 
+    local array = {"lat", "lon", "h", "m", "s", "p", "c", "t", "no", "theend"};
+    tex.print(array[idx])
+  end
+
+  function printnodelabel(idx) 
+    local array = {"Latitude", "Longitude", "Hours",
+                   "Minutes", "Seconds", "AM/PM", "Cents", "SoC Temp.", "Frame No.", "theend"};
+    tex.print(array[idx])
+  end
+\end{luacode*}
+
+\newcommand*{\coordnames}[1]{\directlua {printnodename(#1)}}%
+
+\newcommand*{\coordlabels}[1]{\directlua {printnodelabel(#1)}}%
+
+\begin{document}
+
+
+\begin{tikzpicture}[
+    very thick,
+    inner sep = 1.2 mm,
+    every node/.style={font=\Large}
+  ]
+
+  % \node [anchor = south east, inner sep=2px] at (6.3, .3) {63};
+  % \node [anchor = south east, inner sep=2px] at (3.1, .3) {31};
+
+  \foreach \i [    evaluate=\i as \j   using \coordscaled{\i}{1},
+    evaluate=\i as \k  using \coordscaled{\i}{.3},
+    evaluate=\i as \kp using \coordscaled{\i + 1}{.3}
+    % evaluate=\i as \id  using \coordnames{\i}
+  ] in {1,..., 5} {
+      % \def\name{\coordnames{\i}}
+      \node [anchor = south, inner sep=2px] (bit\j) at (\k, .3) {\j};
+      \node [
+        draw,
+        anchor = north west,
+        minimum height = .5cm,
+        inner sep = 0px,
+        fit = {(\k, 0) (\kp, -.7)}
+      ] (\coordnames{\i}) {};
+      \draw [-, thick] ($(\coordnames{\i}.north west) + (.5pt, 0)$) -- (bit\j.south);
+    }
+
+  \foreach \i [    evaluate=\i as \j   using \coordscaled{\i}{1},
+    evaluate=\i as \k  using \coordscaled{\i}{.3},
+    evaluate=\i as \kp using \coordscaled{\i + 1}{.3}
+    % evaluate=\i as \id  using \coordnames{\i}
+  ] in {6} {
+      % \def\name{\coordnames{\i}}
+      \node [anchor = south east, inner sep=2px] (bit\j) at (\k, .3) {\j};
+      \node [
+        draw,
+        anchor = north west,
+        minimum height = .5cm,
+        inner sep = 0px,
+        fit = {(\k, 0) (\kp, -.7)}
+      ] (\coordnames{\i}) {};
+      \draw [-, thick] ($(\coordnames{\i}.north west) + (.5pt, 0)$) -- (bit\j.south);
+    }
+
+  \foreach \i [    evaluate=\i as \j   using \coordscaled{\i}{1},
+    evaluate=\i as \k  using \coordscaled{\i}{.3},
+    evaluate=\i as \kp using \coordscaled{\i + 1}{.3}
+    % evaluate=\i as \id  using \coordnames{\i}
+  ] in {7} {
+      % \def\name{\coordnames{\i}}
+      \node [anchor = south west, inner sep=2px] (bit\j) at (\k, .3) {\j};
+      \node [
+        draw,
+        anchor = north west,
+        minimum height = .5cm,
+        inner sep = 0px,
+        fit = {(\k, 0) (\kp, -.7)}
+      ] (\coordnames{\i}) {};
+      \draw [-, thick] ($(\coordnames{\i}.north west) + (.5pt, 0)$) -- (bit\j.south);
+    }
+
+  \foreach \i [    evaluate=\i as \j   using \coordscaled{\i}{1},
+    evaluate=\i as \k  using \coordscaled{\i}{.3},
+    evaluate=\i as \kp using \coordscaled{\i + 1}{.3}
+    % evaluate=\i as \id  using \coordnames{\i}
+  ] in {8} {
+      % \def\name{\coordnames{\i}}
+      \node [anchor = south, inner sep=2px] (bit\j) at (\k, .3) {\j};
+      \node [
+        draw,
+        anchor = north west,
+        minimum height = .5cm,
+        inner sep = 0px,
+        fit = {(\k, 0) (\kp, -.7)}
+      ] (\coordnames{\i}) {};
+      \draw [-, thick] ($(\coordnames{\i}.north west) + (.5pt, 0)$) -- (bit\j.south);
+    }
+
+  \foreach \i [
+    evaluate=\i as \j  using \coordscaled{\i}{1},
+    evaluate=\i as \jp using \coordscaled{\i + 1}{1},
+    evaluate=\i as \k  using \coordscaled{\i}{.3},
+    evaluate=\i as \kp using \coordscaled{\i + 1}{.3}
+    % evaluate=\i as \id  using \coordnames{\i}
+  ] in {9} {
+      % \def\name{\coordnames{\i}}
+      \node [anchor = south, inner sep=2px] (bit\j)  at (\k,   .3) {\j};
+      \node [anchor = south, inner sep=2px] (bitEnd) at (\kp, .3) {\jp};
+      \node [
+        draw,
+        anchor = north west,
+        minimum height = .5cm,
+        inner sep = 0px,
+        fit = {(\k, 0) (\kp, -.7)}
+      ] (\coordnames{\i}) {};
+      \draw [-, thick] ($(\coordnames{\i}.north west) + (.5pt, 0)$) -- (bit\j.south);
+      \draw [-, thick] ($(\coordnames{\i}.north east) - (.5pt, 0)$) -- (bitEnd.south);
+    }
+
+  \node [
+    align = center,
+    anchor = north 
+  ] (lab1) at ($(lat) + (-2, -2)$) {\coordlabels{1}\\(32 b)};
+  \draw [thick, dashed, -] (lab1.north) -- (\coordnames{1}.south);
+
+  \foreach \i/\id [
+    evaluate=\i as \im using {int(\i - 1)},
+    evaluate=\i as \lb using {int(\coordscaled{\i + 1}{1} - \coordscaled{\i}{1})},
+  ] in {2,...,8} {
+    \node [
+      align = center,
+      right = 1.9cm of lab\im
+    ] (lab\i) {\coordlabels{\i}\\(\lb{} b)};
+    \draw [thick, dashed, -] (lab\i.north) -- (\coordnames{\i}.south);
+  }
+
+  \node [
+    align = center,
+    right = 1cm of lab8
+  ] (lab9) {\coordlabels{9}\\(16 b)};
+  \draw [thick, dashed, -] (lab9.north) -- (\coordnames{9}.south);
+
+\end{tikzpicture}
+\end{document}
