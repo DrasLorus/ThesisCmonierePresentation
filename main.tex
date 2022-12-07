@@ -27,8 +27,37 @@
 \usepackage{multicol}
 
 
-\usepackage[style=ieee, sorting=none, minnames=1, maxnames=1]{biblatex} %Imports biblatex package
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  sorting=ydnt,
+  minnames=2,
+  maxnames=2,
+]{biblatex} %Imports biblatex package
 \addbibresource{biblio/thesis.bib} %Import the bibliography file
+
+\renewbibmacro{in:}{%
+  \ifentrytype{inproceedings}{\printtext{In proceedings of\intitlepunct}}{\printtext{\bibstring{in}\intitlepunct}}}
+
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite=true]{
+      \step[fieldset=editor, null]
+      \step[fieldsource=author,
+            match=Moni\`ere,
+            final]
+      \step[fieldset=keywords, fieldvalue={, own}, append]
+    }
+  }
+}
+
+
+\DeclareBibliographyCategory{own-conf-en}
+\addtocategory{own-conf-en}{moniereDASIP22}
+\addtocategory{own-conf-en}{moniereTimeSlidingWindow2021}
+
+\DeclareBibliographyCategory{own-conf-fr}
+\addtocategory{own-conf-fr}{moniereImplementationsLogiciellesMaterielles2022}
 
 \usepackage{pifont}
 \setmainfont{Noto Serif}
@@ -62,6 +91,7 @@
 \setbeamertemplate{sidebar canvas \beamer@sidebarside}[vertical shading][top=black,bottom=RoyalBlue]
 \makeatother
 \setbeamercolor{titlelike}{use=structure,fg=RoyalBlue4}
+\setbeamertemplate{bibliography item}{$\:\:\bullet$}
 
 \addtobeamertemplate{frametitle}{}{}
 \setbeamertemplate{sections/subsections in toc}[sections numbered]
@@ -85,7 +115,7 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
 \insertframenumber
 }
 
-\setbeamertemplate{bibliography item}{\insertbiblabel}
+% \setbeamertemplate{bibliography item}{\insertbiblabel}
 
 \AtBeginSection[]{
   \begin{frame}[noframenumbering]{Sommaire}
@@ -119,83 +149,83 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
 \section*{}
 
 \begin{frame}
-    \vspace*{-.8 cm}
-    \titlepage
+  \vspace*{-.8 cm}
+  \titlepage
 
-    \vspace{-.4 cm}
-    \begin{columns}
-        \begin{column}{.11\textwidth}
-            \hfill
-        \end{column}
-        \begin{column}{.13\textwidth} \centering
-            \includegraphics[width=.7\textwidth]{CNRS.svg.png}
-        \end{column}
-        \begin{column}{.13\textwidth} \centering
-            \includegraphics[width=\textwidth]{labsticc.png}
-        \end{column}
-        \begin{column}{.13\textwidth} \centering
-            \includegraphics[width=\textwidth]{logoimsjoom.png}
-        \end{column}
+  \vspace{-.4 cm}
+  \begin{columns}
+    \begin{column}{.11\textwidth}
+      \hfill
+    \end{column}
+    \begin{column}{.13\textwidth} \centering
+      \includegraphics[width=.7\textwidth]{CNRS.svg.png}
+    \end{column}
+    \begin{column}{.13\textwidth} \centering
+      \includegraphics[width=\textwidth]{labsticc.png}
+    \end{column}
+    \begin{column}{.13\textwidth} \centering
+      \includegraphics[width=\textwidth]{logoimsjoom.png}
+    \end{column}
 
-        \begin{column}{.13\textwidth} \centering
-            \includegraphics[width=\textwidth]{anr-logo-2021.png}
-        \end{column}
-        \begin{column}{.13\textwidth} \centering
-            \includegraphics[width=\textwidth]{QCSP_Logo.pdf}
-        \end{column}
-        \begin{column}{.11\textwidth}
-            \hfill
-        \end{column}\subsecname
-    \end{columns}
-    \begin{columns}
-        \begin{column}{.22\textwidth}
-            \hfill
-        \end{column}
-        \begin{column}{.16\textwidth} \centering
-            \includegraphics[width=\textwidth]{universite-bordeaux.eps.pdf}
-        \end{column}
-        \begin{column}{.15\textwidth}\centering
-            \includegraphics[width=\textwidth]{universite-bretagne-sud.eps.pdf}
-            \hfill
-        \end{column}
-        \begin{column}{.22\textwidth}
-            \hfill
-        \end{column}
-    \end{columns}
+    \begin{column}{.13\textwidth} \centering
+      \includegraphics[width=\textwidth]{anr-logo-2021.png}
+    \end{column}
+    \begin{column}{.13\textwidth} \centering
+      \includegraphics[width=\textwidth]{QCSP_Logo.pdf}
+    \end{column}
+    \begin{column}{.11\textwidth}
+      \hfill
+    \end{column}\subsecname
+  \end{columns}
+  \begin{columns}
+    \begin{column}{.22\textwidth}
+      \hfill
+    \end{column}
+    \begin{column}{.16\textwidth} \centering
+      \includegraphics[width=\textwidth]{universite-bordeaux.eps.pdf}
+    \end{column}
+    \begin{column}{.15\textwidth}\centering
+      \includegraphics[width=\textwidth]{universite-bretagne-sud.eps.pdf}
+      \hfill
+    \end{column}
+    \begin{column}{.22\textwidth}
+      \hfill
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \section*{Avant-propos} % Sommaire
 \begin{frame}{\secname}
-    \begin{center}
-        \begin{columns}
-            \begin{column}{.6\linewidth}
-                Ces travaux de thèse ont été financé par l'Agence Nationale de la Recherche (ANR) française, et s'inscrivent ainsi dans le projet \acrfull{qcsp}, identifiant \texttt{ANR-19-CE25-0013-01}.
-            \end{column}
-            \begin{column}{.2\linewidth}
-                \hfill \includegraphics[width=\linewidth]{anr_approved.jpg}
-            \end{column}
-        \end{columns}
+  \begin{center}
+    \begin{columns}
+      \begin{column}{.6\linewidth}
+        Ces travaux de thèse ont été financé par l'Agence Nationale de la Recherche (ANR) française, et s'inscrivent ainsi dans le projet \acrfull{qcsp}, identifiant \texttt{ANR-19-CE25-0013-01}.
+      \end{column}
+      \begin{column}{.2\linewidth}
+        \hfill \includegraphics[width=\linewidth]{anr_approved.jpg}
+      \end{column}
+    \end{columns}
 
-        \vspace{3 em}
+    \vspace{3 em}
 
-        Cette thèse s'est déroulée sous la direction d'Emmanuel BOUTILLON\footnote{\tiny Pr, Lab-STICC, CNRS UMR 6285, Université de Bretagne Sud, 56100 Lorient, France, Email : emmanel.boutillon@univ-ubs.fr}, et l'encadrement de Bertrand LE GAL\footnote{\tiny MCF, IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : bertrand.legal@ims-bordeaux.fr \vspace{1em}}.
-    \end{center}
+    Cette thèse s'est déroulée sous la direction d'Emmanuel BOUTILLON\footnote{\tiny Pr, Lab-STICC, CNRS UMR 6285, Université de Bretagne Sud, 56100 Lorient, France, Email : emmanel.boutillon@univ-ubs.fr}, et l'encadrement de Bertrand LE GAL\footnote{\tiny MCF, IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : bertrand.legal@ims-bordeaux.fr \vspace{1em}}.
+  \end{center}
 \end{frame}
 
 
 \section*{Sommaire} % Sommaire
 \begin{frame}{\secname}
-    \begin{columns}
-        \begin{column}{.2\linewidth}
-            \hfill
-        \end{column}
-        \begin{column}{.7\linewidth}
-            \tableofcontents[hideallsubsections]
-        \end{column}
-        \begin{column}{.1\linewidth}
-            \hfill
-        \end{column}
-    \end{columns}
+  \begin{columns}
+    \begin{column}{.2\linewidth}
+      \hfill
+    \end{column}
+    \begin{column}{.7\linewidth}
+      \tableofcontents[hideallsubsections]
+    \end{column}
+    \begin{column}{.1\linewidth}
+      \hfill
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \subfile{sections/introduction}
@@ -210,12 +240,38 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
 
 \subfile{sections/conclusion.tex}
 
-\section*{Bibliography}
-\begin{frame}[noframenumbering, allowframebreaks]
-    \frametitle{Références}
-    \nocite{*}
-    \renewcommand*{\bibfont}{\tiny}
-    \printbibliography[heading=none]
+\section*{Contributions}
+\begin{frame}
+  \frametitle{\secname}
+
+  Contributions en conférences internationales
+
+  \vspace{1 em}
+
+  \nocite{moniereDASIP22, moniereTimeSlidingWindow2021}
+  \renewcommand*{\bibfont}{\tiny}
+  \printbibliography[category=own-conf-en, heading=none]
+
+  \vspace{2 em}
+
+  Contribution en conférences nationales
+
+  \vspace{1 em}
+
+  \nocite{moniereImplementationsLogiciellesMaterielles2022}
+  \renewcommand*{\bibfont}{\tiny}
+  \printbibliography[category=own-conf-fr, heading=none]
+
+\end{frame}
+
+\section*{Références}
+\begin{frame}[allowframebreaks]
+  \frametitle{\secname}
+
+  \nocite{*}
+  \renewcommand*{\bibfont}{\rikiki}
+  \printbibliography[notkeyword=own, heading=none]
+
 \end{frame}
 
 \end{document}

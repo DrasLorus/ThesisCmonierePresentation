@@ -48,7 +48,7 @@
 			"%PDF%#src:%LINE%%TEX%"
 		],
 		// "on-File-Change" or "ne-ver"
-		"latex-workshop.latex.autoBuild.run": "onFileChange",
+		"latex-workshop.latex.autoBuild.run": "never",
 		"cSpell.language": "en,fr",
 		"cSpell.words": [
 			"Abelian",
