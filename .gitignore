@@ -319,3 +319,11 @@ TSWLatexianTemp*
 sections/*.pdf
 *.ist
 .$*
+
+# Result
+main.pdf
+
+# Figures
+figures/tikzpicture/*.pdf
+figures/pgfplots/*.pdf
+

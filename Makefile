@@ -16,10 +16,10 @@ main: figures main.pdf main.gls main.acr
 	makeglossaries main
 	latexmk main.tex
 
-main.pdf: main.tex figures
+main.pdf main.ist main.acn: main.tex figures
 	latexmk main.tex
 
-main.gls main.acr: main.ist  main.glo main.acn
+main.gls main.acr: main.ist main.glo main.acn
 	makeglossaries main
 
 figures: svg tikzpictures pgfplots
