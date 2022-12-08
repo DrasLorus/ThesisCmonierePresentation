@@ -25,28 +25,28 @@
 			}
 		],
 		// "latex-workshop.latex.autoBuild.interval": 20000,
-		// "latex-workshop.view.pdf.external.viewer.command": "zathura-tabbed",
+		"latex-workshop.view.pdf.external.viewer.command": "zathura-tabbed",
 		// "latex-workshop.view.pdf.external.viewer.command": "zathura",
-		// "latex-workshop.view.pdf.external.viewer.args": [
-		// 	"--synctex-editor-command",
-		// 	"code --no-sandbox -r -g \"%{input}:%{line}\"",
-		// 	"%PDF%"
-		// ],
-		// "latex-workshop.view.pdf.external.synctex.command": "zathura",
-		// "latex-workshop.view.pdf.external.synctex.args": [
-		// 	"--synctex-forward=%LINE%:0:%TEX%",
-		// 	"%PDF%"
-		// ],
-		"latex-workshop.view.pdf.external.viewer.command": "okular",
 		"latex-workshop.view.pdf.external.viewer.args": [
-			"--unique",
+			"--synctex-editor-command",
+			"code --no-sandbox -r -g \"%{input}:%{line}\"",
 			"%PDF%"
 		],
-		"latex-workshop.view.pdf.external.synctex.command": "okular",
+		"latex-workshop.view.pdf.external.synctex.command": "zathura",
 		"latex-workshop.view.pdf.external.synctex.args": [
-			"--unique",
-			"%PDF%#src:%LINE%%TEX%"
+			"--synctex-forward=%LINE%:0:%TEX%",
+			"%PDF%"
 		],
+		// "latex-workshop.view.pdf.external.viewer.command": "okular",
+		// "latex-workshop.view.pdf.external.viewer.args": [
+		// 	"--unique",
+		// 	"%PDF%"
+		// ],
+		// "latex-workshop.view.pdf.external.synctex.command": "okular",
+		// "latex-workshop.view.pdf.external.synctex.args": [
+		// 	"--unique",
+		// 	"%PDF%#src:%LINE%%TEX%"
+		// ],
 		// "on-File-Change" or "ne-ver"
 		"latex-workshop.latex.autoBuild.run": "never",
 		"cSpell.language": "en,fr",
