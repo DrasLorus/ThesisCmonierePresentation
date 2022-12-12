@@ -1,3 +1,5 @@
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
 \newcommand*{\gf}[1]{\acrshort{gf}($#1$)}%
 \newcommand*{\mpn}[1]{\bm{P}_{#1}}%
 \newcommand*{\pn}[1]{%
@@ -9,7 +11,8 @@
 }%
 
 
-\newcommand*{\placeholder}{\includegraphics[width=\linewidth, height=.25\textheight, keepaspectratio = true]{figures/certified_xilinx.png}}%
+\newcommand*{\placeholderreg}{\includegraphics[width=\linewidth, height=.25\textheight, keepaspectratio = true]{figures/certified_xilinx.png}}%
+\newcommand*{\placeholder}[1]{\includegraphics[#1]{figures/certified_xilinx.png}}%
 
 \newcommand*{\snr}{\acrshort{snr}}%
 \newcommand*{\snrs}{\acrshortpl{snr}}%

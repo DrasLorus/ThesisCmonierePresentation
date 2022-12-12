@@ -1,4 +1,4 @@
-\documentclass[hidelinks, french, xcolor={table, rgb, dvipsnames, x11names}, aspectratio=169, professionalfonts]{beamer}
+\documentclass[hidelinks, french, graphicx={draft}, xcolor={table, rgb, dvipsnames, x11names}, aspectratio=169, professionalfonts]{beamer}
 
 \RequirePackage{luatex85}
 
@@ -25,7 +25,8 @@
 \usepackage{stmaryrd}
 \usepackage{bm}
 \usepackage{multicol}
-
+\usepackage{etoolbox}
+\usepackage{blindtext}
 
 \usepackage[
   backend=biber,
@@ -37,12 +38,13 @@
 \addbibresource{biblio/thesis.bib} %Import the bibliography file
 
 \renewbibmacro{in:}{%
-  \ifentrytype{inproceedings}{\printtext{In proceedings of\intitlepunct}}{\printtext{\bibstring{in}\intitlepunct}}}
+  \ifentrytype{inproceedings}{\printtext{In the proceedings of\intitlepunct}}{\printtext{\bibstring{in}\intitlepunct}}}
 
 \DeclareSourcemap{
   \maps[datatype=bibtex]{
     \map[overwrite=true]{
       \step[fieldset=editor, null]
+      \step[fieldset=urldate, null]
       \step[fieldsource=author,
             match=Moni\`ere,
             final]
@@ -90,11 +92,25 @@
 \makeatletter
 \setbeamertemplate{sidebar canvas \beamer@sidebarside}[vertical shading][top=black,bottom=RoyalBlue]
 \makeatother
+
 \setbeamercolor{titlelike}{use=structure,fg=RoyalBlue4}
 \setbeamertemplate{bibliography item}{$\:\:\bullet$}
-
+\setbeamerfont{footnote}{size=\tiny}
 \addtobeamertemplate{frametitle}{}{}
-\setbeamertemplate{sections/subsections in toc}[sections numbered]
+
+\defbeamertemplate{section in toc}{sections numbered roman}{%
+  \leavevmode%
+  \MakeUppercase{\romannumeral\inserttocsectionnumber}.\ \inserttocsection\par
+}
+\defbeamertemplate{subsection in toc}{subsections numbered alone}{%
+  \leavevmode%
+  \hspace{1em}\inserttocsubsectionnumber.\ \inserttocsubsection\par
+}
+
+\setbeamertemplate{section in toc}[sections numbered roman]
+\setbeamertemplate{subsection in toc}[subsections numbered alone]
+
+\newenvironment{ctrlitemize}[1]{\itemize\addtolength{\itemsep}{#1}}{\enditemize}
 
 \newcommand*{\Xb}{\textcolor{blue}{\symbol{"25A0}}}
 \newcommand*{\Ob}{\textcolor{red}{\symbol{"25A0}}}
@@ -123,7 +139,8 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
         \begin{column}{.15\linewidth}
             \hfill
         \end{column}
-        \begin{column}{.85\linewidth}
+        \begin{column}{.85\linewidth} 
+            \setlength{\parskip}{2ex}
             \tableofcontents[hideothersubsections, sectionstyle=show/hide, ]
         \end{column}
     \end{columns}
@@ -228,17 +245,17 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
   \end{columns}
 \end{frame}
 
-\subfile{sections/introduction}
+% \subfile{sections/introduction}
 
-\subfile{sections/qcsp_summary.tex}
+% \subfile{sections/qcsp_summary.tex}
 
-\subfile{sections/algorithm.tex}
+% \subfile{sections/algorithm.tex}
 
-\subfile{sections/implementations.tex}
+% \subfile{sections/implementations.tex}
 
-\subfile{sections/experimentations.tex}
+% \subfile{sections/experimentations.tex}
 
-\subfile{sections/conclusion.tex}
+% \subfile{sections/conclusion.tex}
 
 \section*{Contributions}
 \begin{frame}
