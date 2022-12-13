@@ -1,5 +1,5 @@
 MAKE = make
-SOURCES = $(wildcard *_stdl.tex)
+SOURCES = $(wildcard *.tex)
 RESULTS = $(patsubst %.tex,%.pdf,$(SOURCES))
 
 
@@ -8,7 +8,7 @@ all: echoing $(RESULTS) $(SOURCES)
 	@echo done
 	@echo
 
-%_stdl.pdf : %_stdl.tex
+%.pdf : %.tex
 	latexmk $<
 
 clean:

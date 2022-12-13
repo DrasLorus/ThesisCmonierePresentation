@@ -44,3 +44,17 @@
 \newcommand*{\fpga}{\acrshort{fpga}}%
 
 \newcommand*{\rikiki}{\fontsize{4}{6}\selectfont}%
+
+\newcommand{\blfootnote}[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnotetext{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\newcommand{\blfootnotetext}[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnotetext{#1}%
+  \endgroup
+}
+

@@ -14,15 +14,7 @@ positioning}
 \usepackage{pgfplotstable}
 \pgfplotsset{compat=1.18}
 
-
-
-\usepackage[]{fontspec}
-
-\setmainfont{Latin Modern Roman}
-\setmonofont{Latin Modern Math}
 \renewcommand{\textsc}[1]{{\fontfamily{lmr}\selectfont \scshape #1}}
-
-\usepackage[]{bm}
 
 \makeatletter
 \@ifundefined{fromRoot}{\newcommand{\fromRoot}[1]{../../#1}}{}
@@ -30,5 +22,7 @@ positioning}
 \def\input@path{{../..}{..}{.}{./svg}{./pgfplots}{./tikzpicture}}
 %or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
 \makeatother
+
+\input{font_spec.tex}
 
 \input{commands.tex}

@@ -1,0 +1,53 @@
+\documentclass[tikz,border=0cm]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\usetikzlibrary{calc, shapes.misc, shapes.geometric, arrows.meta, positioning, overlay-beamer-styles, fit}
+
+\begin{document}
+
+\begin{tikzpicture} [-latex,
+        >=latex,
+        auto,
+        ultra thin,
+        main node/.style={rectangle, fill = white!35,  draw,
+                align=center}]
+    
+
+    \node [
+        draw,
+        fill = red!20!white,
+        minimum width = 5 cm,
+    ] (meta) at (0, 0) {\phantom{g}Métadonnées\phantom{g}};
+
+    \node [
+        draw,
+        fill = green!20!white,
+        minimum width = 5 cm,
+        right = 1 cm of meta
+    ] (data)  {Charge utile};
+
+    \node [draw,
+        fill = blue!20!white,
+        minimum width = 5 cm,
+        right = 1 cm of data
+    ] (ecc)  {\phantom{g}Redondance\phantom{g}};
+
+    \node [
+        align = center,
+        below = 2 mm of meta
+    ] (meta_leg)  {Permettent la détection\\et la synchronisation\\de la trame};
+
+    \node [
+        align = center,
+        below = 2 mm of data
+    ] (data_leg)  {Contient l'information\\à transmettre};
+
+    \node [
+        % minimum width = 8 cm,
+        align = center,
+        below = 2 mm of ecc
+    ] (ecc_leg)  {Augmente la robustesse\\et la résilience aux\\erreurs};
+
+\end{tikzpicture}
+\end{document}

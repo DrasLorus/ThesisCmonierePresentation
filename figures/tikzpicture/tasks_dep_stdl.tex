@@ -4,8 +4,8 @@
 
 \begin{document}
 
-\begin{tikzpicture} [-latex,
-    >=latex,
+\begin{tikzpicture} [-Triangle,
+    % >=latex,
     auto,
     very thick,
     every node/.style={font = {\Large}},
@@ -69,15 +69,15 @@
 
   % \draw [dotted, gray, -] (top -| norm.east) -- (bottom -| norm.east);
 
-  \node [anchor = north west, black,]      (a) at ($(state -| fd.east) + (0.5, 0.5)$) {\textbf{→} Data path};
-  \node [anchor = north west, black,]      (z) at ($(a.south west) + (0, -.2)$)     {\underline{Path usage}};
-  \node [anchor = north west, blue,]       (b) at ($(z.south west) + (0, 0)$)                    {\textbf{---} Continuous};
-  \node [anchor = north west, Turquoise3,] (c) at ($(z.south west) + (0, -.6)$)                     {\textbf{---} Depends on \pd{}};
-  \node [anchor = north west, OliveGreen,] (d) at ($(z.south west) + (0, -1.2)$)                     {\textbf{---} When a detection occurs};
+  \node [anchor = north west, black,]      (a) at ($(state -| fd.east) + (0.5, 0.5)$) {$\bm{\rightarrow}$ Chemin des données};
+  \node [anchor = north west, black,]      (z) at ($(a.south west) + (0, -.2)$)       {\underline{Débit des données}};
+  \node [anchor = north west, blue,]       (b) at ($(z.south west) + (0, 0)$)         {\textbf{---} Continue};
+  \node [anchor = north west, Turquoise3,] (c) at ($(z.south west) + (0, -.6)$)       {\textbf{---} Dépend de \pd{}};
+  \node [anchor = north west, OliveGreen,] (d) at ($(z.south west) + (0, -1.2)$)      {\textbf{---} Faible (détection)};
 
-  \node [draw=gray, label={above:\textsc{Legend}}, fit = {(a) (d)}] () {};
+  \node [draw=gray, label={above:\textsc{Légende}}, fit = {(a) (d)}] () {};
 
-  \node [draw, inner sep = 5pt, label={above:Detector}, dashed, fit  = {(score) (buff)}] {}; 
+  \node [draw, inner sep = 5pt, label={above:Détecteur}, dashed, fit  = {(score) (buff)}] {}; 
 
 \end{tikzpicture}
 

@@ -1,0 +1,61 @@
+\documentclass[tikz,border=0cm]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\usetikzlibrary{calc, shapes.misc, shapes.geometric, arrows.meta, positioning, overlay-beamer-styles, fit}
+
+\begin{document}
+\Large
+\begin{tikzpicture} [-latex,
+        >=latex,
+        auto,
+        ultra thin,
+        main node/.style={rectangle, fill = white!35,  draw,
+                align=center}]
+
+    \node [
+        draw,
+        fill = red!20!white,
+        minimum width = 4 cm
+    ] (meta) at (0, 0) {\phantom{g}Métadonnées\phantom{g}};
+
+    \node [
+        draw,
+        fill = green!20!white,
+        minimum width = 6 cm,
+        right = 0 pt of meta
+    ] (data)  {Charge utile};
+
+    \node [draw,
+        fill = blue!20!white,
+        minimum width = 8 cm,
+        right = 0 pt of data
+    ] (ecc)  {\phantom{g}Redondance\phantom{g}};
+
+    \node [draw,
+        top color = green!20!white,
+        bottom color = red!20!white,
+        minimum width = 6 cm,
+        anchor = north west,
+    ] (data_meta) at ($(meta.south) + (0, -1cm)$) {Charge utile $+$ Métadonnées};
+
+    \node [
+        draw,
+        top color = blue!20!white,
+        bottom color = red!20!white,
+        minimum width = 8 cm,
+        right = 0 pt of data_meta
+    ] (ecc_meta)  {\phantom{g}Redondance + Métadonnées\phantom{g}};
+
+    \draw [red!40!white, {Triangle[open, fill=red!40!white]}-{Triangle[open, fill=red!40!white]}, line width=.05cm, double ] (data_meta.west) -- ($(data_meta.west -| meta.west) + (.1, 0)$);
+    \draw [red!40!white, {Triangle[open, fill=red!40!white]}-{Triangle[open, fill=red!40!white]}, line width=.05cm, double ] (ecc_meta.east) -- ($(ecc_meta.east  -| ecc.east)  - (.1, 0)$);
+
+    \node [draw=none, black, align=center, anchor = north west] (eco) at (1,-4) {\phantom{g}Économies de resources\phantom{g}};
+    \draw [red!40!white, {Triangle[open, fill=red!40!white]}-{Triangle[open, fill=red!40!white]}, line width=.05cm, double ] (eco.west) -- ($(eco.west) + (-2, 0)$);
+
+    \node [] (ank) at ($(eco.west) + (-2, 0)$) {};
+
+    \node [very thick, draw=red, fit = (ank) (eco), label = above:\textsc{Légende}] {};
+
+\end{tikzpicture}
+\end{document}

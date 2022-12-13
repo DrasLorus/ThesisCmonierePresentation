@@ -1,36 +1,33 @@
 \documentclass[hidelinks, french, graphicx={draft}, xcolor={table, rgb, dvipsnames, x11names}, aspectratio=169, professionalfonts]{beamer}
 
+\usefonttheme{professionalfonts}
+
 \RequirePackage{luatex85}
 
-\usepackage{latexsym}
-\usepackage{graphicx}
-\usepackage{amsfonts,amssymb,amsmath}
-% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+% \usepackage{latexsym}
 
-% \usepackage{lmodern}
-\usepackage{fontspec}
-\usepackage[T1]{fontenc}
+% Set fonts up 
+\input{font_spec.tex}
+
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 
-\usepackage{amsmath,amssymb,amsfonts}
+% \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
-\usepackage{graphicx, dblfloatfix}
 \usepackage{textcomp}
 \usepackage{xcolor}
 
 \usepackage[toc, acronyms]{glossaries}
 \usepackage{csquotes}
 \usepackage{booktabs}
-\usepackage{stmaryrd}
-\usepackage{bm}
+% \usepackage{stmaryrd}
 \usepackage{multicol}
 \usepackage{etoolbox}
 \usepackage{blindtext}
 
 \usepackage[
   backend=biber,
-  style=authoryear,
+  style=numeric,
   sorting=ydnt,
   minnames=2,
   maxnames=2,
@@ -61,12 +58,8 @@
 \DeclareBibliographyCategory{own-conf-fr}
 \addtocategory{own-conf-fr}{moniereImplementationsLogiciellesMaterielles2022}
 
-\usepackage{pifont}
-\setmainfont{Noto Serif}
-\setsansfont{Noto Sans}
-\setmonofont{Noto Sans Mono}
 
-\usepackage[font={it, small}, tablename=, figurename=]{caption}
+\usepackage[font={it, scriptsize}, tablename=, figurename=, justification=centering]{caption}
 
 \usepackage{tikz}
 \usetikzlibrary{calc,
@@ -94,7 +87,7 @@
 \makeatother
 
 \setbeamercolor{titlelike}{use=structure,fg=RoyalBlue4}
-\setbeamertemplate{bibliography item}{$\:\:\bullet$}
+% \setbeamertemplate{bibliography item}{$\:\:\bullet$}
 \setbeamerfont{footnote}{size=\tiny}
 \addtobeamertemplate{frametitle}{}{}
 
@@ -245,7 +238,7 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
   \end{columns}
 \end{frame}
 
-% \subfile{sections/introduction}
+\subfile{sections/introduction.tex}
 
 % \subfile{sections/qcsp_summary.tex}
 
