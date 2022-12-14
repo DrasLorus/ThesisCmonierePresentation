@@ -12,7 +12,15 @@
 %or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
 \makeatother
 
-\graphicspath{{\subfix{../}}}
+\graphicspath{
+  {\subfix{../}}
+  {\subfix{./figures}}
+  {\subfix{../figures}}
+  {\subfix{./figures/logos-thesis/}}
+  {\subfix{../figures/logos-thesis/}}
+  {\subfix{./figures/rtexps-pics/}}
+  {\subfix{../figures/rtexps-pics/}}
+}
 
 \hypersetup{
     pdfauthor   = {Camille MONIÈRE},
@@ -162,18 +170,139 @@
 
 \subsection[Le projet \acrshort{qcsp}]{Le projet \acrfull{qcsp}}
 
-\begin{frame}{\subsecname}{}
+\begin{frame}{\subsecname}{\href{https://qcsp.univ-ubs.fr/}{https://qcsp.univ-ubs.fr/}}
+
+  \begin{columns}
+    \begin{column}{.4\linewidth} \centering
+      \begin{columns}
+        \begin{column}{.4\linewidth}
+          \includegraphics[width=\textwidth]{QCSP_Logo.pdf}
+        \end{column}
+        \begin{column}{.2\linewidth}
+          \includegraphics[width=\linewidth]{anr_approved.jpg}
+        \end{column}
+      \end{columns}
+      \small \vspace{5pt} Projet ANR \texttt{ANR-19-CE25-0013-01}
+    \end{column}
+    \begin{column}{.5\linewidth}
+      \emph{``L'objectif du projet QCSP est de contribuer à l'évolution des réseaux IoT en établissant,
+        en mettant en œuvre et testant un nouveau type de modulation codée.''}
+    \end{column}
+  \end{columns}
+
+  \vspace{2 em}
+
   \begin{center}
+    Partenaires :\\
     \includegraphics[width=0.6\linewidth]{figures/logos-thesis/partners-logos.png}
   \end{center}
 \end{frame}
 
-\begin{frame}{Principes de \acrshort{qcsp}}
-  \textbf{TODO, le spatial, le ccsk et le nbldpc}
+\begin{frame}{Idées de \acrshort{qcsp}}
+  \begin{overlayarea}{\linewidth}{0.78\textheight}
+    \small
+    \begin{columns}
+      \begin{column}<1,3>{.4\linewidth} \centering
+        \textsc{Internet de Objets (IoT)}
+      \end{column}
+      \begin{column}{.05\linewidth} \centering
+        \only<1,2>{\phantom{VS}}
+        \only<3>{VS}
+      \end{column}
+      \begin{column}<2,3>{.4\linewidth} \centering
+        \textsc{Les technologies spatiales}
+      \end{column}
+    \end{columns}
+
+    \begin{columns}
+      \begin{column}<1,3>[t]{.45\linewidth}
+        \vspace{-2 ex}
+        \begin{ctrlitemize}{-5pt}
+          \item Croissance exponentielle ces 10 dernières années,
+          \item 50 milliards d'objets connectés attendus,
+        \end{ctrlitemize}
+
+        \vspace{-1 ex}
+        \hspace{7 em} \emph{et pourtant\dots}
+        \vspace{-1 ex}
+
+        \begin{ctrlitemize}{-2pt}
+          \item les métadonnées de détection et synchronisation représentent parfois jusqu'à  50\% de la consommation de ressources \cite{durisiMassiveUltrareliableLowLatency2016}.
+        \end{ctrlitemize}
+        \begin{center}
+          \vspace{-1 em}
+          \includegraphics<1,3>[width=.4\linewidth, clip]{Anonymous_Factory.png}
+        \end{center}
+      \end{column}
+      \begin{column}{.05\linewidth}
+        \hfill
+      \end{column}
+      \begin{column}<2,3>[t]{.45\linewidth}
+        \vspace{-1 ex}
+        \begin{ctrlitemize}{-5pt}
+          \item Privilégie la stabilité
+        \end{ctrlitemize}
+
+        \vspace{-1 ex} \hspace{7 em} \emph{et\dots}
+        \vspace{-1 ex}
+
+        \begin{ctrlitemize}{-5pt}
+          \item le Cyclic-Code Shift Keying (CCSK) est utilisé dans la bande LEX de \textit{Quasi-Zenith Satellite System}\\
+          {\tiny  (système japonais d'amélioration du ``\emph{GPS}'')} \\
+          \item des codes correcteurs non-binaires sont utilisé dans BeiDou \cite{openservicesignalb2bBeiDouNavigationSatellite2020}\\ {\tiny  (Le ``\emph{GPS}'' chinois.)}
+        \end{ctrlitemize}
+
+        \begin{center}
+          \includegraphics<2,3>[width=.4\linewidth]{pngegg.png}
+        \end{center}
+      \end{column}
+    \end{columns}
+  \end{overlayarea}
+  \only<1>{\blfootnotetext{\textcite{durisiMassiveUltrareliableLowLatency2016}}}
+  \only<2>{\blfootnotetext{\textcite{openservicesignalb2bBeiDouNavigationSatellite2020}}}
+  \only<3>{\blfootnotetext{\textcite{durisiMassiveUltrareliableLowLatency2016, openservicesignalb2bBeiDouNavigationSatellite2020}}}
 \end{frame}
 
+
 \begin{frame}{\acrfull{ccsk}}
-  \textbf{TODO, animation comment on module et comment on démodule}
+  {}
+  \begin{overlayarea}{\linewidth}{.05 \textheight}
+  \end{overlayarea}
+  \begin{overlayarea}{\linewidth}{.22 \textheight}
+    \centering
+    \normalsize Modulation d'un mot de code de symboles de $p$ bits par la rotation circulaire d'une séquence de pseudo-bruit binaire (\acrshort{pn}) \pn{0}\cite{dillardCyclicCodeShift2003} de $2^p = q$ chips \\\emph{bijection de \gf{q}\footnotemark vers l'ensemble des rotation circulaire de \pn{0}}.
+    \vfill
+  \end{overlayarea}
+
+  \begin{overlayarea}{.4\linewidth}{.35 \textheight}
+    \centering
+
+    \begin{tabular}{@{}r r l@{}}
+      \toprule
+      \multicolumn{3}{c}{\textbf{Paramètres}} \\ \midrule
+      $p$    & $=$ & $2$                      \\
+      $q$    & $=$ & $4$                      \\
+      \pn{0} & $=$ & \Ob{}\Xb{}\Xb{}\Xb{}     \\
+      \bottomrule
+    \end{tabular}
+
+    \Ob{} $= +1$, \Xb{} $= -1$
+  \end{overlayarea}
+
+
+  \begin{overlayarea}{\linewidth}{.2 \textheight}
+    \begin{columns}
+      \begin{column}{.3\linewidth} \centering
+        Mot de code $\vect{C}$\\$\{ 0, \; 3, \; 1,\; 2\}$
+      \end{column}
+      \begin{column}{.6\linewidth} \centering
+        Trame \acrshort{ccsk} $\vect{F}_{CCSK}$\\$\{ \mpn{0} | \mpn{3} | \mpn{1} | \mpn{2} \}$ = \Ob{}\Xb{}\Xb{}\Xb{}~~\Xb{}\Xb{}\Xb{}\Ob{}~~\Xb{}\Ob{}\Xb{}\Xb{}~~\Xb{}\Xb{}\Ob{}\Xb{}
+      \end{column}
+    \end{columns}
+
+  \end{overlayarea}
+  \blfootnotetext{\textcite{dillardCyclicCodeShift2003}}
+  \footnotetext{Corps de Galois d'ordre $p$}
 \end{frame}
 
 \begin{frame}{\acrfull{ldpc}}

@@ -105,8 +105,6 @@
 
 \newenvironment{ctrlitemize}[1]{\itemize\addtolength{\itemsep}{#1}}{\enditemize}
 
-\newcommand*{\Xb}{\textcolor{blue}{\symbol{"25A0}}}
-\newcommand*{\Ob}{\textcolor{red}{\symbol{"25A0}}}
 
 \title[\textsc{Implémentations temps réel d'un récepteur QCSP}]{\textsc{Implémentations temps réel d'un récepteur \acrfull{qcsp}}\vspace*{-.6 cm}}
 % \subtitle{Performances, complexity and chip rates}
@@ -117,11 +115,15 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
 
 \date{04/01/2023}
 
+\beamertemplatenavigationsymbolsempty
 \addtobeamertemplate{navigation symbols}{}{%
 \usebeamerfont{footline}%
-\usebeamercolor[fg]{footline}%
+\usebeamercolor[fg]{default}%
 \hspace{1em}%
-\insertframenumber
+{\scriptsize \textcolor{black}{\insertframenumber~/~\inserttotalframenumber}}
+\hspace{3pt}%
+
+\vspace{3pt}
 }
 
 % \setbeamertemplate{bibliography item}{\insertbiblabel}
@@ -145,7 +147,12 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
   \setbeamercolor{block title}{#3}
   \begin{block}{#1}}{\end{block}}
 
-\graphicspath{{figures/}{figures/logos-thesis/}}
+\graphicspath{
+  {./}
+  {figures/}
+  {figures/logos-thesis/}
+  {figures/rtexps-pics/}
+}
 
 \input{acronyms.tex}
 \input{commands.tex}
