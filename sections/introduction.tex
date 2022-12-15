@@ -266,27 +266,43 @@
 
 \begin{frame}{\acrfull{ccsk}}
   {}
-  \begin{overlayarea}{\linewidth}{.05 \textheight}
+  \begin{overlayarea}{\linewidth}{.02 \textheight}
   \end{overlayarea}
-  \begin{overlayarea}{\linewidth}{.22 \textheight}
+  \begin{overlayarea}{\linewidth}{.18 \textheight}
     \centering
-    \normalsize Modulation d'un mot de code de symboles de $p$ bits par la rotation circulaire d'une séquence de pseudo-bruit binaire (\acrshort{pn}) \pn{0}\cite{dillardCyclicCodeShift2003} de $2^p = q$ chips \\\emph{bijection de \gf{q}\footnotemark vers l'ensemble des rotation circulaire de \pn{0}}.
+    \normalsize Modulation d'un mot de code de symboles de $p$ bits par la rotation circulaire d'une séquence de pseudo-bruit binaire (\acrshort{pn}) \pn{0}\cite{dillardCyclicCodeShift2003} de $2^p = q$ chips \\\emph{\textsf{bijection de \gf{q}\footnotemark vers l'ensemble des rotations circulaires de \pn{0}}}.
     \vfill
   \end{overlayarea}
 
-  \begin{overlayarea}{.4\linewidth}{.35 \textheight}
-    \centering
+  \begin{overlayarea}{\linewidth}{.4 \textheight}
+    \begin{columns}
+      \begin{column}{.3\linewidth} \centering
+        \centering
 
-    \begin{tabular}{@{}r r l@{}}
-      \toprule
-      \multicolumn{3}{c}{\textbf{Paramètres}} \\ \midrule
-      $p$    & $=$ & $2$                      \\
-      $q$    & $=$ & $4$                      \\
-      \pn{0} & $=$ & \Ob{}\Xb{}\Xb{}\Xb{}     \\
-      \bottomrule
-    \end{tabular}
+        \begin{tabular}{@{}r r l@{}}
+          \toprule
+          \multicolumn{3}{c}{\textbf{Paramètres}} \\ \midrule
+          $p$    & $=$ & $2$                      \\
+          $q$    & $=$ & $4$                      \\
+          \pn{0} & $=$ & \Ob{}\Xb{}\Xb{}\Xb{}     \\
+          \bottomrule
+        \end{tabular}
 
-    \Ob{} $= +1$, \Xb{} $= -1$
+        \Ob{} $= +1$, \Xb{} $= -1$
+
+      \end{column}
+      \begin{column}{.3\linewidth}
+        \begin{tabular}{@{}r c l@{}}
+          \toprule
+          Symbole & Notation & Rotation             \\ \midrule
+          $0$     & \pn{0}   & \Ob{}\Xb{}\Xb{}\Xb{} \\
+          $1$     & \pn{1}   & \Xb{}\Ob{}\Xb{}\Xb{} \\
+          $2$     & \pn{2}   & \Xb{}\Xb{}\Ob{}\Xb{} \\
+          $3$     & \pn{3}   & \Xb{}\Xb{}\Xb{}\Ob{} \\
+          \bottomrule
+        \end{tabular}
+      \end{column}
+    \end{columns}
   \end{overlayarea}
 
 
@@ -295,7 +311,10 @@
       \begin{column}{.3\linewidth} \centering
         Mot de code $\vect{C}$\\$\{ 0, \; 3, \; 1,\; 2\}$
       \end{column}
-      \begin{column}{.6\linewidth} \centering
+      \begin{column}{.1\linewidth} \centering
+        $\Rightarrow$
+      \end{column}
+      \begin{column}{.55\linewidth} \centering
         Trame \acrshort{ccsk} $\vect{F}_{CCSK}$\\$\{ \mpn{0} | \mpn{3} | \mpn{1} | \mpn{2} \}$ = \Ob{}\Xb{}\Xb{}\Xb{}~~\Xb{}\Xb{}\Xb{}\Ob{}~~\Xb{}\Ob{}\Xb{}\Xb{}~~\Xb{}\Xb{}\Ob{}\Xb{}
       \end{column}
     \end{columns}
@@ -305,8 +324,13 @@
   \footnotetext{Corps de Galois d'ordre $p$}
 \end{frame}
 
+
+\begin{frame}{\acrshort{ccsk} : Démodulation}
+  
+\end{frame}
+
 \begin{frame}{\acrfull{ldpc}}
-  \textbf{TODO, TRES SUCCINCT, vitye fait trois VN et un CN, pour completion}
+  \textbf{TODO, Juste le principe}
 \end{frame}
 
 
