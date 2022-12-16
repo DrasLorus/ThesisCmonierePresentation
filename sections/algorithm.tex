@@ -12,7 +12,15 @@
 %or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
 \makeatother
 
-\graphicspath{{\subfix{../}}}
+\graphicspath{
+  {\subfix{../}}
+  {\subfix{./figures}}
+  {\subfix{../figures}}
+  {\subfix{./figures/logos-thesis/}}
+  {\subfix{../figures/logos-thesis/}}
+  {\subfix{./figures/rtexps-pics/}}
+  {\subfix{../figures/rtexps-pics/}}
+}
 
 \hypersetup{
     pdfauthor   = {Camille MONIÈRE},
@@ -25,23 +33,44 @@
 
 \section{Étude algorithmique}
 
-\subsection{Sensibilité à un facteur d'échelle}
+% \subsection{Sensibilité à un facteur d'échelle}
 
 
-\begin{frame}{\subsecname}
-  \begin{center}
-    \textcolor{RoyalBlue}{TODO}
-  \end{center}
-\end{frame}
+% \begin{frame}{\subsecname}
+%   \begin{center}
+%     \textcolor{RoyalBlue}{TODO}
+%   \end{center}
+% \end{frame}
 
 
 \subsection{Corrélation glissante dans le temps (\emph{Time sliding})}
 
-\begin{frame}{\subsecname}
+\begin{frame}{Criticité de la tache de corrélation}
+  \includegraphics[width=\linewidth]{figures/tikzpicture/tasks_dep_stdl.pdf}
   \begin{center}
     \textcolor{RoyalBlue}{TODO}
   \end{center}
 \end{frame}
 
+\begin{frame}{Méthode par FFT}
+  \includegraphics[width=\linewidth]{figures/tikzpicture/corr_method_fft_stdl.pdf}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Méthode par TS Data shift}
+  \includegraphics[width=\linewidth]{figures/tikzpicture/arch_statts_sync_stdl.pdf}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Méthode par FFT}
+  \includegraphics[width=\linewidth]{figures/tikzpicture/arch_subts_sync_stdl.pdf}
+  \begin{center}
+    \textcolor{RoyalBlue}{TODO}
+  \end{center}
+\end{frame}
 
 \end{document}
