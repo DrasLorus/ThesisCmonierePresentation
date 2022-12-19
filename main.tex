@@ -25,6 +25,12 @@
 \usepackage{etoolbox}
 \usepackage{blindtext}
 
+\makeatletter
+\@ifundefined{fromRoot}{%
+  \newcommand{\fromRoot}[1]{./#1}
+}{}
+\makeatother
+
 \usepackage[
   backend=biber,
   style=numeric,
@@ -79,17 +85,16 @@
 \usepackage{pgfplotstable}
 \pgfplotsset{compat=1.18}
 
-\usetheme[hideothersubsections]{Marburg}
-\usecolortheme[named=RoyalBlue3]{structure}
+\usetheme[secheader]{Boadilla}
+\usecolortheme[named=RoyalBlue4]{structure}
 
-\makeatletter
-\setbeamertemplate{sidebar canvas \beamer@sidebarside}[vertical shading][top=black,bottom=RoyalBlue]
-\makeatother
+% \makeatletter
+% \setbeamertemplate{sidebar canvas \beamer@sidebarside}[vertical shading][top=black,bottom=RoyalBlue]
+% \makeatother
 
 \setbeamercolor{titlelike}{use=structure,fg=RoyalBlue4}
-% \setbeamertemplate{bibliography item}{$\:\:\bullet$}
+\setbeamertemplate{itemize item}[triangle]
 \setbeamerfont{footnote}{size=\tiny}
-\addtobeamertemplate{frametitle}{}{}
 
 \defbeamertemplate{section in toc}{sections numbered roman}{%
   \leavevmode%
@@ -116,29 +121,23 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
 \date{04/01/2023}
 
 \beamertemplatenavigationsymbolsempty
-\addtobeamertemplate{navigation symbols}{}{%
-\usebeamerfont{footline}%
-\usebeamercolor[fg]{default}%
-\hspace{1em}%
-{\scriptsize \textcolor{black}{\insertframenumber~/~\inserttotalframenumber}}
-\hspace{3pt}%
+% \addtobeamertemplate{navigation symbols}{}{%
+% \usebeamerfont{footline}%
+% \usebeamercolor[fg]{default}%
+% \hspace{1em}%
+% {\scriptsize \textcolor{black}{\insertframenumber~/~\inserttotalframenumber}}
+% \hspace{3pt}%
 
-\vspace{3pt}
-}
+% \vspace{3pt}
+% }
 
 % \setbeamertemplate{bibliography item}{\insertbiblabel}
 
 \AtBeginSection[]{
-  \begin{frame}[noframenumbering]{Sommaire}
-    \begin{columns}
-        \begin{column}{.15\linewidth}
-            \hfill
-        \end{column}
-        \begin{column}{.85\linewidth} 
-            \setlength{\parskip}{2ex}
-            \tableofcontents[hideothersubsections, sectionstyle=show/hide, ]
-        \end{column}
-    \end{columns}
+  \begin{frame}[noframenumbering]{}
+    \begin{center}
+            \Huge \tableofcontents[sectionstyle=show/hide, hideallsubsections]
+    \end{center}
   \end{frame}
 }
 
@@ -257,35 +256,13 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
 
 \subfile{sections/conclusion.tex}
 
-\section*{Contributions}
-\begin{frame}
-  \frametitle{\secname}
 
-  Contributions en conférences internationales
-
-  \vspace{1 em}
-
-  \nocite{moniereDASIP22, moniereTimeSlidingWindow2021}
-  \renewcommand*{\bibfont}{\tiny}
-  \printbibliography[category=own-conf-en, heading=none]
-
-  \vspace{2 em}
-
-  Contribution en conférences nationales
-
-  \vspace{1 em}
-
-  \nocite{moniereImplementationsLogiciellesMaterielles2022}
-  \renewcommand*{\bibfont}{\tiny}
-  \printbibliography[category=own-conf-fr, heading=none]
-
-\end{frame}
 
 \section*{Références}
 \begin{frame}[allowframebreaks]
   \frametitle{\secname}
 
-  \nocite{*}
+  % \nocite{*}
   \renewcommand*{\bibfont}{\rikiki}
   \printbibliography[notkeyword=own, heading=none]
 

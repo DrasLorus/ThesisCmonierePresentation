@@ -44,17 +44,16 @@
       \end{center}
     \end{column}
     \begin{column}{.55\linewidth}
-      \small
+      % \small
       \begin{overlayarea}{\linewidth}{.6\textheight}
         \begin{ctrlitemize}{1em}
-          \item Plus fiables et résilients que leurs pendants analogiques.
-          \item<2-> Champ regroupant :
-          \begin{ctrlitemize}{1ex}
+          \item Piliers des sociétés modernes
+          \item Champ regroupant :
+          \begin{ctrlitemize}{1em}
             \scriptsize
-            \item<2-> les réseaux cellulaires \\\hspace{1em} \textit{3G, 4G/LTE, 5G},
-            \item<3-> les réseaux en champs proches \\\hspace{1em} \textit{ZigBee, NFC, Bluetooth},
-            \only<4>{\item et les réseaux longues portées basses puissances \acrshortpl{lpwan} \\\hspace{1em} \textit{LoRa/LoRaWAN, SigFox, NB-IoT}.}
-            \only<5->{\item et \textbf{\textcolor{red}{les réseaux longues portées basses puissances \acrshortpl{lpwan}}} \\\hspace{1em} \textit{LoRa/LoRaWAN, SigFox, NB-IoT}.}
+            \item les réseaux cellulaires (\textit{3G, 4G/LTE, 5G}),
+            \item les réseaux en champs proches (\textit{ZigBee, NFC, Bluetooth}),
+            \item et, dans le cadre de \textbf{l'Internet des objet}, les \textbf{\textcolor{red}{réseaux longues portées basses puissances (\acrshortpl{lpwan})}}.
           \end{ctrlitemize}
         \end{ctrlitemize}
       \end{overlayarea}
@@ -62,76 +61,107 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{\acrfullpl{lpwan}}
-  \small
-  \begin{overlayarea}{\linewidth}{.1\textheight}
-    \only<1>{
-      Fort développement de l'\acrfull{iot} \textit{[internet des objets]} durant la dernière décennie
-      \textcolor{red}{$\Rightarrow$} développement des \acrshortpl{lpwan}\cite{IEEEStandardLPWAN}.
-    }
-    \only<2>{
-      Le \acrshortpl{lpwan} ont connu un fort développement durant la dernière décennie, de nombreux standards ont vu le jour\cite{goursaudDedicatedNetworksIoT2015, sinhaSurveyLPWATechnology2017}.%
-    }
-  \end{overlayarea}
+\begin{frame}{Internet des objets}
+  {En anglais: \acrfull{iot}}
+  \begin{columns}
+    \begin{column}{.55\linewidth}
+      % \small
+      \begin{overlayarea}{\linewidth}{.6\textheight}
+        \begin{ctrlitemize}{5pt}
+          \item Croissance exponentielle ces 10 dernières années,
+          \item 50 milliards d'objets connectés attendus,
+        \end{ctrlitemize}
 
-  \begin{overlayarea}{\linewidth}{.65\textheight}
-    \only<1>{
-      \begin{columns}
-        \begin{column}{.4\linewidth}
-          \scriptsize
-          Caractéristiques des \acrshortpl{lpwan} :
-          \begin{ctrlitemize}{4pt}
-            \item portées longues,
-            \item coûts faibles,
-            \item consommations énergétiques réduites.
-          \end{ctrlitemize}
-          $\Rightarrow$ Permettre le déploiement massif de d'objets connectés alimentés par batterie.\\
-          $\Rightarrow$ Requiert des débits plus faibles, que les réseaux cellulaires notamment.
-        \end{column}
-        \begin{column}{.5\linewidth} \centering
-          \includegraphics[width=\linewidth]{figures/drawiopdf/lpwan_and_co}
-          \captionof{figure}{Aperçu des caractéristiques de trois technologies utilisées dans les \acrshortpl{lpwan}, SigFox, LoRa et NB-IoT.}
-        \end{column}
-      \end{columns}
-    }
-    \only<2>{
+        % % \vspace{-1 ex}
+        \hspace{7 em} \emph{et pourtant\dots}
+        % % \vspace{-1 ex}
+
+        \begin{ctrlitemize}{2pt}
+          \item les méthodes de transmission restent largement inspirées des précédents réseaux \dots
+          \item [---] {\scriptsize les \emph{métadonnées} de détection et synchronisation représentent parfois jusqu'à  50\% de la consommation de ressources \cite{durisiMassiveUltrareliableLowLatency2016}.}
+        \end{ctrlitemize}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.4\linewidth}
       \begin{center}
-        \ra{1.3}
-        % \begin{noindent}
-          \scriptsize
-          \begin{tabular}[t]{@{}r@{\phantom{XXX}}r@{\phantom{XX}}r@{\phantom{XX}}r@{}}
-            \toprule
-                                   & \textbf{SigFox}   & \textbf{LoRa}     & \textbf{NB-IoT}     \\ \midrule
-            \textbf{Modulation}    & \acrshort{bpsk}   & \acrshort{css}    & \acrshort{qpsk}     \\ 
-            \textbf{Fréquence centrale}
-                                   & $868$ MHz         & $868$ MHz         & bandes LTE          \\
-            \textbf{Largeur de bande}
-                                   & $0.1$ kHz         & $125$/$250$ kHz   & $200$ kHz           \\
-            \textbf{Débit max de données} 
-                                   & $0.1$ kb/s        & $50$ kb/s         & $200$ kb/s          \\
-            \textbf{Taille max de la charge utile}
-                                   & $96$ bits         & $1944$ bits       & $12.8$ kilobits     \\
-            \textbf{Portée urbaine}
-                                   & $10$ km           & $5$ km            & $1$ km              \\
-            \textbf{Portée rurale} & $40$ km           & $20$ km           & $10$ km             \\
-            \textbf{Résilience aux interférences}
-                                   & très grande       & très grande       & basse               \\
-            \textbf{Code(s) correcteur(s) d'erreur}
-                                   & aucun             & codes de Hamming  & codes modernes      \\
-            \bottomrule
-          \end{tabular}
-          % \end{noindent}
-        \captionof{table}{Aperçu des caractéristiques de trois technologies utilisées dans les \acrshortpl{lpwan}, SigFox, LoRa et NB-IoT.}
-        \ra{1}
+        \placeholder{width=.85\linewidth, height=.6\textheight}
+        \captionof{figure}{Illustration : classique IoT.}
       \end{center}
-    }
-  \end{overlayarea}
-  \only<1>{\blfootnotetext{\textcite{IEEEStandardLPWAN}}}
-  \only<2>{
-    \blfootnotetext{\textcite{goursaudDedicatedNetworksIoT2015, sinhaSurveyLPWATechnology2017}}
-  }
+    \end{column}
+  \end{columns}
+  \blfootnotetext{\textcite{durisiMassiveUltrareliableLowLatency2016}}
 \end{frame}
 
+\begin{frame}{Réseaux longues portées basses puissances}
+  {En anglais : \acrfullpl{lpwan}}
+
+  % \begin{overlayarea}{\linewidth}{.1\textheight}
+  %   Fort développement de l'\acrfull{iot} \textit{[internet des objets]} durant la dernière décennie
+  %   \textcolor{red}{$\Rightarrow$} développement des \acrshortpl{lpwan}\cite{IEEEStandardLPWAN}.
+  % \end{overlayarea}
+
+  % \begin{overlayarea}{\linewidth}{.65\textheight}
+  \begin{columns}
+    \begin{column}{.5\linewidth}
+      Caractéristiques des \acrshortpl{lpwan} \cite{IEEEStandardLPWAN} :
+
+      \begin{ctrlitemize}{5pt}
+        \item Communications longues portées (dizaines de kilomètres)
+        \item Réseaux hétérogènes :
+        \begin{ctrlitemize}{2pt}
+          \item des nœud-capteurs bon marché, fonctionnant sur batterie, massivement déployables,
+          \item des relais, plus cher et plus performants,
+          \item des stations de bases couteuses, mais comparativement peu nombreuses.
+        \end{ctrlitemize}
+        % \item consommations énergétiques réduites.
+      \end{ctrlitemize}
+      % $\Rightarrow$ Permettre le déploiement massif de d'objets connectés alimentés par batterie.\\
+      % $\Rightarrow$ Requiert des débits plus faibles, que les réseaux cellulaires notamment.
+    \end{column}
+  \end{columns}
+  % \end{overlayarea}
+  \blfootnotetext{\textcite{IEEEStandardLPWAN}}
+\end{frame}
+
+\begin{frame}{Réseaux longues portées basses puissances}
+
+  % Le \acrshortpl{lpwan} ont connu un fort développement durant la dernière décennie, de nombreux standards ont vu le jour\cite{goursaudDedicatedNetworksIoT2015, sinhaSurveyLPWATechnology2017}.%
+
+  \begin{columns}
+    \begin{column}{.5\linewidth} \centering
+      \includegraphics[width=\linewidth, height=.65\textheight, keepaspectratio=true]{figures/drawiopdf/lpwan_and_co}
+      \captionof{figure}{Positionnement des technologies \acrshort{lpwan} SigFox, LoRa et NB-IoT comparé à celles des réseaux cellulaires ou courtes portées.}
+    \end{column}
+
+    \begin{column}{.5\linewidth} \centering
+      \ra{1.3}
+      % \begin{noindent}
+    \begin{tabular}[t]{@{}c@{\phantom{XX}}c@{\phantom{X}}c@{\phantom{X}}c@{}}
+      \toprule
+                                & \textbf{SigFox} & \textbf{LoRa} & \textbf{NB-IoT} \\ \midrule
+      % \textbf{Modulation}    & \acrshort{bpsk}   & \acrshort{css}    & \acrshort{qpsk}     \\ 
+      % \textbf{Fréquence centrale}
+      %                        & $868$ MHz         & $868$ MHz         & bandes LTE          \\
+      % \textbf{Largeur de bande}
+      %                        & $0.1$ kHz         & $125$/$250$ kHz   & $200$ kHz           \\
+      \coltab{\textbf{Débit max}\\\textit{(kb/s)}} 
+                                & \textcolor{red}{$0.1$} & \textcolor{RoyalBlue2}{$50$}  & \textcolor{Chartreuse3}{$200$}      \\
+      % \textbf{Taille max de la charge utile}
+      %                        & $96$ bits         & $1944$ bits       & $12.8$ kilobits     \\
+      \coltab{\textbf{Portée max}\\\textit{(km)}} 
+                                & \textcolor{Chartreuse3}{$40$}   & \textcolor{RoyalBlue2}{$20$} & \textcolor{red}{$10$}        \\
+      \textbf{Robustesse}       & \textcolor{Chartreuse3}{++}     & \textcolor{Chartreuse3}{++}   & \textcolor{red}{-}           \\
+      % \textbf{Code(s) correcteur(s) d'erreur}
+      %                        & aucun             & codes de Hamming  & codes modernes      \\
+      \bottomrule
+    \end{tabular}
+    % \end{noindent}
+      \captionof{table}{Aperçu des caractéristiques de trois technologies dans les \acrshortpl{lpwan}, SigFox, LoRa et NB-IoT.}
+      \ra{1}
+    \end{column}
+  \end{columns}
+  \blfootnotetext{\textcite{goursaudDedicatedNetworksIoT2015, sinhaSurveyLPWATechnology2017}}
+\end{frame}
 
 \begin{frame}{Problème des préambules}
   % \begin{overlayarea}{\linewidth}{.05\textheight}
@@ -198,72 +228,6 @@
   \end{center}
 \end{frame}
 
-\begin{frame}{Idées de \acrshort{qcsp}}
-  \begin{overlayarea}{\linewidth}{0.78\textheight}
-    \small
-    \begin{columns}
-      \begin{column}<1,3>{.4\linewidth} \centering
-        \textsc{Internet de Objets (IoT)}
-      \end{column}
-      \begin{column}{.05\linewidth} \centering
-        \only<1,2>{\phantom{VS}}
-        \only<3>{VS}
-      \end{column}
-      \begin{column}<2,3>{.4\linewidth} \centering
-        \textsc{Les technologies spatiales}
-      \end{column}
-    \end{columns}
-
-    \begin{columns}
-      \begin{column}<1,3>[t]{.45\linewidth}
-        \vspace{-2 ex}
-        \begin{ctrlitemize}{-5pt}
-          \item Croissance exponentielle ces 10 dernières années,
-          \item 50 milliards d'objets connectés attendus,
-        \end{ctrlitemize}
-
-        \vspace{-1 ex}
-        \hspace{7 em} \emph{et pourtant\dots}
-        \vspace{-1 ex}
-
-        \begin{ctrlitemize}{-2pt}
-          \item les métadonnées de détection et synchronisation représentent parfois jusqu'à  50\% de la consommation de ressources \cite{durisiMassiveUltrareliableLowLatency2016}.
-        \end{ctrlitemize}
-        \begin{center}
-          \vspace{-1 em}
-          \includegraphics<1,3>[width=.4\linewidth, clip]{Anonymous_Factory.png}
-        \end{center}
-      \end{column}
-      \begin{column}{.05\linewidth}
-        \hfill
-      \end{column}
-      \begin{column}<2,3>[t]{.45\linewidth}
-        \vspace{-1 ex}
-        \begin{ctrlitemize}{-5pt}
-          \item Privilégie la stabilité
-        \end{ctrlitemize}
-
-        \vspace{-1 ex} \hspace{7 em} \emph{et\dots}
-        \vspace{-1 ex}
-
-        \begin{ctrlitemize}{-5pt}
-          \item le Cyclic-Code Shift Keying (CCSK) est utilisé dans \textit{Quasi-Zenith Satellite System}\\ % dans la bande LEX
-          {\tiny  (système japonais d'amélioration du ``\emph{GPS}'')} \\
-          \item des codes correcteurs non-binaires sont utilisé dans BeiDou \cite{openservicesignalb2bBeiDouNavigationSatellite2020}\\ {\tiny  (Le ``\emph{GPS}'' chinois.)}
-        \end{ctrlitemize}
-
-        \begin{center}
-          \includegraphics<2,3>[width=.4\linewidth]{pngegg.png}
-        \end{center}
-      \end{column}
-    \end{columns}
-  \end{overlayarea}
-  \only<1>{\blfootnotetext{\textcite{durisiMassiveUltrareliableLowLatency2016}}}
-  \only<2>{\blfootnotetext{\textcite{openservicesignalb2bBeiDouNavigationSatellite2020}}}
-  \only<3>{\blfootnotetext{\textcite{durisiMassiveUltrareliableLowLatency2016, openservicesignalb2bBeiDouNavigationSatellite2020}}}
-\end{frame}
-
-
 \begin{frame}{\acrfull{ccsk}}
   {}
   \begin{overlayarea}{\linewidth}{.02 \textheight}
@@ -326,7 +290,7 @@
 
 
 \begin{frame}{\acrshort{ccsk} : Démodulation}
-  
+
 \end{frame}
 
 \begin{frame}{\acrfull{ldpc}}
