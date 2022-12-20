@@ -1,0 +1,52 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture} [-Triangle,
+    % >=latex,
+    auto,
+    thick,
+    every node/.style={font = {\Large}},
+  ]
+
+
+  \node [rectangle,
+    fill=Gold2!50,
+    draw=Gold4,
+    text=Gold4,
+    inner sep = 5pt,
+    minimum size = 1.2cm
+  ] (srv) at (.80, 0) {$S_0$};
+
+  \foreach \r [
+    evaluate = \r as \crdr using ((\r * 6 - 2) * .8)
+  ] in {0, 1}
+    {
+      \node [diamond,
+        fill=Chartreuse2!50,
+        draw=Chartreuse4,
+        text=Chartreuse4,
+        inner sep = 5pt
+      ] (rla\r) at (\crdr, -2) {$R_\r$};
+
+      \draw [ultra thick, line width = 2pt, -] (rla\r) -- (srv);
+
+      \foreach \n [
+        evaluate=\n as \j using (int(\n + \r * 3)),
+        evaluate=\n as \crdn using (((\n + \r * 3) * 2 - 4) * .8),
+      ] in {0, 1, 2}
+        {
+          \node [circle,
+            fill=RoyalBlue2!50,
+            draw=RoyalBlue4,
+            text=RoyalBlue4,
+            inner sep = 5pt
+          ] (nc\j) at (\crdn, -4) {$N_\j$};
+
+          \draw [-] (nc\j) -- (rla\r);
+        }
+    }
+
+\end{tikzpicture}
+\end{document}

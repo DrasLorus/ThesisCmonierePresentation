@@ -95,35 +95,45 @@
 \begin{frame}{Réseaux longues portées basses puissances}
   {En anglais : \acrfullpl{lpwan}}
 
-  % \begin{overlayarea}{\linewidth}{.1\textheight}
-  %   Fort développement de l'\acrfull{iot} \textit{[internet des objets]} durant la dernière décennie
-  %   \textcolor{red}{$\Rightarrow$} développement des \acrshortpl{lpwan}\cite{IEEEStandardLPWAN}.
-  % \end{overlayarea}
-
-  % \begin{overlayarea}{\linewidth}{.65\textheight}
   \begin{columns}
     \begin{column}{.5\linewidth}
       Caractéristiques des \acrshortpl{lpwan} \cite{IEEEStandardLPWAN} :
 
       \begin{ctrlitemize}{5pt}
-        \item Communications longues portées (dizaines de kilomètres)
-        \item Réseaux hétérogènes :
-        \begin{ctrlitemize}{2pt}
-          \item des nœud-capteurs bon marché, fonctionnant sur batterie, massivement déployables,
-          \item des relais, plus cher et plus performants,
-          \item des stations de bases couteuses, mais comparativement peu nombreuses.
-        \end{ctrlitemize}
-        % \item consommations énergétiques réduites.
+        \item Communications longues portées (dizaines de kilomètres).
+        \item Permettent le déploiement massif d'objets connectés.
+        \item Quantité de données à transmettre et donc débits requis plus faibles.
       \end{ctrlitemize}
-      % $\Rightarrow$ Permettre le déploiement massif de d'objets connectés alimentés par batterie.\\
-      % $\Rightarrow$ Requiert des débits plus faibles, que les réseaux cellulaires notamment.
+    \end{column}
+    \begin{column}{.5\linewidth}
+      \includegraphics[width=\linewidth, height=.65\textheight, keepaspectratio=true]{figures/drawiopdf/lpwan_and_co}
+      \captionof{figure}{Positionnement des technologies \acrshort{lpwan} SigFox, LoRa et NB-IoT comparé à celles des réseaux cellulaires ou courtes portées.}
     \end{column}
   \end{columns}
-  % \end{overlayarea}
   \blfootnotetext{\textcite{IEEEStandardLPWAN}}
 \end{frame}
 
-\begin{frame}{Réseaux longues portées basses puissances}
+\begin{frame}{\acrshortpl{lpwan}}
+
+  \begin{columns}
+    \begin{column}{.5\linewidth}
+      \includegraphics[width=\linewidth, height=.65\textheight, keepaspectratio=true]{figures/tikzpicture/topo-network.pdf}
+      \captionof{figure}{Topologie possible d'un \acrshort{lpwan}.}
+    \end{column}
+    \begin{column}{.5\linewidth}
+      Composition du réseau :
+
+      \begin{ctrlitemize}{2pt}
+        \item \textcolor{RoyalBlue3}{Nœud-capteurs   } --- bon-marchés, fonctionnant sur batterie, déployables massivement.
+        \item \textcolor{Chartreuse3}{Relais          } --- plus cher que les nœud-capteurs, mais plus performants.
+        \item \textcolor{Gold3}{Stations de base} --- couteuses et très performantes, mais en nombre réduit.
+      \end{ctrlitemize}
+    \end{column}
+  \end{columns}
+  \blfootnotetext{\textcite{IEEEStandardLPWAN}}
+\end{frame}
+
+\begin{frame}{\acrshortpl{lpwan} : trois exemples}
 
   % Le \acrshortpl{lpwan} ont connu un fort développement durant la dernière décennie, de nombreux standards ont vu le jour\cite{goursaudDedicatedNetworksIoT2015, sinhaSurveyLPWATechnology2017}.%
 
@@ -161,6 +171,10 @@
     \end{column}
   \end{columns}
   \blfootnotetext{\textcite{goursaudDedicatedNetworksIoT2015, sinhaSurveyLPWATechnology2017}}
+\end{frame}
+
+\begin{frame}{Chaine de communication}
+  \includegraphics[width=\linewidth]{tikzpicture/async_comm_chain_stdl.pdf}
 \end{frame}
 
 \begin{frame}{Problème des préambules}
