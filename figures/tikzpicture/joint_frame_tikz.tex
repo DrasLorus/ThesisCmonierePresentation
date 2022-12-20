@@ -1,4 +1,4 @@
-\documentclass[tikz,border=0cm]{standalone}
+\documentclass[tikz,border=0cm,rgb,dvipsnames,x11names]{standalone}
 
 \input{../stdl_preamble.tex}
 
@@ -9,49 +9,56 @@
 \begin{tikzpicture} [-latex,
         >=latex,
         auto,
-        ultra thin,
+        thick,
         main node/.style={rectangle, fill = white!35,  draw,
                 align=center}]
 
     \node [
-        draw,
-        fill = red!20!white,
+        draw = Red4,
+        text = Red4,
+        fill = Red1!20,
         minimum width = 4 cm
     ] (meta) at (0, 0) {\phantom{g}Métadonnées\phantom{g}};
 
     \node [
-        draw,
-        fill = green!20!white,
+        draw = Chartreuse4,
+        text = Chartreuse4,
+        fill = Chartreuse1!20,
         minimum width = 6 cm,
         right = 0 pt of meta
     ] (data)  {Charge utile};
 
-    \node [draw,
-        fill = blue!20!white,
+    \node [
+        draw = RoyalBlue4,
+        text = RoyalBlue4,
+        fill = RoyalBlue2!20,
         minimum width = 8 cm,
         right = 0 pt of data
     ] (ecc)  {\phantom{g}Redondance\phantom{g}};
 
-    \node [draw,
-        top color = green!20!white,
-        bottom color = red!20!white,
+    \node [
+        draw = Red4!50!Chartreuse4,
+        text = Red4!50!Chartreuse4,
+        top color = Chartreuse1!20,
+        bottom color = Red1!20,
         minimum width = 6 cm,
         anchor = north west,
     ] (data_meta) at ($(meta.south) + (0, -1cm)$) {Charge utile $+$ Métadonnées};
 
     \node [
-        draw,
-        top color = blue!20!white,
-        bottom color = red!20!white,
+        draw = Red4!50!RoyalBlue4,
+        text = Red4!50!RoyalBlue4,
+        top color = RoyalBlue2!20,
+        bottom color = Red1!20,
         minimum width = 8 cm,
         right = 0 pt of data_meta
     ] (ecc_meta)  {\phantom{g}Redondance + Métadonnées\phantom{g}};
 
-    \draw [red!40!white, {Triangle[open, fill=red!40!white]}-{Triangle[open, fill=red!40!white]}, line width=.05cm, double ] (data_meta.west) -- ($(data_meta.west -| meta.west) + (.1, 0)$);
-    \draw [red!40!white, {Triangle[open, fill=red!40!white]}-{Triangle[open, fill=red!40!white]}, line width=.05cm, double ] (ecc_meta.east) -- ($(ecc_meta.east  -| ecc.east)  - (.1, 0)$);
+    \draw [Red3!60, {Triangle[open, fill=Red3!60]}-{Triangle[open, fill=Red3!60]}, line width=.05cm, double ] (data_meta.west) -- ($(data_meta.west -| meta.west) + (.1, 0)$);
+    \draw [Red3!60, {Triangle[open, fill=Red3!60]}-{Triangle[open, fill=Red3!60]}, line width=.05cm, double ] (ecc_meta.east) -- ($(ecc_meta.east  -| ecc.east)  - (.1, 0)$);
 
-    \node [draw=none, black, align=center, anchor = north west] (eco) at (1,-4) {\phantom{g}Économies de resources\phantom{g}};
-    \draw [red!40!white, {Triangle[open, fill=red!40!white]}-{Triangle[open, fill=red!40!white]}, line width=.05cm, double ] (eco.west) -- ($(eco.west) + (-2, 0)$);
+    \node [draw=none, Red3, align=center, anchor = north west] (eco) at (1,-4) {\phantom{g}Économies de resources\phantom{g}};
+    \draw [Red3!60, {Triangle[open, fill=Red3!60]}-{Triangle[open, fill=Red3!60]}, line width=.05cm, double ] (eco.west) -- ($(eco.west) + (-2, 0)$);
 
     \node [] (ank) at ($(eco.west) + (-2, 0)$) {};
 

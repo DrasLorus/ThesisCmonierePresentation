@@ -1,4 +1,4 @@
-\documentclass[tikz,border=0cm]{standalone}
+\documentclass[tikz,border=0cm,rgb,dvipsnames,x11names]{standalone}
 
 \input{../stdl_preamble.tex}
 
@@ -9,27 +9,27 @@
 \begin{tikzpicture} [-latex,
         >=latex,
         auto,
-        ultra thin,
+        thick,
         main node/.style={rectangle, fill = white!35,  draw,
                 align=center}]
 
     \node [
-        draw,
-        fill = red!20!white,
+        text = Red4,
+        draw = Red4,
+        fill = Red1!20,
         minimum width = 5 cm
     ] (meta) at (0, 0) {\phantom{g}Métadonnées\phantom{g}};
 
-    \node [
-        draw,
-        gray!20,
-        fill = green!5!white,
+    \node [draw,
+        Chartreuse4!20,
+        fill = Chartreuse1!5,
         minimum width = 5 cm,
         right = 1 cm of meta
     ] (data)  {Charge utile};
 
     \node [draw,
-        gray!20,
-        fill = blue!5!white,
+        RoyalBlue4!20,
+        fill = RoyalBlue2!5,
         minimum width = 5 cm,
         right = 1 cm of data
     ] (ecc)  {\phantom{g}Redondance\phantom{g}};

@@ -43,14 +43,12 @@
         \captionof{figure}{Illustration : une antenne, deux devices.}
       \end{center}
     \end{column}
-    \begin{column}{.55\linewidth}
-      % \small
+    \begin{column}{.55\linewidth} \large
       \begin{overlayarea}{\linewidth}{.6\textheight}
         \begin{ctrlitemize}{1em}
           \item Piliers des sociétés modernes
           \item Champ regroupant :
           \begin{ctrlitemize}{1em}
-            \scriptsize
             \item les réseaux cellulaires (\textit{3G, 4G/LTE, 5G}),
             \item les réseaux en champs proches (\textit{ZigBee, NFC, Bluetooth}),
             \item et, dans le cadre de \textbf{l'Internet des objet}, les \textbf{\textcolor{red}{réseaux longues portées basses puissances (\acrshortpl{lpwan})}}.
@@ -106,11 +104,11 @@
       \end{ctrlitemize}
     \end{column}
     \begin{column}{.5\linewidth}
-      \includegraphics[width=\linewidth, height=.65\textheight, keepaspectratio=true]{figures/drawiopdf/lpwan_and_co}
-      \captionof{figure}{Positionnement des technologies \acrshort{lpwan} SigFox, LoRa et NB-IoT comparé à celles des réseaux cellulaires ou courtes portées.}
+      \includegraphics[width=\linewidth, height=.65\textheight, keepaspectratio=true]{figures/drawiopdf/lpwan_and_co.pdf}
+      \captionof{figure}{Positionnement des technologies \acrshort{lpwan} SigFox, LoRa et NB-IoT comparé à celles des réseaux cellulaires ou courtes portées \cite{sinhaSurveyLPWATechnology2017}.}
     \end{column}
   \end{columns}
-  \blfootnotetext{\textcite{IEEEStandardLPWAN}}
+  \blfootnotetext{\textcite{IEEEStandardLPWAN, sinhaSurveyLPWATechnology2017}}
 \end{frame}
 
 \begin{frame}{\acrshortpl{lpwan}}
@@ -124,13 +122,15 @@
       Composition du réseau :
 
       \begin{ctrlitemize}{2pt}
-        \item \textcolor{RoyalBlue3}{Nœud-capteurs   } --- bon-marchés, fonctionnant sur batterie, déployables massivement.
-        \item \textcolor{Chartreuse3}{Relais          } --- plus cher que les nœud-capteurs, mais plus performants.
-        \item \textcolor{Gold3}{Stations de base} --- couteuses et très performantes, mais en nombre réduit.
+        \item [\textcolor{RoyalBlue3}{$\bullet$}] \textcolor{RoyalBlue3}{Nœud-capteurs   }
+        --- bon-marchés, fonctionnant sur batterie, déployables massivement.
+        \item [\textcolor{Chartreuse3}{$\blacklozenge$}] \textcolor{Chartreuse3}{Relais  }
+        --- plus cher que les nœud-capteurs, mais plus performants.
+        \item [\textcolor{Gold3}{$\blacksquare$}] \textcolor{Gold3}{Stations de base     }
+        --- couteuses et très performantes, mais en nombre réduit.
       \end{ctrlitemize}
     \end{column}
   \end{columns}
-  \blfootnotetext{\textcite{IEEEStandardLPWAN}}
 \end{frame}
 
 \begin{frame}{\acrshortpl{lpwan} : trois exemples}
@@ -139,8 +139,8 @@
 
   \begin{columns}
     \begin{column}{.5\linewidth} \centering
-      \includegraphics[width=\linewidth, height=.65\textheight, keepaspectratio=true]{figures/drawiopdf/lpwan_and_co}
-      \captionof{figure}{Positionnement des technologies \acrshort{lpwan} SigFox, LoRa et NB-IoT comparé à celles des réseaux cellulaires ou courtes portées.}
+      \includegraphics[width=\linewidth, height=.65\textheight, keepaspectratio=true]{figures/drawiopdf/lpwan_and_co.pdf}
+      \captionof{figure}{Positionnement des technologies \acrshort{lpwan} SigFox, LoRa et NB-IoT comparé à celles des réseaux cellulaires ou courtes portées \cite{sinhaSurveyLPWATechnology2017}.}
     \end{column}
 
     \begin{column}{.5\linewidth} \centering
@@ -166,37 +166,66 @@
       \bottomrule
     \end{tabular}
     % \end{noindent}
-      \captionof{table}{Aperçu des caractéristiques de trois technologies dans les \acrshortpl{lpwan}, SigFox, LoRa et NB-IoT.}
+      \captionof{table}{Aperçu des caractéristiques de trois technologies dans les \acrshortpl{lpwan}, SigFox, LoRa et NB-IoT \cite{goursaudDedicatedNetworksIoT2015}.}
       \ra{1}
     \end{column}
   \end{columns}
   \blfootnotetext{\textcite{goursaudDedicatedNetworksIoT2015, sinhaSurveyLPWATechnology2017}}
 \end{frame}
 
-\begin{frame}{Chaine de communication}
-  \includegraphics[width=\linewidth]{tikzpicture/async_comm_chain_stdl.pdf}
+\begin{frame}{Chaine de communication}{} \centering \vspace{-1em}
+
+  \begin{columns}
+    \begin{column}{.15\linewidth} \centering
+      \includegraphics[width=\linewidth]{figures/tikzpicture/osi_layers_stdl.pdf}
+      \captionof{figure}{Modèle OSI (\textit{Open Systems Interconnection}).}
+    \end{column}
+    \begin{column}{.75\linewidth}
+      \includegraphics[width=\linewidth, height=.9\textheight, keepaspectratio=true]{tikzpicture/async_comm_chain_stdl.pdf}
+    \end{column}
+  \end{columns}
+
+  % \vspace{-2em}
+
+  \begin{columns} \small
+    \begin{column}{.45\linewidth}
+      \begin{itemize}
+        \item [CNA :] Convertisseur Numérique Analogique
+      \end{itemize}
+    \end{column}
+    \begin{column}{.45\linewidth}
+      \begin{itemize}
+        \item [CAN :] Convertisseur Analogique Numérique
+      \end{itemize}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{Problème des préambules}
   % \begin{overlayarea}{\linewidth}{.05\textheight}
   % \end{overlayarea}
   \begin{columns}
-    \begin{column}{.25\linewidth}
-      \begin{overlayarea}{\linewidth}{.45\textheight}
-        \includegraphics[width=\linewidth]{figures/tikzpicture/osi_layers_stdl}
-      \end{overlayarea}
-    \end{column}
-    \begin{column}{.02\linewidth}
+    \begin{column}{.155\linewidth}
+      \hfill
     \end{column}
     \begin{column}{.69\linewidth}
       \begin{overlayarea}{\linewidth}{.45\textheight}
         \only<1,2>{
-          \includegraphics[width=\linewidth]{figures/tikzpicture/joint_frame_tikz_bare.pdf}
+          \includegraphics[
+            width=\linewidth,
+            keepaspectratio=true
+          ]{figures/tikzpicture/joint_frame_tikz_bare.pdf}
         }
         \only<3>{
-          \includegraphics[width=\linewidth]{figures/tikzpicture/joint_frame_tikz.pdf}
+          \includegraphics[
+            width=\linewidth,
+            keepaspectratio=true
+          ]{figures/tikzpicture/joint_frame_tikz.pdf}
         }
       \end{overlayarea}
+    \end{column}
+    \begin{column}{.155\linewidth}
+      \hfill
     \end{column}
   \end{columns}
 
@@ -244,62 +273,68 @@
 
 \begin{frame}{\acrfull{ccsk}}
   {}
-  \begin{overlayarea}{\linewidth}{.02 \textheight}
-  \end{overlayarea}
+  % \begin{overlayarea}{\linewidth}{.02 \textheight}
+  % \end{overlayarea}
   \begin{overlayarea}{\linewidth}{.18 \textheight}
     \centering
-    \normalsize Modulation d'un mot de code de symboles de $p$ bits par la rotation circulaire d'une séquence de pseudo-bruit binaire (\acrshort{pn}) \pn{0}\cite{dillardCyclicCodeShift2003} de $2^p = q$ chips \\\emph{\textsf{bijection de \gf{q}\footnotemark vers l'ensemble des rotations circulaires de \pn{0}}}.
+    Modulation d'un mot de code de symboles de $p$ bits par la rotation circulaire d'une séquence ``\acrshort{pn}'' de pseudo-bruit binaire \pn{0}~\cite{dillardCyclicCodeShift2003} de $2^p = q$ chips. \note{\textsf{bijection de \gf{q} vers l'ensemble des rotations circulaires de \pn{0}}.}
     \vfill
   \end{overlayarea}
 
-  \begin{overlayarea}{\linewidth}{.4 \textheight}
-    \begin{columns}
-      \begin{column}{.3\linewidth} \centering
+  \begin{columns}
+    \begin{column}{.3\linewidth}
+      \begin{overlayarea}{\linewidth}{.37 \textheight}
         \centering
 
         \begin{tabular}{@{}r r l@{}}
           \toprule
-          \multicolumn{3}{c}{\textbf{Paramètres}} \\ \midrule
-          $p$    & $=$ & $2$                      \\
-          $q$    & $=$ & $4$                      \\
-          \pn{0} & $=$ & \Ob{}\Xb{}\Xb{}\Xb{}     \\
+          \multicolumn{3}{c}{\textbf{Paramètres}}         \\ \midrule
+          $p$    & $=$ & $2$ bits                         \\
+          $q$    & $=$ & $4$ symboles                     \\
+          \pn{0} & $=$ & \Ob{}\Xb{}\Xb{}\Xb{} ($4$ chips) \\
           \bottomrule
-        \end{tabular}
+        \end{tabular} \vspace{1 em}
 
-        \Ob{} $= +1$, \Xb{} $= -1$
-
-      \end{column}
-      \begin{column}{.3\linewidth}
+        \Ob{} $= 1$, \Xb{} $= 0$
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.3\linewidth}
+      \begin{overlayarea}{\linewidth}{.37 \textheight}
         \begin{tabular}{@{}r c l@{}}
           \toprule
-          Symbole & Notation & Rotation             \\ \midrule
-          $0$     & \pn{0}   & \Ob{}\Xb{}\Xb{}\Xb{} \\
-          $1$     & \pn{1}   & \Xb{}\Ob{}\Xb{}\Xb{} \\
-          $2$     & \pn{2}   & \Xb{}\Xb{}\Ob{}\Xb{} \\
-          $3$     & \pn{3}   & \Xb{}\Xb{}\Xb{}\Ob{} \\
+          \textbf{Symbole} & \textbf{Notation} & \textbf{Rotation}    \\ \midrule
+          $0$              & \pn{0}            & \Ob{}\Xb{}\Xb{}\Xb{} \\
+          $1$              & \pn{1}            & \Xb{}\Ob{}\Xb{}\Xb{} \\
+          $2$              & \pn{2}            & \Xb{}\Xb{}\Ob{}\Xb{} \\
+          $3$              & \pn{3}            & \Xb{}\Xb{}\Xb{}\Ob{} \\
           \bottomrule
         \end{tabular}
-      \end{column}
-    \end{columns}
-  \end{overlayarea}
-
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
 
   \begin{overlayarea}{\linewidth}{.2 \textheight}
     \begin{columns}
-      \begin{column}{.3\linewidth} \centering
-        Mot de code $\vect{C}$\\$\{ 0, \; 3, \; 1,\; 2\}$
+      \begin{column}{.35\linewidth} \centering
+        Mot de code $\vect{C}$ de $3$ symboles\\$\{ 0, \; 3, \; 1\}$
       \end{column}
-      \begin{column}{.1\linewidth} \centering
+      \begin{column}{.05\linewidth} \centering
         $\Rightarrow$
       \end{column}
-      \begin{column}{.55\linewidth} \centering
-        Trame \acrshort{ccsk} $\vect{F}_{CCSK}$\\$\{ \mpn{0} | \mpn{3} | \mpn{1} | \mpn{2} \}$ = \Ob{}\Xb{}\Xb{}\Xb{}~~\Xb{}\Xb{}\Xb{}\Ob{}~~\Xb{}\Ob{}\Xb{}\Xb{}~~\Xb{}\Xb{}\Ob{}\Xb{}
+      \begin{column}{.6\linewidth} \centering
+        % \begin{noindent}
+        \begin{tabular}{@{}r c@{}}
+          \multicolumn{2}{c}{Trame \acrshort{ccsk} $\vect{F}_{CCSK}$}          \\
+          $\{ \mpn{0} \;|\; \mpn{3} \;|\; \mpn{1} \}$ = 
+            & {\large \Ob{}\Xb{}\Xb{}\Xb{}~~\Xb{}\Xb{}\Xb{}\Ob{}~~\Xb{}\Ob{}\Xb{}\Xb{}} \\
+            & \includegraphics[width=.387\linewidth, height=.05\textheight]{figures/tikzpicture/pn_chrono.pdf}
+        \end{tabular}
+        % \end{noindent}
       \end{column}
     \end{columns}
-
   \end{overlayarea}
   \blfootnotetext{\textcite{dillardCyclicCodeShift2003}}
-  \footnotetext{Corps de Galois d'ordre $p$}
+  % \footnotetext{Corps de Galois d'ordre $p$}
 \end{frame}
 
 
@@ -307,9 +342,9 @@
 
 \end{frame}
 
-\begin{frame}{\acrfull{ldpc}}
-  \textbf{TODO, Juste le principe}
-\end{frame}
+% \begin{frame}{\acrfull{ldpc}}
+%   \textbf{TODO, Juste le principe}
+% \end{frame}
 
 
 \end{document}

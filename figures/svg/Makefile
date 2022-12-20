@@ -1,6 +1,6 @@
 MAKE = make
-SOURCES = $(wildcard *_stdl.tex)
-RESULTS = $(patsubst %.tex,%.pdf,$(SOURCES))
+SOURCES = $(wildcard *_stdl.tex) $(wildcard *.svg)
+RESULTS = $(patsubst %.svg,%.pdf,$(patsubst %_stdl.tex,%_stdl.pdf,$(SOURCES)))
 
 
 all: echoing $(RESULTS) $(SOURCES)
@@ -10,6 +10,9 @@ all: echoing $(RESULTS) $(SOURCES)
 
 %_stdl.pdf : %_stdl.tex
 	latexmk $<
+
+%.pdf : %.svg
+	inkscape $< -o $@
 
 clean:
 	latexmk -c
