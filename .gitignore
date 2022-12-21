@@ -327,3 +327,4 @@ main.pdf
 figures/tikzpicture/*.pdf
 figures/pgfplots/*.pdf
 
+figures/svg/*.pdf
