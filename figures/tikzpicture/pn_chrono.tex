@@ -10,47 +10,78 @@
   ]
   % {0, 3, 1}
 
-  % 0
-  \draw [Red] (0, 0) -- (0.25, 1);
-  \draw [Red] (0.25, 1) -- (.75, 1);
-  \draw [Red] (.75, 1) -- (1, 0);
-  \foreach \t [
-    evaluate = \t as \tp1 using (\t + 1)
-  ] in {1, ..., 3}
-    {
-      \draw [Blue] (\t, 0) -- (\tp1, 0);
+  % % 0
+  % \draw [Red] (0, 0) -- (0.25, 1);
+  % \draw [Red] (0.25, 1) -- (.75, 1);
+  % \draw [Red] (.75, 1) -- (1, 0);
+  % \foreach \t [
+  %   evaluate = \t as \tp1 using (\t + 1)
+  % ] in {1, ..., 3}
+  %   {
+  %     \draw [Blue] (\t, 0) -- (\tp1, 0);
+  %   }
+
+  % % 3
+  % \foreach \t [
+  %   evaluate = \t as \tt using (\t + 4),
+  %   evaluate = \t as \tp1 using (\t + 5)
+  % ] in {0, ..., 2}
+  %   {
+  %     \draw [Blue] (\tt, 0) -- (\tp1, 0);
+  %   }
+
+  % \draw [Red] (7, 0) -- (7.25, 1);
+  % \draw [Red] (7.25, 1) -- (7.75, 1);
+  % \draw [Red] (7.75, 1) -- (8, 0);
+
+
+  % % 1
+  % \draw [Blue] (8, 0) -- (9, 0);
+
+  % \draw [Red] (9, 0) -- (9.25, 1);
+  % \draw [Red] (9.25, 1) -- (9.75, 1);
+  % \draw [Red] (9.75, 1) -- (10, 0);
+  % \foreach \t [
+  %   evaluate = \t as \tt using (\t + 10),
+  %   evaluate = \t as \tp1 using (\t + 11)
+  % ] in {0, 1}
+  %   {
+  %     \draw [Blue] (\tt, 0) -- (\tp1, 0);
+  %   }
+
+  % \draw [dashed,line width = 3pt, darkgray] (4, 0) -- (4, 1);
+  % \draw [dashed,line width = 3pt, darkgray] (8, 0) -- (8, 1);
+
+  \begin{axis} [
+      hide axis,
+      mark = none,
+      line width = 4pt,
+      % grid on,
+      height = 4 cm,
+      width  = 48cm,
+    ]
+
+
+    \draw [solid, black] (0, 0) -- (12, 0);
+    \foreach \t in {0, ..., 12} {
+      \edef\temp{\noexpand\draw (\t, .4) -- (\t, 0);}
+      \temp
     }
 
-  % 3
-  \foreach \t [
-    evaluate = \t as \tt using (\t + 4),
-    evaluate = \t as \tp1 using (\t + 5)
-  ] in {0, ..., 2}
-    {
-      \draw [Blue] (\tt, 0) -- (\tp1, 0);
+    \addplot [Blue] coordinates {(.75, 1) (1, 0) (7, 0) (7.25, 1)};
+    \addplot [Blue] coordinates {(7.75, 1) (8, 0) (9, 0) (9.25, 1)};
+    \addplot [Blue] coordinates {(9.75, 1) (10, 0) (12, 0)};
+    \addplot [Red] coordinates {(0, 0) (.25, 1) (.75, 1) (1, 0)};
+    \addplot [Red] coordinates {(7, 0) (7.25, 1) (7.75, 1) (8, 0)};
+    \addplot [Red] coordinates {(9, 0) (9.25, 1) (9.75, 1) (10, 0)};
+    \draw [darkgray] (0, 0) -- (0, 1);
+    \draw [darkgray] (4, 0) -- (4, 1);
+    \foreach \t in {0, 4, ..., 12} {
+      \edef\temp{\noexpand\draw [darkgray] (\t, 0) -- (\t, 1);}
+      \temp
     }
 
-  \draw [Red] (7, 0) -- (7.25, 1);
-  \draw [Red] (7.25, 1) -- (7.75, 1);
-  \draw [Red] (7.75, 1) -- (8, 0);
-
-
-  % 1
-  \draw [Blue] (8, 0) -- (9, 0);
-
-  \draw [Red] (9, 0) -- (9.25, 1);
-  \draw [Red] (9.25, 1) -- (9.75, 1);
-  \draw [Red] (9.75, 1) -- (10, 0);
-  \foreach \t [
-    evaluate = \t as \tt using (\t + 10),
-    evaluate = \t as \tp1 using (\t + 11)
-  ] in {0, 1}
-    {
-      \draw [Blue] (\tt, 0) -- (\tp1, 0);
-    }
-
-  \draw [dashed,line width = 3pt, darkgray] (4, 0) -- (4, 1);
-  \draw [dashed,line width = 3pt, darkgray] (8, 0) -- (8, 1);
+  \end{axis}
 
 \end{tikzpicture}
 \end{document}
