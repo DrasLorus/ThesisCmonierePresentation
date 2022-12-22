@@ -14,7 +14,7 @@
   ] (nbenc_HL) at (0, 0) {Encodeur\\NB-LDPC};
 
   \node [main node,
-    visible on=<2-9>,
+    visible on=<2->,
     align=center,
     minimum height = 1.5cm
   ] (nbenc) at (0, 0) {Encodeur\\NB-LDPC};
@@ -27,7 +27,7 @@
   ] (ccskm) {Modulation\\CCSK};
 
   \node [main node,
-    visible on=<3-9>,
+    visible on=<3->,
     minimum height = 1.5cm,
     right = 1cm of nbenc
   ] (ccskm) {Modulation\\CCSK};
@@ -41,7 +41,7 @@
   ] (bpskm) {BPSK $+$\\Surmodulation};
 
   \node [main node,
-    visible on=<4-9>,
+    visible on=<4->,
     minimum height = 1.5cm,
     %minimum width = 3cm,
     right = 1cm of ccskm

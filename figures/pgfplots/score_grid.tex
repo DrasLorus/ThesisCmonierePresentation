@@ -1,0 +1,40 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\usetikzlibrary{patterns}
+
+\begin{document}
+\begin{tikzpicture}
+  \draw[step=.8cm,gray,thin] (-.25,-.25) grid (5.25,5.25);
+
+  \draw [opacity = .8,
+    fill=darkgray,
+  ] (4.8, .8) rectangle (1.6, 4.8);
+
+  \foreach \x in {2,2.8,...,5.2}
+    {
+      \foreach \y in {1.2, 2,...,4.8}
+        {
+          \node [circle, fill=Chartreuse3!75] at (\x, \y) {};
+        }
+    }
+
+  \draw [latex-latex, red, thick] (1.6, .7) -- (4.8, .7)
+  node [midway, below] {$//_\Delta$ ($q$ chips)};
+  \draw [latex-latex, blue, thick] (1.5, .8) -- (1.5, 4.8)
+  node [midway, left, align = center] {$//_\omega$\\($2\pi$)};
+
+  \draw [->, very thick] (0,0) -- (5.35, 0)
+  node [midway, below=.3cm] (t) {temps};
+  \draw [->, very thick] (0,0) -- (0, 5.25)
+  node [pos=.65, left=.5cm, rotate=90] {fréquence};
+
+  \node [
+    draw   = black,
+    fill   = white,
+    anchor = south,
+    align  = center
+  ] at (3.2, 4.9) {\small Grille de détection avec :\\\textcolor{Red}{$p_\Delta = 4$} et \textcolor{Blue}{$p_\omega = 5$}};
+\end{tikzpicture}
+\end{document}

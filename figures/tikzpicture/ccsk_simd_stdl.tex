@@ -13,19 +13,19 @@
   ]
 
   \node [main node,
-    fill = red!40!white,
+    fill = Red2!70,
     minimum size = 1cm
   ] (ccsk0) at (0, 0)   {$1$};
   \node [main node,
-    fill = blue!40!white,
+    fill = RoyalBlue2,
     minimum size = 1cm
   ] (ccsk1) at (1cm, 0) {$0$};
   \node [main node,
-    fill = blue!40!white,
+    fill = RoyalBlue2,
     minimum size = 1cm
   ] (ccsk2) at (2cm, 0) {$0$};
   \node [main node,
-    fill = blue!40!white,
+    fill = RoyalBlue2,
     minimum size = 1cm
   ] (ccsk3) at (3cm, 0) {$0$};
 
@@ -35,26 +35,28 @@
     minimum size = 1cm,
     anchor=north east,
     align = center
-  ] (in) at ($(ccsk0.south west) + (-1,-1)$) {Input\\($p$ bits)};
-
+  ] (in) at ($(ccsk0.south west) + (-1,-1)$) {Entrée\\($p$ bits)};
 
   \node [main node,
-    fill = blue!40!white,
+    fill = RoyalBlue2,
     anchor=north west,
     minimum size = 1cm
-  ] (symb0) at ($(in.south east)    + (1,-1)$) {$0$};
+  ] (symb0) at ($(in.south east) + (1,-1)$) {$0$};
+
   \node [main node,
-    fill = blue!40!white,
+    fill = RoyalBlue2,
     minimum size = 1cm,
     anchor=north east,
   ] (symb1) at ($(symb0.north east) + (1, 0)$) {$0$};
+
   \node [main node,
-    fill = red!40!white,
+    fill = Red2!70,
     minimum size = 1cm,
     anchor=north east,
   ] (symb2) at ($(symb1.north east) + (1, 0)$) {$1$};
+
   \node [main node,
-    fill = blue!40!white,
+    fill = RoyalBlue2,
     minimum size = 1cm,
     anchor=north east,
   ] (symb3) at ($(symb2.north east) + (1, 0)$) {$0$};
@@ -73,8 +75,8 @@
 
   \draw (in.east) -- (map.west);
 
-  \node[anchor = south, align = center] at (ccsk1.north east) {CCSK Sequence\\($q$ chips)};
-  \node[anchor = north, align = center] at (symb1.south east) {CCSK Symbol\\($q$ chips)};
+  \node[anchor = south, align = center] at (ccsk1.north east) {Séquence CCSK \pn{0}\\($q$ chips)};
+  \node[anchor = north, align = center] at (symb1.south east) {Symbole CCSK\\($q$ chips)};
 
 \end{tikzpicture}
 \end{document}
