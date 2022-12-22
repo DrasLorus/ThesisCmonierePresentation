@@ -32,7 +32,7 @@
 
 \begin{document}
 
-\section[Communications QCSP]{Système de communications \acrshort{qcsp}}
+\section[Système de communications QCSP]{Système de communications \acrshort{qcsp}}
 
 
 \subsection{Modèle}
@@ -40,171 +40,7 @@
 \begin{frame}{\secname : \subsecname}
   \begin{overlayarea}{\linewidth}{0.3\textheight}
     \resizebox{\linewidth}{!}{
-      \begin{tikzpicture} [-latex,
-          >=latex,
-          auto,
-          thick,
-          main node/.style={rectangle, fill = white!35, draw,
-              align=center}
-        ]
-
-        \node [main node,
-          visible on=<1>,
-          fill = red!20!white,
-          align=center,
-          minimum height = 1.5cm
-        ] (nbenc_HL) at (0, 0) {NB-LDPC\\Encoder};
-
-        \node [main node,
-          visible on=<2-9>,
-          align=center,
-          minimum height = 1.5cm
-        ] (nbenc) at (0, 0) {NB-LDPC\\Encoder};
-
-        \node [main node,
-          visible on=<2>,
-          fill = red!20!white,
-          minimum height = 1.5cm,
-          right = 1cm of nbenc
-        ] (ccskm) {CCSK\\Modulation};
-
-        \node [main node,
-          visible on=<3-9>,
-          minimum height = 1.5cm,
-          right = 1cm of nbenc
-        ] (ccskm) {CCSK\\Modulation};
-
-        \node [main node,
-          visible on=<3>,
-          fill = red!20!white,
-          minimum height = 1.5cm,
-          %minimum width = 3cm,
-          right = 1cm of ccskm
-        ] (bpskm) {BPSK $+$\\Overmodulation};
-
-        \node [main node,
-          visible on=<4-9>,
-          minimum height = 1.5cm,
-          %minimum width = 3cm,
-          right = 1cm of ccskm
-        ] (bpskm) {BPSK $+$\\Overmodulation};
-
-        \node [main node,
-          visible on=<4>,
-          fill = red!20!white,
-          minimum height = .75cm,
-          minimum width = .5cm,
-          right = 1 cm of bpskm
-        ] (dac) {Filter $+$ DAC};
-
-        \node [main node,
-          visible on=<5->,
-          minimum height = .75cm,
-          minimum width = .5cm,
-          fill = white,
-          right = 1 cm of bpskm
-        ] (dac) {Filter $+$ DAC};
-
-        \node [diamond,
-          visible on=<5>,
-          fill = red!20!white,
-          draw,
-          align=center,
-          %minimum height = 1.5cm,
-          %minimum width = 2cm,
-          right = .5 cm of dac
-        ] (chan) {CAWGN\\Channel};
-
-        \node [diamond,
-          visible on=<6->,
-          draw,
-          align=center,
-          %minimum height = 1.5cm,
-          %minimum width = 2cm,
-          fill = white,
-          right = .5 cm of dac
-        ] (chan) {CAWGN\\Channel};
-
-        \node [main node,
-          visible on=<6>,
-          fill = red!20!white,
-          minimum height = .75cm,
-          minimum width = .5cm,
-          right = .5cm of chan
-        ] (adc) {ADC $+$ Filter};
-
-        \node [main node,
-          visible on=<7->,
-          fill = white,
-          minimum height = .75cm,
-          minimum width = .5cm,
-          right = .5cm of chan
-        ] (adc) {ADC $+$ Filter};
-
-        \node [main node,
-          visible on=<7>,
-          fill = red!20!white,
-          minimum height = 1.5cm,
-          %minimum width = 3cm,
-          right = 1 cm of adc
-        ] (ccskd)  {Detection};
-
-        \node [main node,
-          visible on=<8-9>,
-          minimum height = 1.5cm,
-          %minimum width = 3cm,
-          right = 1 cm of adc
-        ] (ccskd)  {Detection};
-
-        \node [main node,
-          visible on=<8>,
-          fill = red!20!white,
-          minimum height = 1.5cm,
-          %minimum width = 3cm,
-          right = 1 cm of ccskd
-        ] (ccsks) {Synchronization};
-
-        \node [main node,
-          visible on=<9>,
-          minimum height = 1.5cm,
-          %minimum width = 3cm,
-          right = 1 cm of ccskd
-        ] (ccsks) {Synchronization};
-
-        \node [main node,
-          visible on=<9>,
-          fill = red!20!white,
-          minimum height = 1.5cm,
-          right = 1cm of ccsks
-        ] (nbdec) {NB-LDPC\\Decoder};
-
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-        \draw  [visible on=<1->] ($(-1, 0) + (nbenc.west)$) -> (nbenc.west)
-        node [visible on=<1-9>, pos=0, align=center, below = 1cm] (M) {Message\\\textbf{M}\\($K \times m$ bits)};
-        \draw [visible on=<1->] (nbenc.east) -> (ccskm.west)
-        node [visible on=<1-9>, midway, align=center, below = 1cm] (M) {Codeword\\\textbf{C}\\($N \times m$ bits)};
-        \draw [visible on=<2->] (ccskm.east) -> (bpskm.west)
-        node [visible on=<2-9>, midway, align=center, below = 1cm] (M) {CCSK Frame\\\textbf{F$_{\mathrm{CCSK}}$}\\($N \times q$ bits)};
-        \draw [visible on=<3->] (bpskm.east) -- (dac.west)
-        node [visible on=<3-9>, midway, align=center, below = 1cm] (M) {QCSP Frame\\\textbf{F}\\($N \times q$ chips)};
-        \draw [visible on=<4->] (dac.east) -- (chan.west);
-        \draw [visible on=<5->] (chan.east) -- (adc.west);
-        \draw [visible on=<6->] (adc.east) -- (ccskd.west)
-        node [visible on=<6-9>, midway, align=center, below = 1cm] (M) {Samples\\$y(n)$\\($1 \times \mathcal{O}$ chip)};
-        \draw [visible on=<7->] (ccskd.east) -> (ccsks.west)
-        node [visible on=<7-9>, midway, align=center, below = 1cm] (M) {\phantom{É}Detected Frame\phantom{É}\\\textbf{B}\\($2  N \times q$ chips)};
-
-        \draw [visible on=<8->] (ccsks.east) -> (nbdec.west)
-        node [visible on=<8-9>, midway, align=center, below = 1cm] (M) {\phantom{É}Synchronized Frame\phantom{É} \\ \textbf{F'}\\ ($N \times q$ chips)};
-
-        \draw [visible on=<9->] (nbdec.east) -> ($(1, 0) + (nbdec.east)$)
-        node [visible on=<9>, pos=1, align=center, below = 1cm] (M) {\phantom{É}Message décodé\phantom{É}\\\textbf{M'}\\($K \times m$ bits)};
-
-        \draw [visible on=<2-9>, latex-latex] ($(0, .2) + (nbenc.north west)$) -- ($(0, .2) + (ccskm.north east)$)
-        node [midway, align=center, above = .2cm] (Mp) {Effective coderate: $R_{eff} = \frac{K \times m}{N \times q}$};
-
-      \end{tikzpicture}
+      \input{figures/tikzpicture/evolutive_chain.tex}
     }
   \end{overlayarea}
 
@@ -214,31 +50,33 @@
     \begin{columns}
       \small
       \begin{column}{.48\linewidth} \centering
-        \only<1>{Message \textbf{M} \\ "1 2 1"}
-        \only<2>{Codeword \textbf{C} \\ "1 2 1 3 2 3"}
-        \only<3>{CCSK Frame \textbf{F$_{CCSK}$} \\ "\Ob{}\Xb{}\Xb{}\Xb{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Ob{}\Xb{}\Xb{}\Xb{}~\Xb{}\Xb{}\Ob{}\Xb{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Xb{}\Xb{}\Ob{}\Xb{}"\\\vspace{1em} \Ob{} : 1 --- \Xb{} : 0}
-        \only<7>{Samples ($\mathcal{O} \times$) \\ \includegraphics[width=\linewidth, keepaspectratio=false, height=.15\textheight]{noise.png}}
-        \only<8>{Detected Frames \textbf{B} \\ "ZZZZZZZZ \Xb{}\Ob{}\Ob{}\Xb{}~\Xb{}\Ob{}?\Xb{}~\Ob{}??\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}?\Xb{}~\Xb{}\Ob{}\Xb{}\Ob{} ZZZZZZZZZZZ"\\\vspace{1em} \Ob{}: +1 --- \Xb{}: -1 --- Z: Noise --- ?: Noisy Chip}
-        \only<9>{Synchronized Frame \textbf{F'} \\ "\Xb{}\Ob{}\Ob{}\Xb{}~\Xb{}\Ob{}?\Xb{}~\Ob{}??\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}?\Xb{}~\Xb{}\Ob{}\Xb{}\Ob{}"\\\vspace{1em} \Ob{}: +1 --- \Xb{}: -1 --- ?: Noisy Chip}
+        \only<1>{Message $\vect{M}$ \\ "1 2 1"}
+        \only<2>{Mot de code $\vect{C}$ \\ "1 2 1 3 2 3"}
+        \only<3>{Trame CCSK $\vect{F}_{CCSK}$ \\ "\Ob{}\Xb{}\Xb{}\Xb{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Ob{}\Xb{}\Xb{}\Xb{}~\Xb{}\Xb{}\Ob{}\Xb{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Xb{}\Xb{}\Ob{}\Xb{}"\\\vspace{1em} \Ob{} : 1 --- \Xb{} : 0}
+        \only<6>{Flux d'échantillons \\ \includegraphics[width=\linewidth, keepaspectratio=false, height=.15\textheight]{noise.png}}
+        \only<7>{Trame détecté $\vect{F}_D$ \\ "ZZZZZZZZ \Xb{}\Ob{}\Ob{}\Xb{}~\Xb{}\Ob{}?\Xb{}~\Ob{}??\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}?\Xb{}~\Xb{}\Ob{}\Xb{}\Ob{} ZZZZZZZZZZZ"\\\vspace{1em} \Ob{}: +1 --- \Xb{}: -1 --- Z: Noise --- ?: Noisy Chip}
+        \only<8>{Trame synchronisée $\vect{F}$ \\ "\Xb{}\Ob{}\Ob{}\Xb{}~\Xb{}\Ob{}?\Xb{}~\Ob{}??\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}?\Xb{}~\Xb{}\Ob{}\Xb{}\Ob{}"\\\vspace{1em} \Ob{}: +1 --- \Xb{}: -1 --- ?: Noisy Chip}
       \end{column}
       \begin{column}{.04\linewidth} \centering
         \only<1-3>{$\Rightarrow$}
-        \only<7-9>{$\Rightarrow$}
+        \only<6->{$\Rightarrow$}
       \end{column}
       \begin{column}{.48\linewidth} \centering
-        \only<1>{Codeword \textbf{C} \\ "1 2 1 3 2 3"}
-        \only<2>{CCSK Frame \textbf{F$_{CCSK}$} \\ "\Ob{}\Xb{}\Xb{}\Xb{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Ob{}\Xb{}\Xb{}\Xb{}~\Xb{}\Xb{}\Ob{}\Xb{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Xb{}\Xb{}\Ob{}\Xb{}"\\\vspace{1em} \Ob{}: 1 --- \Xb{}: 0\\CCSK Sequence: \Ob{}\Xb{}\Xb{}\Xb{}}
-        \only<3>{QCSP Frame \textbf{F\phantom{$_{CCSK}$}} \\ "\Xb{}\Ob{}\Ob{}\Ob{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Ob{}\Xb{}\Xb{}\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}"\\\vspace{1em} \Ob{} : +1 --- \Xb{} : -1}
-        \only<7>{Detected Frame \textbf{B} \\ "ZZZZZZZZ \Xb{}\Ob{}\Ob{}\Xb{}~\Xb{}\Ob{}?\Xb{}~\Ob{}??\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}?\Xb{}~\Xb{}\Ob{}\Xb{}\Ob{} ZZZZZZZZZZZ"\\\vspace{1em} \Ob{}: +1 --- \Xb{}: -1 --- Z: Noise --- ?: Noisy Chip}
-        \only<8>{Synchronized Frame \textbf{F'} \\ "\Xb{}\Ob{}\Ob{}\Xb{}~\Xb{}\Ob{}?\Xb{}~\Ob{}??\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}?\Xb{}~\Xb{}\Ob{}\Xb{}\Ob{}"\\\vspace{1em} \Ob{}: +1 --- \Xb{}: -1 --- ?: Noisy Chip}
-        \only<9>{Decoded Message \textbf{M'} \\ "1 2 1"}
+        \only<1>{Mot de code $\vect{C}$ \\ "1 2 1 3 2 3"}
+        \only<2>{Trame CCSK $\vect{F}_{CCSK}$ \\ "\Ob{}\Xb{}\Xb{}\Xb{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Ob{}\Xb{}\Xb{}\Xb{}~\Xb{}\Xb{}\Ob{}\Xb{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Xb{}\Xb{}\Ob{}\Xb{}"\\\vspace{1em} \Ob{}: 1 --- \Xb{}: 0\\CCSK Sequence: \Ob{}\Xb{}\Xb{}\Xb{}}
+        \only<3>{Trame QCSP $\vect{F}\phantom{_{CCSK}}$ \\ "\Xb{}\Ob{}\Ob{}\Ob{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Ob{}\Xb{}\Xb{}\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}\Xb{}\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}"\\\vspace{1em} \Ob{} : +1 --- \Xb{} : -1}
+        \only<6>{Trame détectée $\vect{F}_D$ \\ "ZZZZZZZZ \Xb{}\Ob{}\Ob{}\Xb{}~\Xb{}\Ob{}?\Xb{}~\Ob{}??\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}?\Xb{}~\Xb{}\Ob{}\Xb{}\Ob{} ZZZZZZZZZZZ"\\\vspace{1em} \Ob{}: +1 --- \Xb{}: -1 --- Z: Noise --- ?: Noisy Chip}
+        \only<7>{Trame synchronisée $\vect{F}_S$ \\ "\Xb{}\Ob{}\Ob{}\Xb{}~\Xb{}\Ob{}?\Xb{}~\Ob{}??\Xb{}~\Ob{}\Ob{}\Xb{}\Ob{}~\Xb{}\Ob{}?\Xb{}~\Xb{}\Ob{}\Xb{}\Ob{}"\\\vspace{1em} \Ob{}: +1 --- \Xb{}: -1 --- ?: Noisy Chip}
+        \only<8>{Message décodé $\vect{M}'$ \\ "1 2 1"}
       \end{column}
     \end{columns}
 
     \vspace{5 em}
 
-    \only<4-6>{\centering \vspace{-6 em}\includegraphics[width=\linewidth, keepaspectratio=false, height=.2\textheight]{noise.png}}
-    \only<9>{\centering \vspace{-4 em} \scriptsize Sidenote: QCSP frame demodulation product is directly usable by the NB-LDPC decoder.}
+    \only<4-5>{\centering \vspace{-6 em} 
+    Flux d'échantillons\\
+    \includegraphics[width=\linewidth, keepaspectratio=false, height=.2\textheight]{noise.png}}
+    \only<8>{\centering \vspace{-4 em} \scriptsize PS : La démodulation d'une trame QCSP produit des données directement utilisable par un décodeur NB-LDPC.}
   \end{overlayarea}
 \end{frame}
 

@@ -1,0 +1,64 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\newcommand*{\lencw}{6}
+
+% \usetikzlibrary{transparent}
+
+\pgfmathdeclarefunction{ifthenelsefpu}{3}{%
+  \pgfmathparse{#1*#2 + !#1*#3}%
+}
+
+\begin{document}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background, main}
+
+\begin{tikzpicture} [-,
+    auto,
+    very thick,
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center}
+  ]
+
+  \let\N\lencw{}
+
+  \foreach \ns / \symb / \ov in {0/1/1, 1/2/1, 2/1/1, 3/3/1, 4/2/1, 5/3/1}
+    {
+      \foreach \x [
+        evaluate = \x as \pos using (\ns * (4 * 1.25 + .45) + \x * 1.25),
+        evaluate = \x as \n using (int(\ns * 4 + \x))
+      ] in {0,...,3}
+        {
+          \ifthenelse{\equal{\ov}{0}}{
+            \ifthenelse{\equal{\symb}{\x}}{
+              \node [
+                fill = Blue,
+                minimum size = 1cm
+              ] (n\n) at (\pos, 0) {};
+            }{
+              \node [
+                fill = Red,
+                minimum size = 1cm
+              ] (n\n) at (\pos, 0) {};
+            }
+          }{
+            \ifthenelse{\equal{\symb}{\x}}{
+              \node [
+                fill = Red,
+                minimum size = 1cm
+              ] (n\n) at (\pos, 0) {};
+            }{
+              \node [
+                fill = Blue,
+                minimum size = 1cm
+              ] (n\n) at (\pos, 0) {};
+            }
+          }
+        }
+    }
+
+    % \node [draw, fill = Purple4, opacity = .8, inner sep = 0pt, fit={($(n0) + (0, .7)$) (n0) (n3) (n23) ($(n23) + (0, -0.7)$)}] {};
+\end{tikzpicture}
+\end{document}
