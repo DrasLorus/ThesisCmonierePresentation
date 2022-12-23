@@ -86,15 +86,28 @@
 \pgfplotsset{compat=1.18}
 
 \usetheme[secheader]{Boadilla}
-\usecolortheme[named=RoyalBlue4]{structure}
+\definecolor{LabsticcBlue}{RGB}{0, 48, 98}
+\usecolortheme[named=LabsticcBlue]{structure}
 
 % \makeatletter
 % \setbeamertemplate{sidebar canvas \beamer@sidebarside}[vertical shading][top=black,bottom=RoyalBlue]
 % \makeatother
 
-\setbeamercolor{titlelike}{use=structure,fg=RoyalBlue4}
+\setbeamercolor{titlelike}{use=structure,fg=LabsticcBlue}
 \setbeamertemplate{itemize item}[triangle]
 \setbeamerfont{footnote}{size=\tiny}
+
+\usepackage{tikz}
+\addtobeamertemplate{headline}{}{
+\begin{tikzpicture}[overlay, remember picture]
+  \node[left=.5cm] (lbs) at ($(current page.28) + (0, .025)$){
+      \includegraphics[width=1cm, height=.39cm, keepaspectratio=true]{labsticc-white.png}
+  };
+  \node[left = .5cm of lbs] {
+      \includegraphics[width=1cm, height=.39cm, keepaspectratio=true]{logoimsjoom.png}
+  };
+\end{tikzpicture}
+}
 
 \defbeamertemplate{section in toc}{sections numbered roman}{%
   \leavevmode%

@@ -25,16 +25,9 @@
     right = 2.7 cm of pack
   ] (anchor_ccskd) {};
 
-  % \draw [-] (pack.east) -> ($(anchor_ccskd.west) + (-1.5, 0)$)
-  % node [pos=1, align=center] (pack_mid) {};
-
-  % \draw (pack_mid.south) -> ($(anchor_ccskd) + (0, 4.5cm)$)
-  % node [midway, align=center] (pack_mid) {};
-
   \def \a{.4}
   \foreach \len in {3,2,1,0}{
       \node [main node,
-        % fill = gray!40!white, 
         minimum size = 3.3cm,
         minimum width = 5cm
       ] (pcd\len) at ($(anchor_ccskd) + (\len * \a, \len * \a) + (-.6, -.6)$) {};
@@ -69,7 +62,7 @@
     minimum size = 1cm,
     % minimum width = 2cm,
     right = 4cm of anchor_ccskd
-  ] (dec) {Decision};
+  ] (dec) {Décision};
 
   \node [above = .5cm of dec] (U0) {$U_0$};
   \draw (U0.south) -- (dec.north);
@@ -85,7 +78,7 @@
     align = center,
     % minimum width = 10cm,
     %below = 2cm of anchor_ccskd
-  ] (buf) at ($(pbuf -| dec.west) + (.1,0)$) {Circular\\memory};
+  ] (buf) at ($(pbuf -| dec.west) + (.1,0)$) {Mémoire\\circulaire};
 
   \draw (pbuf.center) -- (buf);
 

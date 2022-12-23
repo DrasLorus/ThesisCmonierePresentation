@@ -49,12 +49,12 @@
   \node [right = 1 cm of state] (om) {$\omega$};
   \node [right = 1 cm of buff]  (fd) {$\vect{F}_D$};
 
-  \draw [Turquoise3] (score) -> (state);
-  \draw [Turquoise3] (norm)  -| (score);
+  \draw [RoyalBlue] (score) -> (state);
+  \draw [RoyalBlue] (norm)  -| (score);
 
-  \draw [blue] (yn) -> (score);
-  \draw [blue] (yn) |- (norm);
-  \draw [blue] (yn) |- (buff);
+  \draw [Blue4] (yn) -> (score);
+  \draw [Blue4] (yn) |- (norm);
+  \draw [Blue4] (yn) |- (buff);
 
   \draw [OliveGreen] (state) -> (buff);
   \draw [OliveGreen] (state) -> (om);
@@ -71,8 +71,8 @@
 
   \node [anchor = north west, black,]      (a) at ($(state -| fd.east) + (0.5, 0.5)$) {$\bm{\rightarrow}$ Chemin des données};
   \node [anchor = north west, black,]      (z) at ($(a.south west) + (0, -.2)$)       {\underline{Débit des données}};
-  \node [anchor = north west, blue,]       (b) at ($(z.south west) + (0, 0)$)         {\textbf{---} Continue};
-  \node [anchor = north west, Turquoise3,] (c) at ($(z.south west) + (0, -.6)$)       {\textbf{---} Dépend de \pd{}};
+  \node [anchor = north west, Blue4,]       (b) at ($(z.south west) + (0, 0)$)         {\textbf{---} Continue};
+  \node [anchor = north west, RoyalBlue,] (c) at ($(z.south west) + (0, -.6)$)       {\textbf{---} Dépend de \pd{}};
   \node [anchor = north west, OliveGreen,] (d) at ($(z.south west) + (0, -1.2)$)      {\textbf{---} Faible (détection)};
 
   \node [draw=gray, label={above:\textsc{Légende}}, fit = {(a) (d)}] () {};

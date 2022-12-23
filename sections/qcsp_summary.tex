@@ -40,7 +40,7 @@
 \begin{frame}{\secname : \subsecname}
   \begin{overlayarea}{\linewidth}{0.25\textheight}
     \resizebox{\linewidth}{!}{
-      \input{figures/tikzpicture/evolutive_chain.tex}
+      \input{figures/tikzinput/evolutive_chain.tex}
     }
   \end{overlayarea}
 
@@ -113,7 +113,6 @@
   \end{columns}
 \end{frame}
 
-
 % \begin{frame}{\subsecname : {animation CCSK demod}}
 %   \begin{center}
 %     \textcolor{RoyalBlue}{TODO}
@@ -131,7 +130,6 @@
   \end{columns}
 \end{frame}
 
-
 \begin{frame}{\subsecname : {La grille temps fréquences}}
   \begin{columns}
     \begin{column}{.4\linewidth}
@@ -144,7 +142,28 @@
   \end{columns}
 \end{frame}
 
-\subsection{Synchronisation}
+\begin{frame}{\subsecname : {Modèle fonctionnel}}
+  \begin{center}
+    \includegraphics[width=.9\linewidth, height=.75\textheight, keepaspectratio=true]{figures/tikzpicture/funct_view_detection_stdl.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}{\subsecname : {Effets des paramètres $p_\Delta$ et $p_\omega$}}{Données réelles avec $q = 64$ et $N = 60$}
+  \begin{overlayarea}{\linewidth}{.15\textheight} \vspace {-1.2cm}
+    \hfill \includegraphics[width=6.5cm, height=.75\textheight, keepaspectratio=true]{figures/tikzpicture/funct_view_detection_stdl.pdf}
+  \end{overlayarea}
+  \begin{columns}
+    \begin{column}{.65\linewidth}
+      \begin{overlayarea}{\linewidth}{.75\textheight} \vspace {-.5cm}
+        \includegraphics[width=\linewidth]{pgfplots/roc_curves_stdl.pdf}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.35\linewidth}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Synchronisation et décodage}
 
 \begin{frame}{\subsecname}
   \begin{center}
@@ -152,12 +171,12 @@
   \end{center}
 \end{frame}
 
-\subsection{Décodage}
+% \subsection{Décodage}
 
-\begin{frame}{\subsecname}
-  \begin{center}
-    \textcolor{RoyalBlue}{TODO --- Merci CCSK et hop}
-  \end{center}
-\end{frame}
+% \begin{frame}{\subsecname}
+%   \begin{center}
+%     \textcolor{RoyalBlue}{TODO --- Merci CCSK et hop}
+%   \end{center}
+% \end{frame}
 
 \end{document}

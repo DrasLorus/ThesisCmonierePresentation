@@ -26,17 +26,17 @@
     right = .8 cm of input
   ] (pack) {Buffer};
 
-  \node [red,
+  \node [black,
     font = {\normalsize},
     % fill = gray!40!white, 
     % minimum size = 1cm
     anchor = south,
     align = center
-  ] at (pack.north east) {Output $\vect{y}_n$\\every $\frac{q}{p_\Delta}$\\chips};
+  ] at (pack.north) {Produit un\\vecteur $\vect{y}_n$ tous\\les $\frac{q}{\textcolor{Red}{p_\Delta}}$ chips};
 
   \draw (input.east) -> (pack.west);
   \draw [latex-latex] ($(pack.south west) + (-.05, -.15)$) -> ($(pack.south east) + (.05, -.15)$)
-  node [midway, anchor = north] {size $q$};
+  node [midway, anchor = north] {taille $q$};
 
   \node [circle,
     draw,
@@ -74,6 +74,7 @@
     right = .8 cm of fft,
     minimum size = .8 cm
   ] (mult) {};
+
   \node [circle,
     draw=none,
     % fill = gray!40!white, 
