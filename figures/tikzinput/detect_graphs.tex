@@ -1,0 +1,122 @@
+\begin{tikzpicture} [-,
+    auto,
+    very thick,
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center}
+  ]
+
+  \node [anchor = south west] (gr) at (0, 0) {\includegraphics[width=\linewidth, height=.75\textheight, keepaspectratio=true]{figures/pgfplots/maximums_demoQ4N6.pdf}};
+
+  \coordinate (orig) at (.161\linewidth, .137\textheight);
+  \coordinate (origpx) at (.1855\linewidth, .137\textheight);
+  \coordinate (origpy) at (.161\linewidth, .25125\textheight);
+  \coordinate (stepx) at ($(origpx) - (orig)$);
+  \coordinate (stepy) at ($(origpy) - (orig)$);
+
+  \foreach \x [
+    evaluate = \x as \y using int(\x - 3)
+  ] in {4,...,7}
+    {
+      \node [circle,
+        visible on=<\y>,
+        minimum size = .25cm,
+        draw = Red2,
+      ] at ($(orig) + \x*(stepx) + \y*(stepy)$) {};
+    }
+
+  \foreach \x [
+    evaluate = \x as \ovl using int(\x - 3),
+  ] in {8,...,10}
+    {
+      \node [circle,
+        visible on=<\ovl>,
+        minimum size = .25cm,
+        draw = Red2,
+      ] at ($(orig) + \x*(stepx) + 2*(stepy)$) {};
+    }
+
+  \foreach \x [
+    evaluate = \x as \ovl using int(\x - 3)
+  ] in {11,12}
+    {
+      \node [circle,
+        visible on=<\ovl>,
+        minimum size = .25cm,
+        draw = Red2,
+      ] at ($(orig) + \x*(stepx) + 4*(stepy)$) {};
+    }
+
+%   \node [circle,
+%     visible on=<10>,
+%     minimum size = .25cm,
+%     draw = Red2,
+%   ] at ($(orig) + 13*(stepx) + 2*(stepy)$) {};
+
+%   \foreach \x [
+%     evaluate = \x as \ovl using int(\x - 3)
+%   ] in {14,15}
+%     {
+%       \node [circle,
+%         visible on=<\ovl>,
+%         minimum size = .25cm,
+%         draw = Red2,
+%       ] at ($(orig) + \x*(stepx) + 4*(stepy)$) {};
+%     }
+
+%   \foreach \x [
+%     evaluate = \x as \ovl using int(\x - 3)
+%   ] in {16,17}
+%     {
+%       \node [circle,
+%         visible on=<\ovl>,
+%         minimum size = .25cm,
+%         draw = Red2,
+%       ] at ($(orig) + \x*(stepx) + 2*(stepy)$) {};
+%     }
+
+%   \foreach \x [
+%     evaluate = \x as \ovl using int(\x - 3)
+%   ] in {18,19}
+%     {
+%       \node [circle,
+%         visible on=<\ovl>,
+%         minimum size = .25cm,
+%         draw = Red2,
+%       ] at ($(orig) + \x*(stepx) + 4*(stepy)$) {};
+%     }
+
+%   \node [circle,
+%     visible on=<17>,
+%     minimum size = .25cm,
+%     draw = Red2,
+%   ] at ($(orig) + 20*(stepx) + 2*(stepy)$) {};
+
+%   \foreach \x [
+%     evaluate = \x as \ovl using int(\x - 3)
+%   ] in {21,...,23}
+%     {
+%       \node [circle,
+%         visible on=<\ovl>,
+%         minimum size = .25cm,
+%         draw = Red2,
+%       ] at ($(orig) + \x*(stepx) + 4*(stepy)$) {};
+%     }
+
+%   \node [circle,
+%     visible on=<21>,
+%     minimum size = .25cm,
+%     draw = Red2,
+%   ] at ($(orig) + 24*(stepx) + 2*(stepy)$) {};
+
+%   \foreach \x [
+%     evaluate = \x as \ovl using int(\x - 3)
+%   ] in {25,...,27}
+%     {
+%       \node [circle,
+%         visible on=<\ovl>,
+%         minimum size = .25cm,
+%         draw = Red2,
+%       ] at ($(orig) + \x*(stepx) + 4*(stepy)$) {};
+%     }
+
+\end{tikzpicture}

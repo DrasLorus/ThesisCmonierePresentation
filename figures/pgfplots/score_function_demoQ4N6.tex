@@ -1,0 +1,63 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+\usetikzlibrary{math}
+
+\begin{document}
+\begin{tikzpicture}[
+    very thick
+  ]
+  \begin{axis}[
+      % title={Detection Score (function of $\Delta$ and $\omega$)},
+      xlabel={Décalage temporel $\Delta$ (chips$\backslash$symboles)},
+      ylabel={Score $\:S^{\phantom{0\omega}}_n$},
+      font={\large},
+      width=8cm,
+      height=8cm,
+      very thick,
+      xmin=9, xmax=63,
+      ymin=0, ymax=26,
+      xtick={12, 24, ..., 60},
+      xticklabels={{$-24$$\backslash$$-6$}, {$-12$$\backslash$$-3$}, {$0$$\backslash$$0$}, {$+12$$\backslash$$+3$}, {$+24$$\backslash$$+6$}},
+      ytick={0, 4, ..., 28},
+      legend pos=north east,
+      grid=both,
+      yminorgrids=false,
+      minor x tick num=2,
+      every tick/.style={major tick length=6pt, minor tick length=4pt},
+      grid style={solid, very thick},
+      axis x line = bottom,
+      axis y line = left,
+      at={(0, 0)}
+    ]
+
+    \addplot[color=RoyalBlue,mark=x, mark options ={Red4}]
+    table[x index=0, y index=1, col sep=space]{\fromRoot{data/scores_demo.dat}};
+
+    \draw (9,15) -- (63, 15)
+    node [pos=.11, above] {$U_0$};
+
+    \node [left, Red3, align=center] at (36, 24) {Maximum\\maximorum};
+    \foreach \s [
+      evaluate = \s as \ypos using int((\s - 12)),
+      evaluate = \s as \mods using int((\s - 12) / 4)
+    ] in {12,16,...,36}
+      {
+        \edef\temp{\noexpand\node [above, Red2, align=right] at (\s, \ypos) {\mods};}
+        \temp
+      }
+
+    \foreach \s [
+      evaluate = \s as \ypos using int((24 - \s + 36)),
+      evaluate = \s as \mods using int((24 - \s + 36) / 4)
+    ] in {40, 44,..., 60}
+      {
+        \edef\temp{\noexpand\node [above, Red2, align=right] at (\s, \ypos) {\mods};}
+        \temp
+      }
+
+    \legend{Score}
+  \end{axis}
+
+\end{tikzpicture}
+\end{document}

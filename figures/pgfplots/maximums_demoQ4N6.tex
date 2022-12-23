@@ -1,0 +1,49 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+\usetikzlibrary{math}
+
+\begin{document}
+\begin{tikzpicture}[
+    very thick
+  ]
+  \begin{axis}[
+      % title={Detection Score (function of $\Delta$ and $\omega$)},
+      xlabel={temps discret (chips)},
+      ylabel={Résultat},
+      font={\large},
+      width =8cm,
+      height=8cm,
+      very thick,
+      xmin=9+20, xmax=63,
+      ymin=0, ymax=5.5,
+      xtick={28, 32, ..., 64},
+    %   xticklabels={{$-24$$\backslash$$-6$}, {$-12$$\backslash$$-3$}, {$0$$\backslash$$0$}, {$+12$$\backslash$$+3$}, {$+24$$\backslash$$+6$}},
+      ytick={0, 1, ..., 5},
+      legend pos=north east,
+      grid=both,
+      yminorgrids=false,
+      minor x tick num=1,
+      every tick/.style={major tick length=6pt, minor tick length=4pt},
+      grid style={solid, very thick},
+      axis x line = bottom,
+      axis y line = left,
+      at={(0, 0)}
+    ]
+
+    \addplot[color=Chartreuse4,mark=x, mark options ={RoyalBlue4}]
+    table[x index=0, y index=1, col sep=space]{\fromRoot{data/maxs_demo.dat}};
+
+    \foreach \s [
+      evaluate = \s as \mods using int((\s - 32) / 4)
+    ] in {36,40,...,56}
+      {
+        \edef\temp{\noexpand\node [above, Red2, align=right] at (\s, 4) {\mods};}
+        \temp
+      }
+
+    \legend{Maximum de corrélation}
+  \end{axis}
+
+\end{tikzpicture}
+\end{document}

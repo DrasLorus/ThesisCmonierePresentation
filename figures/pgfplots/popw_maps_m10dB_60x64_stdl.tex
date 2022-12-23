@@ -1,4 +1,4 @@
-\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
 
 \input{../stdl_preamble.tex}
 
@@ -15,31 +15,31 @@
 
 \begin{document}
 
-\catcode`\%=12
-\newcommand{\lookupraw}[2]{
-    \directlua {
-        local array = {{3.3e-3, 2e-4,   2.1e-4},
-                       {2e-3,   4.3e-5, 4e-5},  
-                       {1.1e-3, 2.3e-5, 0.5e-5}};
-        tex.print(string.format("%.1f \\times 10^{%d}", array[#2][#1] * 10^(math.ceil(-math.log10(array[#2][#1]))), math.floor(math.log10(array[#2][#1]))))
-    }
-}
-\catcode`\%=14
+% \catcode`\%=12
+% \newcommand{\lookupraw}[2]{
+%     \directlua {
+%         local array = {{3.3e-3, 2e-4,   2.1e-4},
+%                        {2e-3,   4.3e-5, 4e-5},  
+%                        {1.1e-3, 2.3e-5, 0.5e-5}};
+%         tex.print(string.format("%.1f \\times 10^{%d}", array[#2][#1] * 10^(math.ceil(-math.log10(array[#2][#1]))), math.floor(math.log10(array[#2][#1]))))
+%     }
+% }
+% \catcode`\%=14
 
 % Test
 
 \begin{tikzpicture}[
-    thick
+    ultra thick
   ]
   \foreach \i/\ib in {1/1, 2/3, 3/5} {
       \foreach \j/\jb in {1/1, 2/3, 3/5} {
             \node [fill=RoyalBlue!\lookup{\i}{\j}!Goldenrod, draw=RoyalBlue!\lookup{\i}{\j}!Goldenrod,
-            minimum size = 2 cm] (v\i\j) at (\ib, \jb) {$\lookupraw{\i}{\j}$};
+            minimum size = 2 cm] (v\i\j) at (\ib, \jb) {};
         }
     }
 
-    \node [red, thick, inner sep = 0pt, draw, fit={(v22) (v33)}] (fp) {};
-    \node [red, anchor = south] at (fp.south) {Functioning limit};
+    \node [Red3, thick, inner sep = 0pt, draw, fit={(v22) (v33)}] (fp) {};
+    \node [Red3, anchor = south] at (fp.south) {Limite de fonctionnement};
 
     \node [very thick, inner sep = 0pt, draw, fit={(v11) (v33)}] {}; 
 

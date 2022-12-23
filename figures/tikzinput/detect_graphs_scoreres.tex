@@ -1,0 +1,38 @@
+\begin{tikzpicture} [-,
+    auto,
+    very thick,
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center}
+  ]
+
+  \node [anchor = south west] (gr) at (0, 0) {\includegraphics[width=\linewidth, height=.75\textheight, keepaspectratio=true]{figures/pgfplots/score_function_demoQ4N6.pdf}};
+
+  \coordinate (orig) at (.16382\linewidth, .146\textheight);
+  \coordinate (stepx) at (.01215\linewidth, 0);
+  \coordinate (stepy) at (0, .0238\textheight);
+
+  \node [circle,
+  visible on=<1>,
+  minimum size = .25cm,
+  draw = Red2,
+] at ($(orig) + 24*(stepx) + 13*(stepy)$) {};
+
+  \node [circle,
+    visible on=<2>,
+    minimum size = .25cm,
+    draw = Red2,
+  ] at ($(orig) + 25*(stepx) + 16*(stepy)$) {};
+
+  \node [circle,
+    visible on=<3>,
+    minimum size = .25cm,
+    draw = Red2,
+  ] at ($(orig) + 26*(stepx) + 21*(stepy)$) {};
+
+  \node [circle,
+    visible on=<4>,
+    minimum size = .25cm,
+    draw = Red2,
+  ] at ($(orig) + 27*(stepx) + 24*(stepy)$) {};
+
+\end{tikzpicture}

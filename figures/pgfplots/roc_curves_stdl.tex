@@ -49,38 +49,38 @@
     \addplot[color=Orange, smooth, thick, mark=diamond*]
     table[col sep=comma, x index=4, y index=5] {\fromRoot{data/data_for_fig_sips.dat}};
 
-    \addplot[dotted, mark options={solid}, color=Cerulean!90!black, smooth, thick, mark=square]
+    \addplot[dotted, mark options={solid}, color=Green4, smooth, thick, mark=square]
     table[col sep=comma, x index=6, y index=7] {\fromRoot{data/data_for_fig_sips.dat}};
 
-    \addplot[dashed, mark options={solid}, color=Cerulean!90!black, smooth, thick, mark=square]
+    \addplot[dashed, mark options={solid}, color=Green4, smooth, thick, mark=square]
     table[col sep=comma, x index=8, y index=9] {\fromRoot{data/data_for_fig_sips.dat}};
 
-    \addplot[color=Cerulean!90!black, smooth, thick, mark=square*]
+    \addplot[color=Green4, smooth, thick, mark=square*]
     table[col sep=comma, x index=10, y index=11] {\fromRoot{data/data_for_fig_sips.dat}};
 
-    \addplot[dotted, mark options={solid}, color=Blue, smooth, thick, mark=o]
+    \addplot[dotted, mark options={solid}, color=RoyalBlue4, smooth, thick, mark=o]
     table[col sep=comma, x index=12, y index=13] {\fromRoot{data/data_for_fig_sips.dat}};
 
-    \addplot[dashed, mark options={solid}, color=Blue, smooth, thick, mark=o]
+    \addplot[dashed, mark options={solid}, color=RoyalBlue4, smooth, thick, mark=o]
     table[col sep=comma, x index=14, y index=15] {\fromRoot{data/data_for_fig_sips.dat}};
 
-    \addplot[color=Blue, smooth, thick, mark=*]
+    \addplot[color=RoyalBlue4, smooth, thick, mark=*]
     table[col sep=comma, x index=16, y index=17] {\fromRoot{data/data_for_fig_sips.dat}};
 
     \addplot[ color=red!80, mark = *, thick, mark size = 2pt, forget plot ]
     coordinates {(1e-6, 1e-4)};
-    \node [fill = white, anchor = north west, inner sep = 0pt, text = red!80, align=left] at (11e-7, 1e-4) {Functioning\\point};
+    \node [fill = white, anchor = north west, inner sep = 0pt, text = red!80, align=left] at (11e-7, 1e-4) {Point de\\fonctionnement};
 
     \legend{
-      {$(\textcolor{OliveGreen}{2}, \; \textcolor{red}{\phantom{6}8})$},
-      {$(\textcolor{OliveGreen}{2}, \; \textcolor{red}{16})$},
-      {$(\textcolor{OliveGreen}{2}, \; \textcolor{red}{64})$},
-      {$(\textcolor{OliveGreen}{4}, \; \textcolor{red}{\phantom{6}8})$},
-      {$(\textcolor{OliveGreen}{4}, \; \textcolor{red}{16})$},
-      {$(\textcolor{OliveGreen}{4}, \; \textcolor{red}{64})$},
-      {$(\textcolor{OliveGreen}{8}, \; \textcolor{red}{\phantom{6}8})$},
-      {$(\textcolor{OliveGreen}{8}, \; \textcolor{red}{16})$},
-      {$(\textcolor{OliveGreen}{8}, \; \textcolor{red}{64})$}
+      {$(\textcolor{Blue}{2}, \; \textcolor{red}{\phantom{6}8})$},
+      {$(\textcolor{Blue}{2}, \; \textcolor{red}{16})$},
+      {$(\textcolor{Blue}{2}, \; \textcolor{red}{64})$},
+      {$(\textcolor{Blue}{4}, \; \textcolor{red}{\phantom{6}8})$},
+      {$(\textcolor{Blue}{4}, \; \textcolor{red}{16})$},
+      {$(\textcolor{Blue}{4}, \; \textcolor{red}{64})$},
+      {$(\textcolor{Blue}{8}, \; \textcolor{red}{\phantom{6}8})$},
+      {$(\textcolor{Blue}{8}, \; \textcolor{red}{16})$},
+      {$(\textcolor{Blue}{8}, \; \textcolor{red}{64})$}
     }
   \end{loglogaxis}
 
