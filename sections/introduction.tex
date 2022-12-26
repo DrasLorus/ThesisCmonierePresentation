@@ -39,19 +39,24 @@
   \begin{columns}
     \begin{column}{.4\linewidth}
       \begin{center}
-        \placeholder{width=.85\linewidth, height=.6\textheight}
-        \captionof{figure}{Illustration : une antenne, deux devices.}
+        \includegraphics[
+          width=\linewidth,
+          height=.75\textheight,
+          keepaspectratio=true,
+        ]{drawiopdf/illu_telecomdig.pdf}
+        \captionof{figure}{Illustration de dispositifs télécommunicants.}
       \end{center}
     \end{column}
     \begin{column}{.55\linewidth} \large
-      \begin{overlayarea}{\linewidth}{.6\textheight}
+      \begin{overlayarea}{\linewidth}{.75\textheight}
         \begin{ctrlitemize}{1em}
           \item Piliers des sociétés modernes
-          \item Champ regroupant :
+          \item Champ englobant :
           \begin{ctrlitemize}{1em}
-            \item les réseaux cellulaires (\textit{3G, 4G/LTE, 5G}),
-            \item les réseaux en champs proches (\textit{ZigBee, NFC, Bluetooth}),
-            \item et, dans le cadre de \textbf{l'Internet des objet}, les \textbf{\textcolor{red}{réseaux longues portées basses puissances (\acrshortpl{lpwan})}}.
+            \item les standards des réseaux cellulaires (\textit{Wi-Fi, 3G, 4G/LTE, 5G}),
+            \item les communications en champs proches (\textit{ZigBee, NFC, Bluetooth}),
+            \item les technologies de communications par satellites (\textit{DVB-S2, standards CCSDS}),
+            \item et, dans le cadre de \textbf{l'Internet des objets}, les \textbf{\textcolor{red}{réseaux longues portées basses puissances (\acrshortpl{lpwan})}}.
           \end{ctrlitemize}
         \end{ctrlitemize}
       \end{overlayarea}
@@ -82,8 +87,12 @@
     \end{column}
     \begin{column}{.4\linewidth}
       \begin{center}
-        \placeholder{width=.85\linewidth, height=.6\textheight}
-        \captionof{figure}{Illustration : classique IoT.}
+        \includegraphics[
+          width=\linewidth,
+          height=.6\textheight,
+          keepaspectratio=true
+        ]{figures/svg/iot-network-wikimedia.pdf}
+        \captionof{figure}{Vue d'artiste du ``cloud computing'' appliqué à de nombreux dispositifs. {\textrm{\tiny Wikimedia, CC-zero.}}}
       \end{center}
     \end{column}
   \end{columns}
@@ -353,9 +362,6 @@
   \blfootnotetext{\textcite{dillardCyclicCodeShift2003}}
   % \footnotetext{Corps de Galois d'ordre $p$}
 \end{frame}
-
-\newcommand*{\pta}{\:\phantom{+}\:}
-\newcommand*{\mgb}{\textcolor{DarkSeaGreen4}{\blacksquare}}
 
 \begin{frame}{\acrshort{ccsk} : Démodulation}
   {\scriptsize Note : Post BPSK, donc cette fois, \Ob{} $= +1$, \Xb{} $= -1$.}

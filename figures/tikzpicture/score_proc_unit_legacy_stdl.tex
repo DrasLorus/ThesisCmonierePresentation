@@ -39,8 +39,8 @@
 
   \draw [dashed, -] ($(yn.north east) + (-0.1, 0)$) -> ($(yn.north east) + (-.1, -3.5)$)
   node [pos=1, anchor = south] (ankdsh) {};
-  \node [draw = none, anchor = east, align = center] at (ankdsh.north west) {every\\ sample};
-  \node [draw = none, anchor = west, align = center] at (ankdsh.north east) {every $\frac{q}{p_\Delta}$\\samples};
+  \node [draw = none, anchor = east, align = center] at (ankdsh.north west) {À chaque\\chip};
+  \node [draw = none, anchor = west, align = center] at (ankdsh.north east) {Tous les $\frac{q}{p_\Delta}$\\chips};
 
 
   \draw (yn.south) -> (pack.east);
@@ -53,7 +53,7 @@
     align = center,
     % fill = gray!40!white, 
     right = .8cm of corr
-  ] (mabs) {Maximum\\Absolute};
+  ] (mabs) {Maximum\\valeur absolue};
 
   \draw [line width = 2.6pt] (corr.east) -- (mabs.west)
   node [midway, above = .1 cm, align=center] () {$\vect{L}^\omega_n$};
@@ -112,10 +112,10 @@
   node [pos=0, below = .2] () {$S^\omega_{n - q}$};
 
   \draw ($(mabs.south) + (4, 1.65)$) -> ($(mabs.south) + (4.8, 1.65)$)
-  node [pos = 1, right] (scalar) {scalar};
+  node [pos = 1, right] (scalar) {scalaire};
 
   \draw [line width = 2.6pt] ($(mabs.south) + (4, 1.25)$) -> ($(mabs.south) + (4.8, 1.25)$)
-  node [pos = 1, right] (lq) {vector (size q)};
+  node [pos = 1, right] (lq) {vecteur (taille $q$)};
 
   \draw [latex-latex, gray] ($(ff.north west) + (0, +.15)$) -- ($(ff.north east) + (0, +.15)$)
   node [midway, above] {$N \times p_\Delta$};

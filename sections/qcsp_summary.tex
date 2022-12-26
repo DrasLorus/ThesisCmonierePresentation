@@ -102,13 +102,31 @@
 
 \subsection{Détection}
 
-\begin{frame}{\subsecname : {Principe}}
+\begin{frame}{\subsecname basé sur la CCSK}
   \begin{columns}
     \begin{column}{.6\linewidth}
-      \centering
-      \resizebox{\linewidth}{!}{
-        \input{figures/tikzinput/detect_trame.tex}
-      }
+      \begin{overlayarea}{\linewidth}{.75\textheight}
+        Estimation d'un ``score'' de détection, en utilisant les propriétés de la \acrshort{ccsk}. On ``\emph{estime}'' à quel point chaque ``\emph{symbole}'' de $q$ chips ressemble à \pn{0} \dots
+
+        \ra{.5}
+        \begin{center}
+          % \begin{noindent}
+        \begin{tabular}{@{}r c@{}l@{}l@{}}
+          ${M_n} = $ & $\mathrm{max}(\mathrm{abs}($ &
+          \begin{tabular}{@{}c@{}}
+              $\mgb{} \pta{} \mgb{} \pta{} \mgb{} \pta{} \mgb{}$ \\
+              $\times + \times + \times + \times$                \\
+              $\mXb{} \pta{} \mXb{} \pta{} \mXb{} \pta{} \mOb{}$
+            \end{tabular} & $)) = \mathrm{max}(|\vect{L}_n|)$
+        \end{tabular}
+        % \end{noindent}
+          \ra{1} \vspace{1 em}
+
+          \resizebox{\linewidth}{!}{
+            \input{figures/tikzinput/detect_trame.tex}
+          }
+        \end{center}
+      \end{overlayarea}
     \end{column}
     \begin{column}{.4\linewidth}
       \centering
@@ -119,13 +137,17 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{\subsecname : {Principe}}
+\begin{frame}{Accumulation d'information au niveau trame}
   \begin{columns}
     \begin{column}{.5\linewidth}
-      \centering
-      \resizebox{\linewidth}{!}{
-        \input{figures/tikzinput/detect_graphs_score.tex}
-      }
+      \dots~et on les accumule sur la durée d'une ``trame'' de taille $N$ (ici $N = 6$). On compare le résultat à un seuil de détection $U_0$.
+      \begin{center}
+        $S_n = \sum_{i = 0}^{N - 1}\:M_{n - i \times q}$
+
+        \resizebox{.6\linewidth}{!}{
+          \input{figures/tikzinput/detect_graphs_score.tex}
+        }
+      \end{center}
     \end{column}
     \begin{column}{.5\linewidth}
       \centering
@@ -139,9 +161,20 @@
 \begin{frame}{\subsecname : {Principe}}
   \begin{columns}
     \begin{column}{.4\linewidth}
-
+      \centering
+      \begin{itemize}
+        \item [1.] calcul des corrélations circulaires,
+        \item [2.] extraction du maximum en valeur absolue,
+        \item [3.] accumulation sur la durée de la dernière ``trame'' de $N \times q$ chips.
+      \end{itemize}
+      \begin{align*}
+        \text{Corrélation }    & :\quad & \vect{L}_n = & \:\vect{y}_n \star \mpn{0}                 \\
+        \text{Max. absolu } & :\quad & M_n =        & \:\mathrm{max}(|\vect{L}_n|)               \\
+        \text{Score }          & :\quad & S_n =        & \:\sum_{i = 0}^{N - 1}\:M_{n - i \times q}
+      \end{align*}
     \end{column}
     \begin{column}{.6\linewidth}
+      \centering
       \includegraphics[width=\linewidth, height=.75\textheight, keepaspectratio=true]{figures/pgfplots/score_function_uniq_stdl.pdf}
     \end{column}
   \end{columns}
@@ -159,6 +192,7 @@
 
     \end{column}
     \begin{column}{.6\linewidth}
+      \centering
       \includegraphics[width=\linewidth, height=.75\textheight, keepaspectratio=true]{figures/pgfplots/score_function_stdl.pdf}
     \end{column}
   \end{columns}
