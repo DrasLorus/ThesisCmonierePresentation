@@ -35,12 +35,42 @@
 
 \subsection{Sensibilité à un facteur d'échelle}
 
-
 \begin{frame}{\subsecname}
-  \begin{center}
-    \includegraphics[width=.8\linewidth]{figures/tikzpicture/funct_view_detnorm_stdl.pdf}
-  \end{center}
+  \begin{columns}
+    \begin{column}{.5\linewidth}
+      \centering
+      \begin{itemize}
+        \item L'utilisation de dispositif bas-coûts implique une instabilité du gain des amplificateurs.
+        \item Constat d'une forte perte de performance de détection.
+      \end{itemize} \vspace*{1 em}
+
+      \includegraphics[width=.75\linewidth]{figures/pgfplots/gain_gained.pdf}
+      \captionof{figure}{Gain en dB variable}
+    \end{column}
+    \begin{column}{.5\linewidth}
+      \includegraphics[width=\linewidth]{figures/pgfplots/score_function_gained.pdf}
+    \end{column}
+  \end{columns}
 \end{frame}
+
+\begin{frame}{Solution : normalisation}
+  \begin{columns}
+    \begin{column}{.5\linewidth}
+      \centering
+      Normalisation des maximums de corrélation avant accumulation par la norme-2 : $$\mnorm{2}(\vect{y}_n) = \sqrt{\sum_{i = 0}^{q - 1} y_n(i)}$$\\
+      Impact léger sur les performances de détection\footnotemark.
+      
+      \vspace*{1 em}
+
+      \includegraphics[width=\linewidth]{figures/tikzpicture/score_proc_unit_stdl.pdf}
+    \end{column}
+    \begin{column}{.5\linewidth}
+      \includegraphics[width=\linewidth]{figures/pgfplots/score_function_normed.pdf}
+    \end{column}
+  \end{columns}
+  \footnotetext{Une étude approfondie est disponible dans le manuscrit.}
+\end{frame}
+
 
 
 \subsection{Corrélation glissante dans le temps (\emph{Time sliding})}

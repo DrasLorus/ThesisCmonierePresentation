@@ -16,37 +16,22 @@
     rotate = 90,
     anchor = east
     % below = .8 cm of yn
-  ] (pack) at ($(yn.south) + (0, -.4)$) {Buffer};
-
-  \node [circle, draw,
-    % fill = RoyalBlue3!40!white, 
-    align = center,
-    minimum size = .7 cm,
-    right = .8 cm of pack.south
-  ] (multf) {\large $\odot$};
-  %\draw [-] ($(multf.north east) + (-.1, -.1)$) -- ($(multf.south west) + ( .1, .1)$);
-  %\draw [-] ($(multf.north west) + ( .1, -.1)$) -- ($(multf.south east) + (-.1,  .1)$);
-
-  \node [] (gamma) at (multf |- yn) {$\vect{\Gamma}^{\textcolor{Blue}{\omega}}_n$};
-  \draw [line width = 2.6pt] (gamma.south) -> (multf.north);
+  ] (pack) at ($(yn.south) + (0, -.6)$) {Buffer};
 
   \node [main node,
     % fill = RoyalBlue3!40!white, 
     align = center,
-    right = .6 cm of multf
+    right = 1 cm of pack.south
   ] (corr) {$\star \vect{P}_0$};
 
+  \draw (yn.south) -- (pack.east);
+  % \draw [dashed, -] ($(yn.north east) + (-0.1, 0)$) -> ($(yn.north east) + (-.1, -3.5)$)
+  % node [pos=1, anchor = south] (ankdsh) {};
+  % \node [draw = none, anchor = east, align = center] at (ankdsh.north west) {À chaque\\chip};
+  % \node [draw = none, anchor = west, align = center] at (ankdsh.north east) {Tous les $\frac{q}{q}$\\chips};
 
-  \draw [dashed, -] ($(yn.north east) + (-0.1, 0)$) -> ($(yn.north east) + (-.1, -3.5)$)
-  node [pos=1, anchor = south] (ankdsh) {};
-  \node [draw = none, anchor = east, align = center] at (ankdsh.north west) {À chaque\\chip};
-  \node [draw = none, anchor = west, align = center] at (ankdsh.north east) {Tous les $\frac{q}{\textcolor{Red}{\mpd}}$\\chips};
 
-
-  \draw (yn.south) -> (pack.east);
-  \draw [line width = 2.6pt] (multf.east) -> (corr.west);
-
-  \draw [line width = 2.6pt] (pack.south) -- (multf.west)
+  \draw [line width = 2.6pt] (pack.south) -- (corr.west)
   node [midway, anchor = south, align=center] (vyn) {$\vect{y}_n$};
 
   \node [main node,
@@ -56,7 +41,7 @@
   ] (mabs) {Maximum\\absolue};
 
   \draw [line width = 2.6pt] (corr.east) -- (mabs.west)
-  node [midway, above = .1 cm, align=center] () {$\vect{L}^{\textcolor{Blue}{\omega}}_n$};
+  node [midway, above = .1 cm, align=center] () {$\vect{L}_n$};
 
   \node [circle,
     draw,
@@ -79,11 +64,11 @@
   % \node [] () at ($(add.north west) + (  0,  .4)$) {$+$};
 
   \draw (mabs.east) -- (add.west)
-  node [pos = .5, above] () {$M^{\textcolor{Blue}{\omega}}_{n}$};
+  node [pos = .5, above] () {$M_{n}$};
 
   \draw ($(mabs.east) + (.8, 0)$) |- (ff.west);
   \draw (ff.east) -| (add.south west)
-  node [pos=0.4, below = .2] () {$M^{\textcolor{Blue}{\omega}}_{n - N \times q}$};
+  node [pos=0.4, below = .2] () {$M_{n - N \times q}$};
 
 
   % \node [main node,
@@ -104,12 +89,12 @@
   %  anchor=west
   %] () at ($({reg}.east) + (0, -.5)$) {};
 
-  \node [right = 3.2 cm of add] (out) {$S^{\textcolor{Blue}{\omega}}_n$};
+  \node [right = 3.2 cm of add] (out) {$S_n$};
   \draw (add.east) -- (out.west);
 
   \draw ($(add.east -| regq.east) + (.6, 0)$) |- (regq.east);
   \draw (regq.west) -| (add.south east)
-  node [pos=0, below = .2] () {$S^{\textcolor{Blue}{\omega}}_{n - q}$};
+  node [pos=0, below = .2] () {$S_{n - q}$};
 
   \draw ($(mabs.south) + (4, 1.65)$) -> ($(mabs.south) + (4.8, 1.65)$)
   node [pos = 1, right] (scalar) {scalaire};
@@ -118,9 +103,9 @@
   node [pos = 1, right] (lq) {vecteur (taille $q$)};
 
   \draw [latex-latex, RoyalBlue3] ($(ff.north west) + (0, +.15)$) -- ($(ff.north east) + (0, +.15)$)
-  node [midway, above] {$N \times \textcolor{Red}{\mpd}$};
+  node [midway, above] {$N \times q$};
   \draw [latex-latex, RoyalBlue3] ($(regq.north west) + (0, +.15)$) -- ($(regq.north east) + (0, +.15)$)
-  node [midway, above] {$\textcolor{Red}{\mpd}$};
+  node [midway, above] {$q$};
 
   \draw[RoyalBlue3, latex-latex] ($(pack.north west) + (-.15, 0)$) -- ($(pack.north east) + (-.15, 0)$)
   node [midway, left] () {$q$};

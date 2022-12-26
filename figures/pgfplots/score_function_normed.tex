@@ -1,0 +1,73 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    very thick
+  ]
+  % \pgfplotsset{set layers}
+  \begin{axis}[
+      scale only axis,
+      % title={Detection Score (function of $\Delta$ and $\omega$)},
+      ylabel={Score $\:S^{\omega\phantom{0}}_n$ (référence)},
+      font={\large},
+      width=8 cm,
+      height=8 cm,
+      very thick,
+      axis y line*=right,
+      xmin=160-32, xmax=1184+32,
+      % ymin=200, ymax=500,
+      % xtick={160, 416, 672, 928, 1184},
+      xticklabels={},
+      ytick={257, 303,...,450},
+      yticklabels={{250}, {300}, {350}, {400}, {450}},
+      % legend pos=north west,
+      % xmajorgrids=true,
+      % yminorgrids=true,
+      % ymajorgrids=true,
+      grid style=dashed,
+      axis x line = bottom,
+      at={(0, 0)}
+    ]
+
+    \addplot[black,]
+    table[x index=0, y index=2, col sep=space]{\fromRoot{data/scores_gain_effect.dat}};
+  \end{axis}
+
+  \begin{axis}[
+      scale only axis,
+      % title={Detection Score (function of $\Delta$ and $\omega$)},
+      xlabel={Décalage temporel $\Delta$ (chips)},
+      ylabel={Score $\:S^{\omega\phantom{0}}_n$ (Normalisé)},
+      font={\large},
+      width=8 cm,
+      height=8 cm,
+      very thick,
+      axis y line*=left,
+      xmin=160-32, xmax=1184+32,
+      % ymin=200, ymax=500,
+      xtick={160, 416, 672, 928, 1184},
+      xticklabels={{-512}, {-256}, {0}, {+256}, {+512}},
+      % ytick={{200}, {250}, {300}, {350}, {400}, {450}},
+      % yticklabels={{200}, {250}, {300}, {350}, {400}, {450}},
+      legend pos=north west,
+      xmajorgrids=true,
+      yminorgrids=true,
+      ymajorgrids=true,
+      grid style=dashed,
+      axis x line = bottom,
+      at={(0, 0)}
+    ]
+
+    \addplot[black,] coordinates {(0, 0)};
+    \addplot[color=Chartreuse4,]
+    table[x index=0, y index=4, col sep=space]{\fromRoot{data/scores_gain_effect.dat}};
+    \draw [RoyalBlue4] (160-32,18) -- (1184+32, 18);
+    \node [RoyalBlue4, above] at (160 + 60, 18) {$U'_0$};
+    \node [RoyalBlue4, above] at (1184-60, 18) {$U_0$};
+    \legend{Référence, Normalisé}
+  \end{axis}
+
+\end{tikzpicture}
+\end{document}

@@ -102,7 +102,7 @@
 
 \subsection{Détection}
 
-\begin{frame}{\subsecname basé sur la CCSK}
+\begin{frame}{\subsecname~basée sur la CCSK}
   \begin{columns}
     \begin{column}{.6\linewidth}
       \begin{overlayarea}{\linewidth}{.75\textheight}
@@ -159,23 +159,29 @@
 \end{frame}
 
 \begin{frame}{\subsecname : {Principe}}
+  \begin{center}
+    \includegraphics[
+      width=\linewidth,
+      height=.4\textheight,
+      keepaspectratio=true
+    ]{figures/tikzpicture/score_proc_unit_legacy_stripped.pdf}
+  \end{center}
   \begin{columns}
-    \begin{column}{.4\linewidth}
+    \begin{column}{.5\linewidth}
       \centering
       \begin{itemize}
         \item [1.] calcul des corrélations circulaires,
         \item [2.] extraction du maximum en valeur absolue,
         \item [3.] accumulation sur la durée de la dernière ``trame'' de $N \times q$ chips.
       \end{itemize}
-      \begin{align*}
-        \text{Corrélation }    & :\quad & \vect{L}_n = & \:\vect{y}_n \star \mpn{0}                 \\
-        \text{Max. absolu } & :\quad & M_n =        & \:\mathrm{max}(|\vect{L}_n|)               \\
-        \text{Score }          & :\quad & S_n =        & \:\sum_{i = 0}^{N - 1}\:M_{n - i \times q}
-      \end{align*}
     \end{column}
-    \begin{column}{.6\linewidth}
+    \begin{column}{.5\linewidth}
       \centering
-      \includegraphics[width=\linewidth, height=.75\textheight, keepaspectratio=true]{figures/pgfplots/score_function_uniq_stdl.pdf}
+      \begin{align*}
+        \text{Corrélation } & :\quad & \vect{L}_n = & \:\vect{y}_n \star \mpn{0}                 \\
+        \text{Max. absolu } & :\quad & M_n =        & \:\mathrm{max}(|\vect{L}_n|)               \\
+        \text{Score }       & :\quad & S_n =        & \:\sum_{i = 0}^{N - 1}\:M_{n - i \times q}
+      \end{align*}
     \end{column}
   \end{columns}
 \end{frame}
@@ -189,7 +195,10 @@
 \begin{frame}{\subsecname : {Problèmes Temps Fréquence}}
   \begin{columns}
     \begin{column}{.4\linewidth}
-
+      \begin{ctrlitemize}{6pt}
+        \item Les imprécisions d'horloges et l'effet Doppler introduisent des \textbf{erreurs de fréquences}, résultent en une \textbf{rotation du signal entrant}.
+        \item Le calcul de \textbf{chaque} valeur de score pour \textbf{chaque} chip accroit la complexité calculatoire.
+      \end{ctrlitemize}
     \end{column}
     \begin{column}{.6\linewidth}
       \centering
@@ -200,19 +209,35 @@
 
 \begin{frame}{\subsecname : {La grille temps fréquences}}
   \begin{columns}
-    \begin{column}{.4\linewidth}
-
-    \end{column}
     \begin{column}{.6\linewidth}
+      \begin{ctrlitemize}{6pt}
+        \item Ouverture d'une fenêtre de détection, de taille $\textcolor{Red}{\mpd} \times \textcolor{Blue}{\mpo}$.
+        \item Calcul de $\textcolor{Red}{\mpd}$ valeurs de scores tous les $q$ chips : $\searrow$ de la complexité, $\searrow$ de performances de détection.
+        \item Calcul de $\textcolor{Blue}{\mpo}$ valeurs de scores sur un intervalle arbitraire (ex: $2\pi$) : $\nearrow$ des performances de détection, $\nearrow$ de la complexité.
+      \end{ctrlitemize}
+    \end{column}
+    \begin{column}{.4\linewidth}
       \centering
-      \includegraphics[width=\linewidth, height=.75\textheight, keepaspectratio=true]{figures/pgfplots/score_grid.pdf}
+      \includegraphics[width=\linewidth, height=.85\textheight, keepaspectratio=true]{figures/pgfplots/score_grid.pdf}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}{\subsecname : {Modèle fonctionnel}}
   \begin{center}
-    \includegraphics[width=.9\linewidth, height=.75\textheight, keepaspectratio=true]{figures/tikzpicture/funct_view_detection_stdl.pdf}
+    \includegraphics[
+      width=.75\linewidth,
+      height=.35\textheight,
+      keepaspectratio=true
+    ]{figures/tikzpicture/score_proc_unit_legacy_stdl.pdf}
+
+    \vspace{1em}
+
+    \includegraphics[
+      width=.9\linewidth,
+      height=.4\textheight,
+      keepaspectratio=true
+    ]{figures/tikzpicture/funct_view_detection_stdl.pdf}
   \end{center}
 \end{frame}
 
@@ -232,13 +257,13 @@
   \end{columns}
 \end{frame}
 
-\subsection{Synchronisation et décodage}
+% \subsection{Synchronisation et décodage}
 
-\begin{frame}{\subsecname}
-  \begin{center}
-    \textcolor{RoyalBlue}{TODO --- En fonction du temps, détails ou pas}
-  \end{center}
-\end{frame}
+% \begin{frame}{\subsecname}
+%   \begin{center}
+%     \textcolor{RoyalBlue}{TODO --- En fonction du temps, détails ou pas}
+%   \end{center}
+% \end{frame}
 
 % \subsection{Décodage}
 

@@ -1,0 +1,44 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    very thick
+  ]
+  \begin{axis}[
+    % title={Detection Score (function of $\Delta$ and $\omega$)},
+    xlabel={Décalage temporel $\Delta$ (chips)},
+    ylabel={Score $\:S^{\omega\phantom{0}}_n$},
+    font={\large},
+    width=8 cm,
+    height=8 cm,
+    very thick,
+    xmin=160-32, xmax=1184+32,
+    ymin=200, ymax=500,
+    xtick={160, 416, 672, 928, 1184},
+    xticklabels={{-512}, {-256}, {0}, {+256}, {+512}},
+    ytick={{200}, {250}, {300}, {350}, {400}, {450}},
+    % yticklabels={{200}, {250}, {300}, {350}, {400}, {450}},
+    legend pos=north west,
+    xmajorgrids=true,
+    yminorgrids=true,
+    ymajorgrids=true,
+    grid style=dashed,
+    axis x line = bottom,
+    axis y line = left,
+    at={(0, 0)}
+  ]
+
+    \addplot[color=RoyalBlue,]
+    table[x index=0, y index=2, col sep=space]{\fromRoot{data/scores_gain_effect.dat}};
+    \addplot[Red3,]
+    table[x index=0, y index=3, col sep=space]{\fromRoot{data/scores_gain_effect.dat}};
+    \draw (160-32,350) -- (1184+32, 350)
+    node [pos=.11, above] {$U_0$};
+
+    \legend{stable, instable}
+  \end{axis}
+
+\end{tikzpicture}
+\end{document}
