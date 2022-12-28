@@ -2,10 +2,10 @@
 
 \input{../stdl_preamble.tex}
 
+\def\locshift{64}
+
 \begin{document}
-\begin{tikzpicture}[
-    very thick
-  ]
+\begin{tikzpicture}
   \begin{axis}[
     % title={Detection Score (function of $\Delta$ and $\omega$)},
     xlabel={Décalage temporel $\Delta$ (chips)},
@@ -14,9 +14,9 @@
     width=8cm,
     height=4cm,
     very thick,
-    xmin=160-32-64, xmax=1184+32-64,
+    xmin=160-32-\locshift, xmax=1184+32-\locshift,
     ymin=-2.1, ymax=2.1,
-    xtick={160-64, 416-64, 672-64, 928-64, 1184-64},
+    xtick={160-\locshift, 416-\locshift, 672-\locshift, 928-\locshift, 1184-\locshift},
     xticklabels={{-512}, {-256}, {0}, {+256}, {+512}},
     % ytick={{200}, {250}, {300}, {350}, {400}, {450}},
     % yticklabels={{200}, {250}, {300}, {350}, {400}, {450}},

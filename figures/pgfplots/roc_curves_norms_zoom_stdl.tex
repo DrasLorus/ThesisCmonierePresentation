@@ -4,12 +4,10 @@
 
 \begin{document}
 
-\begin{tikzpicture}[
-    thin
-  ]
-  \tiny
+\begin{tikzpicture}
   \begin{loglogaxis}
     [
+      thick,
       height = 8 cm,
       width  = 10.5 cm,
       font = \normalsize,
@@ -62,7 +60,7 @@
     table [ x=Pfa_L2, y=Pmd_L2 ] {\fromRoot{data/norms_data_sync_raw_60x64.dat}};
 
     \draw [-latex] (1.6e-6, 1.5e-6) -- (11e-7, 11e-7)
-    node [pos = -.75, ] {reference};
+    node [pos = -.75, ] {référence};
 
     % \addplot[ color=red!80, mark = *, thick, mark size = 2pt, forget plot ]
     % coordinates {(1e-6, 1e-4)};
@@ -75,7 +73,7 @@
       {$\mathcal{L}_d$},
       {$\mathcal{L}_1$},
       {$\mathcal{L}_2$},
-      {ref.},
+      {réf.},
     }
   \end{loglogaxis}
 

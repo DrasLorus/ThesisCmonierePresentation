@@ -1,0 +1,159 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\newcommand{\multnode}[2]{
+  \node [calc node,
+    #1
+  ] ({#2}) {};
+  \draw [-] ($({#2}.north west) + (+.075,-.075)$) -- ($({#2}.south east) + (-.075, +.075)$);
+  \draw [-] ($({#2}.south west) + (+.075,+.075)$) -- ($({#2}.north east) + (-.075, -.075)$);
+}
+
+\newcommand{\addnode}[2]{
+  \node [calc node,
+    #1
+  ] ({#2}) {};
+  \draw [-] ($({#2}.west)  + (.1,  0)$) -- ($({#2}.east)  + (-.1,   0)$);
+  \draw [-] ($({#2}.south) + ( 0, .1)$) -- ($({#2}.north) + (  0, -.1)$);
+}
+
+\newcommand{\addnodeat}[3]{
+  \node [calc node,
+    #1
+  ] ({#2}) at (#3) {};
+  \draw [-] ($({#2}.west)  + (.1,  0)$) -- ($({#2}.east)  + (-.1,   0)$);
+  \draw [-] ($({#2}.south) + ( 0, .1)$) -- ($({#2}.north) + (  0, -.1)$);
+}
+
+\newcommand{\subnode}[2]{
+  \node [calc node,
+    #1
+  ] ({#2}) {};
+  \draw [-] ($({#2}.west)  + (.1,  0)$) -- ($({#2}.east)  + (-.1,   0)$);
+}
+
+\newcommand{\regnode}[2]{
+  \node [main node,
+    minimum height = 0.6cm,
+    minimum width  = 1.0 cm,
+    #1
+  ] ({#2}) {};
+  \draw [-] ($({#2}.south east) + (-.02, .3) $) -- ($({#2}.south east) + (-.2, .2)$);
+  \draw [-] ($({#2}.south east) + (-.02, .1) $) -- ($({#2}.south east) + (-.2, .2)$);
+}
+
+\newcommand{\regnodeat}[3]{
+  \node [main node,
+    minimum height = 0.6cm,
+    minimum width  = 1.0 cm,
+    #1
+  ] ({#2}) at (#3) {};
+  \draw [-] ($({#2}.south east) + (-.02, .3) $) -- ($({#2}.south east) + (-.2, .2)$);
+  \draw [-] ($({#2}.south east) + (-.02, .1) $) -- ($({#2}.south east) + (-.2, .2)$);
+}
+
+\begin{tikzpicture} [->,
+  >={Triangle[width=6pt, length=8pt]},
+  auto,
+  thick,
+  main node/.style={rectangle, fill = white!35, draw,
+      align=center},
+  calc node/.style={circle, fill = white!35, draw},
+  every node/.style={font = {\Large}}
+  ]
+  \node at (10, 5.25){\phantom{.}};
+  \node at (-0.25, -4.25){\phantom{.}};
+
+  \node [] (dnw) at (0, 0) {$d_{n}^{\bomega}$};
+
+  \node [anchor = west] (lnw) at ($(dnw) + (10.1, 0)$) {$\vect{L}_n^{\textcolor{blue}{\bm{\omega}}}$};
+
+  %% CLUSTER 1 | REF %%
+
+  \node[main node,
+    minimum width = 2.5cm,
+    anchor = north west,
+  ] (mult1) at ($(dnw.east) + (1.25, -3)$) {$\times  p_{q - 1}(q - 1)$};
+
+  \addnode{minimum size = .8cm, right = .8cm of mult1}{add1};
+
+  \regnodeat{anchor = south west}{reg1}{$(add1) + (.9, .6)$};
+
+  %% CLUSTER 0 | DEP %%
+
+  \node [main node,
+    minimum width = 2.5cm,
+  ] (mult0) at (mult1 |- dnw){$\times  p_{i}(q - 1)$};
+
+  \addnodeat{minimum size = .8cm,}{add0}{mult0 -| add1};
+
+  \regnodeat{anchor = south west}{reg0}{$(add0) + (.9, .6)$};
+
+  %% CLUSTER 2 | DEP %%
+
+  \node[main node,
+    minimum width = 2.5cm,
+    anchor = south,
+  ] (mult2) at ($(mult1 |- mult0) + (0, 3)$) {$\times p_{0}(q - 1)$};
+
+  \addnodeat{minimum size = .8cm}{add2}{mult2 -| add0};
+
+  \regnodeat{anchor = south west}{reg2}{$(add2) + (.9, .6)$};
+
+  \draw (dnw.east) -> (mult0.west);
+
+  \draw[line width = 2.5pt, dashed, red, latex-latex] ($(add1.south west -| dnw.north east) + (.25, -.6)$) -- ($(add2.north west -| dnw.north east) + (.25, .6)$)
+  node [pos=.75, left = .3cm,] {$q$};
+
+  \draw ($(dnw.north east) + (.5, 0)$) |- (mult2.west);
+  \draw ($(dnw.north east) + (.5, 0)$) |- (mult1.west);
+
+  \foreach \x in {0, 1, 2}
+    {
+      \draw (mult\x.east) -> (add\x.west);
+
+      \draw (reg\x.west) -| (add\x.north);
+
+      \node [anchor = west] (ankl\x) at  ($(add\x.east) + (3, 0)$) {};
+    }
+
+  \draw [-, gray] ($(ankl1) + (-.75, 0)$) |- ($(reg2.north) + (0, .45)$);
+  \foreach \x in {0, 2}
+    {
+      \draw (add\x.east -| reg\x.south) -> ($(add\x.east -| reg\x.south) + (0, -.75)$);
+    }
+
+  \foreach \x in {0, 1}
+    {
+      \node [rotate = 90, anchor = west] (dots\x) at ($(reg\x.north -| reg0) + (0, .75)$) {\dots};
+      \draw (dots\x) -> (reg\x.north);
+    }
+
+  \draw ($(reg2.north) + (0, .45)$) -> (reg2.north);
+
+  \foreach \x in {0, 1, 2}
+    {
+      \draw (add\x.east) -> (ankl\x);
+    }
+
+  \node [anchor = north west] at ($(add0 -| reg0) + (.1, 0)$) {$L_n^{\textcolor{blue}{\bm{\omega}}}(i)$};
+  \node [anchor = north west] at ($(add1 -| reg1) + (.1, 0)$) {$L_n^{\textcolor{blue}{\bm{\omega}}}(q - 1)$};
+  \node [anchor = north west] at ($(add2 -| reg2) + (.1, 0)$) {$L_n^{\textcolor{blue}{\bm{\omega}}}(0)$};
+
+  \node [anchor = south] at ($(add0 |- reg0.west) + (-.25, 0)$) {$L_{n - 1}^{\textcolor{blue}{\bm{\omega}}}(i - 1)$};
+  \node [anchor = south] at ($(add1 |- reg1.west) + (-.25, 0)$) {$L_{n - 1}^{\textcolor{blue}{\bm{\omega}}}(q - 2)$};
+  \node [anchor = south] at ($(add2 |- reg2.west) + (-.25, 0)$) {$L_{n - 1}^{\textcolor{blue}{\bm{\omega}}}(q - 1)$};
+
+  \draw [-, line width = 2.6pt] ($(ankl1.west) + (0, -.1)$) -> ($(ankl2.west) + (0, .1)$);
+
+  \draw [line width = 2.6pt] ($(ankl0.west) + (0, 0)$) -> (lnw.west);
+
+  \node [rotate=90] () at ($(mult0.north) + (0, .75)$) {\Large \textbf{\dots}};
+  \node [rotate=90] () at ($(mult0.south) + (0, -.75)$) {\Large \textbf{\dots}};
+
+\end{tikzpicture}
+
+\end{document}

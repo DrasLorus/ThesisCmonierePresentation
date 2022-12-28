@@ -48,7 +48,7 @@
 		// 	"%PDF%#src:%LINE%%TEX%"
 		// ],
 		// "on-File-Change" or "ne-ver"
-		"latex-workshop.latex.autoBuild.run": "onFileChange",
+		"latex-workshop.latex.autoBuild.run": "never",
 		"cSpell.language": "en,fr",
 		"cSpell.words": [
 			"Abelian",
@@ -57,13 +57,49 @@
 			"correlators",
 			"manycore",
 			"Sigfox",
-			"stdl"
+			"stdl",
+			"télécommunicants"
 		],
 		"latex-workshop.message.latexlog.exclude": [
 			"(hyperref)*acr*",
 			"Font shape `U/stmry/b/n' undefined",
 			"Font shape `TU/.*/m/sc' undefined"
 		],
-		"latex-workshop.intellisense.citation.backend": "biblatex"
+		"latex-workshop.intellisense.citation.backend": "biblatex",
+		"latex-workshop.latex.watch.files.ignore": [
+			"${workspaceFolder}/commands.tex",
+			"${workspaceFolder}/acronymns.tex",
+			"${workspaceFolder}/font_spec.tex",
+			"${workspaceFolder}/figures/*/*.pdf",
+			"**/*.bbx",
+			"**/*.bbl",
+			"**/*.cbx",
+			"**/*.cfg",
+			"**/*.clo",
+			"**/*.cnf",
+			"**/*.def",
+			"**/*.dfu",
+			"**/*.enc",
+			"**/*.fd",
+			"**/*.fmt",
+			"**/*.lbx",
+			"**/*.map",
+			"**/*.mkii",
+			"**/*.pfb",
+			"**/*.tfm",
+			"**/*.vf",
+			"**/*.code.tex",
+			"**/*.sty",
+			"**/texmf-{dist,var}/**",
+			"**/Local/MiKTeX/**",
+			"**/Local/Programs/MiKTeX/**",
+			"**/Roaming/MiKTeX/**",
+			"**/Program*/MiKTeX*/**",
+			"**/.miktex/texmfs/**",
+			"/var/cache/miktex-texmf/**",
+			"/usr/local/share/miktex-texmf/**",
+			"**/Library/Application Support/MiKTeX/texmfs/**",
+			"/dev/null"
+		]
 	}
 }

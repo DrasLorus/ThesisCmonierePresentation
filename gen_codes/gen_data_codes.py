@@ -53,8 +53,8 @@ def over_modulate(ccsk_word):
 
 SNR = -5.0
 SIGMA = np.sqrt((10.0**(-SNR / 10)) / 2)
-Q = 64
-N = 7
+Q = min(64, len(pn))
+N = min(7, len(best))
 rng = np.random.default_rng(12345)
 
 
@@ -121,7 +121,7 @@ def calc_score(sequence):
     return np.array(res)
 
 
-codeword = rng.integers(0, 63, N)
+codeword = rng.integers(0, Q - 1, N)
 qcsp_frame = over_modulate(ccsk_modulate(codeword))
 full_seq = np.concatenate((
     np.zeros(int(Q*N*3/2)),
@@ -142,12 +142,6 @@ result_0 = calc_score(noise + full_seq)
 result_pi2 = calc_score(noise + rotate_seq(full_seq, np.pi / 2))
 result_pi = calc_score(noise + rotate_seq(full_seq, np.pi))
 result_2pi = calc_score(noise + rotate_seq(full_seq, 2 * np.pi))
-
-plt.plot(result_0)
-plt.plot(result_pi2)
-plt.plot(result_pi)
-plt.plot(result_2pi)
-plt.show()
 
 data = np.transpose(np.array([result_0, result_pi2, result_pi, result_2pi]))
 plt.plot(data)

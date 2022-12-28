@@ -1,0 +1,175 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\pgfdeclarelayer{background}
+\pgfsetlayers{background, main}
+\begin{tikzpicture} [-,
+    auto,
+    very thick,
+    font = \huge,
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center}
+  ]
+
+  \foreach \ns / \symb / \ov [
+    evaluate = \ns as \nsp using int(\ns + 1),
+    evaluate = \ns as \nn using int(\ns * 4 + 3)
+  ] in {0/1/0, 1/2/1, 2/1/1, 3/3/0, 4/2/1, 5/3/0}
+    {
+      \foreach \x [
+        evaluate = \x as \pos using (\ns * (4 * 1.25 + .45) + \x * 1.25),
+        evaluate = \x as \n using (int(\ns * 4 + \x))
+      ] in {0,...,3}
+        {
+          \ifthenelse{\equal{\ov}{0}}{
+            \ifthenelse{\equal{\symb}{\x}}{
+              \node [
+                fill = Blue,
+                minimum size = 1cm
+              ] (n\n) at (\pos, 0) {};
+            }{
+              \node [
+                fill = Red,
+                minimum size = 1cm
+              ] (n\n) at (\pos, 0) {};
+            }
+          }{
+            \ifthenelse{\equal{\symb}{\x}}{
+              \node [
+                fill = Red,
+                minimum size = 1cm
+              ] (n\n) at (\pos, 0) {};
+            }{
+              \node [
+                fill = Blue,
+                minimum size = 1cm
+              ] (n\n) at (\pos, 0) {};
+            }
+          }
+        }
+
+      \node [Red2, above=.5cm] at (n\nn.north east) {\Huge \nsp};
+    }
+
+  \foreach \n [
+    evaluate = \n as \pos using int(-\n),
+  ] in {1, 2, 3} {
+      \node [minimum size = 1cm,] (n\pos) at (\pos, 0) {};
+    }
+
+  \foreach \n [
+    evaluate = \n as \pos  using (\n*1.25 + 5*.45),
+  ] in {24, 25, 26} {
+      \node [minimum size = 1cm,] (n\n) at (\pos, 0) {};
+    }
+
+  \begin{pgfonlayer}{background}
+    \foreach \n [
+      evaluate = \n as \nsp using int(\n + 3),
+      evaluate = \n as \np using int(\n + 4),
+      evaluate = \n as \color using int(100 + (\n * 10 - 70)*3)
+    ] in {6, 7}
+      {
+        \node [
+          draw,
+          fill = black!\color,
+          minimum height = 1.5 cm,
+          inner sep = 6pt,
+          fit={(n\n) (n\nsp) ($(n\nsp) + (0, -2)$)},
+        ] (corr\n) {};
+      }
+  \end{pgfonlayer}
+
+
+  \node [
+    fill = Red,
+    text = white,
+    minimum size = 1cm
+  ] (nv0) at (2+6*1.25, -4) {0};
+  \node [
+    fill = Blue,
+    text = white,
+    minimum size = 1cm
+  ] (nv1) at (2+6*1.25+1.25, -4) {1};
+  \node [
+    fill = Blue,
+    text = white,
+    minimum size = 1cm
+  ] (nv2) at (2+6*1.25+1.25*2, -4) {2};
+  \node [
+    fill = Red,
+    text = white,
+    minimum size = 1cm
+  ] (nv3) at (2+6*1.25+1.25*3, -4) {3};
+
+  \node [
+    fill = Blue,
+    text = white,
+    minimum size = 1cm
+  ] (np0) at (2, -4) {1};
+  \node [
+    fill = Blue,
+    text = white,
+    minimum size = 1cm
+  ] (np1) at (2+1.25, -4) {2};
+  \node [
+    fill = Red,
+    text = white,
+    minimum size = 1cm
+  ] (np2) at (2+1.25*2, -4) {3};
+  \node [
+    fill = Blue,
+    text = white,
+    minimum size = 1cm
+  ] (np3) at (2+1.25*3, -4) {4};
+
+  \begin{pgfonlayer}{background}
+    \node [
+      fill = black!70,
+      label={above: Corrélation $n - 1$},
+      fit = {(nv0) (nv1) (nv2) (nv3)},
+      inner sep = 6pt
+    ] (corrnm1) {};
+    \node [
+      fill = black,
+      anchor=west,
+      label={above: Corrélation $n$},
+      fit = {(np0) (np1) (np2) (np3)},
+      inner sep = 6pt
+    ] (corrn)  {};
+  \end{pgfonlayer}
+
+  \node [
+    % right = .5 cm of corrnm1
+  ] (apx) at ($(corrn.east) + (1 cm +3pt, 0)$) {$\bm{\rightrightarrows}$};
+
+  \node [
+    fill = black!70,
+    minimum size = 1 cm + 12pt
+  ] (pcorr) at ($(nv0) + (5*1.25+.5, 0)$) {};
+  \node [
+    fill = Red,
+    text = white,
+    minimum size = 1cm
+  ] (npp3) at (pcorr) {3};
+
+  \node [
+  ] (ppp) at ($(pcorr.east) + (0.75, 0)$) {$\bm{+}$};
+
+  \node [
+    fill = black,
+    minimum size = 1 cm + 12pt
+  ] (ncorr) at ($(npp3) + (2*1.25+.5, 0)$) {};
+  \node [
+    fill = Blue,
+    text = white,
+    minimum size = 1cm
+  ] (npp3) at (ncorr) {4};
+
+  \node [
+  ] (mmm) at ($(corrnm1.east) + (0.75, 0)$) {$\bm{-}$};
+
+\end{tikzpicture}
+\end{document}

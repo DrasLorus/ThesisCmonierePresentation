@@ -1,0 +1,113 @@
+\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+
+\newcommand{\multnode}[2]{
+  \node [calc node,
+    #1
+  ] ({#2}) {};
+  \draw [-] ($({#2}.north west) + (+.075,-.075)$) -- ($({#2}.south east) + (-.075, +.075)$);
+  \draw [-] ($({#2}.south west) + (+.075,+.075)$) -- ($({#2}.north east) + (-.075, -.075)$);
+}
+
+\newcommand{\addnode}[2]{
+  \node [calc node,
+    #1
+  ] ({#2}) {};
+  \draw [-] ($({#2}.west)  + (.1,  0)$) -- ($({#2}.east)  + (-.1,   0)$);
+  \draw [-] ($({#2}.south) + ( 0, .1)$) -- ($({#2}.north) + (  0, -.1)$);
+}
+
+\newcommand{\addnodeat}[3]{
+  \node [calc node,
+    #1
+  ] ({#2}) at (#3) {};
+  \draw [-] ($({#2}.west)  + (.1,  0)$) -- ($({#2}.east)  + (-.1,   0)$);
+  \draw [-] ($({#2}.south) + ( 0, .1)$) -- ($({#2}.north) + (  0, -.1)$);
+}
+
+\newcommand{\subnode}[2]{
+  \node [calc node,
+    #1
+  ] ({#2}) {};
+  \draw [-] ($({#2}.west)  + (.1,  0)$) -- ($({#2}.east)  + (-.1,   0)$);
+}
+
+\newcommand{\regnode}[2]{
+  \node [main node,
+    minimum height = 1cm,
+    minimum width = .6cm,
+    #1
+  ] ({#2}) {};
+  \draw [-] ($({#2}.south east) + (-.02, .3) $) -- ($({#2}.south east) + (-.2, .2)$);
+  \draw [-] ($({#2}.south east) + (-.02, .1) $) -- ($({#2}.south east) + (-.2, .2)$);
+}
+
+\newcommand{\regnodeat}[3]{
+  \node [main node,
+    minimum height = 1cm,
+    minimum width = .6cm,
+    #1
+  ] ({#2}) at (#3) {};
+  \draw [-] ($({#2}.south east) + (-.02, .3) $) -- ($({#2}.south east) + (-.2, .2)$);
+  \draw [-] ($({#2}.south east) + (-.02, .1) $) -- ($({#2}.south east) + (-.2, .2)$);
+}
+
+\begin{tikzpicture} [->,
+  >={Triangle[width=6pt, length=8pt]},
+  auto,
+  thick,
+  main node/.style={rectangle, fill = white!35, draw,
+      align=center},
+  calc node/.style={circle, fill = white!35, draw},
+  every node/.style={font = {\Large}}
+  ]
+
+
+  \node [pos=.1, left, align=center] (yn) at (0, 0) {$y(n)$};
+
+  \multnode{minimum size = .8cm, right = 0.8 of yn}{inrot};
+
+  \node [main node,
+    fill = white!35,
+    % minimum size = 1.2 cm,
+    minimum width = 1.2 cm,
+    anchor = south west
+  ] (ff) at ($(inrot.east) + (.8, .8)$) {FIFO};
+
+  \draw [latex-latex] ($(ff.north west) + (0, .15)$) -- ($(ff.north east) + (0, .15)$)
+  node [above, midway] () {taille $q$};
+
+
+  \node [calc node,
+    minimum size = .8cm,
+    anchor = west,
+  ] (minus) at (inrot -| ff.east) {};
+  \draw [-] ($(minus.west) + (.15, 0)$) -- ($(minus.east) + (-.15, 0)$);
+
+
+  \draw (yn.east) -> (inrot.west);
+  \draw ($(inrot.east) + (.4, 0)$) |- (ff.west);
+
+  \draw (ff.east) -| (minus.north);
+
+  \draw (inrot.east) -> (minus.west);
+
+  \node at ($(minus.north) + (.3, .1)$) {$-$};
+
+  \node [
+    anchor = north,
+    align  = center,
+    below  = .5 of inrot,
+    font   = {\Large},
+  ] (ejw) {$e^{-j\frac{{\textcolor{blue}{\bm{\omega}}} n}{q}}$};
+  \draw[] (ejw.north) -- (inrot.south);
+
+  \node [right = 1cm of minus] (dnw) {$d_{n}^{\bomega}$};
+  \draw[] (minus.east) -- (dnw.west);
+
+\end{tikzpicture}
+
+\end{document}

@@ -1,4 +1,4 @@
-\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
 
 \input{../stdl_preamble.tex}
 
@@ -15,8 +15,6 @@
   main node/.style={rectangle, fill = white!35,  draw,
       align=center}]
 
-  \def\currcolor{blue!60!green!30}
-
   \coordinate (ref_fft) at (0, 0);
 
   \foreach \n in {0,...,\lenn} {
@@ -26,7 +24,7 @@
   \pgfmathparse{Mod(\n, \mk + 1)==0?1:0}
 
   \ifnum\pgfmathresult>0 {
-    \node [fill= red!70!green!50,
+    \node [fill= RoyalBlue,
       draw=black,
       anchor=south west,
       minimum size = 1 cm] at ($(ref_fft) + (\n, \k) $) {};
@@ -35,12 +33,12 @@
       \pgfmathparse{int(Mod(\n, (\mk + 1) / 2))==0?1:0}
 
       \ifnum\pgfmathresult>0
-        { \node [fill= red!60!white!70,
+        { \node [fill= DarkGoldenrod3,
           draw=black,
           anchor=south west,
           minimum size = 1 cm] at ($(ref_fft) + (\n, \k)$) {}; }
         \else
-        { \node [fill= \currcolor,
+        { \node [fill= lightgray,
             draw=black,
             anchor=south west,
             minimum size = 1 cm] at ($(ref_fft) + (\n, \k)$) {}; }
@@ -86,7 +84,7 @@
     draw=none,
     anchor=north,
     font = {\Huge},
-    minimum size = 1 cm] at ($(ref_fft) + (\pgfmathresult, -1)$) {$n$};
+    minimum size = 1 cm] at ($(ref_fft) + (\pgfmathresult, -.6)$) {$n$};
 
 
   \pgfmathparse{(\mk) / 2 + 1}
