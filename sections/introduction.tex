@@ -4,8 +4,8 @@
 \@ifundefined{fromRoot}{%
   \newcommand{\fromRoot}[1]{../#1}
   
-  % \usepackage{xr}
-  % \externaldocument{../main}
+  \usepackage{xr}
+  \externaldocument{../main}
 }{}
 
 \def\input@path{{\subfix{../}}}
@@ -31,9 +31,7 @@
 
 \begin{document}
 
-\section{Introduction}
-
-\subsection{Contexte}
+\section*{Contexte}
 
 \begin{frame}{Télécommunications numériques sans-fil}
   \begin{columns}
@@ -110,6 +108,7 @@
         \item Communications longues portées (dizaines de kilomètres).
         \item Permettent le déploiement massif d'objets connectés.
         \item Quantité de données à transmettre et donc débits requis plus faibles.
+        \item Topologie typique : des nœud-capteurs bas-coûts et des stations de base haute-performances.
       \end{ctrlitemize}
     \end{column}
     \begin{column}{.5\linewidth}
@@ -118,28 +117,6 @@
     \end{column}
   \end{columns}
   \blfootnotetext{\textcite{IEEEStandardLPWAN, sinhaSurveyLPWATechnology2017}}
-\end{frame}
-
-\begin{frame}{\acrshortpl{lpwan}}
-
-  \begin{columns}
-    \begin{column}{.5\linewidth}
-      \includegraphics[width=\linewidth, height=.65\textheight, keepaspectratio=true]{figures/tikzpicture/topo-network.pdf}
-      \captionof{figure}{Topologie possible d'un \acrshort{lpwan}.}
-    \end{column}
-    \begin{column}{.5\linewidth}
-      Composition du réseau :
-
-      \begin{ctrlitemize}{2pt}
-        \item [\textcolor{RoyalBlue3}{$\bullet$}] \textcolor{RoyalBlue3}{Nœud-capteurs   }
-        --- bon-marchés, fonctionnant sur batterie, déployables massivement.
-        \item [\textcolor{Chartreuse3}{$\blacklozenge$}] \textcolor{Chartreuse3}{Relais  }
-        --- plus cher que les nœud-capteurs, mais plus performants.
-        \item [\textcolor{Gold3}{$\blacksquare$}] \textcolor{Gold3}{Stations de base     }
-        --- couteuses et très performantes, mais en nombre réduit.
-      \end{ctrlitemize}
-    \end{column}
-  \end{columns}
 \end{frame}
 
 \begin{frame}{\acrshortpl{lpwan} : trois exemples}
@@ -249,10 +226,24 @@
   \end{overlayarea}
 \end{frame}
 
+\section*{Sommaire} % Sommaire
+\begin{frame}{\secname}
+  \begin{columns}
+    \begin{column}{.2\linewidth}
+      \hfill
+    \end{column}
+    \begin{column}{.7\linewidth}
+      \tableofcontents[hideallsubsections]
+    \end{column}
+    \begin{column}{.1\linewidth}
+      \hfill
+    \end{column}
+  \end{columns}
+\end{frame}
 
-\subsection[Le projet \acrshort{qcsp}]{Le projet \acrfull{qcsp}}
+\section[Le projet \acrshort{qcsp}]{Le projet \acrfull{qcsp}}
 
-\begin{frame}{\subsecname}{\href{https://qcsp.univ-ubs.fr/}{https://qcsp.univ-ubs.fr/}}
+\begin{frame}{\secname}{\href{https://qcsp.univ-ubs.fr/}{https://qcsp.univ-ubs.fr/}}
 
   \begin{columns}
     \begin{column}{.4\linewidth} \centering

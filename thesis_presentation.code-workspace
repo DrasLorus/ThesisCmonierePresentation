@@ -48,7 +48,7 @@
 		// 	"%PDF%#src:%LINE%%TEX%"
 		// ],
 		// "on-File-Change" or "ne-ver"
-		"latex-workshop.latex.autoBuild.run": "never",
+		"latex-workshop.latex.autoBuild.run": "onFileChange",
 		"cSpell.language": "en,fr",
 		"cSpell.words": [
 			"Abelian",
@@ -66,6 +66,8 @@
 			"Font shape `TU/.*/m/sc' undefined"
 		],
 		"latex-workshop.intellisense.citation.backend": "biblatex",
+		"latex-workshop.latex.rootFile.useSubFile": true,
+		"latex-workshop.check.duplicatedLabels.enabled": false,
 		"latex-workshop.latex.watch.files.ignore": [
 			"${workspaceFolder}/commands.tex",
 			"${workspaceFolder}/acronymns.tex",

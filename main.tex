@@ -1,4 +1,4 @@
-\documentclass[hidelinks, french, graphicx={draft}, xcolor={table, rgb, dvipsnames, x11names}, aspectratio=169, professionalfonts]{beamer}
+\documentclass[hidelinks, french, xcolor={table, rgb, dvipsnames, x11names}, aspectratio=169, professionalfonts]{beamer}
 % \setbeameroption{show only notes}
 \usefonttheme{professionalfonts}
 
@@ -23,9 +23,36 @@
 % \usepackage{stmaryrd}
 \usepackage{multicol}
 \usepackage{etoolbox}
+\usepackage{listings}
+\usepackage{listings-ext}
 \usepackage{blindtext}
 
+
+\lstdefinestyle{cstyle}{
+    language=C,
+    backgroundcolor=\color{lightgray},   
+    commentstyle=\color{Chartreuse4},
+    keywordstyle=\color{RoyalBlue4},
+    stringstyle=\color{Orange},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    morekeywords={int32_t, int64_t, _mm256_add_epi32, _mm256_add_pd, pthread_create, pthread_t...},
+    breaklines=false,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=none,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
 \makeatletter
+\lst@CCPutMacro
+\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-}}
+\@empty\z@\@empty
+
 \@ifundefined{fromRoot}{%
   \newcommand{\fromRoot}[1]{./#1}
 }{}
@@ -183,57 +210,59 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
 
   \vspace{-.4 cm}
   \begin{columns}
-    \begin{column}{.11\textwidth}
-      \hfill
+    \begin{column}{.4\linewidth}
+      \centering \scriptsize \ra{1.25}
+      \begin{tabular}{@{}rl@{}}
+        % \toprule
+        \multicolumn{2}{c}{\textbf{Composition du Jury}} \\ \midrule
+        Examinateurs :     & Bertrand GRANADO            \\
+                           & Christophe JEGO             \\
+        Rapporteurs :      & Claire GOURSAUD             \\
+                           & Matthieu GAUTIER            \\
+        Dir. de thèse :    & Emmanuel BOUTILLON          \\
+        Co-Enc. de thèse : & Bertrand LE GAL             %\\ \bottomrule
+      \end{tabular} \ra{1}
     \end{column}
-    \begin{column}{.13\textwidth} \centering
-      \includegraphics[width=.7\textwidth]{CNRS.svg.png}
-    \end{column}
-    \begin{column}{.13\textwidth} \centering
-      \includegraphics[width=\textwidth]{labsticc.png}
-    \end{column}
-    \begin{column}{.13\textwidth} \centering
-      \includegraphics[width=\textwidth]{logoimsjoom.png}
-    \end{column}
+    \begin{column}{.6\linewidth}
+      \begin{columns}
+        \begin{column}{.11\linewidth}
+          \hfill
+        \end{column}
+        \begin{column}{.13\linewidth} \centering
+          \includegraphics[width=.7\linewidth]{CNRS.svg.png}
+        \end{column}
+        \begin{column}{.13\linewidth} \centering
+          \includegraphics[width=\linewidth]{labsticc.png}
+        \end{column}
+        \begin{column}{.13\linewidth} \centering
+          \includegraphics[width=\linewidth]{logoimsjoom.png}
+        \end{column}
 
-    \begin{column}{.13\textwidth} \centering
-      \includegraphics[width=\textwidth]{anr-logo-2021.png}
-    \end{column}
-    \begin{column}{.13\textwidth} \centering
-      \includegraphics[width=\textwidth]{QCSP_Logo.pdf}
-    \end{column}
-    \begin{column}{.11\textwidth}
-      \hfill
-    \end{column}\subsecname
-  \end{columns}
-  \begin{columns}
-    \begin{column}{.22\textwidth}
-      \hfill
-    \end{column}
-    \begin{column}{.16\textwidth} \centering
-      \includegraphics[width=\textwidth]{universite-bordeaux.eps.pdf}
-    \end{column}
-    \begin{column}{.15\textwidth}\centering
-      \includegraphics[width=\textwidth]{universite-bretagne-sud.eps.pdf}
-      \hfill
-    \end{column}
-    \begin{column}{.22\textwidth}
-      \hfill
-    \end{column}
-  \end{columns}
-
-\end{frame}
-\section*{Sommaire} % Sommaire
-\begin{frame}{\secname}
-  \begin{columns}
-    \begin{column}{.2\linewidth}
-      \hfill
-    \end{column}
-    \begin{column}{.7\linewidth}
-      \tableofcontents[hideallsubsections]
-    \end{column}
-    \begin{column}{.1\linewidth}
-      \hfill
+        \begin{column}{.13\linewidth} \centering
+          \includegraphics[width=\linewidth]{anr-logo-2021.png}
+        \end{column}
+        \begin{column}{.13\linewidth} \centering
+          \includegraphics[width=\linewidth]{QCSP_Logo.pdf}
+        \end{column}
+        \begin{column}{.11\linewidth}
+          \hfill
+        \end{column}\subsecname
+      \end{columns}
+      \begin{columns}
+        \begin{column}{.22\linewidth}
+          \hfill
+        \end{column}
+        \begin{column}{.16\linewidth} \centering
+          \includegraphics[width=\linewidth]{universite-bordeaux.eps.pdf}
+        \end{column}
+        \begin{column}{.15\linewidth}\centering
+          \includegraphics[width=\linewidth]{universite-bretagne-sud.eps.pdf}
+          \hfill
+        \end{column}
+        \begin{column}{.22\linewidth}
+          \hfill
+        \end{column}
+      \end{columns}
     \end{column}
   \end{columns}
 \end{frame}
@@ -256,7 +285,7 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
   \end{center}
 \end{frame}
 
-\subfile{sections/introduction.tex} 
+\subfile{sections/introduction.tex}
 
 \subfile{sections/qcsp_summary.tex}
 
@@ -267,8 +296,6 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
 \subfile{sections/experimentations.tex}
 
 \subfile{sections/conclusion.tex}
-
-
 
 \section*{Références}
 \begin{frame}[allowframebreaks]

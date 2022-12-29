@@ -83,7 +83,7 @@
 
 \subsection{Corrélation glissante dans le temps (\emph{Time sliding})}
 
-\begin{frame}{Criticité de la tache de corrélation}
+\begin{frame}{Criticité de la tâche de corrélation}
   \begin{columns}
     \begin{column}{.5\linewidth}
       \begin{overlayarea}{\linewidth}{.33\textheight}
@@ -97,7 +97,7 @@
     \end{column}
     \begin{column}{.4\linewidth}
       \begin{overlayarea}{\linewidth}{.2\textheight}
-        La corrélation circulaire est la partie la plus complexe de cette tache critique.
+        La corrélation circulaire est la partie la plus complexe de cette tâche critique.
       \end{overlayarea}
     \end{column}
   \end{columns}
@@ -121,7 +121,8 @@
           $\vect{L}^{\bomega}_{n} = \mifft{\mfft{\vect{y}_n  \odot \bm{\Gamma}^{\bomega}_n} \odot \mfft{\mpn{0}}^{*}}$ \vspace{1 em}
 
           $\mfft{\bm{y}}$ : FFT de $\bm{y}$ \\
-          $\mifft{\bm{Y}}$ : IFFT de $\bm{Y}$
+          $\mifft{\bm{Y}}$ : IFFT de $\bm{Y}$ \\
+          $\bm{\Gamma}^{\bomega}_n$ : Vecteur Correcteur de fréquence
         }%
         \only<2>{%
           \centering

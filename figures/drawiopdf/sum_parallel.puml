@@ -1,0 +1,52 @@
+@startuml sum_seq
+
+start
+:Créer "s" et "cmp" à 0;
+while (cmp < 10^9)
+:s = s + cmp;
+:cmp = cmp + 1;
+endwhile
+
+:Fin;
+stop
+
+@enduml
+
+@startuml sum_parallel
+
+start
+:Créer "stab[4]" à {0, 0, 0, 0};
+fork
+:Créer cmp à 0; 
+while (cmp < 25 x 10^7)
+:stab[0] = stab[0] + cmp;
+:cmp = cmp + 1;
+endwhile
+fork again
+:Créer cmp à 25 x 10^7; 
+while (cmp <  50 x 10^7)
+:stab[1] = stab[1] + cmp;
+:cmp = cmp + 1;
+endwhile
+fork again
+:Créer cmp à 50 x 10^7; 
+while (cmp <  75 x 10^7)
+:stab[2] = stab[2] + cmp;
+:cmp = cmp + 1;
+endwhile
+fork again
+:Créer cmp à 75 x 10^7; 
+while (cmp < 10^9)
+:stab[3] = stab[3] + cmp;
+:cmp = cmp + 1;
+endwhile
+end fork
+
+while (i < 4)
+:s = stab[i] + s;
+endwhile
+
+:Fin;
+stop
+
+@enduml

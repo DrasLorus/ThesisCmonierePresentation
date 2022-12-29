@@ -12,7 +12,15 @@
 %or: \def\input@path{{/path/to/folder/}{/path/to/other/folder/}}
 \makeatother
 
-\graphicspath{{\subfix{../}}}
+\graphicspath{
+  {\subfix{../}}
+  {\subfix{./figures}}
+  {\subfix{../figures}}
+  {\subfix{./figures/logos-thesis/}}
+  {\subfix{../figures/logos-thesis/}}
+  {\subfix{./figures/rtexps-pics/}}
+  {\subfix{../figures/rtexps-pics/}}
+}
 
 \hypersetup{
     pdfauthor   = {Camille MONIÈRE},

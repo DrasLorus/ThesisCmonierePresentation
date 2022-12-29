@@ -37,53 +37,242 @@
 
 \begin{frame}{\acrfull{simd}}
   \begin{columns}
-    \begin{column}{.5\linewidth}
+    \begin{column}{.3\linewidth}
       \centering
       \includegraphics[
         width=\linewidth,
-        height=.85\textheight,
+        height=.75\textheight,
         keepaspectratio=true
-      ]{figures/drawiopdf/simd_simt.drawio.pdf}
+      ]{figures/drawiopdf/simd_simt.drawio.pdf}\\
+      {\small \itshape UC : Unité de Calcul}
     \end{column}
-    \begin{column}{.5\linewidth}
-      {}
-      UC : Unité de Calcul
+    \begin{column}{.7\linewidth}
+      \begin{ctrlitemize}{.5 em}
+        \item Parallélisme de plus bas niveau.
+        \item Consiste en l'exécution d'une même instruction sur plusieurs données.
+        \item Une instruction sur $\alpha$ entrées conduit à une accélération d'un facteur $\alpha$.
+      \end{ctrlitemize}
+
+      \vspace{2 em}
+
+      \begin{ctrlitemize}{.5 em}
+        \item Requiert une unique unité de calcul équipée d'opérateurs adaptés.
+        \item Applicable \textbf{uniquement} pour des calculs \textbf{identiques} sur des données \textbf{alignées}.
+      \end{ctrlitemize}
     \end{column}
   \end{columns}
 \end{frame}
 
-\begin{frame}{Single Process Multiple Data (SPMD)}
+
+\begin{frame}[fragile]{\acrshort{simd} : Exemple}
+
+  Exemple : \\
+  \hspace{2 em} \centering Somme termes à termes de $\vect{a} = [a_0, a_1, a_2, a_3]$ et $\vect{b} = [b_0, b_1, b_2, b_3]$ stocké dans $\vect{c} =  [c_0, c_1, c_2, c_3]$ \vspace{3 em} \\
+
+  \begin{columns}
+    \begin{column}{.5\linewidth}
+      \begin{overlayarea}{\linewidth}{.4\textheight}
+        \underline{Séquentiellement ($\thickapprox 4$ instructions)} \vspace{1 em}
+
+        Pour chaque $x$ dans $[0,1,2,3]$, faire :\\
+        \hspace{2 em} $c_x = a_x + b_x$
+
+        \begin{columns}
+          \begin{column}{.45\linewidth}
+            % \begin{noindent}
+          \begin{lstlisting}[title={Sequentiellement en C},style=cstyle,basicstyle=\tiny]
+ //  a, b et c => double[4]
+ for (int i = 0; i < 4; i++) {
+   c[i] = a[i] + b[i]; 
+ }\end{lstlisting}
+          % \end{noindent}
+          \end{column}
+          \begin{column}{.5\linewidth}
+            % \begin{noindent}
+           \begin{lstlisting}[title={Sequentiellement en MATLAB},style=cstyle,language=MATLAB,basicstyle=\tiny]
+ % a, b, et c => size = (1, 4)
+ for i in 1 : 4
+   c(i) = a(i) + b(i)
+ end\end{lstlisting}
+           % \end{noindent}
+          \end{column}
+        \end{columns}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.45\linewidth}
+      \begin{overlayarea}{\linewidth}{.4\textheight}
+        \underline{En parallèle (SIMD) ($\thickapprox 1$ instruction)} \vspace{1 em}
+
+        $\vect{c} = \vect{a} + \vect{b}$ \\
+        \phantom{$c_x$}
+
+        \begin{columns}
+          \begin{column}{.5\linewidth}
+            % \begin{noindent}
+          \begin{lstlisting}[title={SIMD en C (Intel, double)},style=cstyle,basicstyle=\tiny]
+ //  a, b et c => double[4]
+ c = _mm256_add_pd(a, b);\end{lstlisting}
+          % \end{noindent}
+          \end{column}
+          \begin{column}{.5\linewidth}
+            % \begin{noindent}
+            \begin{lstlisting}[title={SIMD en MATLAB},style=cstyle,language=MATLAB,basicstyle=\tiny]
+% a, b, et c => size = (1, 4)
+c = a + b;\end{lstlisting}
+            % \end{noindent}
+          \end{column}
+        \end{columns}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Single Program Multiple Data (SPMD)}
+  \begin{columns}
+    \begin{column}{.4\linewidth}
+      \centering
+      \includegraphics[
+        width=\linewidth,
+        height=.7\textheight,
+        keepaspectratio=true
+      ]{figures/drawiopdf/spmd.drawio.pdf}\\
+      {\small \itshape UC : Unité de Calcul}
+    \end{column}
+    \begin{column}{.6\linewidth}
+      \begin{ctrlitemize}{.5 em}
+        \item Parallélisme de type \emph{Multiple Instructions Multiple Data (MIMD)}.
+        \item Consiste à segmenter un processus ou algorithme en sous-tâches travaillant indépendamment sur des sous-ensembles de données.
+      \end{ctrlitemize}
+
+      \vspace{1.4 em}
+
+      \begin{ctrlitemize}{.5 em}
+        \item Accélération fortement dépendante du degré d'indépendance des sous-tâches.
+        \item Le temps de répartition des calculs et données aux UCs n'est pas négligeable \cite{hillAmdahlLawMulticore2008}.
+      \end{ctrlitemize}
+    \end{column}
+  \end{columns}
+  \blfootnote{\textcite{hillAmdahlLawMulticore2008}}
+\end{frame}
+
+\begin{frame}{SPMD : Exemple --- Somme de $10^9$ valeurs}
+  \begin{columns}
+    \begin{column}{.33\linewidth}
+      \begin{overlayarea}{\linewidth}{.85\textheight}
+        \centering
+        \textbf{Séquentielle (1 thread)} \vspace{.03\textheight}
+
+        \includegraphics[
+          width=\linewidth,
+          height=.45\textheight,
+          keepaspectratio=true,
+        ]{figures/drawiopdf/sum_seq.pdf}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.66\linewidth}
+      \begin{overlayarea}{\linewidth}{.85\textheight}
+        \centering
+        \textbf{Parallèle (4 threads)} \vspace{.03\textheight}
+
+        \includegraphics[
+          width=\linewidth,
+          height=.8\textheight,
+          keepaspectratio=true,
+        ]{figures/drawiopdf/sum_parallel.pdf}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Multiple Programs Multiple Data (MPMD)}
   \begin{columns}
     \begin{column}{.5\linewidth}
       \centering
       \includegraphics[
         width=\linewidth,
-        height=.85\textheight,
+        height=.75\textheight,
         keepaspectratio=true
-      ]{figures/drawiopdf/spmd.drawio.pdf}
+      ]{figures/drawiopdf/mpmd.drawio.pdf}\\
+      {\small \itshape UC : Unité de Calcul}
     \end{column}
     \begin{column}{.5\linewidth}
-      {}
-      UC : Unité de Calcul
+      \begin{ctrlitemize}{.5 em}
+        \item Parallélisme de plus haut niveau et de type \emph{MIMD}.
+        \item Consiste à segmenter un programme en plusieurs processus ou algorithmes, aussi indépendants que possible.
+      \end{ctrlitemize}
+
+      \vspace{1.4 em}
+
+      \begin{ctrlitemize}{.5 em}
+        \item À nouveau, accélération fortement dépendante du degré d'indépendance des algorithmes.
+      \end{ctrlitemize}
     \end{column}
   \end{columns}
 \end{frame}
+\begin{frame}{MPMD : Exemple --- Chaine de communication}
+  \begin{center}
+    \includegraphics[
+      width=\linewidth,
+      height=.35\textheight,
+      keepaspectratio=true
+    ]{figures/tikzpicture/chain_mpmd.pdf}
+    \captionof{figure}{Répartition des tâches de réception sur plusieurs unités de calcul.}
 
-\begin{frame}{Multiple Processes Multiple Data (MPMD)}
+    \vspace{1 em}
+
+    Le goulet d'étranglement se situe dans les transferts de données \dots
+
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{En tirer parti}
+
   \begin{columns}
     \begin{column}{.5\linewidth}
-      \centering
-      \includegraphics[
-        width=\linewidth,
-        height=.85\textheight,
-        keepaspectratio=true
-      ]{figures/drawiopdf/mpmd.drawio.pdf}
+      \begin{overlayarea}{\linewidth}{.85\textheight}
+        \centering
+        \textbf{\large \underline{\phantom{g}Logiciel\phantom{g}}} \vspace{.25 em}
+
+        \begin{ctrlitemize}{.5 em}
+          \item Limité par l'architecture du processeur.
+          \item Effort d'adaptation de la description algorithmique à l'architecture \cite{armNEONProgrammerGuide2013,intelrArchitectureInstructionSet2022} \textbf{et} au langage utilisé (C/\cpp{}, Python, MATLAB \dots)
+          \item []
+        \end{ctrlitemize}
+
+        \includegraphics[
+          width=\linewidth,
+          height=.2\textheight,
+          keepaspectratio=true,
+          clip,
+          trim = {15px 227px 15px 140px},
+        ]{figures/processor-2217771_1920.jpg}
+        \captionof{figure}{Schéma d'implémentation d'un Intel\textregistered{} Core\texttrademark{} 4th gen, \textrm{\tiny par Intel, CC-BY-SA, flikr.com}}
+      \end{overlayarea}
     \end{column}
     \begin{column}{.5\linewidth}
-      {}
-      UC : Unité de Calcul
+      \begin{overlayarea}{\linewidth}{.85\textheight}
+        \centering
+        \textbf{\large \underline{\phantom{g}Matériel\phantom{g}}} \vspace{.25 em}
+
+        \begin{ctrlitemize}{.25 em}
+          \item Grande liberté, les UCs étant définies par le concepteur lui-même.
+          \item Temps de conception notablement plus long qu'en logiciel.
+          \item Limité par les ressources de calculs disponibles (LUT, Flip-Flop, DSP).
+          % \item []
+        \end{ctrlitemize}
+
+        \includegraphics[
+          width=.25\textheight,
+          height=\linewidth,
+          keepaspectratio=true,
+          angle = 90,
+        ]{figures/xilinxkintex7_20221229_154930.png}
+        \captionof{figure}{Schéma d'implémentation d'un Kintex\texttrademark-7 de Xilinx\textregistered, \textrm{\tiny par Xilinx, Tous droits réservés}}
+      \end{overlayarea}
     \end{column}
   \end{columns}
+  \blfootnote{\textcite{armNEONProgrammerGuide2013,intelrArchitectureInstructionSet2022}}
 \end{frame}
 
 \subsection{Étude du parallélisme}

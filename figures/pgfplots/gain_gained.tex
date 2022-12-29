@@ -7,30 +7,33 @@
 \begin{document}
 \begin{tikzpicture}
   \begin{axis}[
-    % title={Detection Score (function of $\Delta$ and $\omega$)},
-    xlabel={Décalage temporel $\Delta$ (chips)},
-    ylabel={Gain (dB)},
-    font={\large},
-    width=8cm,
-    height=4cm,
-    very thick,
-    xmin=160-32-\locshift, xmax=1184+32-\locshift,
-    ymin=-2.1, ymax=2.1,
-    xtick={160-\locshift, 416-\locshift, 672-\locshift, 928-\locshift, 1184-\locshift},
-    xticklabels={{-512}, {-256}, {0}, {+256}, {+512}},
-    % ytick={{200}, {250}, {300}, {350}, {400}, {450}},
-    % yticklabels={{200}, {250}, {300}, {350}, {400}, {450}},
-    legend pos=north east,
-    xmajorgrids=true,
-    yminorgrids=true,
-    ymajorgrids=true,
-    grid style=dashed,
-    axis x line = bottom,
-    axis y line = left,
-    at={(0, 0)}
-  ]
+      % title={Detection Score (function of $\Delta$ and $\omega$)},
+      xlabel={Décalage temporel $\Delta$ (chips)},
+      ylabel={Gain (dB)},
+      font={\large},
+      width=8cm,
+      height=4cm,
+      very thick,
+      xmin=160-32-\locshift, xmax=1184+32-\locshift,
+      ymin=-2.1, ymax=2.1,
+      xtick={160-\locshift, 416-\locshift, 672-\locshift, 928-\locshift, 1184-\locshift},
+      xticklabels={{-512}, {-256}, {0}, {+256}, {+512}},
+      % ytick={{200}, {250}, {300}, {350}, {400}, {450}},
+      % yticklabels={{200}, {250}, {300}, {350}, {400}, {450}},
+      legend pos=north east,
+      xmajorgrids=true,
+      yminorgrids=true,
+      ymajorgrids=true,
+      grid style=dashed,
+      axis x line = bottom,
+      axis y line = left,
+      at={(0, 0)}
+    ]
 
     \addplot[color=RoyalBlue, smooth]
+    coordinates {(0, 0) (1600, 0)};
+
+    \addplot[color=Red2, smooth]
     table[x index=0, y index=1, y expr = 10*log10(\thisrowno{1}), col sep=space]{\fromRoot{data/scores_gain_effect.dat}};
 
     \legend{}

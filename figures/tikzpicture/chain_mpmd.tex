@@ -1,0 +1,66 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture} [->,
+    >={Triangle[width=8pt, length=16pt]},
+    auto,
+    very thick,
+    every node/.style={font={\Large}},
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center}
+  ]
+
+  \node [
+    draw = RoyalBlue3,
+    fill = RoyalBlue3!30
+  ] (yn) at (0, 0) {$y(n)$};
+
+  \node [main node,
+    draw = Chartreuse4,
+    fill = Chartreuse4!30,
+    minimum height = 1.5cm,
+    %minimum width = 3cm,
+  ] (n0) at (3, 0) {Détection};
+
+  \node [main node,
+    draw = Chartreuse4,
+    fill = Chartreuse4!30,
+    minimum height = 1.5cm,
+    %minimum width = 3cm,
+  ] (n1) at (7.5, 0) {Synchronisation};
+
+  \node [main node,
+    % fill = red!20!white
+    draw = Chartreuse4,
+    fill = Chartreuse4!30,
+    minimum height = 1.5cm,
+  ] (n2) at (12, 0) {Décodeur\\NB-LDPC};
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \draw [RoyalBlue3, ultra thick] (yn.east) -> (n0.west);
+  \draw [RoyalBlue3, ultra thick] (n0.east) -> (n1.west);
+  \draw [RoyalBlue3, ultra thick] (n1.east) -> (n2.west);
+  \draw [RoyalBlue3, ultra thick] (n2.east) -> ($(2, 0) + (n2.east)$);
+
+  \foreach \n [
+    evaluate = \n as \pos using (\n*4.5 + 3)
+  ] in {0, 1, 2}
+    {
+      \node [
+        inner sep = 5pt,
+        minimum size = 2 cm,
+        text = Red4,
+        draw = Red4,
+        fill = Red2!30,
+        align = center,
+      ] (uc\n) at (\pos, -3) {Alloué à\\l'UC \n};
+
+      \draw [dashed, Red4, ultra thick, -] ($(\pos, -4.25) + (2.25, 0)$) --  ($(\pos, 1) + (2.25, 0)$);
+    }
+
+
+\end{tikzpicture}
+\end{document}
