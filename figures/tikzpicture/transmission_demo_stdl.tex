@@ -1,0 +1,93 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture} [-latex,
+    >=latex,
+    auto,
+    very thick,
+    every node/.style={font=\LARGE},
+    main node/.style={rectangle, draw=RoyalBlue4,
+        fill=RoyalBlue2!20,
+        text=RoyalBlue4,
+        align = center, inner sep = 4mm}]
+
+  \node [
+    align=center,
+    minimum height = 1.5cm
+  ] (m) at (0, 0) {Message $\vect{M}$\\($20 \times 6$ bits)};
+
+  \node [main node,
+    % top color = NavyBlue!20,
+    % bottom color = green!10,
+    align=center,
+    minimum height = 1.5cm,
+    right = 1cm of m
+  ] (nbenc) {Encodeur\\NB-LDPC};
+
+  \node [main node,
+    % top color = NavyBlue!20,
+    % bottom color = green!10,
+    minimum height = 1.5cm,
+    %minimum width = 3cm,
+    right = 1cm of nbenc
+  ] (ccskm) {Modulation\\CCSK};
+
+  \node [main node,
+    % top color = NavyBlue!20,
+    % bottom color = green!10,
+    minimum height = 2cm,
+    %minimum width = 3cm,
+    right = 1cm of ccskm
+  ] (bpskm) {BPSK};
+
+  \node [main node,
+    Goldenrod4!50!RoyalBlue4,
+    top color = RoyalBlue2!40,
+    bottom color = Goldenrod2!40,
+    minimum height = 2cm,
+    %minimum width = 3cm,
+    right = 1cm of bpskm
+  ] (dac) {Filtre $+$ CNA};
+
+
+  \node [
+    align = center,
+    right = 1 cm of dac
+  ] (tochan) {Vers\\le canal};
+
+  \draw (m.east) -> (nbenc.west);
+
+  \draw (nbenc.east) -> (ccskm.west);
+  % node [midway, align=center, below = 1.5 cm] {Codeword $\vect{C}$\\($N \times p$ bits)};
+
+  \draw (ccskm.east) -> (bpskm.west);
+  % node [midway, align=center, below = 1.5 cm] {CCSK Frame $\vect{F}_{\mathrm{CCSK}}$\\($N \times q$ bits)};
+
+  \draw (bpskm.east) -> (dac.west);
+  % node [midway, align=center, below = 1.5 cm] {QCSP Frame $\vect{F}$\\($N \times q$ chips)};
+
+  \draw (dac.east) -> (tochan.west);
+  % node [midway, align=center, below = 1.5 cm] {QCSP Frame $\vect{F}$\\($N \times q$ chips)};
+
+  \node [
+    main node,
+    minimum height = 1.5cm,
+  ] (ccpp) at ($(ccskm.south west) + (0, -2)$) {C/C++};
+  \node [
+    main node,
+    Goldenrod4!50!RoyalBlue4,
+    top color = RoyalBlue2!40,
+    bottom color = Goldenrod2!40,
+    right = 1 cm of ccpp,
+    minimum height = 1.5cm,
+  ] (hb) {Hybride};
+  \node [
+    draw,
+    label = {above:Légende},
+    fit={(ccpp) (hb)},
+  ] {};
+
+\end{tikzpicture}
+\end{document}

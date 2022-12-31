@@ -16,27 +16,31 @@
   \node [
     align=center,
     minimum height = 1.5cm
-  ] (chan) at (0, 0) {From the\\
-  channel};
+  ] (chan) at (0, 0) {Depuis\\le canal};
 
   \node [main node,
-  align=center,
-  minimum height = .75cm,
-  minimum width = .5cm,
-  fill = yellow!40,
-  % label = above:{$f_s = 500$ kHz},
-  right = .5cm of chan
-  ] (adc) {ADC $+$ Filter};
+    align=center,
+    minimum height = .75cm,
+    minimum width = .5cm,
+    Goldenrod4!70!black,
+    fill = Goldenrod3!30,
+    % label = above:{$f_s = 500$ kHz},
+    right = .5cm of chan
+  ] (adc) {CAN $+$ Filtre};
 
   \draw (chan.east) -- (adc.west);
-  \draw [dashed, -] ($(adc.north east) + (.5, 1)$) -- ($(adc.south east) + (.5, -2.5)$);
-  
-  \node [anchor = south east, inner sep = .8cm] at ($(adc.south east) + (.5, -2.5)$) {\itshape On the USRP\phantom{p}};
-  \node [anchor = south west, inner sep = .8cm] at ($(adc.south east) + (.5, -2.5)$) {\itshape On the laptop};
+
+  \coordinate (anchor) at ($(adc.south east) + (.5, -2.2)$);
+
+  \draw [dashed, -] ($(adc.north east) + (.5, 1)$) -- (anchor);
+
+  \node [anchor =  east,] at ($(adc.south east) + (.5, -1.8)$) {\itshape Sur le module SdR\phantom{xx}};
+  \node [anchor =  west,] at ($(adc.south east) + (.5, -1.8)$) {\itshape \phantom{xx}Sur l'hôte};
 
   \node [main node,
     minimum height = 1.5cm,
-    fill = green!40,
+    Chartreuse4!50!black,
+    fill = Chartreuse3!15,
     %minimum width = 3cm,
     right = 1 cm of adc
   ] (ccskd)  {Detection};
@@ -45,21 +49,23 @@
   \draw (adc.east) -- (ccskd.west);
 
   \node [main node,
-    fill = red!35,
+    Red4!70!black,
+    fill =Red3!30,
     minimum height = 1.5cm,
     %minimum width = 3cm,
     right = 1 cm of ccskd
-  ] (ccsks) {Synchronization};
+  ] (ccsks) {Synchronisation};
 
   \draw (ccskd.east) -> (ccsks.west);
 
   \node [main node,
-    fill = magenta!30,
+    Purple4!70!black,
+    fill = Purple3!30,
     minimum height = 1.5cm,
     right = 1cm of ccsks
-  ] (nbdec) {NB-LDPC\\Decoder};
+  ] (nbdec) {Décodeur\\NB-LDPC};
 
-  \node [right = 1cm of nbdec, align=center] (Mp) {Received Message\\$\vect{M'}$\\($20 \times 6$ bits)};
+  \node [right = 1cm of nbdec, align=center] (Mp) {Message Reçu\\$\vect{M'}$\\($20 \times 6$ bits)};
 
 
   \draw (ccsks.east) -> (nbdec.west);
@@ -79,33 +85,37 @@
     main node,
     draw,
     left = 5.5 cm of chan,
-    fill=yellow!40,
+    Goldenrod4!70!black,
+    fill = Goldenrod3!30,
   ] (rcvl) {\phantom{/}VHDL\phantom{/}};
   \node [
     main node,
+    Chartreuse4!50!black,
+    fill = Chartreuse3!15,
     draw,
     right = .5cm of rcvl,
-    fill=green!40,
   ] (rccc) {C/\cpp{}};
   \node [
     main node,
     draw,
     below = .5cm of rcvl,
-    fill=red!30,
+    Red4!70!black,
+    fill = Red3!30,
   ] (rcm) {\textsc{Matlab}};
   \node [
     draw,
     main node,
     align = center,
     right = .5cm of rcm,
-    fill=magenta!30,
-  ] (rcmc) {C/\cpp{} called\\from \textsc{Matlab}};
+    Purple4!70!black,
+    fill = Purple3!30,
+  ] (rcmc) {C/\cpp{} appelé\\depuis \textsc{Matlab}};
 
   \node[
     draw,
     inner sep = 2.1 mm,
     fit = (rcvl) (rcmc),
-    label = {below:\textsc{Legend}}
+    label = {above:Légende}
   ] (rcfit) {};
 
 \end{tikzpicture}
