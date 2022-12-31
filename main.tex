@@ -26,7 +26,7 @@
 \usepackage{listings}
 \usepackage{listings-ext}
 \usepackage{blindtext}
-
+\usepackage{pdfpages}
 
 \lstdefinestyle{cstyle}{
     language=C,
@@ -65,6 +65,7 @@
   minnames=2,
   maxnames=2,
 ]{biblatex} %Imports biblatex package
+\addbibresource{biblio/MyPublications.bib} %Import the bibliography file
 \addbibresource{biblio/thesis.bib} %Import the bibliography file
 
 \renewbibmacro{in:}{%
@@ -79,6 +80,11 @@
             match=Moni\`ere,
             final]
       \step[fieldset=keywords, fieldvalue={, own}, append]
+    }
+    \map{
+      \perdatasource{biblio/thesis.bib}
+      \step[fieldset=keywords, fieldvalue={, }, appendstrict]
+      \step[fieldset=keywords, fieldvalue=thesis, append]
     }
   }
 }
@@ -151,12 +157,12 @@
 \newenvironment{ctrlitemize}[1]{\itemize\addtolength{\itemsep}{#1}}{\enditemize}
 
 
-\title[\textsc{Implémentations temps réel d'un récepteur QCSP}]{\textsc{Implémentations temps réel d'un récepteur \acrfull{qcsp}}\vspace*{-.6 cm}}
+\title[\textsc{Implémentations temps réel d'un récepteur QCSP}]{\textsc{\Huge Implémentations temps réel d'un récepteur \acrfull{qcsp}}\vspace*{-.8 cm}}
 % \subtitle{Performances, complexity and chip rates}
 
 \author[C. MONIÈRE]{Camille MONIÈRE}
-\institute[UBS Lab-STICC, UB IMS]{Lab-STICC, CNRS UMR 6285, Université de Bretagne Sud, 56100 Lorient, France, Email : camille.moniere@univ-ubs.fr \and
-IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : camille.moniere@ims-bordeaux.fr}
+\institute[UBS Lab-STICC, UB IMS]{Lab-STICC, CNRS UMR 6285, Université de Bretagne Sud, France \and
+IMS, CNRS UMR 5218, Université de Bordeaux, France}
 
 \date{04/01/2023}
 
@@ -208,7 +214,7 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
   \vspace*{-.8 cm}
   \titlepage
 
-  \vspace{-.4 cm}
+  \vspace{-.6 cm}
   \begin{columns}
     \begin{column}{.4\linewidth}
       \centering \scriptsize \ra{1.25}
@@ -303,8 +309,12 @@ IMS, CNRS UMR 5218, Université de Bordeaux, 33400 Talence, France, Email : cami
 
   % \nocite{*}
   \renewcommand*{\bibfont}{\rikiki}
-  \printbibliography[notkeyword=own, heading=none]
+  \printbibliography[notkeyword=ownpub, notkeyword=own, heading=none]
 
 \end{frame}
+
+\section*{Back-Ups}
+
+\includepdf[pages={-}]{sections/backup.pdf}
 
 \end{document}

@@ -1,0 +1,53 @@
+\documentclass[tikz,margin=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+\pgfdeclarelayer{background}
+\pgfsetlayers{background, main}
+
+\begin{document}
+
+\begin{tikzpicture} [->,
+  >={Triangle[width=6pt, length=8pt]},
+  auto,
+  thick,
+  font={\Large}]
+
+  \def\expf{2}
+  \def\vpw{3}
+  \def\vpd{3}
+
+  \foreach \n [
+    evaluate = \n as \nm using int(\n - 1),
+    evaluate = \n as \rcolor using (\nm * 1 / \vpd),
+    evaluate = \n as \x using (\n * \expf),
+  ] in {1,...,\vpd}
+    {
+      \foreach \w [
+          evaluate = \w as \wm using int(\w - 1),
+        evaluate = \w as \bcolor using (\wm * 1 / \vpw),
+        evaluate = \w as \y using (\w * \expf),
+        evaluate = \w as \gcolor using ((\bcolor + \rcolor) * .1),
+      ] in {1,...,\vpw}
+        {
+          \definecolor{clr\n\w}{rgb}{\rcolor, \gcolor, \bcolor}
+
+          \node [
+            clr\n\w,
+            fill,
+            draw,
+            minimum size = \expf cm,
+            align = center,
+            text = white,
+          ] (n\n\w) at (\x, \y) {$\mpd{} = \nm$\\$\mpo{} = \wm$};
+        }
+    }
+
+  \draw [ultra thick, Red,]
+  ($(n11.south west) + (-.5, -.5)$) -- ($(n\vpw1.south east) + (.5, -.5)$)
+  node [font={\Huge}, midway, below, Red] {$//_{\Delta}$};
+  \draw [ultra thick, Blue,]
+  ($(n11.south west) + (-.5, -.5)$) -- ($(n1\vpd.north west) + (-.5, .5)$)
+  node [font={\Huge}, midway, left, Blue] {$//_{\omega}$};
+
+\end{tikzpicture}
+\end{document}

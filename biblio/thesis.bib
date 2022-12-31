@@ -1069,24 +1069,7 @@
   keywords = {Bit error rate,Computer architecture,Directive antennas,Mobile antennas,Modulation coding,Radio control,Radio spectrum management,Receiving antennas,Software radio,Transmitting antennas}
 }
 
-@inproceedings{moniereDASIP22,
-  title = {Efficient {{Software}} and {{Hardware Implementations}} of a {{QCSP Communication System}}},
-  booktitle = {Design and {{Architecture}} for {{Signal}} and {{Image Processing}}},
-  author = {Monière, Camille and Le Gal, Bertrand and Boutillon, Emmanuel},
-  editor = {Desnos, Karol and Pertuz, Sergio},
-  date = {2022-06},
-  series = {Lecture {{Notes}} in {{Computer Science}}},
-  volume = {13425},
-  pages = {29--41},
-  publisher = {{Springer International Publishing}},
-  location = {{Cham}},
-  doi = {10.1007/978-3-031-12748-9_3},
-  abstract = {In wireless communications, frame detection and synchronization are usually performed using a preamble, consuming bandwidth and resources that are not negligible for small packets. Recently, a new kind of preamble-free frame called Quasi Cyclic Small Packet (QCSP) have been proposed. This paper studies the implementation of QCSP transmission, both at the transmitter side and the receiver side. For the latter, only detection, the most consuming task, is considered. Different parallelism levels and implementation strategies are detailed for both software and hardware implementations. Several trade-offs between throughput and resource usage are also discussed. Finally, the paper demonstrates that the emission/reception process of a QCSP frame is feasible at low hardware cost, which make the QCSP frame very attractive for Low Power Wide Area Networks (LPWAN).},
-  isbn = {978-3-031-12747-2 978-3-031-12748-9},
-  langid = {english}
-}
-
-@inproceedings{moniereImplementationsLogiciellesMaterielles2022,
+@inproceedings{moniereCOMPAS2022,
   title = {Implémentations Logicielles et Matérielles Efficientes d'une Chaîne de Communications {{QCSP}}},
   booktitle = {Conférence Francophone d'informatique En {{Parallélisme}}, {{Architecture}} et {{Système}}, {{comPAS}}'2022},
   author = {Monière, Camille and Le Gal, Bertrand and Boutillon, Emmanuel},
@@ -1096,13 +1079,24 @@
   urldate = {2022-11-30},
   abstract = {Dans les communications sans-fil classiques, des préambules sont utilisés pour aider le récepteur à détecter et synchroniser les trames. Cependant, ceux-ci entraînent une surconsommation de bande passante et de ressources non négligeables pour les paquets courts. Récemment, un nouveau type de trame sans préambule appelé Quasi Cyclic Small Packet (QCSP) a été proposé. Les travaux actuels étudient la mise en oeuvre de la chaîne de communication associée. Dans cet article, seule le processus de complexité calculatoire la plus élevée, la détection coté récepteur, est détaillé. Différents niveaux de parallélisme et stratégies d'implémentation sont détaillés en logiciel (CPU) et matériel (FPGA). Un comparatif des performances atteignables est réalisé sur des cibles multicoeurs et FPGA.},
   hal_id = {hal-03699091},
-  keywords = {CCSK,FPGA,HLS,Multicoeurs,Paquets courts,Synthèse d'architectures}
+  keywords = {nationale, ownpub}
+}
+
+@article{moniereJSA2023,
+  title = {Real-{{Time Energy Efficient Software}} and {{Hardware Implementations}} of a {{QCSP Communication System}} (in Reviews)},
+  author = {Monière, Camille and Le Gal, Bertrand and Boutillon, Emmanuel},
+  date = {2023},
+  journaltitle = {Journal of System Architecture},
+  shortjournal = {JSA},
+  abstract = {In wireless communications, frame detection and synchronization are usually performed using a preamble. This consumes bandwidth and resource amounts that are significant for small packets. Recently, a new kind of preamble-less physical layer called Quasi Cyclic Small Packet (QCSP) has been proposed. This paper studies the implementation of the QCSP communication chain, both at the transmitter side and the receiver side. For the receiver side, the focus is put on the detection stage, which is the most computationally complex. Indeed, it requires a relatively high throughput considering the resource usage constraint of the context, around few hundreds of kilo-bits per second of information bit rate, which is equivalent to around ten mega-samples per second of input sample rate. Moreover, while synchronization and error correction run occasionally when a detection occurs, detection has to run continuously. Different parallelism levels and implementation strategies are detailed for both software and hardware implementations. We also discuss several trade-offs between throughput and resource usage. Finally, the paper demonstrates that the transmission and reception process of a QCSP frame is feasible at a low hardware cost, which makes the QCSP frame very attractive for LPWANs, and for Internet of Things (IoT) in general.},
+  langid = {english},
+  keywords = {inter, ownpub}
 }
 
 @inproceedings{moniereTimeSlidingWindow2021,
   title = {Time Sliding Window for the Detection of {{CCSK}} Frames},
   booktitle = {{{IEEE Workshop}} on {{Signal Processing Systems}} ({{SiPS}}'2021)},
-  author = {Moniere, Camille and Saied, Kassem and Le Gal, Bertrand and Boutillon, Emmanuel},
+  author = {Monière, Camille and Saied, Kassem and Le Gal, Bertrand and Boutillon, Emmanuel},
   date = {2021-10},
   pages = {99--104},
   publisher = {{IEEE}},
@@ -1111,7 +1105,7 @@
   abstract = {In wireless communications, frame detection and synchronization are usually performed using a preamble that consumes bandwidth and resources. A new type of frame called Quasi Cyclic Short Packet offers the advantage of avoiding preamble (thus saving resource) while allowing simple detection algorithm. The paper presents a time method to simplify the proposed detection algorithm and makes it robust to channel gain variation. First results show that a receiver can detect reliably short packet transmitted at few 100 Kbits/s at very low signalto-noise ratio (-10 dB, typically).},
   eventtitle = {2021 {{IEEE Workshop}} on {{Signal Processing Systems}} ({{SiPS}})},
   isbn = {978-1-66540-144-9},
-  keywords = {Cyclic Code Shift Keying,Detection,Internet of Things,Short frame,Software Implementation}
+  keywords = {inter, ownpub}
 }
 
 @inproceedings{moriNonbinaryPolarCodes2010,

@@ -1,0 +1,152 @@
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+\pgfdeclarelayer{background}
+\pgfsetlayers{background, main}
+
+\begin{document}
+
+\begin{tikzpicture} [->,
+  >={Triangle[width=6pt, length=8pt]},
+  auto,
+  thick,
+  every node/.style={font={\Large}, thick},
+  main node/.style={rectangle, draw,
+      align=center}
+  ]
+
+  \node [main node,
+    draw = none,
+    % fill = gray!40!white, 
+    % minimum size = 1cm
+  ] (input) {$y(n)$};
+
+  \node [main node,
+    draw,
+    fill = white,
+    minimum width = 3.75 cm,
+    right = 1 cm of input
+  ] (pack) {Buffer};
+
+
+  \draw (input.east) -> (pack.west);
+  \draw [latex-latex] ($(pack.north west) + (-.05, .15)$) -> ($(pack.north east) + (.05, .15)$)
+  node [midway, anchor = south] {taille $q + q/3 +q/6$};
+
+  \begin{pgfonlayer}{background}
+    \foreach \n [
+      evaluate = \n as \x using (-\n * .75 - 1.125),
+      evaluate = \n as \y using (-\n * 1 - 1.25),
+      evaluate = \n as \varclr using int(100 - \n * 30)
+    ] in {2,1,0}
+      {
+        \node [
+          black!\varclr!Red4,
+          circle,
+          thick,
+          draw = none,
+        ] (bout\n) at ($(pack.south east) + (\x, \y)$) {};
+
+        \node [
+          black,
+          anchor = west,
+        ] (nfft\n) at ($(bout\n.east) + (.4, 0)$){};
+
+        \draw [
+          draw=black!\varclr!Red4, -, line width = 2.6pt
+        ] ($(pack.south east) + (\x + 1.125, 0)$) -- ($(bout\n |- pack.south) + (0, -.2 + \n * -.2)$);
+        \draw [
+          draw=black!\varclr!Red4, -, line width = 2.6pt
+        ] ($(pack.south east) + (\x - 1.125, 0)$) -- ($(bout\n |- pack.south) + (0, -.2 + \n * -.2)$);
+        \path[
+          fill=black!\varclr!Red4,
+        ] ($(pack.south east) + (\x + 1.125, 0)$) -- ($(bout\n |- pack.south) + (0, -.2 + \n * -.2)$) -- ($(pack.south east) + (\x - 1.125, 0)$);
+
+        \draw [black!\varclr!Red4, line width=2.6pt, -] ($(pack.south east) + (\x, 0)$) -- (bout\n.center);
+      }
+  \end{pgfonlayer}
+
+  \coordinate (wom0) at ($(nfft0.west) + (0, 0)$);
+
+  \foreach \w [
+    evaluate = \w as \y using (\w * -1.75),
+    evaluate = \w as \varclr using int(100 - \w * 30),
+  ] in {2, 1, 0}
+  {
+  \coordinate (wom\w) at ($(nfft0.west) + (0, \y)$);
+
+  \node [
+    black!\varclr!Blue,
+    circle,
+    draw,
+    right = .8 cm of wom\w,
+  ] (multf\w) {$\odot$};
+
+  \node [
+    black!\varclr!Blue,
+    main node,
+    right = .8 cm of multf\w,
+  ] (fft\w) {$\mathcal{F}$};
+
+  \node [
+    black!\varclr!Blue,
+    circle,
+    draw,
+    right = .8 cm of fft\w,
+    minimum size = .8 cm
+  ] (mult\w) {$\odot$};
+
+  \node [main node,
+    black!\varclr!Blue,
+    right = .8 cm of mult\w
+  ] (ifft\w) {$\mathcal{F}^{-1}$};
+
+  \node [
+  black!\varclr!Blue,
+  anchor = west,
+  right = .8 cm of ifft\w,
+  ] (lnw\w) {$\vect{L}_{n}^{\omega_{\w}}$};
+
+  \node [black!\varclr!Blue, above = .2cm] (gnw\w) at (multf\w.north) {$\vect{\Gamma}^{\omega_{\w}}$};
+  \draw [draw=black!\varclr!Blue, line width=2.6pt] (gnw\w) -- (multf\w.north);
+
+  \draw [draw=black!\varclr!Blue, line width=2.6pt] (wom0) |- (multf\w);
+
+  \draw [draw=black!\varclr!Blue, line width=2.6pt] (multf\w) -- (fft\w);
+  \draw [draw=black!\varclr!Blue, line width=2.6pt] (fft\w) -- (mult\w);
+  \draw [draw=black!\varclr!Blue, line width=2.6pt] (mult\w) -- (ifft\w);
+  \draw [draw=black!\varclr!Blue, line width=2.6pt] (ifft\w) -- (lnw\w);
+  }
+
+  \node [
+    black,
+    above = .2cm,
+  ] (fpn) at (mult0.north) {$\mathcal{F}(\mpn{0})^{\ast}$};
+  \draw [
+    black, line width = 2.6pt, -, dashed,
+  ] (fpn) -- (mult0.north);
+
+  \foreach \w [
+    evaluate = \w as \varclr using int(100 - \w * 20),
+    evaluate = \w as \wp using int(\w + 1),
+    evaluate = \w as \varclrp using int(100 - (\w + 1) * 20),
+  ] in {1, 0}
+    {
+      \draw [
+        black!\varclrp!Blue, line width = 2.6pt, -, dashed,
+      ] (mult\w.south) -- (mult\wp.north);
+      \begin{pgfonlayer}{background}
+        \draw [black!\varclr!Blue!50, line width = 2.6pt, dashed, -] (mult\w.north) -- (mult\w.south);
+      \end{pgfonlayer}
+    }
+
+  \draw [draw=black, line width=2.6pt] (bout0.north) |- (multf0);
+
+
+  \node [anchor = south, black] at (wom0.north) {$\vect{y}_{n}$};
+  \node [anchor = north, black!80!Red4] at (bout1.center) {$\vect{y}_{n - \frac{q}{3}}$};
+  \node [anchor = north, black!60!Red4] at (bout2.center) {$\vect{y}_{n - \frac{2q}{3}}$};
+
+\end{tikzpicture}
+
+\end{document}

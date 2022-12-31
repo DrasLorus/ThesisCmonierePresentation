@@ -40,8 +40,8 @@
     \begin{column}{.5\linewidth}
       \centering
       \begin{itemize}
-        \item L'utilisation de dispositif bas-coûts implique une instabilité du gain des amplificateurs.
-        \item Constat d'une forte perte de performance de détection.
+        \item L'utilisation de dispositif bas-coûts implique une instabilité du gain des amplificateurs ;
+        \item En découle une forte perte de performance de détection.
       \end{itemize} \vspace*{1 em}
 
       \includegraphics[width=.75\linewidth]{figures/pgfplots/gain_gained.pdf}
@@ -89,9 +89,9 @@
       \begin{overlayarea}{\linewidth}{.33\textheight}
         Le calcul du score est la partie la plus critique du détecteur :
         \begin{itemize}
-          \item Débit moyen le plus élevé.
-          \item Utilisation continue.
-          \item Forte complexité calculatoire.
+          \item Débit moyen le plus élevé
+          \item Utilisation continue
+          \item Forte complexité calculatoire
         \end{itemize}
       \end{overlayarea}
     \end{column}
@@ -186,7 +186,7 @@
   \blfootnote{\textcite{abassiNonbinaryLowdensityParitycheck2013, kastnerParallelProgrammingFPGAs2018}}
 \end{frame}
 
-\begin{frame}{Méthode \acrfull{ts}}{}
+\begin{frame}{Méthode par \acrfull{ts}}{}
   {%
     \centering
     \includegraphics[
@@ -254,7 +254,7 @@
 
         \begin{ctrlitemize}{0pt}
           \item [\bonus] Intuitive, sortie ordonnée.
-          \item [\malus] Lourde, les $L^{\bomega}_{n}(i - 1)$ sont des nombres complexes, et toujours représentés sur plusieurs bits.
+          \item [\malus] Lourde, les $L^{\bomega}_{n}(i)$ sont des nombres complexes, et toujours représentés sur plusieurs bits.
         \end{ctrlitemize}
       \end{overlayarea}
     \end{column}
@@ -266,12 +266,34 @@
         % \vspace{-1 em}
 
         \begin{ctrlitemize}{0pt}
-          \item [\bonus] Légère, les $p_{k + i}(q -1)$ sont des nombres réels, pouvant être représentés par $1$ bit.
+          \item [\bonus] Légère, les $P_{k + i}(q - 1)$ sont des nombres réels, pouvant être représentés par $1$ bit.
           \item [\textcolor{RoyalBlue}{\malus}] Sortie désordonnée, mais \dots{} l'ordre n'importe pas \textit{en détection}.
         \end{ctrlitemize}
       \end{overlayarea}
     \end{column}
   \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algorithme de détection efficient}
+  \begin{columns}
+    \begin{column}{.4\linewidth}
+      \begin{ctrlitemize}{.5 em}
+        \item Algorithme robuste à des variations de gain d'entrée ;
+        \item Nouvelle méthode de corrélation plus efficiente\footnotemark.
+      \end{ctrlitemize} \vspace{1.5 em}
+
+      \begin{ctrlitemize}{.5 em}
+        \item Insuffisant pour atteindre un débit temps réel ;
+        \item Le débit d'information ``algorithmique'' du système atteint $5$ kb/s, $10\times$ moins que le LoRa \dots
+      \end{ctrlitemize}
+    \end{column}
+    \begin{column}{.4\linewidth}
+      \centering
+      \includegraphics[width = \linewidth]{figures/pgfplots/results_algo_through.pdf}
+    \end{column}
+  \end{columns}
+  \footnotetext{Meilleur rapport performances de détection / complexité calculatoire.}
 \end{frame}
 
 \end{document}

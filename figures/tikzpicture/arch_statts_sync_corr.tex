@@ -76,7 +76,7 @@
   \node[main node,
     minimum width = 2.5cm,
     anchor = north west,
-  ] (mult1) at ($(dnw.east) + (1.25, -3)$) {$\times  p_{q - 1}(q - 1)$};
+  ] (mult1) at ($(dnw.east) + (1.25, -3)$) {$\times  P_{q - 1}(q - 1)$};
 
   \addnode{minimum size = .8cm, right = .8cm of mult1}{add1};
 
@@ -86,7 +86,7 @@
 
   \node [main node,
     minimum width = 2.5cm,
-  ] (mult0) at (mult1 |- dnw){$\times  p_{i}(q - 1)$};
+  ] (mult0) at (mult1 |- dnw){$\times  P_{i}(q - 1)$};
 
   \addnodeat{minimum size = .8cm,}{add0}{mult0 -| add1};
 
@@ -97,7 +97,7 @@
   \node[main node,
     minimum width = 2.5cm,
     anchor = south,
-  ] (mult2) at ($(mult1 |- mult0) + (0, 3)$) {$\times p_{0}(q - 1)$};
+  ] (mult2) at ($(mult1 |- mult0) + (0, 3)$) {$\times P_{0}(q - 1)$};
 
   \addnodeat{minimum size = .8cm}{add2}{mult2 -| add0};
 

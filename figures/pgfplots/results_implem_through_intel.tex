@@ -1,0 +1,59 @@
+
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}
+    [
+      width=10 cm,
+      height=10 cm,
+      ybar = .7,
+      bar width = 24pt,
+      ymin = 0, ymax=175,
+      symbolic x coords={p8, p16, p64},
+      enlarge x limits = .5,
+      xtick = {p8, p16, p64},
+      ytick = {0,20,...,180},
+      major tick length = 0ex,
+      xticklabels = {8, 16, 64},
+      %   yticklabels = {{}},
+      xmajorgrids = true,
+      ymajorgrids = true,
+      xlabel = {\phantom{()}\pd{}\phantom{()}},
+      ylabel = {Débit d'informations (kb/s)},
+      nodes near coords,
+      nodes near coords style = {black},
+      legend pos=north west,
+      legend columns = 2,
+    ]
+
+    % FFT
+    \addplot coordinates {
+        (p8,  70)
+        (p16, 38)
+        (p64,  9)
+      };
+
+    % MT FFT
+    \addplot coordinates {
+        (p8,  140)
+        (p16, 110)
+        (p64,  50)
+      };
+
+    % TS
+    \addplot coordinates {
+        (p64, 90)
+      };
+
+    % TS
+    \addplot coordinates {
+        (p64, 160)
+      };
+
+    \legend{{FFT~~~~~}, {MT FFT}, {TS DS~~~~~}, {TS IS}}
+  \end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,57 @@
+
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}
+    [
+      width=10 cm,
+      height=10 cm,
+      ybar = .7,
+      bar width = 24pt,
+      ymin = 0, ymax=265,
+      symbolic x coords={p8, p16, p64},
+      enlarge x limits = .5,
+      xtick = {p8, p16, p64},
+      % ytick = {0,20,...,180},
+      major tick length = 0ex,
+      xticklabels = {8, 16, 64},
+      % yticklabels = {0, 50, ...,200},
+      xmajorgrids = true,
+      ymajorgrids = true,
+      xlabel = {\phantom{()}\pd{}\phantom{()}},
+      ylabel = {Consommation énergétique ($\mu$J/b)},
+      nodes near coords,
+      nodes near coords style = {black},
+      legend pos=north east,
+      legend columns = 2,
+    ]
+
+    % FFT
+    \addplot coordinates {
+        (p8,  90)
+        (p16, 180)
+      };
+
+    % MT FFT
+    \addplot coordinates {
+        (p8,  80)
+        (p16, 230)
+      };
+
+    % TS DS
+    \addplot coordinates {
+        (p64, 45)
+      };
+
+    % TS IS
+    \addplot coordinates {
+        (p64, 20)
+      };
+
+    \legend{{FFT~~~~~}, {MT FFT}, {TS DS~~~~~}, {TS IS}}
+  \end{axis}
+\end{tikzpicture}
+\end{document}

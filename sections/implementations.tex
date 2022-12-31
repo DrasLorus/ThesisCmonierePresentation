@@ -275,20 +275,150 @@ c = a + b;\end{lstlisting}
   \blfootnote{\textcite{armNEONProgrammerGuide2013,intelrArchitectureInstructionSet2022}}
 \end{frame}
 
-\subsection{Étude du parallélisme}
+\subsection{Adaptation aux corrélations}
 
-\begin{frame}{\subsecname}
-  \begin{center}
-    \textcolor{RoyalBlue}{TODO}
-  \end{center}
+\begin{frame}{En logiciel --- FFT}
+  \begin{columns}
+    \begin{column}{.4\linewidth} \centering
+      \includegraphics[
+        width=\linewidth,
+        height=.45\textheight,
+        keepaspectratio=true,
+      ]{figures/tikzpicture/grid_fft_paral.pdf}
+    \end{column}
+    \begin{column}{.5 \linewidth}
+      \centering
+      \includegraphics[
+        width=\linewidth,
+        height=.45\textheight,
+        keepaspectratio=true,
+      ]{figures/tikzpicture/corr_method_fftshar_stdl.pdf}
+    \end{column}
+  \end{columns}
+  \begin{columns}
+    \begin{column}{.9\linewidth} \centering
+      \begin{itemize}
+        \item Stratégie ``SPMD'' selon l'axe \textcolor{Red}{$//_{\Delta}$} :
+              \begin{itemize}
+                \item un thread de calcul par hypothèse temporelle,
+                \item lancement de la procédure tous les $q$ chips.
+              \end{itemize}
+        \item L'axe \textcolor{Blue}{$//_{\omega}$} reste séquentiel, le coût de la parallélisation s'est avéré trop important.
+        \item Les FFTs proviennent de FFTW3 \cite{frigoDesignImplementationFFTW32005a}, et donc utilisent, entres autres, du ``SIMD''.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \blfootnote{\textcite{frigoDesignImplementationFFTW32005a}}
 \end{frame}
 
-\subsection{Les corrélations}
+\begin{frame}{En logiciel --- Time Sliding}
+  \begin{columns}
+    \begin{column}{.4\linewidth} \centering
+      \includegraphics[
+        width=\linewidth,
+        height=.45\textheight,
+        keepaspectratio=true,
+      ]{figures/tikzpicture/grid_fft_paral.pdf}
+    \end{column}
+    \begin{column}{.5 \linewidth}
+      \centering
+      \includegraphics[
+        width=\linewidth,
+        height=.45\textheight,
+        keepaspectratio=true,
+      ]{figures/tikzpicture/corr_method_subts_stdl.pdf}
+    \end{column}
+  \end{columns}
+  \begin{columns}
+    \begin{column}{.9\linewidth} \centering
+      \begin{itemize}
+        \item Utilisation de la version ``index shift'', plus performantes.
+        \item Stratégie ``SIMD'' selon l'axe \textcolor{Red}{$//_{\Delta}$} :
+              \begin{itemize}
+                \item décomposition des calculs dans l'espace des réels,
+                \item description algorithmique telle que le compilateur puisse la vectoriser.
+              \end{itemize}
+        \item Comme pour la FFT, l'axe \textcolor{Blue}{$//_{\omega}$} reste séquentiel.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \blfootnote{\textcite{frigoDesignImplementationFFTW32005a}}
+\end{frame}
 
-\begin{frame}{}
-  \begin{center}
-    \textcolor{RoyalBlue}{TODO}
-  \end{center}
+\begin{frame}{En matériel}
+  \begin{columns}
+    \begin{column}{.45\linewidth}
+      \centering
+      \begin{overlayarea}{\linewidth}{.65\textheight}
+        \underline{\textbf{FFT}}
+        \begin{ctrlitemize}{1 em}
+          \item Parallélisation MASSIVE de modules FFT optimisés ;
+          \item Impose une forte contrainte sur les ressources matérielles ;
+          \item Non concluant à l'heure actuelle \dots
+        \end{ctrlitemize}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.45\linewidth}
+      \centering
+      \begin{overlayarea}{\linewidth}{.65\textheight}
+        \underline{\textbf{Time Sliding}}
+        \begin{ctrlitemize}{1 em}
+          \item Utilisation de la version ``index shift'' à nouveau ;
+          \item Parallélisation complète des opérateurs, $\textcolor{Red}{\mpd{}} \times \textcolor{Blue}{\mpo{}}$ calculés en parallèle ;
+          \item En cours de finalisation.
+        \end{ctrlitemize}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+
+  \begin{columns}
+    \begin{column}{.8\linewidth}
+      \centering
+      \begin{overlayarea}{\linewidth}{.1\textheight}
+        {\small Note : utilisation de la synthèse de haut-niveau (HLS) pour convertir des descriptions comportementales en architectures matérielles.}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Résultats d'implémentation}{Débits binaires d'information fonction de \textcolor{Red}{\pd{}}, pour \textcolor{Blue}{$\mpo{} = 4$}}
+  \begin{columns}
+    \begin{column}{.5\linewidth}
+      \begin{overlayarea}{\linewidth}{.75\textheight}
+        \centering
+        \includegraphics[height = .65 \textheight]{figures/pgfplots/results_implem_through_intel.pdf}
+        \captionof{figure}{Plateforme Intel\textregistered{} x86\_64, $40$ cœurs Xeon\texttrademark{}-6148,\\horloge à $2,8$ GHz.}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.5\linewidth}
+      \begin{overlayarea}{\linewidth}{.75\textheight}
+        \centering
+        \includegraphics[height = .65 \textheight]{figures/pgfplots/results_implem_through_jetson.pdf}
+        \captionof{figure}{Plateforme ARM\textregistered{}, $12$ cœurs Cortex\texttrademark{}-A78AE,\\horloge à $2,2$ GHz.}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}{Résultats d'implémentation}{Consommations énergétiques fonction de \textcolor{Red}{\pd{}}, pour \textcolor{Blue}{$\mpo{} = 4$}}
+  \begin{columns}
+    \begin{column}{.5\linewidth}
+      \begin{overlayarea}{\linewidth}{.75\textheight}
+        \centering
+        \includegraphics[height = .65 \textheight]{figures/pgfplots/results_implem_nrj_intel.pdf}
+        \captionof{figure}{Plateforme Intel\textregistered{} x86\_64, $40$ cœurs Xeon\texttrademark{}-6148,\\horloge à $2,8$ GHz.}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.5\linewidth}
+      \begin{overlayarea}{\linewidth}{.75\textheight}
+        \centering
+        \includegraphics[height = .65 \textheight]{figures/pgfplots/results_implem_nrj_jetson.pdf}
+        \captionof{figure}{Plateforme ARM\textregistered{}, $12$ cœurs Cortex\texttrademark{}-A78AE,\\horloge à $2,2$ GHz.}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+  
 \end{frame}
 
 \end{document}

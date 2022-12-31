@@ -40,13 +40,13 @@
       minimum width  = 1.5 cm,
       minimum height = 1.3 cm},
   ] {
-  |[txt]| {} & |[rfnoc]| {RF tasks} & |[cpp]|   {FIR} & |[cpp]|   {Detector} & |[mat]|   {Time Sync.} & |[mat]|   {Freq. Sync.} & |[mat]|   {Phase Sync.} & |[mat]|   {NB-LDPC Decoder} & |[txt]| {}  \\
-  |[txt]| {} & |[rfnoc]| {RF tasks} & |[rfnoc]| {FIR} & |[cpp]|   {Detector} & |[mat]|   {Time Sync.} & |[mat]|   {Freq. Sync.} & |[mat]|   {Phase Sync.} & |[mat]|   {NB-LDPC Decoder} & |[txt]| {}  \\
-  |[txt]| {} & |[rfnoc]| {RF tasks} & |[rfnoc]| {FIR} & |[cpp]|   {Detector} & |[cpp]|   {Time Sync.} & |[cpp]|   {Freq. Sync.} & |[mat]|   {Phase Sync.} & |[mat]|   {NB-LDPC Decoder} & |[txt]| {}  \\
-  |[txt]| {} & |[rfnoc]| {RF tasks} & |[rfnoc]| {FIR} & |[rfnoc]| {Detector} & |[cpp]|   {Time Sync.} & |[cpp]|   {Freq. Sync.} & |[mat]|   {Phase Sync.} & |[mat]|   {NB-LDPC Decoder} & |[txt]| {}  \\
-  |[txt]| {} & |[rfnoc]| {RF tasks} & |[rfnoc]| {FIR} & |[rfnoc]| {Detector} & |[rfnoc]| {Time Sync.} & |[rfnoc]| {Freq. Sync.} & |[mat]|   {Phase Sync.} & |[mat]|   {NB-LDPC Decoder} & |[txt]| {}  \\
-  |[txt]| {} & |[rfnoc]| {RF tasks} & |[rfnoc]| {FIR} & |[rfnoc]| {Detector} & |[rfnoc]| {Time Sync.} & |[rfnoc]| {Freq. Sync.} & |[cpp]|   {Phase Sync.} & |[cpp]|   {NB-LDPC Decoder} & |[txt]| {}  \\
-  |[txt]| {} & |[rfnoc]| {RF tasks} & |[rfnoc]| {FIR} & |[rfnoc]| {Detector} & |[rfnoc]| {Time Sync.} & |[rfnoc]| {Freq. Sync.} & |[rfnoc]| {Phase Sync.} & |[rfnoc]| {NB-LDPC Decoder} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[cpp]|   {FIR} & |[cpp]|   {Détecteur} & |[mat]|   {Sync. Temp.} & |[mat]|   {Sync. Freq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur NB-LDPC} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[cpp]|   {Détecteur} & |[mat]|   {Sync. Temp.} & |[mat]|   {Sync. Freq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur NB-LDPC} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[cpp]|   {Détecteur} & |[cpp]|   {Sync. Temp.} & |[cpp]|   {Sync. Freq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur NB-LDPC} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[rfnoc]| {Détecteur} & |[cpp]|   {Sync. Temp.} & |[cpp]|   {Sync. Freq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur NB-LDPC} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[rfnoc]| {Détecteur} & |[rfnoc]| {Sync. Temp.} & |[rfnoc]| {Sync. Freq.} & |[mat]|   {Sync. Phase} & |[mat]|   {Décodeur NB-LDPC} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[rfnoc]| {Détecteur} & |[rfnoc]| {Sync. Temp.} & |[rfnoc]| {Sync. Freq.} & |[cpp]|   {Sync. Phase} & |[cpp]|   {Décodeur NB-LDPC} & |[txt]| {}  \\
+  |[txt]| {} & |[rfnoc]| {Tâches RF} & |[rfnoc]| {FIR} & |[rfnoc]| {Détecteur} & |[rfnoc]| {Sync. Temp.} & |[rfnoc]| {Sync. Freq.} & |[rfnoc]| {Sync. Phase} & |[rfnoc]| {Décodeur NB-LDPC} & |[txt]| {}  \\
   };
 
   \foreach \n in {1,...,7} {
@@ -136,12 +136,12 @@
 
   \node [matrix, draw = black, thick,
     right = 2cm of chain_4] (leg) {
-    \node [rfnoc, align = center, minimum size = 3 cm] (rfnoc_l) {RFNoC\\IP};
-    \node [cpp,   align = center, minimum size = 3 cm, right = 2 cm of rfnoc_l] (cpp_l) {Software\\(C/\cpp{})};
+    \node [rfnoc, align = center, minimum size = 3 cm] (rfnoc_l) {IP\\Matériel};
+    \node [cpp,   align = center, minimum size = 3 cm, right = 2 cm of rfnoc_l] (cpp_l) {Logiciel\\(C/\cpp{})};
   \node [mat,   align = center, minimum size = 3 cm, right = 2 cm of cpp_l] {MATLAB\\Octave};\\
   \node [draw = none, minimum size = 1cm] {}; \\
-  \node[usrp, align = center, minimum size = 3 cm, anchor = north west] (usrp_l) {Embeded on\\the SdR device};
-  \node[pc,   align = center, minimum size = 3 cm, right = 2 cm of usrp_l] (pc_l) {Running\\on the host};\\
+  \node[usrp, align = center, minimum size = 3 cm, anchor = north west] (usrp_l) {Embarqué dans\\le module SdR};
+  \node[pc,   align = center, minimum size = 3 cm, right = 2 cm of usrp_l] (pc_l) {Traiter\\par l'hôte};\\
   };
 
   \node [anchor = south] at (leg.north) {\textsc{Legend}};

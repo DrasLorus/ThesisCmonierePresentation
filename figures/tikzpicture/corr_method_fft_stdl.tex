@@ -1,17 +1,16 @@
-\documentclass[tikz,margin=0pt,dvipsnames,rgb]{standalone}
+\documentclass[tikz,margin=0pt,dvipsnames,x11names,rgb]{standalone}
 
 \input{../stdl_preamble.tex}
 
 \begin{document}
 
-\begin{tikzpicture} [->,
+\begin{tikzpicture}  [->,
   >={Triangle[width=6pt, length=8pt]},
   auto,
   thick,
   every node/.style={font={\Large}},
   main node/.style={rectangle, fill = white!35, draw,
-      align=center}
-  ]
+      align=center}]
 
   \node [main node,
     draw = none,
@@ -57,7 +56,7 @@
 
   \draw (input.east) -> (pack.west);
   \draw [latex-latex] ($(pack.south west) + (-.05, -.15)$) -> ($(pack.south east) + (.05, -.15)$)
-  node [midway, anchor = north] {size $q$};
+  node [midway, anchor = north] {taille $q$};
 
   \draw (ff1.south) |- (pack1.west);
   \draw [latex-latex] ($(ff1.north west) + (-.2, .1)$) -> ($(ff1.south west) + (-.2, -.1)$)
@@ -202,7 +201,7 @@
     % minimum size = 1cm
     anchor = south,
     align = center
-  ] at (pack.north east) {Output $\vect{y}_{n}$\\every $q$ chips};
+  ] at (pack.north east) {Produit $\vect{y}_{n}$\\tous les $q$ chips};
 
   \node [red,
   font = {\normalsize},

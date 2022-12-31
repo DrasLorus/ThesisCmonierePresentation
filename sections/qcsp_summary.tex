@@ -157,16 +157,16 @@
     \begin{column}{.5\linewidth}
       \centering
       \begin{itemize}
-        \item [1.] calcul des corrélations circulaires,
-        \item [2.] extraction du maximum en valeur absolue,
-        \item [3.] accumulation sur la durée de la dernière ``trame'' de $N \times q$ chips.
+        \item [1 ---] calcul des corrélations circulaires
+        \item [2 ---] extraction du maximum en valeur absolue
+        \item [3 ---] accumulation des $N$ derniers maximums pour former une ``trame''
       \end{itemize}
     \end{column}
     \begin{column}{.5\linewidth}
       \centering
       \begin{align*}
         \text{Corrélation } & :\quad & \vect{L}_n & = \vect{y}_n \star \mpn{0}               \\
-        \text{Max. absolu } & :\quad & M_n        & = \mathrm{max}(|\vect{L}_n|)             \\
+        \text{Max. v. absolue } & :\quad & M_n        & = \mathrm{max}(|\vect{L}_n|)             \\
         \text{Score }       & :\quad & S_n        & = S_{n - q} + M_{n} - M_{n - N \times q}
       \end{align*}
     \end{column}
@@ -179,12 +179,12 @@
 %   \end{center}
 % \end{frame}
 
-\begin{frame}{\subsecname : {Problèmes Temps Fréquence}}
+\begin{frame}{\subsecname : {Problèmes de la précision temps-fréquence}}
   \begin{columns}
     \begin{column}{.4\linewidth}
-      \begin{ctrlitemize}{6pt}
-        \item Les imprécisions d'horloges et l'effet Doppler introduisent des \textbf{erreurs de fréquences}, résultent en une \textbf{rotation du signal entrant}.
-        \item Le calcul de \textbf{chaque} valeur de score pour \textbf{chaque} chip accroit la complexité calculatoire.
+      \begin{ctrlitemize}{8pt}
+        \item Les imprécisions d'horloges et l'effet Doppler introduisent des \textbf{erreurs de fréquences} \textbf{$\Rightarrow$ rotation du signal entrant} ;
+        \item Calculer un score à chaque \textit{chip} coûte cher.
       \end{ctrlitemize}
     \end{column}
     \begin{column}{.6\linewidth}
