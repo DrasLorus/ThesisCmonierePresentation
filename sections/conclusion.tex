@@ -38,15 +38,19 @@
 \begin{frame}{\subsecname}
   \begin{columns}
     \begin{column}{.7 \linewidth}
-      \begin{ctrlitemize}{1 em}
-        \item L'algorithme préexistant a été amélioré :
-        \begin{ctrlitemize}{.5 em}
-          \item Robustesse aux variations de gain d'entrée ;%|
-          \item Rapport $\frac{\text{performances de détection}}{\text{complexité calculatoire}}$ supérieur ;
-          \item Objectif de performances atteint {\tiny (SNRs inférieurs à $-10$ dB, avec $20 \%$ de ressource spectrale de moins comparé aux protocoles à base de préambules \cite{saiedThesis2022})}.
-        \end{ctrlitemize}
+      Présenté aujourd'hui :
+      \begin{ctrlitemize}{.2 em} \small
+        \item L'algorithme préexistant a été amélioré en termes de robustesse et d'efficacité ;
+        %, et atteint toujours des SNRs inférieurs à $-10$ dB, avec $20 \%$ de ressource spectrale de moins comparé aux protocoles à base de préambules \cite{saiedThesis2022}).
         \item Le  récepteur QCSP est temps réel ($\approx 100$ kb/s de débit utile), grâce aux efforts de parallélisation ;
         \item Des campagnes d'expérimentations grandeurs nature ont permis, et permettent encore, d'améliorer le modèle et l'algorithme ;
+      \end{ctrlitemize} \vspace{1 em}
+
+      Non abordé dans cette présentation, mais également étudié :
+      \begin{ctrlitemize}{.2 em} \small
+        \item L'émetteur temps-réel ;
+        \item Un modèle en virgule fixe préliminaire du détecteur ;
+        \item Une description matérielle des corrélateurs via la synthèse de haut-niveau (HLS) 
       \end{ctrlitemize}
     \end{column}
     \begin{column}{.3 \linewidth}
@@ -103,23 +107,25 @@
 
 \begin{frame}{\subsecname}
   \begin{columns}
-    \begin{column}{.7 \linewidth}
-      {\centering \underline{\textbf{Courts termes}}\par}
-      \begin{ctrlitemize}{.6 em}
-        \item Modèle en virgule fixe validé, en cours d'implantation sur puce FPGA ;
-        \item Intégration complète du détecteur FPGA dans un module radio-logiciel.
-      \end{ctrlitemize}
-
-      {\centering \underline{\textbf{Longs termes}}\par}
-      \begin{ctrlitemize}{.6 em}
-        \item Porter les avancées de la détection à la synchronisation ;
-        \item Étudier la faisabilité d'un récepteur QCSP sur un SoPC ;
-        \item Étudier la modularité de la chaines QCSP --- Différentes complexités potentielles pour différents usages.
-      \end{ctrlitemize}
-    \end{column}
     \begin{column}{.3 \linewidth}
       \hfill \includegraphics[width = .35\linewidth]{future_sp.png} \\
       \includegraphics[width = \linewidth]{steps_futur.jpg}
+    \end{column}
+    \begin{column}{.7 \linewidth}
+      {\centering \underline{\textbf{Courts termes}}\par}
+      \begin{ctrlitemize}{.2 em} \small
+        \item Modèle en virgule fixe validé et en cours d'implantation sur puce FPGA ;
+        \item Intégration complète du détecteur matériel dans un module de radio logicielle.
+      \end{ctrlitemize}
+
+      {\centering \underline{\textbf{Longs termes}}\par}
+      \begin{ctrlitemize}{.2 em} \small
+        \item Mise en œuvre de la synchronisation ;
+        \item Performances, atouts et faiblesses de la chaine QCSP en contexte multi-utilisateurs ;
+        \item Pertinence de l'usage de la forme d'onde QCSP pour l'\acrshort{iot} spatial --- Faisabilité d'un récepteur QCSP sur un SoPC ;
+        \item Utilisation de systèmes QCSP dans des bouées autonomes ;
+        \item Modularité de la chaine, interaction avec la couche de liaison du modèle OSI.
+      \end{ctrlitemize}
     \end{column}
   \end{columns}
 \end{frame}

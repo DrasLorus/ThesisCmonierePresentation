@@ -143,32 +143,34 @@
         width=\linewidth,
         height=.7\textheight,
         keepaspectratio=true
-      ]{figures/tikzpicture/arch_fft_sync_stdl.pdf}
-      \note{\scriptsize
-        \captionof{table}{Complexité calculatoire de la méthode par FFT en fonction de $\textcolor{red}{\mpd}$ pour $\textcolor{blue}{p_\omega = 1}$.}
-        % \begin{noindent}
-  \begin{tabular}{@{}r r @{\phantom{XX}} r @{\phantom{XX}} r @{\phantom{XX}} r@{}}
-\toprule
-\ra{1.4}        & $\bm{\textcolor{red}{\mpd}}$
-        & \textbf{Add}
-        & \textbf{Multiply}
-        & \textbf{Memory}                              \\
-\midrule
-\textbf{\fft{}} & $\llbracket 1, \; q - 1 \rrbracket$ 
-        & $2 \textcolor{red}{\mpd} q \log_2(q)$
-        & $\textcolor{red}{\mpd} q(\log_2(q) + 2)$
-        & $(\frac{\textcolor{red}{\mpd} - 1}{\textcolor{red}{\mpd}} + \textcolor{red}{\mpd})q$ \\
-              & $q$                                 
-        & $2 q^2 \log_2(q)$
-        & $q^2(\log_2(q) + 2)$
-        & $q^2 + q + 1$                                 \\
-                      % \cmidrule{2-8}
-    % \textbf{\ts{}}  & $q$                                 &             & $q^2 + q$                &             & $q^2$                       &             & $2q$                                          \\
-\bottomrule
-  \end{tabular}
-  % \end{noindent}
-        \ra{1}
-      }
+      ]{figures/tikzpicture/arch_fft_sync_stdl.pdf} \\
+
+      {\scriptsize Complexité pour $1$ corrélation\\ $\sim \mathcal{O}(q^2) \rightarrow \sim \mathcal{O}(q \log_2(q))$}
+%       \note{\scriptsize
+%         \captionof{table}{Complexité calculatoire de la méthode par FFT en fonction de $\textcolor{red}{\mpd}$ pour $\textcolor{blue}{p_\omega = 1}$.}
+%         % \begin{noindent}
+%   \begin{tabular}{@{}r r @{\phantom{XX}} r @{\phantom{XX}} r @{\phantom{XX}} r@{}}
+% \toprule
+% \ra{1.4}        & $\bm{\textcolor{red}{\mpd}}$
+%         & \textbf{Add}
+%         & \textbf{Multiply}
+%         & \textbf{Memory}                              \\
+% \midrule
+% \textbf{\fft{}} & $\llbracket 1, \; q - 1 \rrbracket$ 
+%         & $2 \textcolor{red}{\mpd} q \log_2(q)$
+%         & $\textcolor{red}{\mpd} q(\log_2(q) + 2)$
+%         & $(\frac{\textcolor{red}{\mpd} - 1}{\textcolor{red}{\mpd}} + \textcolor{red}{\mpd})q$ \\
+%               & $q$                                 
+%         & $2 q^2 \log_2(q)$
+%         & $q^2(\log_2(q) + 2)$
+%         & $q^2 + q + 1$                                 \\
+%                       % \cmidrule{2-8}
+%     % \textbf{\ts{}}  & $q$                                 &             & $q^2 + q$                &             & $q^2$                       &             & $2q$                                          \\
+% \bottomrule
+%   \end{tabular}
+%   % \end{noindent}
+%         \ra{1}
+%       }
     \end{column}
   \end{columns}
 
@@ -193,7 +195,10 @@
       width=\linewidth,
       height=.25\textheight,
       keepaspectratio=true
-    ]{figures/tikzpicture/detect_trame_compare.pdf}
+    ]{figures/tikzpicture/detect_trame_compare.pdf}\\
+
+    {\scriptsize Complexité pour $1$ corrélation :
+    $\sim \mathcal{O}(q \log_2(q)) \rightarrow \sim \mathcal{O}(q)$}
     \par%
   }%
   \begin{columns}
@@ -219,6 +224,7 @@
 
           \captionof{figure}{Résultat si \textcolor{Red}{$\mpd{} = 2$} pour $q = 8$}
         }%
+        
       \end{overlayarea}
     \end{column}
     \begin{column}{.55\linewidth}
@@ -291,6 +297,7 @@
     \begin{column}{.4\linewidth}
       \centering
       \includegraphics[width = \linewidth]{figures/pgfplots/results_algo_through.pdf}
+      \captionof{figure}{Débits logiciels en l'absence d'optimisation sur serveur Intel\textregistered{} Xeon\texttrademark{}, horloge $3.0$ GHz.}
     \end{column}
   \end{columns}
   \footnotetext{Meilleur rapport performances de détection / complexité calculatoire.}

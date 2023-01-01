@@ -32,8 +32,205 @@
 
 \begin{document}
 
-\section[Système de communications QCSP]{Système de communications \acrshort{qcsp}}
 
+\section[\acrshort{qcsp}]{Le projet \acrfull{qcsp}}
+
+\begin{frame}{\secname}{\href{https://qcsp.univ-ubs.fr/}{https://qcsp.univ-ubs.fr/}}
+
+  \begin{columns}
+    \begin{column}{.4\linewidth} \centering
+      \begin{columns}
+        \begin{column}{.4\linewidth}
+          \includegraphics[width=\textwidth]{QCSP_Logo.pdf}
+        \end{column}
+        \begin{column}{.2\linewidth}
+          \includegraphics[width=\linewidth]{anr_approved.jpg}
+        \end{column}
+      \end{columns}
+      \small \vspace{5pt} Projet ANR \texttt{ANR-19-CE25-0013-01}
+    \end{column}
+    \begin{column}{.5\linewidth}
+      \emph{``L'objectif du projet QCSP est de contribuer à l'évolution des réseaux IoT en établissant,
+        en mettant en œuvre et testant un nouveau type de modulation codée.''}
+    \end{column}
+  \end{columns}
+
+  \vspace{2 em}
+
+  \begin{center}
+    Partenaires :\\
+    \includegraphics[width=0.6\linewidth]{figures/logos-thesis/partners-logos.png}
+  \end{center}
+\end{frame}
+
+
+\subsection[\acrshort{ccsk}]{\acrfull{ccsk}}
+
+\begin{frame}{\acrfull{ccsk}}
+  {}
+  % \begin{overlayarea}{\linewidth}{.02 \textheight}
+  % \end{overlayarea}
+  \begin{overlayarea}{\linewidth}{.15 \textheight} \centering
+    symboles de $p$ bits $\Longrightarrow$ rotation circulaire d'une \emph{séquence de pseudo-bruit binaire} (\acrshort{pn}) \cite{dillardCyclicCodeShift2003}.\\
+    La \acrshort{pn} (noté \pn{0}) est composée $2^p = q$ \emph{chips}, telle que $\mpn{0} = [P_0(0), ..., P_0(q - 1)]$
+  \end{overlayarea}
+
+  \begin{columns}
+    \begin{column}{.3\linewidth}
+      \begin{overlayarea}{\linewidth}{.37 \textheight}
+        \centering
+
+        \begin{tabular}{@{}r r l@{}}
+          \toprule
+          \multicolumn{3}{c}{\textbf{Paramètres}}         \\ \midrule
+          $p$    & $=$ & $2$ bits par symbole             \\
+          $q$    & $=$ & $4$ symboles possibles           \\
+          \pn{0} & $=$ & \Ob{}\Xb{}\Xb{}\Xb{} ($4$ chips) \\
+          \bottomrule
+        \end{tabular} \vspace*{-2pt}
+
+        \Ob{} $= 1$, \Xb{} $= 0$
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.3\linewidth}
+      \begin{overlayarea}{\linewidth}{.37 \textheight}
+        \begin{tabular}{@{}r c l@{}}
+          \toprule
+          \textbf{Symbole} & \textbf{Notation} & \textbf{Rotation}    \\ \midrule
+          $0$              & \pn{0}            & \Ob{}\Xb{}\Xb{}\Xb{} \\
+          $1$              & \pn{1}            & \Xb{}\Ob{}\Xb{}\Xb{} \\
+          $2$              & \pn{2}            & \Xb{}\Xb{}\Ob{}\Xb{} \\
+          $3$              & \pn{3}            & \Xb{}\Xb{}\Xb{}\Ob{} \\
+          \bottomrule
+        \end{tabular}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+
+  \vspace{1 em}
+
+  \begin{columns}
+    \begin{column}{.35\linewidth}
+      \begin{overlayarea}{\linewidth}{.19 \textheight}
+        \centering
+        Mot de code $\vect{C}$ de $3$ symboles\\
+        $\{ 0, \; 3, \; 1\}$
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.05\linewidth}
+      \centering
+      $\Rightarrow$
+    \end{column}
+    \begin{column}{.6\linewidth}
+      \begin{overlayarea}{\linewidth}{.19 \textheight}
+        \centering
+        % \begin{noindent}
+        \begin{tabular}{@{}r c@{}}
+          \multicolumn{2}{c}{Trame \acrshort{ccsk} $\vect{F}_{CCSK}$}          \\
+          $\{ \mpn{0} \;|\; \mpn{3} \;|\; \mpn{1} \}$ = 
+            & {\large \Ob{}\Xb{}\Xb{}\Xb{}~~\Xb{}\Xb{}\Xb{}\Ob{}~~\Xb{}\Ob{}\Xb{}\Xb{}} \\
+            & \includegraphics[width=.387\linewidth, height=.05\textheight]{figures/tikzpicture/pn_chrono.pdf}
+        \end{tabular}
+        % \end{noindent}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+  \begin{columns}
+    \begin{column}{.6678\linewidth}
+      Après le CCSK, on applique une BPSK ($1 \rightarrow +1$, $0 \rightarrow -1$) :
+    \end{column}
+    \begin{column}{.2322\linewidth} \centering
+      \includegraphics[width=\linewidth, height=.1\textheight]{figures/tikzpicture/pn_chrono_bpsk.pdf}
+    \end{column}
+    \begin{column}{.055\linewidth}
+    \end{column}
+  \end{columns}
+  \blfootnotetext{\textcite{dillardCyclicCodeShift2003}}
+  % \footnotetext{Corps de Galois d'ordre $p$}
+\end{frame}
+
+\begin{frame}{\acrshort{ccsk} : Démodulation}
+  {\scriptsize Note : Post BPSK, donc cette fois, \Ob{} $= +1$, \Xb{} $= -1$.}
+
+  Corrélation circulaire $\vect{L}$: $\quad\forall k \in \llbracket 0, q - 1 \rrbracket, \quad L(k) = \sum_{i = 0}^{q - 1} y(i) \times P_0(k + i \mod{q})$. \vspace{-2pt}
+  \begin{center}
+    On note $\vect{y} = \mgb{} \mgb{} \mgb{} \mgb{}$, avec ``$\mgb{}$'' une valeur quelconque.
+  \end{center} \vspace{-5pt}
+  \begin{columns}
+    \begin{column}{.25\linewidth}
+      \centering
+      \ra{.5}
+      \begin{tabular}{@{}r l@{}}
+        $L(0) =$ &
+        \begin{tabular}{@{}c l@{}}
+          $\mgb{} \pta{} \mgb{} \pta{} \mgb{} \pta{} \mgb{}$ \\
+          $\times + \times + \times + \times$                \\
+          $\mOb{} \pta{} \mXb{} \pta{} \mXb{} \pta{} \mXb{}$
+        \end{tabular}
+      \end{tabular}
+      \ra{1}
+    \end{column}
+    \begin{column}{.25\linewidth}
+      \centering
+      \ra{.5}
+      \begin{tabular}{@{}r l@{}}
+        $L(1) =$ &
+        \begin{tabular}{@{}c@{}}
+          $\mgb{} \pta{} \mgb{} \pta{} \mgb{} \pta{} \mgb{}$ \\
+          $\times + \times + \times + \times$                \\
+          $\mXb{} \pta{} \mOb{} \pta{} \mXb{} \pta{} \mXb{}$
+        \end{tabular}
+      \end{tabular}
+      \ra{1}
+    \end{column}
+    \begin{column}{.25\linewidth}
+      \centering
+      \ra{.5}
+      \begin{tabular}{@{}r l@{}}
+        $L(2) =$ &
+        \begin{tabular}{@{}c@{}}
+          $\mgb{} \pta{} \mgb{} \pta{} \mgb{} \pta{} \mgb{}$ \\
+          $\times + \times + \times + \times$                \\
+          $\mXb{} \pta{} \mXb{} \pta{} \mOb{} \pta{} \mXb{}$
+        \end{tabular}
+      \end{tabular}
+      \ra{1}
+    \end{column}
+    \begin{column}{.25\linewidth} \centering
+      \ra{.5}
+      \begin{tabular}{@{}r l@{}}
+        $L(3) =$ &
+        \begin{tabular}{@{}c@{}}
+          $\mgb{} \pta{} \mgb{} \pta{} \mgb{} \pta{} \mgb{}$ \\
+          $\times + \times + \times + \times$                \\
+          $\mXb{} \pta{} \mXb{} \pta{} \mXb{} \pta{} \mOb{}$
+        \end{tabular}
+      \end{tabular}
+      \ra{1}
+    \end{column}
+  \end{columns}
+
+  \vspace{15pt}
+
+  \begin{columns}
+    \begin{column}{.25\linewidth}
+      \captionof{figure}{$\vect{y} = \mpn{0}$ \\ Autocorrélation circulaire de \pn{\textcolor{Red}{\bm{0}}}}
+      \includegraphics[width=\linewidth]{pgfplots/pn_demod_0.pdf}
+    \end{column}
+    \begin{column}{.25\linewidth}
+      \captionof{figure}{$\vect{y} = \mpn{1}$ \\ Corrélation circulaire de \pn{0} et \pn{\textcolor{Red}{\bm{1}}}}
+      \includegraphics[width=\linewidth]{pgfplots/pn_demod_1.pdf}
+    \end{column}
+    \begin{column}{.25\linewidth}
+      \captionof{figure}{$\vect{y} = \mpn{2}$ \\ Corrélation circulaire de \pn{0} et \pn{\textcolor{Red}{\bm{2}}}}
+      \includegraphics[width=\linewidth]{pgfplots/pn_demod_2.pdf}
+    \end{column}
+    \begin{column}{.25\linewidth}
+      \captionof{figure}{$\vect{y} = \mpn{3}$ \\ Corrélation circulaire de \pn{0} et \pn{\textcolor{Red}{\bm{3}}}}
+      \includegraphics[width=\linewidth]{pgfplots/pn_demod_3.pdf}
+    \end{column}
+  \end{columns}
+\end{frame}
 
 \subsection{Modèle}
 
@@ -165,9 +362,9 @@
     \begin{column}{.5\linewidth}
       \centering
       \begin{align*}
-        \text{Corrélation } & :\quad & \vect{L}_n & = \vect{y}_n \star \mpn{0}               \\
+        \text{Corrélation }     & :\quad & \vect{L}_n & = \vect{y}_n \star \mpn{0}               \\
         \text{Max. v. absolue } & :\quad & M_n        & = \mathrm{max}(|\vect{L}_n|)             \\
-        \text{Score }       & :\quad & S_n        & = S_{n - q} + M_{n} - M_{n - N \times q}
+        \text{Score }           & :\quad & S_n        & = S_{n - q} + M_{n} - M_{n - N \times q}
       \end{align*}
     \end{column}
   \end{columns}

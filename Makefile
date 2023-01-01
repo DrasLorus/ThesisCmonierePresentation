@@ -16,11 +16,14 @@ main: figures main.pdf main.gls main.acr
 	makeglossaries main
 	latexmk main.tex
 
-main.pdf main.ist main.acn: main.tex figures
+main.pdf main.ist main.acn: main.tex sections/backup.pdf
 	latexmk main.tex
 
 main.gls main.acr: main.ist main.glo main.acn
 	makeglossaries main
+
+sections/backup.pdf: sections/backup.tex
+	latexmk sections/backup.tex -output-directory=sections
 
 figures: svg tikzpictures pgfplots
 	@echo

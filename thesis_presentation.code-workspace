@@ -25,8 +25,8 @@
 			}
 		],
 		// "latex-workshop.latex.autoBuild.interval": 20000,
-		"latex-workshop.view.pdf.external.viewer.command": "zathura-tabbed",
-		// "latex-workshop.view.pdf.external.viewer.command": "zathura",
+		// "latex-workshop.view.pdf.external.viewer.command": "zathura-tabbed",
+		"latex-workshop.view.pdf.external.viewer.command": "zathura",
 		"latex-workshop.view.pdf.external.viewer.args": [
 			"--synctex-editor-command",
 			"code --no-sandbox -r -g \"%{input}:%{line}\"",

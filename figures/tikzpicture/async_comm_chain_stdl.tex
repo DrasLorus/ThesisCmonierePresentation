@@ -35,16 +35,6 @@
     right = 1.75 cm of m
   ] (chanenc) {Codage};
 
-
-  \node [main node,
-    fill = RoyalBlue2!20,
-    draw = RoyalBlue4,
-    text = RoyalBlue4,
-    minimum height = 1.5cm,
-    % minimum width = 6cm,
-    right = 1.75 cm of chanenc
-  ] (mod) {Modulation};
-
   \node [main node,
     fill = Red1!20,
     draw = Red4,
@@ -52,7 +42,7 @@
     align = center,
     minimum height = 1.5cm,
     % minimum width = 6cm,
-    right = 1.75 cm of mod
+    right = 1.75 cm of chanenc
   ] (met) {Ajout de\\métadonnées};
 
   \node [main node,
@@ -113,15 +103,6 @@
   ] (synch) at (adc.west -| met.south) {Détection et\\synchronisation};
 
   \node [main node,
-    % fill = red!60!gray!30!white,
-    fill = RoyalBlue2!20,
-    draw = RoyalBlue4,
-    text = RoyalBlue4,
-    minimum height = 1.5cm,
-    % minimum width = 6cm,
-  ] (demod) at (synch -| mod) {Démodulation};
-
-  \node [main node,
     fill = RoyalBlue2!20,
     draw = RoyalBlue4,
     text = RoyalBlue4,
@@ -175,23 +156,21 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   \draw (m.east)       -> (chanenc.west);
-  \draw (chanenc.east) -> (mod.west);
-  \draw (mod.east)     -> (met.west);
+  \draw (chanenc.east) -> (met.west);
   \draw (met.east)     -> (dac.west);
   \draw (dac.east)     -> (tx);
   \draw [dashed] (tx)  -> (chan.north);
   \draw [dashed] (chan.south) -> (rx);
   \draw (rx)           -> (adc.east);
-  \draw (adc.west)    -> (synch.east);
-  \draw (synch.west)   -> (demod.east);
-  \draw (demod.west)   -> (chandec.east);
+  \draw (adc.west)     -> (synch.east);
+  \draw (synch.west)   -> (chandec.east);
   \draw (chandec.west) -> (mp.east);
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   \draw [dashed, line width = 3pt, -] (m |- chan) -- (adc |- chan);
-  \node [] at (mod |- chan.north) {\textbf{Émission}};
-  \node [] at (mod |- chan.south) {\textbf{Réception}};
+  \node [] at (chanenc |- chan.north) {\textbf{Émission}};
+  \node [] at (chanenc |- chan.south) {\textbf{Réception}};
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
