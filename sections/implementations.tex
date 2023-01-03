@@ -65,9 +65,16 @@
 
 
 \begin{frame}[fragile]{\acrshort{simd} : Exemple}
-
-  Exemple : \\
-  \hspace{2 em} \centering Somme termes à termes de $\vect{a} = [a_0, a_1, a_2, a_3]$ et $\vect{b} = [b_0, b_1, b_2, b_3]$ stocké dans $\vect{c} =  [c_0, c_1, c_2, c_3]$ \vspace{3 em} \\
+  \vspace{- 1 em}
+  \begin{columns}
+    \begin{column}{.5\linewidth}
+      \includegraphics[width=\linewidth]{figures/drawiopdf/testyolo-jm2.pdf}
+    \end{column}
+    \begin{column}{.5\linewidth}
+      Exemple : \\
+      \hspace{2 em} \centering Somme termes à termes de $\vect{a} = [a_0, a_1, a_2, a_3]$ et $\vect{b} = [b_0, b_1, b_2, b_3]$ stocké dans $\vect{c} =  [c_0, c_1, c_2, c_3]$ 
+    \end{column}
+  \end{columns} \vspace{1 em} 
 
   \begin{columns}
     \begin{column}{.5\linewidth}
@@ -77,26 +84,24 @@
         Pour chaque $x$ dans $[0,1,2,3]$, faire :\\
         \hspace{2 em} $c_x = a_x + b_x$
 
-        \begin{columns}
-          \begin{column}{.45\linewidth}
-            % \begin{noindent}
-          \begin{lstlisting}[title={Sequentiellement en C},style=cstyle,basicstyle=\tiny]
+        % \begin{columns}
+        %   \begin{column}{.45\linewidth}
+        \begin{lstlisting}[title={Sequentiellement en C},style=cstyle,basicstyle=\scriptsize]
  //  a, b et c => double[4]
  for (int i = 0; i < 4; i++) {
    c[i] = a[i] + b[i]; 
  }\end{lstlisting}
-          % \end{noindent}
-          \end{column}
-          \begin{column}{.5\linewidth}
-            % \begin{noindent}
-           \begin{lstlisting}[title={Sequentiellement en MATLAB},style=cstyle,language=MATLAB,basicstyle=\tiny]
- % a, b, et c => size = (1, 4)
- for i in 1 : 4
-   c(i) = a(i) + b(i)
- end\end{lstlisting}
-           % \end{noindent}
-          \end{column}
-        \end{columns}
+        % \end{column}
+        % \begin{column}{.5\linewidth}
+
+        %   \begin{lstlisting}[title={Sequentiellement en MATLAB},style=cstyle,language=MATLAB,basicstyle=\tiny]
+        %  % a, b, et c => size = (1, 4)
+        %  for i in 1 : 4
+        %    c(i) = a(i) + b(i)
+        %  end\end{lstlisting}
+        %          
+        %  \end{column}
+        % \end{columns}
       \end{overlayarea}
     \end{column}
     \begin{column}{.45\linewidth}
@@ -106,25 +111,30 @@
         $\vect{c} = \vect{a} + \vect{b}$ \\
         \phantom{$c_x$}
 
-        \begin{columns}
-          \begin{column}{.5\linewidth}
-            % \begin{noindent}
-          \begin{lstlisting}[title={SIMD en C (Intel, double)},style=cstyle,basicstyle=\tiny]
+        % \begin{columns}
+        %   \begin{column}{.5\linewidth}
+        \begin{lstlisting}[title={SIMD en C (Intel, double $64$-bit)},style=cstyle,basicstyle=\scriptsize]
  //  a, b et c => double[4]
  c = _mm256_add_pd(a, b);\end{lstlisting}
-          % \end{noindent}
-          \end{column}
-          \begin{column}{.5\linewidth}
-            % \begin{noindent}
-            \begin{lstlisting}[title={SIMD en MATLAB},style=cstyle,language=MATLAB,basicstyle=\tiny]
-% a, b, et c => size = (1, 4)
-c = a + b;\end{lstlisting}
-            % \end{noindent}
-          \end{column}
-        \end{columns}
+        % \end{column}
+        %           \begin{column}{.5\linewidth}
+        %             % \begin{noindent}
+%             \begin{lstlisting}[title={SIMD en MATLAB},style=cstyle,language=MATLAB,basicstyle=\tiny]
+% % a, b, et c => size = (1, 4)
+% c = a + b;\end{lstlisting}
+%             % \end{noindent}
+        %           \end{column}
+        % \end{columns}
       \end{overlayarea}
     \end{column}
   \end{columns}
+  \note{
+    \begin{itemize}
+      \item Les CPU today, c'est cool
+      \item Faut leur parler bien
+      \item Exemple
+    \end{itemize}
+  }
 \end{frame}
 
 \begin{frame}{Single Program Multiple Data (SPMD)}
@@ -153,6 +163,9 @@ c = a + b;\end{lstlisting}
     \end{column}
   \end{columns}
   \blfootnote{\textcite{hillAmdahlLawMulticore2008}}
+  \note{
+    Lis $+$ dis boost débit mais attention latence !
+  }
 \end{frame}
 
 \begin{frame}{SPMD : Exemple --- Somme de $10^9$ valeurs}
@@ -166,7 +179,11 @@ c = a + b;\end{lstlisting}
           width=\linewidth,
           height=.45\textheight,
           keepaspectratio=true,
-        ]{figures/drawiopdf/sum_seq.pdf}
+        ]{figures/drawiopdf/sum_seq.pdf} \vspace{1em} 
+
+        $T_{seq} = T_{iter} \times 10^9$ \\
+        VS
+        $T_{//}  = \frac{T_{seq}}{4} + T_{start} + T_{stop} + 4 \times T_{iter}$ \\
       \end{overlayarea}
     \end{column}
     \begin{column}{.66\linewidth}
@@ -208,7 +225,11 @@ c = a + b;\end{lstlisting}
       \end{ctrlitemize}
     \end{column}
   \end{columns}
+  \note{
+    Lis $+$ dis gain latence mais debit limité par plus lent !
+  }
 \end{frame}
+
 \begin{frame}{MPMD : Exemple --- Chaine de communication}
   \begin{center}
     \includegraphics[
@@ -230,6 +251,9 @@ c = a + b;\end{lstlisting}
       \end{itemize}
     \end{column}
   \end{columns}
+  \note{
+    Lis $+$ ui ui on pourrait mixer
+  }
 \end{frame}
 
 \begin{frame}
@@ -280,6 +304,9 @@ c = a + b;\end{lstlisting}
     \end{column}
   \end{columns}
   \blfootnote{\textcite{armNEONProgrammerGuide2013,intelrArchitectureInstructionSet2022}}
+  \note {
+    Déroule juste, on verra après
+  }
 \end{frame}
 
 \subsection{Adaptation aux corrélations}
@@ -386,6 +413,14 @@ c = a + b;\end{lstlisting}
   %     \end{overlayarea}
   %   \end{column}
   % \end{columns}
+  \only<2>{
+    \vspace{1 em}
+    
+    \centering \Huge En cours !
+  }
+  \note{
+    En cours, ingénieure L. Volpin supervisée, à récupérer 
+  }
 \end{frame}
 
 \begin{frame}{Résultats d'implémentation}{Débits binaires d'information fonction de \textcolor{Red}{\pd{}}, pour \textcolor{Blue}{$\mpo{} = 4$}}

@@ -49,8 +49,8 @@
       Non abordé dans cette présentation, mais également étudié :
       \begin{ctrlitemize}{.2 em} \small
         \item L'émetteur temps-réel ;
-        \item Un modèle en virgule fixe préliminaire du détecteur ;
-        \item Une description matérielle des corrélateurs via la synthèse de haut-niveau (HLS) 
+        \item Un modèle en virgule fixe du détecteur ;
+        \item Une description matérielle du détecteur en cours de finalisation.
       \end{ctrlitemize}
     \end{column}
     \begin{column}{.3 \linewidth}
@@ -112,22 +112,34 @@
       \includegraphics[width = \linewidth]{steps_futur.jpg}
     \end{column}
     \begin{column}{.7 \linewidth}
-      {\centering \underline{\textbf{Courts termes}}\par}
+      {\centering \underline{\textbf{Court terme}}\par}
       \begin{ctrlitemize}{.2 em} \small
         \item Modèle en virgule fixe validé et en cours d'implantation sur puce FPGA ;
         \item Intégration complète du détecteur matériel dans un module de radio logicielle.
       \end{ctrlitemize}
 
-      {\centering \underline{\textbf{Longs termes}}\par}
+      {\centering \underline{\textbf{Long terme}}\par}
       \begin{ctrlitemize}{.2 em} \small
-        \item Mise en œuvre de la synchronisation ;
-        \item Performances, atouts et faiblesses de la chaine QCSP en contexte multi-utilisateurs ;
-        \item Pertinence de l'usage de la forme d'onde QCSP pour l'\acrshort{iot} spatial --- Faisabilité d'un récepteur QCSP sur un SoPC ;
-        \item Utilisation de systèmes QCSP dans des bouées autonomes ;
-        \item Modularité de la chaine, interaction avec la couche de liaison du modèle OSI.
+        \item Extensions :
+        \begin{itemize}
+          \item QCSP en contexte ``multi-utilisateurs'' ;
+          \item Pertinence pour l'usage spatial ;
+          \item Étude des couches OSI supérieures.
+        \end{itemize}
+        \item Applicatifs :
+        \begin{itemize}
+          \item Bouées autonomes ;
+          \item Communications courtes pour des drones. 
+        \end{itemize}
       \end{ctrlitemize}
     \end{column}
   \end{columns}
+  \note{
+    pour les extensions :
+
+    * Résilience au Doppler par conception\\
+    * Possibilité d'une plateforme SoPC
+  }
 \end{frame}
 
 

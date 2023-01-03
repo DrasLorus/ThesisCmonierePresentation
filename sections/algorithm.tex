@@ -248,7 +248,7 @@
     \begin{column}{.55\linewidth}
       Nouvelle méthode, mise au point spécialement pour la détection QCSP.
       \begin{ctrlitemize}{0pt}
-        \item [\bonus] Moins complexe que la méthode par \fft{} quand \textcolor{red}{$\mpd{} > \frac{q}{\log_2(q)}$} \cite{moniereTimeSlidingWindow2021}\\$\Rightarrow$ $\nearrow$ efficience.
+        \item [\bonus] Moins complexe que la méthode par \fft{} quand \textcolor{red}{$\mpd{} > \frac{q}{\log_2(q)}$} \cite{moniereTimeSlidingWindow2021}\\$\Rightarrow$ $\nearrow$ efficacité.
         \item [\malus] Le degré de liberté sur \textcolor{red}{\pd{}} est perdu.
       \end{ctrlitemize}
     \end{column}
@@ -286,8 +286,8 @@
         % \vspace{-1 em}
 
         \begin{ctrlitemize}{0pt}
-          \item [\bonus] Intuitive, sortie ordonnée.
-          \item [\malus] Lourde, les $L^{\bomega}_{n}(i)$ sont des nombres complexes, et toujours représentés sur plusieurs bits.
+          \item [\bonus] Intuitive.
+          \item [\malus] Les $L^{\bomega}_{n}(i)$ sont des nombres complexes, et toujours représentés sur plusieurs bits.
         \end{ctrlitemize}
       \end{overlayarea}
     \end{column}
@@ -299,8 +299,8 @@
         % \vspace{-1 em}
 
         \begin{ctrlitemize}{0pt}
-          \item [\bonus] Légère, les $P_{k + i}(q - 1)$ sont des nombres réels, pouvant être représentés par $1$ bit.
-          \item [\textcolor{RoyalBlue}{\malus}] Sortie désordonnée, mais \dots{} l'ordre n'importe pas \textit{en détection}.
+          \item [\bonus] Les $P_{k + i}(q - 1)$ sont des nombres réels, pouvant être représentés par $1$ bit.
+          \item [\textcolor{RoyalBlue}{\malus}] Aucun pour la détection.
         \end{ctrlitemize}
       \end{overlayarea}
     \end{column}

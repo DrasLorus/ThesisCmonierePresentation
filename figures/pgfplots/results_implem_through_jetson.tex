@@ -9,11 +9,11 @@
     [
       width=10 cm,
       height=10 cm,
-      ybar = .7,
-      bar width = 24pt,
+      ybar,
+      bar width = 16pt,
       ymin = 0, ymax=75,
       symbolic x coords={p8, p16, p64},
-      enlarge x limits = .5,
+      enlarge x limits = .2,
       xtick = {p8, p16, p64},
       ytick = {0,20,...,180},
       major tick length = 0ex,
@@ -33,23 +33,36 @@
     \addplot coordinates {
         (p8,  20)
         (p16, 10)
+        (p64, -1)
       };
 
     % MT FFT
     \addplot coordinates {
         (p8,  40)
         (p16, 15)
+        (p64, -1)
       };
 
     % TS DS
     \addplot coordinates {
+        (p8,  -1)
+        (p16, -1)
         (p64, 41)
       };
 
     % TS IS
     \addplot coordinates {
+        (p8,  -1)
+        (p16, -1)
         (p64, 66)
       };
+
+    \coordinate (A) at (axis cs:p8,50);
+    \coordinate (O1) at (rel axis cs:0,0);
+    \coordinate (O2) at (rel axis cs:1,0);
+
+    \draw [Red, ultra thick] (A -| O1) -- (A -| O2)
+    node [pos = .3, above] {Objectif};
 
     \legend{{FFT~~~~~}, {MT FFT}, {TS DS~~~~~}, {TS IS}}
   \end{axis}
