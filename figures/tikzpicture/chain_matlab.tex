@@ -1,0 +1,69 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+\begin{document}
+\begin{tikzpicture} [-latex,
+    >=latex,
+    auto,
+    thick,
+    main node/.style={rectangle, fill = white!35, draw,
+        align=center}
+  ]
+
+  \node [main node,
+    align=center,
+    minimum height = 1.5cm
+  ] (nbenc) at (0, 0) {Encodeur\\NB-LDPC};
+
+  \node [main node,
+    minimum height = 1.5cm,
+    right = 1cm of nbenc
+  ] (ccskm) {Modulation\\CCSK};
+
+  \node [main node,
+    minimum height = 1.5cm,
+    minimum width = 2cm,
+    right = 1cm of ccskm
+  ] (bpskm) {BPSK};% $+$\\Surmodulation};
+
+  \node [diamond,
+    aspect = 2,
+    draw,
+    fill = white,
+    align = center,
+    right = 1cm of bpskm,
+  ] (bichan)  {Canal gaussien\\complexe asynchrone};
+
+  \node [main node,
+    minimum height = 1.5cm,
+    %minimum width = 3cm,
+    right = 1 cm of bichan
+  ] (ccskd)  {Détection};
+
+  \node [main node,
+    minimum height = 1.5cm,
+    %minimum width = 3cm,
+    right = 1 cm of ccskd
+  ] (ccsks) {Synchronisation};
+
+  \node [main node,
+    minimum height = 1.5cm,
+    right = 1cm of ccsks
+  ] (nbdec) {Décodeur\\NB-LDPC};
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \draw ($(-1, 0) + (nbenc.west)$) -> (nbenc.west)
+  node [pos=0, align=center, left] (M) {Message};
+  \draw (nbenc.east) -> (ccskm.west);
+  \draw (ccskm.east) -> (bpskm.west);
+  \draw (bpskm.east) -- (bichan.west);
+  \draw (bichan.east) -- (ccskd.west);
+  \draw (ccskd.east) -> (ccsks.west);
+  \draw (ccsks.east) -> (nbdec.west);
+  \draw (nbdec.east) -> ($(1, 0) + (nbdec.east)$)
+  node [pos=1, align=center, right] (M) {Message\\décodé};
+
+
+\end{tikzpicture}
+\end{document}

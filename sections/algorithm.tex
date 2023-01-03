@@ -35,7 +35,7 @@
 
 \subsection{Sensibilité à un facteur d'échelle}
 
-\begin{frame}{\subsecname}
+\begin{frame}{\subsecname : réalité physique}
   \begin{columns}
     \begin{column}{.5\linewidth}
       \centering
@@ -51,9 +51,22 @@
       \includegraphics[width=\linewidth]{figures/pgfplots/score_function_gained.pdf}
     \end{column}
   \end{columns}
+  \note{
+    \begin{enumerate}
+      \item un système réel, ce n'est pas la simu. : il est imparfait
+      \item Dans théorie, le seuil est fixe
+      \item En vrai, pas possible,  gain d'entrée peut varier pour :
+      \begin{itemize}
+        \item Température
+        \item batterie \dots
+      \end{itemize}
+      \item En \textcolor{Blue}{bleu}, gain stable, seuil fixe = ça marche.
+      \item En \textcolor{Red}{rouge}, meme entrée MAIS gain instable
+    \end{enumerate}
+  }
 \end{frame}
 
-\begin{frame}{Solution : normalisation}
+\begin{frame}{Solution proposée : normalisation}
   \begin{columns}
     \begin{column}{.5\linewidth}
       \centering
@@ -77,6 +90,14 @@
     \end{column}
   \end{columns}
   \footnotetext{Une étude approfondie est disponible dans le manuscrit.}
+  \note{
+    I - Le score --- II - Impact sur perfo
+    \begin{enumerate}
+      \item solution que \textbf{J'AI} proposée
+      \item bla bla
+      \item Etude de complexité et impact que \textbf{J'AI} menée
+    \end{enumerate}
+  }
 \end{frame}
 
 
@@ -109,6 +130,19 @@
   ]{figures/tikzpicture/tasks_dep_stdl.pdf}
   \captionof{figure}{$\task{S}$ : calcul de score --- $\task{\mnorm{}}$ : calcul de la norme --- $\task{U}$ : décision --- $\task{B}$ : Tampon mémoire}
   \par}%
+  \note{
+    \textit{Fais l'point, t'es plus} \textbf{focus} 
+    
+    Focaliser les efforts.
+
+    \vspace*{2 em}
+
+    \begin{itemize}
+      \item Dans le recepteur -> Détection
+      \item Dans détecteur -> Score
+      \item Dans Score -> Corrélation.
+    \end{itemize}
+  }
 \end{frame}
 
 \begin{frame}{Méthode par transformée de Fourier rapide (FFT)}{}
@@ -128,9 +162,9 @@
           \centering
           \includegraphics[
             width=\linewidth,
-            height=.7\textheight,
+            height=.45\textheight,
             keepaspectratio=true
-          ]{figures/tikzpicture/comp_fft_grid_stdl.pdf} \vspace{-2em}
+          ]{figures/tikzpicture/comp_fft_grid_stdl.pdf} \vspace{-1 em}
 
           \captionof{figure}{Résultat si \textcolor{Red}{$\mpd{} = 2$} pour $q = 8$}
         }%
@@ -146,31 +180,7 @@
       ]{figures/tikzpicture/arch_fft_sync_stdl.pdf} \\
 
       {\scriptsize Complexité pour $1$ corrélation\\ $\sim \mathcal{O}(q^2) \rightarrow \sim \mathcal{O}(q \log_2(q))$}
-%       \note{\scriptsize
-%         \captionof{table}{Complexité calculatoire de la méthode par FFT en fonction de $\textcolor{red}{\mpd}$ pour $\textcolor{blue}{p_\omega = 1}$.}
-%         % \begin{noindent}
-%   \begin{tabular}{@{}r r @{\phantom{XX}} r @{\phantom{XX}} r @{\phantom{XX}} r@{}}
-% \toprule
-% \ra{1.4}        & $\bm{\textcolor{red}{\mpd}}$
-%         & \textbf{Add}
-%         & \textbf{Multiply}
-%         & \textbf{Memory}                              \\
-% \midrule
-% \textbf{\fft{}} & $\llbracket 1, \; q - 1 \rrbracket$ 
-%         & $2 \textcolor{red}{\mpd} q \log_2(q)$
-%         & $\textcolor{red}{\mpd} q(\log_2(q) + 2)$
-%         & $(\frac{\textcolor{red}{\mpd} - 1}{\textcolor{red}{\mpd}} + \textcolor{red}{\mpd})q$ \\
-%               & $q$                                 
-%         & $2 q^2 \log_2(q)$
-%         & $q^2(\log_2(q) + 2)$
-%         & $q^2 + q + 1$                                 \\
-%                       % \cmidrule{2-8}
-%     % \textbf{\ts{}}  & $q$                                 &             & $q^2 + q$                &             & $q^2$                       &             & $2q$                                          \\
-% \bottomrule
-%   \end{tabular}
-%   % \end{noindent}
-%         \ra{1}
-%       }
+%       \note{
     \end{column}
   \end{columns}
 
@@ -186,6 +196,14 @@
     \end{column}
   \end{columns}
   \blfootnote{\textcite{abassiNonbinaryLowdensityParitycheck2013, kastnerParallelProgrammingFPGAs2018}}
+  \note{
+    \begin{itemize}
+      \item Méthode original utilisé dans les travaux de K.S. utilisent des FFT
+      \item PK ? Litterature
+      \item Pour un calcul -> de $q^2$ à $q\log_2(q)$
+      \item si $1$ calcul tous les $4$ ech. ($q = 8$, $\mpd{} = 2$), à $1$ Méch/s -> $250~000$ FFT et IFFT par seconde !
+    \end{itemize}
+  }
 \end{frame}
 
 \begin{frame}{Méthode par \acrfull{ts}}{}
@@ -193,7 +211,7 @@
     \centering
     \includegraphics[
       width=\linewidth,
-      height=.25\textheight,
+      height=.24\textheight,
       keepaspectratio=true
     ]{figures/tikzpicture/detect_trame_compare.pdf}\\
 
@@ -218,9 +236,9 @@
           \centering
           \includegraphics[
             width=\linewidth,
-            height=.7\textheight,
+            height=.45\textheight,
             keepaspectratio=true
-          ]{figures/tikzpicture/comp_ts_grid_stdl.pdf} \vspace{-2 em}
+          ]{figures/tikzpicture/comp_ts_grid_stdl.pdf} \vspace{-1 em}
 
           \captionof{figure}{Résultat si \textcolor{Red}{$\mpd{} = 2$} pour $q = 8$}
         }%
@@ -236,6 +254,15 @@
     \end{column}
   \end{columns}
   \blfootnote{\textcite{moniereTimeSlidingWindow2021}}
+  \note{
+    \begin{itemize}
+      \item Nouvelle méthode que \textbf{NOUS} avons mise au point
+      \item PK ? dans le temps, adapté à un flux de données par conception
+      \item MAIS besoin de tous les points !!
+      \item Pour un calcul -> de $q\log_2(q)$ à $q$ et \pd{} is $q$
+      \item si \pd{} $>$ \dots OK
+    \end{itemize}
+  }
 \end{frame}
 
 \begin{frame}{Deux versions : \textit{data shift} et \textit{index shift}}{}
@@ -281,13 +308,13 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Algorithme de détection efficiace}
+  \frametitle{Algorithme de détection efficace}
   \begin{columns}
-    \begin{column}{.4\linewidth}
+    \begin{column}{.5\linewidth}
       \begin{ctrlitemize}{.5 em}
         \item Algorithme robuste à des variations de gain d'entrée ;
-        \item Nouvelle méthode de corrélation plus efficiace\footnotemark.
-      \end{ctrlitemize} \vspace{1.5 em}
+        \item Nouvelle méthode de corrélation plus efficace\footnotemark.
+      \end{ctrlitemize} \vspace{1 em}
 
       \begin{ctrlitemize}{.5 em}
         \item Insuffisant pour atteindre un débit temps réel ;
@@ -299,7 +326,7 @@
       \includegraphics[width = \linewidth]{figures/pgfplots/results_algo_through.pdf}
       \captionof{figure}{Débits logiciels en l'absence d'optimisation sur serveur Intel\textregistered{} Xeon\texttrademark{}, horloge $3.0$ GHz.}
     \end{column}
-  \end{columns}
+  \end{columns} \vspace{-1 em}
   \footnotetext{Meilleur rapport performances de détection / complexité calculatoire.}
 \end{frame}
 

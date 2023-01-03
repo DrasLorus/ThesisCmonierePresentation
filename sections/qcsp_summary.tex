@@ -61,6 +61,18 @@
     Partenaires :\\
     \includegraphics[width=0.6\linewidth]{figures/logos-thesis/partners-logos.png}
   \end{center}
+  \note{
+    \begin{enumerate}
+      \item QCSP, sa vie, son oeuvre (C'est quoi, but, idée)
+      \item Les partenaires : 
+      \begin{itemize}
+        \item IMT, CEA, Autres labsticc : Code correcteur d'erreur (Turbo/ldpc/polar NB)
+        \item Orange : IA et valolo
+        \item LIU, LabSTICC : l'algo
+        \item Moi : Faisabilité temps réel 
+      \end{itemize}
+    \end{enumerate}
+  }
 \end{frame}
 
 
@@ -71,8 +83,8 @@
   % \begin{overlayarea}{\linewidth}{.02 \textheight}
   % \end{overlayarea}
   \begin{overlayarea}{\linewidth}{.15 \textheight} \centering
-    symboles de $p$ bits $\Longrightarrow$ rotation circulaire d'une \emph{séquence de pseudo-bruit binaire} (\acrshort{pn}) \cite{dillardCyclicCodeShift2003}.\\
-    La \acrshort{pn} (noté \pn{0}) est composée $2^p = q$ \emph{chips}, telle que $\mpn{0} = [P_0(0), ..., P_0(q - 1)]$
+    symboles de $p$ bits $\Longrightarrow$ rotation circulaire d'une \emph{séquence de pseudo-bruit binaire} \pn{0} \cite{dillardCyclicCodeShift2003}.\\
+    \pn{0} est composée de $2^p = q$ \emph{chips}, telle que $\mpn{0} = [P_0(0), ..., P_0(q - 1)]$
   \end{overlayarea}
 
   \begin{columns}
@@ -147,6 +159,15 @@
   \end{columns}
   \blfootnotetext{\textcite{dillardCyclicCodeShift2003}}
   % \footnotetext{Corps de Galois d'ordre $p$}
+  \note{
+    \begin{enumerate}
+      \item CCSK c'est important
+      \item comme dis avant ... envoyer des bits n'est pas fiables -> on module
+      \item on dis que P0 c'est des 'chips' pour bien faire la distinction avec les bits d'informations
+      \item on prend groupe de bits -> symbole -> rotation de P0
+      \item déroule BG
+    \end{enumerate}
+  }
 \end{frame}
 
 \begin{frame}{\acrshort{ccsk} : Démodulation}
@@ -210,7 +231,11 @@
     \end{column}
   \end{columns}
 
-  \vspace{15pt}
+  \vspace{7pt}
+
+  \hrule{}
+
+  \vspace{7pt}
 
   \begin{columns}
     \begin{column}{.25\linewidth}
@@ -230,6 +255,12 @@
       \includegraphics[width=\linewidth]{pgfplots/pn_demod_3.pdf}
     \end{column}
   \end{columns}
+  \note{
+    \begin{enumerate}
+      \item D'abord lis (comme à l'entrainement)
+      \item Oublie pas, si $y \ncong \mpn{0}$, y.a.r. 
+    \end{enumerate}
+  }
 \end{frame}
 
 \subsection{Modèle}
@@ -252,7 +283,8 @@
         \only<4->{\hfill Flux d'échantillons $y(n)$\\} \vspace{.25em}
         \only<6->{\hfill Trame détecté $\vect{F}_{D}$\\} \vspace{.25em}
         \only<7->{\hfill Trame synchronisation $\vect{F}_{S}$\\} \vspace{.25em}
-        \only<8->{\hfill Message décodé $\vect{M}'$}
+        \only<8->{\hfill Mode de code reçu $\vect{C}'$} \vspace{.25em}
+        \only<9->{\hfill Message décodé $\vect{M}'$}
       \end{overlayarea}
     \end{column}
     \begin{column}{.7\linewidth}
@@ -264,7 +296,9 @@
         \only<4->{\includegraphics[width=\linewidth, height=.73em, keepaspectratio = false]{figures/rtexps-pics/noise.png}\\} \vspace{.25em}
         \only<6->{\includegraphics[width=\linewidth, height=1.05em, keepaspectratio = true]{figures/tikzpicture/trame_detectee.pdf}\\} \vspace{.25em}
         \only<7->{\includegraphics[width=\linewidth, height=1.05em, keepaspectratio = true]{figures/tikzpicture/trame_synchro.pdf}\\} \vspace{.25em}
-        \only<8->{$\{1, \: 2, \: 1\}$}
+        \only<8->{$\{1, \: \textcolor{Red}{0}, \: 2, \: \textcolor{Red}{0}, \: 2, \: 3\}$\\}
+        \vspace{.25em}
+        \only<9->{$\{1, \: 2, \: 1\}$}
       \end{overlayarea}
     \end{column}
   \end{columns}
@@ -317,6 +351,23 @@
       }
     \end{column}
   \end{columns}
+  \note{
+    \begin{enumerate}
+      \item C'est quoi l'PB ? 
+      \begin{itemize}
+        \item detection, t'écoute H24, si il y a tu trouves, sinon tu cherches
+        \item si metadonnées, cool, tu cherches metadonnées.
+        \item mais nous on est aveugle !
+      \end{itemize} 
+      \item Déroule la proposition
+      \item quand y'a R ok, mais quand y'a comment trouver le début ?
+    \end{enumerate} 
+    
+    \only<7-> {Attention H-3\\}
+    \only<8-> {Attention H-2\\}
+    \only<9-> {Attention \textcolor{Red}{H - 1}\\}
+    \only<10-> {\textcolor{Red}{LAST BEFORE SCORE}\\}
+  }
 \end{frame}
 
 \begin{frame}{Accumulation d'information au niveau trame}
@@ -340,6 +391,13 @@
       }
     \end{column}
   \end{columns}
+  \note{
+    \begin{enumerate}
+      \item Solution : on somme sur les $N$ derniers !!
+      \item explique formule
+      \item follow
+    \end{enumerate}
+  }
 \end{frame}
 
 \begin{frame}{\subsecname : {Principe}}
@@ -389,6 +447,14 @@
       \includegraphics[width=\linewidth, height=.75\textheight, keepaspectratio=true]{figures/pgfplots/score_function_stdl.pdf}
     \end{column}
   \end{columns}
+  \note{
+    \begin{enumerate}
+      \item Rappel, en vrai les systèmes sont imparfaits \dots
+      \item Doppler, horloge
+      \item freq => rotation. Plus simple de considérer symbole.
+      \item $+$ on est aveugle  !
+    \end{enumerate}
+  }
 \end{frame}
 
 \begin{frame}{\subsecname : {La grille temps fréquences}}
@@ -405,6 +471,13 @@
       \includegraphics[width=\linewidth, height=.85\textheight, keepaspectratio=true]{figures/pgfplots/score_grid.pdf}
     \end{column}
   \end{columns}
+  \note{
+    \begin{enumerate}
+      \item Solution : La grille (you know what to say)
+      \item PS wink wink : dans les travaux théorique, pas de \pd{} ni \po{} mais vu \Delta / \omega, c'est moi qui ai introduit pour imple' purpose
+      \item Slide suivante, c'est le résumé en modèle fonctionnel, BG
+    \end{enumerate}
+  }
 \end{frame}
 
 \begin{frame}{\subsecname : {Modèle fonctionnel}}
@@ -423,6 +496,11 @@
       keepaspectratio=true
     ]{figures/tikzpicture/funct_view_detection_stdl.pdf}
   \end{center}
+  \note{
+    \begin{enumerate}
+      \item $\mpd{} \times \mpo{}$ scores $\heartsuit$
+    \end{enumerate}
+  }
 \end{frame}
 
 \begin{frame}{\subsecname : {Effets des paramètres $p_\Delta$ et $p_\omega$}}{Données réelles avec $q = 64$ et $N = 60$}
@@ -439,6 +517,19 @@
       \includegraphics[width=\linewidth]{pgfplots/popw_maps_m10dB_60x64_stdl.pdf}
     \end{column}
   \end{columns}
+  \note{
+    ``Pour finir cet état des lieux''
+    \begin{enumerate}
+      \item $\mpd{}$ et $\mpo{}$ -> impact sur perfo. de dét. et complexité
+      \item Ici c'est ROC et déroule
+      \begin{itemize}
+        \item \acrfull{pfa}
+        \item \acrfull{pmd}
+        \item best détecteur : PFA = PMD = 0 <=> Il détecte \textbf{que} les trames, et \textbf{toutes} les trames. 
+      \end{itemize}
+      \item Mais \pd{} et \po{}, c'est pas yolo ! (les couleurs TMTC)
+    \end{enumerate}
+  }
 \end{frame}
 
 % \subsection{Synchronisation et décodage}
@@ -451,10 +542,26 @@
 
 % \subsection{Décodage}
 
-% \begin{frame}{\subsecname}
-%   \begin{center}
-%     \textcolor{RoyalBlue}{TODO --- Merci CCSK et hop}
-%   \end{center}
-% \end{frame}
+\begin{frame}{\subsecname}
+  \begin{center}
+    
+    \includegraphics[width = .9\linewidth]{figures/tikzpicture/chain_matlab.pdf}
+  \end{center}
+  \begin{columns}
+    \begin{column}{.8\linewidth}
+      \begin{itemize}
+        \item La chaine existe \dots en \textsc{Matlab} :
+        \begin{itemize}
+          \item Suffisante pour les simulations ;
+          \item Montre des limites pour les simulations intensives ;
+          \item Impossible de l'utiliser en conditions réelles ou en temps réel.
+        \end{itemize}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \note{
+    Le temps réel, j'le bouffe au p'tit déj.
+  }
+\end{frame}
 
 \end{document}

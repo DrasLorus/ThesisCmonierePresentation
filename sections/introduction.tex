@@ -93,6 +93,9 @@
       \end{center}
     \end{column}
   \end{columns}
+  \note{
+    Chez les autres, on cherche le débit ++, pas dans l'IoT !!
+  }
 \end{frame}
 
 \begin{frame}{Réseaux longues portées basses puissances}
@@ -115,6 +118,15 @@
     \end{column}
   \end{columns}
   \blfootnotetext{\textcite{IEEEStandardLPWAN, sinhaSurveyLPWATechnology2017}}
+  \note{
+    \begin{itemize}
+      \item Portée (parfois comparable au cellulaire)
+      \item MAIS but déploiement massif
+      \item Petit packets
+      \item basse conso'
+      \item petits objets, grosse station
+    \end{itemize}
+  }
 \end{frame}
 
 \begin{frame}{\acrshortpl{lpwan} : trois exemples}
@@ -165,11 +177,16 @@
       \captionof{figure}{Modèle OSI (\textit{Open Systems Interconnection}).}
     \end{column}
     \begin{column}{.6\linewidth}
-      \includegraphics[width=\linewidth, height=.9\textheight, keepaspectratio=true]{tikzpicture/async_comm_chain_stdl.pdf}
+      \only<1>{
+        \includegraphics[width=\linewidth, height=.9\textheight, keepaspectratio=true]{tikzpicture/async_comm_chain_stdl.pdf}
+      }
+      \only<2>{
+        \includegraphics[width=\linewidth, height=.9\textheight, keepaspectratio=true]{tikzpicture/async_comm_chain_stdl-2.pdf}
+      }
     \end{column}
   \end{columns}
 
-  % \vspace{-2em}
+  \vspace{-1em}
 
   \begin{columns} \small
     \begin{column}{.45\linewidth}
@@ -183,6 +200,11 @@
       \end{itemize}
     \end{column}
   \end{columns}
+  \note{
+    Décrit la chaine puis\\
+    Cadre thèse ->\\
+    Cadre présentation. 
+  }
 \end{frame}
 
 \begin{frame}{Problème des préambules}
@@ -225,6 +247,14 @@
     }
   \end{overlayarea}
   \blfootnote{\textcite{durisiMassiveUltrareliableLowLatency2016, polyanskiyAsynchronousCommunicationExact2013}}
+  \note{
+    \begin{enumerate}
+      \item Classiquement le paquet, c'est ça
+      \item Mais dans l'iot, pas ouf !! (50\% ...)
+      \item Peut-on se passer de ces métadonnées, et rester temps réel ?!
+      \item PB Syncro temps fréquence, pas d'info à priori !
+    \end{enumerate}
+  }
 \end{frame}
 
 \end{document}

@@ -1,0 +1,199 @@
+\documentclass[tikz,border=0cm,dvipsnames,x11names,rgb]{standalone}
+
+\input{../stdl_preamble.tex}
+
+\graphicspath{
+  {../svg}
+}
+
+\usetikzlibrary{calc, shapes.misc, shapes.symbols, shapes.geometric, arrows.meta, positioning, fit}
+
+\begin{document}
+\begin{tikzpicture} [-latex,
+    >=latex,
+    auto,
+    very thick,
+    every node/.style={font=\Large},
+    main node/.style={rectangle, draw, inner sep = 4mm,
+        align=center}
+  ]
+
+  \node [circle,
+    align=center,
+    minimum height = 1.5cm,
+    draw = Chartreuse4,
+    text = Chartreuse4,
+    fill = Chartreuse1!20,
+  ] (m) at (0, 0) {Message\\envoyé};
+
+  \node [main node,
+    fill = RoyalBlue2!20,
+    draw = RoyalBlue4,
+    text = RoyalBlue4,
+    minimum height = 1.5cm,
+    %  minimum width = 4cm,
+    right = 1.75 cm of m
+  ] (chanenc) {Codage};
+
+  \node [main node,
+    fill = Red1!20,
+    draw = Red4,
+    text = Red4,
+    align = center,
+    minimum height = 1.5cm,
+    % minimum width = 6cm,
+    right = 1.75 cm of chanenc
+  ] (met) {Ajout de\\métadonnées};
+
+  \node [main node,
+    fill = SlateGray2!20,
+    text = darkgray,
+    draw = darkgray,
+    minimum height = .75cm,
+    anchor = west,
+  ] (dac) at ($(met.east) + (1.5, 0)$) {Filtre $+$ CNA};
+
+  \node [anchor = west,
+  ] (tx) at ($(dac.east) + (1.5, 0)$ ) {\includegraphics[width=1.5cm]{jcartier-antenna-square.pdf}};
+
+  \node [main node,
+    cloud,
+    fill = SlateGray2!20,
+    text = darkgray,
+    draw = darkgray,
+    draw,
+    align=center,
+    %minimum height = 1.5cm,
+    %  minimum width = 4cm,
+    anchor = west,
+    below = 1 cm of tx,
+    aspect = 1.5,
+  ] (chan)  {Canal};
+
+  \node [below = 1 cm of chan
+  ] (rx) {\includegraphics[width=1.5cm]{jcartier-antenna-square.pdf}};
+
+  \node [main node,
+    fill = SlateGray2!20,
+    text = darkgray,
+    draw = darkgray,
+    minimum height = .75cm,
+    %  minimum width = 4cm,
+    % below = 1.5 cm of chan,
+    % anchor = east,
+  ] (adc) at (rx -| dac) {CAN $+$ Filtre};
+
+  % \node [main node,
+  %   % fill = red!60!gray!30!white,
+  %   fill = Red1!20,
+  %  draw = Red4,
+  %   minimum height = 1.5cm,
+  %   % minimum width = 6cm,
+  %   anchor = north east,
+  % ] (detec) at ($(adc.south west -| met.east) + (0, -.5)$) {Détection};
+
+  \node [main node,
+    % fill = red!60!gray!30!white,
+    fill = Red1!20,
+    draw = Red4,
+    text = Red4,
+    minimum height = 1.5cm,
+    % minimum width = 6cm,
+    % anchor = north,
+  ] (synch) at (adc.west -| met.south) {Détection et\\synchronisation};
+
+  \node [main node,
+    fill = RoyalBlue2!20,
+    draw = RoyalBlue4,
+    text = RoyalBlue4,
+    % fill = gray!40!white,
+    minimum height = 1.5cm,
+    %  minimum width = 4cm,
+    % left = 1 cm of demod
+  ] (chandec) at (synch -| chanenc) {Décodage};
+
+  \node [circle,
+    align=center,
+    draw = Chartreuse4,
+    text = Chartreuse4,
+    fill = Chartreuse1!20,
+  ] (mp) at (m |- chandec) {Message\\reçu};
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \node [main node,
+    fill = RoyalBlue2!20,
+    draw = RoyalBlue4,
+    text = RoyalBlue4,
+    minimum height = 1 cm,
+    %  minimum width = 4cm,
+    below = 2.5 cm of chandec.south west,
+  ] (legchncod) {\phantom{O}\textbf{Codage canal}\phantom{O}};
+
+  \node [main node,
+    fill = Red1!20,
+    draw = Red4,
+    text = Red4,
+    minimum height = 1 cm,
+    %  minimum width = 4cm,
+    right = 1 cm of legchncod,
+  ] (legmet) {\phantom{O}\textbf{Synchronisme}\phantom{O}};
+
+  \node [main node,
+    fill = SlateGray2!20,
+    text = darkgray,
+    draw = darkgray,
+    minimum height = 1 cm,
+    %  minimum width = 4cm,
+    right = 1 cm of legmet,
+  ] (legchanel) {\phantom{O}\textbf{Canal de transmission}\phantom{O}};
+
+  \node [main node,
+    fill=none,
+    fit = (legchncod) (legchanel),
+    inner sep = 4mm,
+    label = \textbf{\textsc{Légende}},
+  ] (legend) {};
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \node[
+    RoyalBlue,
+    label = {below:\textcolor{RoyalBlue}{\textbf{Cadre de la thèse}}},
+    draw,
+    fit = {(met) (synch) (chanenc) (chandec)},
+    inner sep = 4 mm,
+  ] {};
+
+  \node[
+    Red,
+    label = {above:\textcolor{Red}{\textbf{Cadre de la présentation}}},
+    draw,
+    fit = {(synch) (chandec)},
+    inner sep = 2 mm,
+  ] {};
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \draw (m.east)       -> (chanenc.west);
+  \draw (chanenc.east) -> (met.west);
+  \draw (met.east)     -> (dac.west);
+  \draw (dac.east)     -> (tx);
+  \draw [dashed] (tx)  -> (chan.north);
+  \draw [dashed] (chan.south) -> (rx);
+  \draw (rx)           -> (adc.east);
+  \draw (adc.west)     -> (synch.east);
+  \draw (synch.west)   -> (chandec.east);
+  \draw (chandec.west) -> (mp.east);
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \draw [dashed, line width = 3pt, -] (m |- chan) -- (adc |- chan);
+  \node [] at (chanenc |- chan.north) {\textbf{Émission}};
+  \node [] at (chanenc |- chan.south) {\textbf{Réception}};
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{tikzpicture}
+\end{document}

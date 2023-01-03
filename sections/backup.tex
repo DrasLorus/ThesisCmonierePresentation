@@ -95,6 +95,41 @@
   \end{columns}
 \end{frame}
 
+\subsection*{Variation de corrélations : Complexité}
+
+\begin{frame}
+  \frametitle{\subsecname}
+
+  \scriptsize \centering
+  \captionof{table}{Complexité calculatoire pour $\textcolor{red}{\mpd}$ corrélations des méthodes FFT et TS avec $\textcolor{blue}{p_\omega = 1}$ .}
+  % \begin{noindent}
+  \begin{tabular}{@{}r r @{\phantom{XX}} r @{\phantom{XX}} r @{\phantom{XX}} r@{}}
+\toprule
+\ra{1.4}        & $\bm{\textcolor{red}{\mpd}}$
+        & \textbf{Add}
+        & \textbf{Multiply}
+        & \textbf{Memory}                              \\
+\midrule
+\textbf{\fft{}} & $\llbracket 1, \; q - 1 \rrbracket$ 
+        & $2 \textcolor{red}{\mpd} q \log_2(q)$
+        & $\textcolor{red}{\mpd} q(\log_2(q) + 2)$
+        & $(\frac{\textcolor{red}{\mpd} - 1}{\textcolor{red}{\mpd}} + \textcolor{red}{\mpd})q$ \\
+              & $q$                                 
+        & $2 q^2 \log_2(q)$
+        & $q^2(\log_2(q) + 2)$
+        & $q^2 + q + 1$                                 \\
+                      \cmidrule{2-5}
+\textbf{\ts{}}  & $q$
+                & $q^2 + q$
+                & $q^2$
+                & $2q$                                   \\
+\bottomrule
+  \end{tabular}
+  % \end{noindent}
+  \ra{1}
+
+\end{frame}
+
 \subsection*{Parallélisme}
 \begin{frame}[fragile]{SPMD : Exemple --- Somme de $10^9$ valeurs en C}
   \begin{columns}
