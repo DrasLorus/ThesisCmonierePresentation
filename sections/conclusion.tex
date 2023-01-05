@@ -40,17 +40,17 @@
     \begin{column}{.7 \linewidth}
       Présenté aujourd'hui :
       \begin{ctrlitemize}{.2 em} \small
-        \item L'algorithme préexistant a été amélioré en termes de robustesse et d'efficacité ;
+        \item Améliorations algorithmiques, en termes de robustesse et d'efficacité ;
         %, et atteint toujours des SNRs inférieurs à $-10$ dB, avec $20 \%$ de ressource spectrale de moins comparé aux protocoles à base de préambules \cite{saiedThesis2022}).
-        \item Le  récepteur QCSP est temps réel ($\approx 100$ kb/s de débit utile), grâce aux efforts de parallélisation ;
-        \item Des campagnes d'expérimentations grandeurs nature ont permis, et permettent encore, d'améliorer le modèle et l'algorithme ;
+        \item Mise au point d'un démonstrateur temps réel ;
+        \item Campagnes d'expérimentations grandeurs nature.
       \end{ctrlitemize} \vspace{1 em}
 
       Non abordé dans cette présentation, mais également étudié :
       \begin{ctrlitemize}{.2 em} \small
-        \item L'émetteur temps-réel ;
-        \item Un modèle en virgule fixe du détecteur ;
-        \item Une description matérielle du détecteur en cours de finalisation.
+        \item Émetteur temps-réel ;
+        \item Modèle en virgule fixe du détecteur ;
+        \item Description matérielle du détecteur en cours de finalisation.
       \end{ctrlitemize}
     \end{column}
     \begin{column}{.3 \linewidth}
@@ -101,6 +101,10 @@
     \printbibliography[keyword=ownpub, keyword=nationale, type=unpublished, heading=none,]
 
   \end{refsection}
+  \note{
+    \textbf{JSA -> Q1} \\
+    \textbf{DASIP -> BEST PAPER AWARD}
+  }
 \end{frame}
 
 \subsection{Perspectives futures}
@@ -126,19 +130,28 @@
           \item Pertinence pour l'usage spatial ;
           \item Étude des couches OSI supérieures.
         \end{itemize}
-        \item Applicatifs :
-        \begin{itemize}
-          \item Bouées autonomes ;
-          \item Communications courtes pour des drones. 
-        \end{itemize}
+        \item Domaines applicatifs variés : Maritime, terrestre, aérien, spatial \dots
       \end{ctrlitemize}
     \end{column}
   \end{columns}
   \note{
+    \textit{Tournure :} en discutant avec des collègues 
+
     pour les extensions :
 
-    * Résilience au Doppler par conception\\
-    * Possibilité d'une plateforme SoPC
+    \begin{itemize}
+      \item Résilience au Doppler par conception\\
+      \item Possibilité d'une plateforme SoPC
+    \end{itemize}
+
+
+    pour les domaines :
+
+    \begin{itemize}
+      \item Bouées autonomes ;
+      \item IoT spatial ou terrestre ;
+      \item paquets cours pour flottes de drones
+    \end{itemize}
   }
 \end{frame}
 

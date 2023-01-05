@@ -59,18 +59,18 @@
 
   \begin{center}
     Partenaires :\\
-    \includegraphics[width=0.6\linewidth]{figures/logos-thesis/partners-logos.png}
+    \includegraphics[width=0.6\linewidth]{figures/logos-thesis/logo-partners.pdf}
   \end{center}
   \note{
     \begin{enumerate}
       \item QCSP, sa vie, son oeuvre (C'est quoi, but, idée)
-      \item Les partenaires : 
-      \begin{itemize}
-        \item IMT, CEA, Autres labsticc : Code correcteur d'erreur (Turbo/ldpc/polar NB)
-        \item Orange : IA et valolo
-        \item LIU, LabSTICC : l'algo
-        \item Moi : Faisabilité temps réel 
-      \end{itemize}
+      \item Les partenaires :
+            \begin{itemize}
+              \item IMT, CEA, Autres labsticc : Code correcteur d'erreur (Turbo/ldpc/polar NB)
+              \item Orange : IA et valolo
+              \item LIU, LabSTICC : l'algo et chaine matlab
+              \item Moi : Faisabilité temps réel, prendre la chaine et faire un systeme réel (proc', FPGA)
+            \end{itemize}
     \end{enumerate}
   }
 \end{frame}
@@ -258,7 +258,8 @@
   \note{
     \begin{enumerate}
       \item D'abord lis (comme à l'entrainement)
-      \item Oublie pas, si $y \ncong \mpn{0}$, y.a.r. 
+      \item Oublie pas, si $y \ncong \mpn{0}$, y.a.r.
+      \item DONC CCSK apporte de la robustesse
     \end{enumerate}
   }
 \end{frame}
@@ -283,7 +284,7 @@
         \only<4->{\hfill Flux d'échantillons $y(n)$\\} \vspace{.25em}
         \only<6->{\hfill Trame détecté $\vect{F}_{D}$\\} \vspace{.25em}
         \only<7->{\hfill Trame synchronisation $\vect{F}_{S}$\\} \vspace{.25em}
-        \only<8->{\hfill Mode de code reçu $\vect{C}'$} \vspace{.25em}
+        \only<8->{\hfill Mot de code erroné $\vect{C}'$} \vspace{.25em}
         \only<9->{\hfill Message décodé $\vect{M}'$}
       \end{overlayarea}
     \end{column}
@@ -296,12 +297,19 @@
         \only<4->{\includegraphics[width=\linewidth, height=.73em, keepaspectratio = false]{figures/rtexps-pics/noise.png}\\} \vspace{.25em}
         \only<6->{\includegraphics[width=\linewidth, height=1.05em, keepaspectratio = true]{figures/tikzpicture/trame_detectee.pdf}\\} \vspace{.25em}
         \only<7->{\includegraphics[width=\linewidth, height=1.05em, keepaspectratio = true]{figures/tikzpicture/trame_synchro.pdf}\\} \vspace{.25em}
-        \only<8->{$\{1, \: \textcolor{Red}{0}, \: 2, \: \textcolor{Red}{0}, \: 2, \: 3\}$\\}
+        \only<8->{$\{1, \: \textcolor{Red}{0}, \: 1, \: \textcolor{Red}{0}, \: 2, \: 3\}$\\}
         \vspace{.25em}
         \only<9->{$\{1, \: 2, \: 1\}$}
       \end{overlayarea}
     \end{column}
   \end{columns}
+  \note{
+    Déroule et Attention
+    \begin{itemize}
+      \item Canal => en réalité on sur-échantillonne, ici on simplifie
+      \item après synchro, on extrait un mot potentiellement erroné -> Decodeur corrige et recup' le message
+    \end{itemize}
+  }
 \end{frame}
 
 \subsection{Détection}
@@ -353,20 +361,19 @@
   \end{columns}
   \note{
     \begin{enumerate}
-      \item C'est quoi l'PB ? 
-      \begin{itemize}
-        \item detection, t'écoute H24, si il y a tu trouves, sinon tu cherches
-        \item si metadonnées, cool, tu cherches metadonnées.
-        \item mais nous on est aveugle !
-      \end{itemize} 
+      \item C'est quoi l'PB ?
+            \begin{itemize}
+              \item detection, t'écoute H24, si il y a tu trouves, sinon tu cherches
+              \item si metadonnées, cool, tu cherches metadonnées.
+              \item mais nous on est aveugle !
+            \end{itemize}
       \item Déroule la proposition
       \item quand y'a R ok, mais quand y'a comment trouver le début ?
-    \end{enumerate} 
-    
-    \only<7-> {Attention H-3\\}
-    \only<8-> {Attention H-2\\}
-    \only<9-> {Attention \textcolor{Red}{H - 1}\\}
-    \only<10-> {\textcolor{Red}{LAST BEFORE SCORE}\\}
+    \end{enumerate}
+
+    % \only<7-> {Attention H-3\\}
+    % \only<8-> {Attention H-2\\}
+    % \only<9> {Attention \textcolor{Red}{H - 1}\\}
   }
 \end{frame}
 
@@ -426,6 +433,11 @@
       \end{align*}
     \end{column}
   \end{columns}
+  \note {
+    P'tit point :
+
+    On a un détecteur ici qui est robuste au bruit. Mais ce n'est pas suffisant !
+  }
 \end{frame}
 
 % \begin{frame}{\subsecname : {animation CCSK demod}}
@@ -450,7 +462,7 @@
   \note{
     \begin{enumerate}
       \item Rappel, en vrai les systèmes sont imparfaits \dots
-      \item Doppler, horloge
+      \item \textbf{Doppler, horloge}
       \item freq => rotation. Plus simple de considérer symbole.
       \item $+$ on est aveugle  !
     \end{enumerate}
@@ -474,11 +486,79 @@
   \note{
     \begin{enumerate}
       \item Solution : La grille (you know what to say)
-      \item PS wink wink : dans les travaux théorique, pas de \pd{} ni \po{} mais vu \Delta / \omega, c'est moi qui ai introduit pour imple' purpose
-      \item Slide suivante, c'est le résumé en modèle fonctionnel, BG
+      \item PS wink wink : dans les travaux théoriques de Kassem Saied, l'intérêt était sur l'erreur temps-freq', j'ai introduit \pd{} et \po{} pour simplifier l'étude du rapport complexité performances
+      \item Slide suivante, c'est \pd{} et \po{}
     \end{enumerate}
   }
 \end{frame}
+
+\begin{frame}{\subsecname : {Effets des paramètres $p_\Delta$ et $p_\omega$}}{Données réelles avec $q = 64$ et $N = 60$}
+  % \begin{overlayarea}{\linewidth}{.15\textheight} \vspace {-1.2cm}
+  %   \hfill \includegraphics[width=6.5cm, height=.75\textheight, keepaspectratio=true]{figures/tikzpicture/funct_view_detection_stdl.pdf}
+  % \end{overlayarea}
+  \begin{columns}
+    \begin{column}{.7\linewidth}
+      \begin{overlayarea}{\linewidth}{.75\textheight} \vspace {-.5cm}
+        \includegraphics[width=\linewidth]{pgfplots/roc_curves_stdl.pdf}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.3\linewidth}
+      \begin{itemize}
+        \item Légende :
+              \begin{itemize}
+                \item \textcolor{Red}{\pd{} en rouge} ;
+                \item \textcolor{Blue}{\po{} en bleu}.
+              \end{itemize}
+        \item []
+        \item [\acrshort{pfa}] \acrlong{pfa}
+        \item [\acrshort{pmd}] \acrlong{pmd}
+      \end{itemize}
+      Objectif : $\mpfa{} = 10^{-6} \Rightarrow \mpmd{} < 10^{-4}$
+    \end{column}
+  \end{columns}
+  \note{
+    \begin{enumerate}
+      \item $\mpd{}$ et $\mpo{}$ -> impact sur perfo. de dét. et complexité
+      \item Ici c'est ROC et déroule
+            \begin{itemize}
+
+              \item \acrfull{pmd} en fonction de
+              \item \acrfull{pfa}
+              \item best détecteur : PFA = PMD = 0 <=> Il détecte \textbf{que} les trames, et \textbf{toutes} les trames.
+            \end{itemize}
+      \item Un objectif est nécessaire : dans les travaux théorique, arbitrairement, si $\mpfa{} = 10^{-6}$, $\mpmd{} < 10^{-4}$ (1 detection sur 1 million est fausse, et on ne rate que 1 trame sur 10 000)
+      \item Mais \pd{} et \po{}, c'est pas yolo !
+    \end{enumerate}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{\subsecname{} : Compromis performance / complexité}
+
+  \begin{columns}
+    \begin{column}{.7\linewidth}
+      \centering
+      \includegraphics[height=.65\textheight]{pgfplots/popw_maps_m10dB_60x64_stdl.pdf}
+    \end{column}
+    \begin{column}{.3\linewidth}
+      \begin{ctrlitemize}{.5 em}
+        \item \textcolor{RoyalBlue}{Du moins performant}
+        \item \textcolor{Yellow3}{Au plus performant}
+      \end{ctrlitemize}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+% \subsection{Synchronisation et décodage}
+
+% \begin{frame}{\subsecname}
+%   \begin{center}
+%     \textcolor{RoyalBlue}{TODO --- En fonction du temps, détails ou pas}
+%   \end{center}
+% \end{frame}
+
+% \subsection{Décodage}
 
 \begin{frame}{\subsecname : {Modèle fonctionnel}}
   \begin{center}
@@ -500,68 +580,33 @@
     \begin{enumerate}
       \item $\mpd{} \times \mpo{}$ scores $\heartsuit$
     \end{enumerate}
+
+    Existe en MATLAB, MAIS n'est pas assez efficace, et ne peut pas supporter le temps réel\dots
+
+    Nécessaire d'avoir une implem' efficace, sur plateforme accessible
   }
 \end{frame}
-
-\begin{frame}{\subsecname : {Effets des paramètres $p_\Delta$ et $p_\omega$}}{Données réelles avec $q = 64$ et $N = 60$}
-  \begin{overlayarea}{\linewidth}{.15\textheight} \vspace {-1.2cm}
-    \hfill \includegraphics[width=6.5cm, height=.75\textheight, keepaspectratio=true]{figures/tikzpicture/funct_view_detection_stdl.pdf}
-  \end{overlayarea}
-  \begin{columns}
-    \begin{column}{.65\linewidth}
-      \begin{overlayarea}{\linewidth}{.75\textheight} \vspace {-.5cm}
-        \includegraphics[width=\linewidth]{pgfplots/roc_curves_stdl.pdf}
-      \end{overlayarea}
-    \end{column}
-    \begin{column}{.35\linewidth} \vspace {-.5cm}
-      \includegraphics[width=\linewidth]{pgfplots/popw_maps_m10dB_60x64_stdl.pdf}
-    \end{column}
-  \end{columns}
-  \note{
-    ``Pour finir cet état des lieux''
-    \begin{enumerate}
-      \item $\mpd{}$ et $\mpo{}$ -> impact sur perfo. de dét. et complexité
-      \item Ici c'est ROC et déroule
-      \begin{itemize}
-        \item \acrfull{pfa}
-        \item \acrfull{pmd}
-        \item best détecteur : PFA = PMD = 0 <=> Il détecte \textbf{que} les trames, et \textbf{toutes} les trames. 
-      \end{itemize}
-      \item Mais \pd{} et \po{}, c'est pas yolo ! (les couleurs TMTC)
-    \end{enumerate}
-  }
-\end{frame}
-
-% \subsection{Synchronisation et décodage}
 
 % \begin{frame}{\subsecname}
 %   \begin{center}
-%     \textcolor{RoyalBlue}{TODO --- En fonction du temps, détails ou pas}
+%     \includegraphics[width = .9\linewidth]{figures/tikzpicture/chain_matlab.pdf}
+%   \end{center}
+%   \begin{columns}
+%     \begin{column}{.8\linewidth}
+%       \begin{itemize}
+%         \item La chaine existe \dots en \textsc{Matlab} :
+%         \begin{itemize}
+%           \item Suffisante pour les simulations ;
+%           \item Montre des limites pour les simulations intensives ;
+%           \item Impossible de l'utiliser en conditions réelles ou en temps réel.
+%         \end{itemize}
+%       \end{itemize}
+%     \end{column}
+%   \end{columns} \vspace{1 em}
+
+%   \begin{center}
+%     \large Nécessité de mettre au point une chaine implémentable sur processeur ou, voir et, sur circuit FPGA. 
 %   \end{center}
 % \end{frame}
-
-% \subsection{Décodage}
-
-\begin{frame}{\subsecname}
-  \begin{center}
-    \includegraphics[width = .9\linewidth]{figures/tikzpicture/chain_matlab.pdf}
-  \end{center}
-  \begin{columns}
-    \begin{column}{.8\linewidth}
-      \begin{itemize}
-        \item La chaine existe \dots en \textsc{Matlab} :
-        \begin{itemize}
-          \item Suffisante pour les simulations ;
-          \item Montre des limites pour les simulations intensives ;
-          \item Impossible de l'utiliser en conditions réelles ou en temps réel.
-        \end{itemize}
-      \end{itemize}
-    \end{column}
-  \end{columns} \vspace{1 em}
-  
-  \begin{center}
-    \large Nécessité de mettre au point une chaine implémentable sur processeur ou, voir et, sur circuit FPGA. 
-  \end{center}
-\end{frame}
 
 \end{document}

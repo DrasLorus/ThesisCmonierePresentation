@@ -94,7 +94,11 @@
     \end{column}
   \end{columns}
   \note{
-    Chez les autres, on cherche le débit ++, pas dans l'IoT !!
+    \begin{itemize}
+      \item Un "objet connecté" c'est un dispositifs basse conso, bas-coût, spécialisé (thermomètres, capteur de lumière, domotique, etc) -> noeud-capteurs
+      \item parle pas souvent, quand il parle on veut l'entendre
+      \item Chez les autres, on cherche le débit ++, moins dans l'IoT
+    \end{itemize}
   }
 \end{frame}
 
@@ -121,8 +125,8 @@
   \note{
     \begin{itemize}
       \item Portée (parfois comparable au cellulaire)
-      \item MAIS but déploiement massif
-      \item Petit packets
+      \item MAIS déploiement massif DONC bruit
+      \item paquets courts
       \item basse conso'
       \item petits objets, grosse station
     \end{itemize}
@@ -167,6 +171,11 @@
     \end{column}
   \end{columns}
   \blfootnotetext{\textcite{goursaudDedicatedNetworksIoT2015, sinhaSurveyLPWATechnology2017}}
+  \note {
+    bla bla bla \vspace{1 em}
+
+    contexte : LoRa donc $50$ kb/s en prio., portée secondaire.
+  }
 \end{frame}
 
 \begin{frame}{Chaine de communication classique}{} \centering \vspace{-1em}
@@ -201,9 +210,18 @@
     \end{column}
   \end{columns}
   \note{
-    Décrit la chaine puis\\
+    Décrit la chaine puis vite :\\
+    \begin{itemize}
+      \item Message binaire
+      \item codage / redondance pour robustesse
+      \item Metadonnée en préambule pour simplifier détection et synchro
+      \item Canal (ex radio)
+      \item Detec/sync grace à rouge
+      \item Decodage
+      \item message
+    \end{itemize}
     Cadre thèse ->\\
-    Cadre présentation. 
+    Cadre présentation.
   }
 \end{frame}
 

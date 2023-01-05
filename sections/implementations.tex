@@ -33,6 +33,85 @@
 
 \section{Étude et exploitation du parallélisme}
 
+\subsection{Objectif}
+
+\begin{frame}{Objectif : Implémentation temps réel}
+  {Solution : mise à profit des plateformes de radio logicielle}
+  \begin{columns}
+    \begin{column}{.55\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{drawiopdf/sdr_platform.drawio.pdf}
+    \end{column}
+    \begin{column}{.35\linewidth}
+      \begin{ctrlitemize}{1 em}
+        \item Prototypage rapide ;
+        \item Plusieurs cibles possibles ;
+        \item Systèmes versatiles.
+      \end{ctrlitemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{1 em}
+
+  \begin{center}
+    Nécessité d'orienter la conception en fonction de la cible.
+  \end{center}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Stratégie dépendante de la cible}
+
+  \begin{columns}
+    \begin{column}{.5\linewidth}
+      \begin{overlayarea}{\linewidth}{.85\textheight}
+        \centering
+        \textbf{\large \underline{\phantom{g}Logiciel\phantom{g}}} \vspace{.25 em}
+
+        \begin{ctrlitemize}{.5 em}
+          \item Limité par l'architecture du processeur.
+          \item Effort d'adaptation de la description algorithmique à l'architecture \cite{armNEONProgrammerGuide2013,intelrArchitectureInstructionSet2022} \textbf{et} au langage utilisé (C/\cpp{}, Python, MATLAB \dots)
+          \item []
+        \end{ctrlitemize}
+
+        \includegraphics[
+          width=\linewidth,
+          height=.2\textheight,
+          keepaspectratio=true,
+          clip,
+          trim = {15px 227px 15px 140px},
+        ]{figures/processor-2217771_1920.jpg}
+        \captionof{figure}{Schéma d'implémentation d'un Intel\textregistered{} Core\texttrademark{} 4th gen, \textrm{\tiny par Intel, CC-BY-SA, flikr.com}}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.5\linewidth}
+      \begin{overlayarea}{\linewidth}{.85\textheight}
+        \centering
+        \textbf{\large \underline{\phantom{g}Matériel\phantom{g}}} \vspace{.25 em}
+
+        \begin{ctrlitemize}{.25 em}
+          \item Grande liberté, les UCs étant définies par le concepteur lui-même.
+          \item Temps de conception notablement plus long qu'en logiciel.
+          \item Limité par les ressources de calculs disponibles (LUT, Flip-Flop, DSP).
+          % \item []
+        \end{ctrlitemize}
+
+        \includegraphics[
+          width=.25\textheight,
+          height=\linewidth,
+          keepaspectratio=true,
+          angle = 90,
+        ]{figures/xilinxkintex7_20221229_154930.png}
+        \captionof{figure}{Schéma d'implémentation d'un Kintex\texttrademark-7 de Xilinx\textregistered, \textrm{\tiny par Xilinx, Tous droits réservés}}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+  \blfootnote{\textcite{armNEONProgrammerGuide2013,intelrArchitectureInstructionSet2022}}
+  \note {
+    Déroule juste, on verra après
+  }
+\end{frame}
+
 \subsection{Rappel : Différents niveaux de parallélismes}
 
 \begin{frame}{\acrfull{simd}}
@@ -68,13 +147,14 @@
   \vspace{- 1 em}
   \begin{columns}
     \begin{column}{.5\linewidth}
-      \includegraphics[width=\linewidth]{figures/drawiopdf/testyolo-jm2.pdf}
+      \centering
+      \includegraphics[height=.35\textheight]{figures/drawiopdf/testyolo-jm2.pdf}
     \end{column}
     \begin{column}{.5\linewidth}
       Exemple : \\
-      \hspace{2 em} \centering Somme termes à termes de $\vect{a} = [a_0, a_1, a_2, a_3]$ et $\vect{b} = [b_0, b_1, b_2, b_3]$ stocké dans $\vect{c} =  [c_0, c_1, c_2, c_3]$ 
+      \hspace{2 em} \centering Somme termes à termes de $\vect{a} = [a_0, a_1, a_2, a_3]$ et $\vect{b} = [b_0, b_1, b_2, b_3]$ stocké dans $\vect{c} =  [c_0, c_1, c_2, c_3]$
     \end{column}
-  \end{columns} \vspace{1 em} 
+  \end{columns} \vspace{1 em}
 
   \begin{columns}
     \begin{column}{.5\linewidth}
@@ -164,7 +244,7 @@
   \end{columns}
   \blfootnote{\textcite{hillAmdahlLawMulticore2008}}
   \note{
-    Lis $+$ dis boost débit mais attention latence !
+    Lis $+$ dis boost débit, mais attention latence !
   }
 \end{frame}
 
@@ -179,7 +259,7 @@
           width=\linewidth,
           height=.45\textheight,
           keepaspectratio=true,
-        ]{figures/drawiopdf/sum_seq.pdf} \vspace{1em} 
+        ]{figures/drawiopdf/sum_seq.pdf} \vspace{1em}
 
         $T_{seq} = T_{iter} \times 10^9$ \\
         VS
@@ -256,59 +336,6 @@
   }
 \end{frame}
 
-\begin{frame}
-  \frametitle{En tirer parti}
-
-  \begin{columns}
-    \begin{column}{.5\linewidth}
-      \begin{overlayarea}{\linewidth}{.85\textheight}
-        \centering
-        \textbf{\large \underline{\phantom{g}Logiciel\phantom{g}}} \vspace{.25 em}
-
-        \begin{ctrlitemize}{.5 em}
-          \item Limité par l'architecture du processeur.
-          \item Effort d'adaptation de la description algorithmique à l'architecture \cite{armNEONProgrammerGuide2013,intelrArchitectureInstructionSet2022} \textbf{et} au langage utilisé (C/\cpp{}, Python, MATLAB \dots)
-          \item []
-        \end{ctrlitemize}
-
-        \includegraphics[
-          width=\linewidth,
-          height=.2\textheight,
-          keepaspectratio=true,
-          clip,
-          trim = {15px 227px 15px 140px},
-        ]{figures/processor-2217771_1920.jpg}
-        \captionof{figure}{Schéma d'implémentation d'un Intel\textregistered{} Core\texttrademark{} 4th gen, \textrm{\tiny par Intel, CC-BY-SA, flikr.com}}
-      \end{overlayarea}
-    \end{column}
-    \begin{column}{.5\linewidth}
-      \begin{overlayarea}{\linewidth}{.85\textheight}
-        \centering
-        \textbf{\large \underline{\phantom{g}Matériel\phantom{g}}} \vspace{.25 em}
-
-        \begin{ctrlitemize}{.25 em}
-          \item Grande liberté, les UCs étant définies par le concepteur lui-même.
-          \item Temps de conception notablement plus long qu'en logiciel.
-          \item Limité par les ressources de calculs disponibles (LUT, Flip-Flop, DSP).
-          % \item []
-        \end{ctrlitemize}
-
-        \includegraphics[
-          width=.25\textheight,
-          height=\linewidth,
-          keepaspectratio=true,
-          angle = 90,
-        ]{figures/xilinxkintex7_20221229_154930.png}
-        \captionof{figure}{Schéma d'implémentation d'un Kintex\texttrademark-7 de Xilinx\textregistered, \textrm{\tiny par Xilinx, Tous droits réservés}}
-      \end{overlayarea}
-    \end{column}
-  \end{columns}
-  \blfootnote{\textcite{armNEONProgrammerGuide2013,intelrArchitectureInstructionSet2022}}
-  \note {
-    Déroule juste, on verra après
-  }
-\end{frame}
-
 \subsection{Adaptation aux corrélations}
 
 \begin{frame}{En logiciel --- FFT}
@@ -379,50 +406,6 @@
   \blfootnote{\textcite{frigoDesignImplementationFFTW32005a}}
 \end{frame}
 
-\begin{frame}{En matériel}
-  \begin{columns}
-    \begin{column}{.45\linewidth}
-      \centering
-      \begin{overlayarea}{\linewidth}{.65\textheight}
-        \underline{\textbf{FFT}}
-        \begin{ctrlitemize}{1 em}
-          \item Parallélisation MASSIVE de modules FFT optimisés ;
-          \item Impose une forte contrainte sur les ressources matérielles ;
-          \item Non concluant à l'heure actuelle \dots
-        \end{ctrlitemize}
-      \end{overlayarea}
-    \end{column}
-    \begin{column}{.45\linewidth}
-      \centering
-      \begin{overlayarea}{\linewidth}{.65\textheight}
-        \underline{\textbf{Time Sliding}}
-        \begin{ctrlitemize}{1 em}
-          \item Utilisation de la version ``index shift'' à nouveau ;
-          \item Parallélisation complète des opérateurs, $\textcolor{Red}{\mpd{}} \times \textcolor{Blue}{\mpo{}}$ calculés en parallèle ;
-          \item En cours de finalisation.
-        \end{ctrlitemize}
-      \end{overlayarea}
-    \end{column}
-  \end{columns}
-
-  % \begin{columns}
-  %   \begin{column}{.8\linewidth}
-  %     \centering
-  %       \begin{overlayarea}{\linewidth}{.1\textheight}
-  %         {\small Note : utilisation de la synthèse de haut-niveau (HLS) pour convertir des descriptions comportementales en architectures matérielles.}
-  %     \end{overlayarea}
-  %   \end{column}
-  % \end{columns}
-  \only<2>{
-    \vspace{1 em}
-    
-    \centering \Huge En cours !
-  }
-  \note{
-    En cours, ingénieure L. Volpin supervisée, à récupérer 
-  }
-\end{frame}
-
 \begin{frame}{Résultats d'implémentation}{Débits binaires d'information fonction de \textcolor{Red}{\pd{}}, pour \textcolor{Blue}{$\mpo{} = 4$}}
   \begin{columns}
     \begin{column}{.5\linewidth}
@@ -461,6 +444,58 @@
     \end{column}
   \end{columns}
 
+\end{frame}
+
+
+\begin{frame}{En matériel}
+  \begin{columns}
+    \begin{column}{.45\linewidth}
+      \centering
+      \begin{overlayarea}{\linewidth}{.65\textheight}
+        \underline{\textbf{FFT}}
+        \begin{ctrlitemize}{1 em}
+          \item Parallélisation MASSIVE de modules FFT optimisés ;
+          \item Impose une forte contrainte sur les ressources matérielles ;
+          \item Non concluant à l'heure actuelle \dots
+        \end{ctrlitemize}
+      \end{overlayarea}
+    \end{column}
+    \begin{column}{.45\linewidth}
+      \centering
+      \begin{overlayarea}{\linewidth}{.65\textheight}
+        \underline{\textbf{Time Sliding}}
+        \begin{ctrlitemize}{1 em}
+          \item Utilisation de la version ``index shift'' à nouveau ;
+          \item Parallélisation complète des opérateurs, $\textcolor{Red}{\mpd{}} \times \textcolor{Blue}{\mpo{}}$ calculés en parallèle ;
+          \item En cours de finalisation.
+        \end{ctrlitemize}
+      \end{overlayarea}
+    \end{column}
+  \end{columns}
+
+  % \begin{columns}
+  %   \begin{column}{.8\linewidth}
+  %     \centering
+  %       \begin{overlayarea}{\linewidth}{.1\textheight}
+  %         {\small Note : utilisation de la synthèse de haut-niveau (HLS) pour convertir des descriptions comportementales en architectures matérielles.}
+  %     \end{overlayarea}
+  %   \end{column}
+  % \end{columns}
+  \only<2>{
+    \vspace{1 em}
+
+    \centering \Huge En cours !
+  }
+  \note{
+    EN matériel on peux faire ça
+    
+    \textbf{J'AI FAIS}
+    Rafinement virgule fixe parce que en matériel pas d'op flottant ! \vspace{1em}
+
+    En cours, ingénieure L. Volpin supervisée, à récupérer\vspace{1 em}
+
+    Résultat préliminaire cool
+  }
 \end{frame}
 
 \end{document}

@@ -62,9 +62,8 @@
     \draw [-latex] (1.6e-6, 1.5e-6) -- (11e-7, 11e-7)
     node [pos = -.75, ] {référence};
 
-    % \addplot[ color=red!80, mark = *, thick, mark size = 2pt, forget plot ]
-    % coordinates {(1e-6, 1e-4)};
-    % \node [anchor = north west, red!80, align=left] at (11e-7, 1e-4) {Functioning\\point};
+    \draw [Red, -latex] (rel axis cs:.2, .875) -- (rel axis cs:.1, .975)
+    node [right, pos = 0,] {Point de fonctionnement};
 
     \addplot[ color=black,  thick, mark = pentagon*, mark options={fill=Goldenrod}]
     coordinates {(1e-6, 1e-6)};

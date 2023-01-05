@@ -125,9 +125,9 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   \draw  [visible on=<1->] ($(-1, 0) + (nbenc.west)$) -> (nbenc.west)
-  node [visible on=<1->, pos=0, align=center, below = 1cm] (M) {Message\\$\vect{M}$\\($K \times m$ bits)};
+  node [visible on=<1->, pos=0, align=center, below = 1cm] (M) {Message\\$\vect{M}$\\($K \times p$ bits)};
   \draw [visible on=<1->] (nbenc.east) -> (ccskm.west)
-  node [visible on=<1->, midway, align=center, below = 1cm] (M) {Mot de code\\$\vect{C}$\\($N \times m$ bits)};
+  node [visible on=<1->, midway, align=center, below = 1cm] (M) {Mot de code\\$\vect{C}$\\($N \times p$ bits)};
   \draw [visible on=<2->] (ccskm.east) -> (bpskm.west)
   node [visible on=<2->, midway, align=center, below = 1cm] (M) {Trame CCSK\\$\vect{F}_{\mathrm{CCSK}}$\\($N \times q$ bits)};
   \draw [visible on=<3-4>] (bpskm.east) -- (dac.west)
@@ -147,9 +147,9 @@
   node [visible on=<7->, midway, align=center, below = 1cm] (M) {\phantom{É}Trame synchronisée\phantom{É} \\ $\vect{F}_s$\\ ($N \times q$ chips)};
 
   \draw [visible on=<8->] (nbdec.east) -> ($(1, 0) + (nbdec.east)$)
-  node [visible on=<8->, pos=1, align=center, below = 1cm] (M) {\phantom{É}Message décodé\phantom{É}\\$\vect{M}'$\\($K \times m$ bits)};
+  node [visible on=<8->, pos=1, align=center, below = 1cm] (M) {\phantom{É}Message décodé\phantom{É}\\$\vect{M}'$\\($K \times p$ bits)};
 
   \draw [visible on=<2->, latex-latex] ($(0, .2) + (nbenc.north west)$) -- ($(0, .2) + (ccskm.north east)$)
-  node [midway, align=center, above = .2cm] (Mp) {Taux réel de codage : $R_{eff} = \frac{K \times m}{N \times q}$};
+  node [midway, align=center, above = .2cm] (Mp) {Taux réel de codage : $R_{eff} = \frac{K \times p}{N \times q}$};
 
 \end{tikzpicture}

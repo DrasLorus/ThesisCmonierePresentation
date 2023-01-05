@@ -56,10 +56,10 @@
       \item un système réel, ce n'est pas la simu. : il est imparfait
       \item Dans théorie, le seuil est fixe
       \item En vrai, pas possible,  gain d'entrée peut varier pour :
-      \begin{itemize}
-        \item Température
-        \item batterie \dots
-      \end{itemize}
+            \begin{itemize}
+              \item Température
+              \item batterie \dots
+            \end{itemize}
       \item En \textcolor{Blue}{bleu}, gain stable, seuil fixe = ça marche.
       \item En \textcolor{Red}{rouge}, meme entrée MAIS gain instable
     \end{enumerate}
@@ -131,9 +131,9 @@
   \captionof{figure}{$\task{S}$ : calcul de score --- $\task{\mnorm{}}$ : calcul de la norme --- $\task{U}$ : décision --- $\task{B}$ : Tampon mémoire}
   \par}%
   \note{
-    \textit{Fais l'point, t'es plus} \textbf{focus} 
-    
-    Focaliser les efforts.
+    \textit{Fais l'point, t'es plus} \textbf{focus}
+
+    \textbf{J'AI } --- Focaliser les efforts.
 
     \vspace*{2 em}
 
@@ -180,7 +180,6 @@
       ]{figures/tikzpicture/arch_fft_sync_stdl.pdf} \\
 
       {\scriptsize Complexité pour $1$ corrélation\\ $\sim \mathcal{O}(q^2) \rightarrow \sim \mathcal{O}(q \log_2(q))$}
-%       \note{
     \end{column}
   \end{columns}
 
@@ -198,7 +197,7 @@
   \blfootnote{\textcite{abassiNonbinaryLowdensityParitycheck2013, kastnerParallelProgrammingFPGAs2018}}
   \note{
     \begin{itemize}
-      \item Méthode original utilisé dans les travaux de K.S. utilisent des FFT
+      \item Méthode original utilisé dans les travaux de K. Saied utilisent des FFT
       \item PK ? Litterature
       \item Pour un calcul -> de $q^2$ à $q\log_2(q)$
       \item si $1$ calcul tous les $4$ ech. ($q = 8$, $\mpd{} = 2$), à $1$ Méch/s -> $250~000$ FFT et IFFT par seconde !
@@ -208,16 +207,16 @@
 
 \begin{frame}{Méthode par \acrfull{ts}}{}
   {%
-    \centering
-    \includegraphics[
-      width=\linewidth,
-      height=.24\textheight,
-      keepaspectratio=true
-    ]{figures/tikzpicture/detect_trame_compare.pdf}\\
+  \centering
+  \includegraphics[
+    width=\linewidth,
+    height=.24\textheight,
+    keepaspectratio=true
+  ]{figures/tikzpicture/detect_trame_compare.pdf}\\
 
-    {\scriptsize Complexité pour $1$ corrélation :
-    $\sim \mathcal{O}(q \log_2(q)) \rightarrow \sim \mathcal{O}(q)$}
-    \par%
+  {\scriptsize Complexité pour $1$ corrélation :
+  $\sim \mathcal{O}(q \log_2(q)) \rightarrow \sim \mathcal{O}(q)$}
+  \par%
   }%
   \begin{columns}
     \begin{column}{.45\linewidth}
@@ -242,7 +241,7 @@
 
           \captionof{figure}{Résultat si \textcolor{Red}{$\mpd{} = 2$} pour $q = 8$}
         }%
-        
+
       \end{overlayarea}
     \end{column}
     \begin{column}{.55\linewidth}
@@ -305,6 +304,14 @@
       \end{overlayarea}
     \end{column}
   \end{columns}
+  \note{
+    \begin{itemize}
+      \item 1ere méthode intuitive, premiere étudiée.
+      \item MAIS lourde.
+      \item Or, \emph{fais les barillets qui tournent}
+      \item Donc \textbf{j'ai} proposé index shift
+    \end{itemize}
+  }
 \end{frame}
 
 \begin{frame}
