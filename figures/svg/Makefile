@@ -12,7 +12,7 @@ all: echoing $(RESULTS) $(SOURCES)
 	latexmk $<
 
 %.pdf : %.svg
-	inkscape $< -o $@
+	cairosvg $< -o $@
 
 clean:
 	latexmk -c
